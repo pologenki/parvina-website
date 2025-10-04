@@ -1,0 +1,57 @@
+{
+  "header": {
+    "home": "Главная",
+    "about": "Обо мне",
+    "services": "Услуги",
+    "portfolio": "Портфолио",
+    "contact": "Контакты"
+  },
+  "about": {
+    "title": "Привет! Я Парвина",
+    "subtitle": "Продуктовый дизайнер",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit...",
+    "principles": "Свяжитесь со мной:"
+  },
+  "services": {
+    "title": "Потрясающие услуги",
+    "productDesign": "Дизайн продукта",
+    "uxDesign": "U/LX дизайн",
+    "visualDesign": "Визуальный дизайн",
+    "businessAnalysis": "Бизнес-анализ",
+    "webDevelopment": "Веб-разработка",
+    "contentDesign": "Дизайн контента",
+    "readMore": "Подробнее",
+    "modalDescriptions": {
+      "productDesign": "Исследования показывают, что контейнерные решения...",
+      "uxDesign": "Некоторые исследования показывают, что компьютерные ответы...",
+      "visualDesign": "Некоторые исследования показывают, что контейнерные решения...",
+      "businessAnalysis": "Некоторые исследования показывают, что контейнерные решения...",
+      "webDevelopment": "Создаем адаптивные и интерактивные веб-приложения...",
+      "contentDesign": "Создаем убедительные стратегии контента..."
+    }
+  },
+  "portfolio": {
+    "title": "Мое портфолио"
+  },
+  "contact": {
+    "title": "Свяжитесь со мной",
+    "firstName": "Имя",
+    "lastName": "Фамилия",
+    "email": "Email",
+    "message": "Как мы можем вам помочь?",
+    "sendMessage": "Отправить сообщение",
+    "connectWithMe": "Свяжитесь со мной",
+    "firstNamePlaceholder": "Введите ваше имя...",
+    "lastNamePlaceholder": "Введите вашу фамилию...",
+    "emailPlaceholder": "Введите ваш email...",
+    "messagePlaceholder": "Введите ваше сообщение..."
+  },
+  "footer": {
+    "navigation": "Навигация",
+    "services": "Услуги",
+    "connect": "Связь",
+    "copyright": "Создано разработчиком Pologenki. Все права защищены.",
+    "privacy": "Политика конфиденциальности",
+    "terms": "Условия использования"
+  }
+}

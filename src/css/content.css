@@ -1,0 +1,1576 @@
+/* Section 1 - About Section */
+.about-section {
+    background: #fff;
+}
+
+.about-section {
+    padding: 0px 20px;
+    background: #f8f9fa;
+    min-height: 70vh;
+    display: flex
+;
+    align-items: center;
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+}
+
+.about-text {
+    flex: 1;
+    max-width: 600px;
+}
+
+.about-title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    line-height: 1.1;
+}
+
+.about-subtitle {
+    font-size: 1.5rem;
+    color: #666;
+    margin-bottom: 30px;
+    font-weight: normal;
+}
+
+.about-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+.about-principles {
+    margin-bottom: 40px;
+}
+
+.about-principles h4 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.principles-list {
+    list-style: none;
+    padding: 0;
+}
+
+.principles-list li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+}
+
+.principles-list li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #66B1F1;
+    font-size: 1.5rem;
+}
+
+.about-buttons {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-talk {
+    background: #66B1F1;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-talk:hover {
+    background: #5590d1;
+}
+
+.btn-cv {
+    background: transparent;
+    color: #333;
+    border: 2px solid #333;
+    padding: 15px 30px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-cv:hover {
+    background: #333;
+    color: white;
+}
+
+.about-image {
+    flex: 1;
+    max-width: 400px;
+    text-align: center;
+}
+
+.profile-photo {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Адаптивность для About Section */
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+    
+    .about-title {
+        font-size: 2.5rem;
+    }
+    
+    .about-buttons {
+        justify-content: center;
+    }
+    
+    .principles-list {
+        text-align: left;
+    }
+}
+
+/* Social Icons Styles в стиле Codepen */
+.social-icons-wrapper {
+  margin-top: 40px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.social-icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #000;
+  border-radius: 50%;
+  text-decoration: none;
+  color: #000;
+  font-size: 1.3rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+}
+
+.social-icon:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  transform: scale(0);
+  transition: transform 0.3s ease;
+  z-index: 0;
+}
+
+.social-icon i {
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+.social-icon:hover:before {
+  transform: scale(1);
+}
+
+.social-icon:hover i {
+  color: #fff;
+}
+
+/* Цвета для иконок при наведении */
+.social-icon.facebook:hover:before {
+  background: #1877F2;
+}
+
+.social-icon.telegram:hover:before {
+  background: #0088CC;
+}
+
+.social-icon.whatsapp:hover:before {
+  background: #25D366;
+}
+
+.social-icon.wechat:hover:before {
+  background: #09B83E!important;
+}
+
+.social-icon.gmail:hover:before {
+  background: #EA4335;
+}
+
+/* Анимация для иконок */
+.social-icon {
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.social-icon:nth-child(1) { animation-delay: 0.1s; }
+.social-icon:nth-child(2) { animation-delay: 0.2s; }
+.social-icon:nth-child(3) { animation-delay: 0.3s; }
+.social-icon:nth-child(4) { animation-delay: 0.4s; }
+.social-icon:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Адаптивность для иконок */
+@media (max-width: 768px) {
+  .social-icons {
+    justify-content: center;
+    gap: 12px;
+  }
+  
+  .social-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .social-icons {
+    gap: 10px;
+  }
+  
+  .social-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+  
+  .social-icons-wrapper {
+    margin-top: 30px;
+  }
+}
+
+/* !Section 2 - Services Section */
+.services-section {
+    padding: 10px 20px;
+    background: #fff;
+}
+
+.services-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.services-title {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 60px;
+    color: #000;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.service-card {
+    background: #fff;
+    border: 2px solid #000;
+    border-radius: 0;
+    padding: 40px 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    transition: left 0.3s ease;
+    z-index: 0;
+}
+
+.service-card:hover::before {
+    left: 0;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+.service-icon {
+    width: 80px;
+    height: 80px;
+    border: 2px solid #000;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+    border-color: #fff;
+    color: #fff;
+}
+
+.service-name {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #000;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+}
+
+.service-card:hover .service-name {
+    color: #fff;
+}
+
+.service-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #666;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 4.8em;
+}
+
+.service-card:hover .service-description {
+    color: #fff;
+}
+
+/* Read More Button */
+.read-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border: 2px solid #000;
+    background: #000;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.read-more-btn svg {
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover .read-more-btn {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+    transform: translateX(5px);
+}
+
+.service-card:hover .read-more-btn svg {
+    transform: translateX(3px);
+}
+
+.read-more-btn svg path {
+    fill: currentColor;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 0;
+    border: 2px solid #000;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    animation: slideDown 0.3s ease;
+}
+
+/* Крестики только в модальных окнах сервисов */
+.modal .close-modal {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: #000;
+    z-index: 2001;
+    transition: color 0.3s ease;
+}
+
+.modal .close-modal:hover {
+    color: #666;
+}
+
+/* Скрываем крестики везде кроме модальных окон сервисов */
+.close-modal {
+    display: none;
+}
+
+/* Убедимся что в хедере и слайдере нет крестиков */
+.header .close-modal,
+.portfolio-section .close-modal,
+.swiper .close-modal,
+.portfolio-card .close-modal {
+    display: none !important;
+}
+
+.modal-icon {
+    width: 100%;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    margin-bottom: 30px;
+}
+
+.modal-icon svg {
+    color: #fff;
+}
+
+.modal-content h3 {
+    font-size: 2rem;
+    margin: 30px 30px 20px;
+    color: #000;
+    text-align: center;
+}
+
+.modal-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #333;
+    margin: 0 30px 40px;
+    text-align: center;
+    display: block;
+    -webkit-line-clamp: unset;
+    -webkit-box-orient: unset;
+    overflow: visible;
+    text-overflow: unset;
+    max-height: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideDown {
+    from { 
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile Styles для Services */
+@media (max-width: 768px) {
+    .services-section {
+        padding: 60px 20px;
+    }
+    
+    .services-title {
+        font-size: 2.2rem;
+        margin-bottom: 40px;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .service-card {
+        padding: 30px 20px;
+    }
+    
+    .service-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.2rem;
+    }
+    
+    .service-name {
+        font-size: 1.3rem;
+    }
+    
+    .service-description {
+        -webkit-line-clamp: 2;
+        max-height: 3.2em;
+    }
+    
+    .read-more-btn {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+    }
+    
+    .read-more-btn svg {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .modal-content {
+        margin: 10% auto;
+        width: 95%;
+    }
+    
+    .modal-content h3 {
+        font-size: 1.5rem;
+        margin: 25px 20px 15px;
+    }
+    
+    .modal-content p {
+        font-size: 1rem;
+        margin: 0 20px 30px;
+    }
+}
+
+/* Tablet Styles для Services */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Section 3 - Portfolio Section */
+.portfolio-section {
+    padding: 80px 0;
+    background: #ffffff;
+}
+
+.portfolio-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.portfolio-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    color: #333;
+    font-weight: 600;
+    position: relative;
+}
+
+.portfolio-title:after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: #333;
+}
+
+.mySwiper {
+    width: 100%;
+    height: 580px;
+    padding: 20px 0;
+}
+
+.swiper-wrapper {
+    align-items: stretch;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    padding: 10px;
+    height: auto;
+}
+
+.portfolio-card {
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 380px;
+    border: 1px solid #e0e0e0;
+    position: relative;
+    cursor: default;
+}
+
+.portfolio-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    border-color: #d0d0d0;
+}
+
+.portfolio-image {
+    width: 100%;
+    height: 480px !important;
+    object-fit: cover;
+    display: block;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.portfolio-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 70px;
+    background: none;
+}
+
+.portfolio-content h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #555;
+    font-weight: 600;
+    line-height: 1.3;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.portfolio-content p {
+    display: none;
+}
+
+.portfolio-category {
+    display: none;
+}
+
+/* Кнопки навигации в стиле сайта */
+/* Стили для кнопок навигации Swiper */
+.swiper-button-next,
+.swiper-button-prev {
+  width: 50px;
+  height: 50px;
+  background: #000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: #333;
+  transform: scale(1.1);
+}
+
+/* Стили для пагинации */
+.swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background: #000;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+  background: #000;
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* Позиционирование кнопок */
+.swiper-button-next {
+  right: 20px;
+}
+
+.swiper-button-prev {
+  left: 20px;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .swiper-button-next:after,
+  .swiper-button-prev:after {
+    font-size: 16px;
+  }
+  
+  .swiper-button-next {
+    right: 10px;
+  }
+  
+  .swiper-button-prev {
+    left: 10px;
+  }
+}
+/* Пагинация в стиле сайта */
+.swiper-pagination {
+    bottom: 0px !important;
+}
+
+.swiper-pagination-bullet {
+    background: #b0b0b0;
+    opacity: 0.7;
+    width: 8px;
+    height: 8px;
+    margin: 0 4px !important;
+    transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+    background: #333;
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Адаптивность для Portfolio Section */
+@media (max-width: 1024px) {
+    .portfolio-section {
+        padding: 60px 0;
+    }
+    
+    .portfolio-title {
+        font-size: 2.2rem;
+    }
+    
+    .mySwiper {
+        height: 560px;
+    }
+    
+    .portfolio-card {
+        height: 530px;
+        max-width: 360px;
+    }
+    
+    .portfolio-image {
+        height: 460px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .portfolio-section {
+        padding: 50px 0;
+    }
+    
+    .portfolio-title {
+        font-size: 2rem;
+        margin-bottom: 40px;
+    }
+    
+    .mySwiper {
+        height: 540px;
+        padding: 15px 0;
+    }
+    
+    .portfolio-card {
+        height: 510px;
+        max-width: 340px;
+    }
+    
+    .portfolio-image {
+        height: 440px !important;
+    }
+    
+    .portfolio-content {
+        padding: 15px;
+    }
+    
+    .portfolio-content h3 {
+        font-size: 1.3rem;
+    }
+    
+    .swiper-button-next,
+    .swiper-button-prev {
+        width: 44px;
+        height: 44px;
+        margin-top: -22px;
+    }
+    
+    .swiper-button-prev {
+        left: 5px;
+    }
+    
+    .swiper-button-next {
+        right: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .portfolio-section {
+        padding: 40px 0;
+    }
+    
+    .portfolio-title {
+        font-size: 1.8rem;
+    }
+    
+    .mySwiper {
+        height: 520px;
+    }
+    
+    .portfolio-card {
+        height: 490px;
+    }
+    
+    .portfolio-image {
+        height: 420px !important;
+    }
+    
+    .portfolio-content {
+        padding: 12px;
+    }
+    
+    .portfolio-content h3 {
+        font-size: 1.2rem;
+    }
+    
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: none;
+    }
+}
+
+/* Гарантируем что скролл работает */
+html, body {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+body {
+    position: relative;
+    height: auto;
+    min-height: 100vh;
+}
+
+/* Убираем любые блокировки скролла */
+body.menu-open {
+    overflow: auto !important;
+}
+
+body[style*="overflow: hidden"] {
+    overflow: auto !important;
+}
+
+/*!Section4*/
+
+/* Contacts Section */
+.contacts-section {
+  padding: 80px 0;
+  background: #fff;
+}
+
+.contacts-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.contacts-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 60px;
+  color: #333;
+  font-weight: 600;
+  position: relative;
+}
+
+.contacts-title:after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: #333;
+}
+
+.contacts-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+/* Форма */
+.contact-form-container {
+  background: #f8f9fa;
+  padding: 40px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.name-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 12px 16px;
+  border: 2px solid #000;
+  border-radius: 0;
+  font-size: 1rem;
+  background: #fff;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #66B1F1;
+  background: #fff;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+  font-family: inherit;
+}
+
+.send-message-btn {
+  background: #000;
+  color: #fff;
+  border: 2px solid #000;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 0;
+  margin-top: 10px;
+}
+
+.send-message-btn:hover {
+  background: #fff;
+  color: #000;
+  transform: translateY(-2px);
+}
+
+/* Правая часть - соцсети в новом стиле */
+.contact-info-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.social-section {
+  width: 100%;
+}
+
+.social-title {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 30px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.social-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.social-card {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 2px solid #000;
+  padding: 23.9px 25px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.social-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  transition: left 0.3s ease;
+  z-index: 0;
+}
+
+.social-card:hover::before {
+  left: 0;
+}
+
+.social-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.social-icon {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #000;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0px;
+  font-size: 1.3rem;
+  color: #000;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.social-card:hover .social-icon {
+  border-color: #fff;
+  color: #fff;
+}
+
+.social-text {
+  position: relative;
+  z-index: 1;
+  padding-left: 15px;
+}
+
+.social-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #000;
+  transition: color 0.3s ease;
+}
+
+.social-card:hover .social-name {
+  color: #fff;
+}
+
+/* Цвета для соцсетей при наведении */
+.social-card.facebook:hover .social-icon {
+  background: #1877F2;
+  border-color: #1877F2;
+}
+
+.social-card.whatsapp:hover .social-icon {
+  background: #25D366;
+  border-color: #25D366;
+}
+
+.social-card.gmail:hover .social-icon {
+  background: #EA4335;
+  border-color: #EA4335;
+}
+
+.social-card.telegram:hover .social-icon {
+  background: #0088CC;
+  border-color: #0088CC;
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+  .contacts-content {
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .contacts-section {
+    padding: 60px 0;
+  }
+  
+  .contacts-title {
+    font-size: 2rem;
+    margin-bottom: 40px;
+  }
+  
+  .contacts-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .name-fields {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .contact-form-container {
+    padding: 30px 25px;
+  }
+  
+  .social-card {
+    padding: 18px 20px;
+  }
+  
+  .social-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+    margin-right: 15px;
+  }
+  
+  .social-name {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contacts-section {
+    padding: 40px 0;
+  }
+  
+  .contacts-title {
+    font-size: 1.8rem;
+  }
+  
+  .contact-form-container {
+    padding: 25px 20px;
+  }
+  
+  .social-card {
+    padding: 15px;
+  }
+  
+  .social-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+    margin-right: 12px;
+  }
+  
+  .social-name {
+    font-size: 1rem;
+  }
+}
+
+/*!Footer*/
+
+/* Footer Styles */
+.footer {
+  background: #fff;
+  border-top: 2px solid #000;
+  padding: 60px 0 30px;
+  margin-top: 80px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Верхняя часть футера */
+.footer-top {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 60px;
+  margin-bottom: 50px;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-name {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 10px;
+  line-height: 1;
+}
+
+.footer-tagline {
+  font-size: 1.1rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.footer-column-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.footer-column-title:after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: #000;
+}
+
+.footer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-list li {
+  margin-bottom: 12px;
+}
+
+.footer-link {
+  color: #666;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 2px 0;
+}
+
+.footer-link:hover {
+  color: #000;
+  transform: translateX(5px);
+}
+
+.footer-link:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #000;
+  transition: width 0.3s ease;
+}
+
+.footer-link:hover:before {
+  width: 100%;
+}
+
+/* Нижняя часть футера */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 30px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.footer-copyright {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.footer-legal {
+  display: flex;
+  gap: 30px;
+}
+
+.footer-legal-link {
+  color: #666;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.footer-legal-link:hover {
+  color: #000;
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+  .footer-top {
+    gap: 40px;
+  }
+  
+  .footer-links {
+    gap: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 40px 0 20px;
+    margin-top: 60px;
+  }
+  
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  
+  .footer-links {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+  
+  .footer-brand {
+    text-align: center;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  
+  .footer-legal {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 30px 0 20px;
+    margin-top: 40px;
+  }
+  
+  .footer-top {
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+  
+  .footer-links {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  
+  .footer-name {
+    font-size: 1.8rem;
+  }
+  
+  .footer-column-title {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+  
+  .footer-list li {
+    margin-bottom: 10px;
+  }
+  
+  .footer-link {
+    font-size: 0.9rem;
+  }
+  
+  .footer-copyright {
+    font-size: 0.8rem;
+  }
+  
+  .footer-legal-link {
+    font-size: 0.8rem;
+  }
+}
+
+/**/
+
+/* Стили для уведомлений */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #4CAF50;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  z-index: 10000;
+  max-width: 400px;
+  animation: slideInRight 0.3s ease-out;
+}
+
+.notification.error {
+  background: #f44336;
+}
+
+.notification-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.notification-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notification-close:hover {
+  opacity: 0.8;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Стили для состояния загрузки */
+.send-message-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Улучшенные стили формы */
+.contact-form {
+  position: relative;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e1e1e1;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.name-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+@media (max-width: 768px) {
+  .name-fields {
+    grid-template-columns: 1fr;
+  }
+}
+
+/**/
+
