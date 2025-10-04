@@ -40,7 +40,7 @@ export function Content() {
           </div>
           
           <div class="about-image">
-            <img src="/public/myfoto.jpg" alt="Parvina - Import Manager" class="profile-photo">
+            <img src="/myfoto.jpg" alt="Parvina - Import Manager" class="profile-photo">
           </div>
         </div>
       </div>
@@ -231,7 +231,7 @@ export function Content() {
             <!-- Слайд 1 -->
             <div class="swiper-slide">
               <div class="portfolio-card">
-                <img src="/public/img/img001.jpg" alt="Импорт орехов" class="portfolio-image">
+                <img src="/img/img001.jpg" alt="Импорт орехов" class="portfolio-image">
                 <div class="portfolio-content" style="display: none;">
                   <h3>Премиальный импорт орехов</h3>
                   <p>Поставки миндаля, грецких орехов и кешью из США, Турции и Вьетнама</p>
@@ -242,7 +242,7 @@ export function Content() {
             <!-- Слайд 2 -->
             <div class="swiper-slide">
               <div class="portfolio-card">
-                <img src="/public/img/img002.jpg" alt="Сухофрукты" class="portfolio-image">
+                <img src="/img/img002.jpg" alt="Сухофрукты" class="portfolio-image">
                 <div class="portfolio-content" style="display: none;">
                   <h3>Экспорт сухофруктов</h3>
                   <p>Курага, изюм, чернослив и финики из Узбекистана, Турции и Ирана</p>
@@ -253,7 +253,7 @@ export function Content() {
             <!-- Слайд 3 -->
             <div class="swiper-slide">
               <div class="portfolio-card">
-                <img src="/public/img/img003.jpg" alt="Специи" class="portfolio-image">
+                <img src="/img/img003.jpg" alt="Специи" class="portfolio-image">
                 <div class="portfolio-content" style="display: none;">
                   <h3>Пряности и специи</h3>
                   <p>Шафран, корица, кардамон и перец из Индии, Шри-Ланки и Марокко</p>
@@ -264,7 +264,7 @@ export function Content() {
             <!-- Слайд 4 -->
             <div class="swiper-slide">
               <div class="portfolio-card">
-                <img src="/public/img/img004.jpg" alt="Кофе" class="portfolio-image">
+                <img src="/img/img004.jpg" alt="Кофе" class="portfolio-image">
                 <div class="portfolio-content" style="display: none;">
                   <h3>Спешиалти кофе</h3>
                   <p>Отборные кофейные зерна из Бразилии, Колумбии и Эфиопии</p>
@@ -275,7 +275,7 @@ export function Content() {
             <!-- Слайд 5 -->
             <div class="swiper-slide">
               <div class="portfolio-card">
-                <img src="/public/img/img005.jpg" alt="Чай" class="portfolio-image">
+                <img src="/img/img005.jpg" alt="Чай" class="portfolio-image">
                 <div class="portfolio-content" style="display: none;">
                   <h3>Элитные сорта чая</h3>
                   <p>Зеленый, черный и травяной чай из Китая, Индии и Кении</p>
@@ -287,7 +287,7 @@ export function Content() {
             <!-- Слайд 7 -->
             <div class="swiper-slide">
               <div class="portfolio-card">
-                <img src="/public/img/img007.jpg" alt="Органические продукты" class="portfolio-image">
+                <img src="/img/img007.jpg" alt="Органические продукты" class="portfolio-image">
                 <div class="portfolio-content" style="display: none;">
                   <h3>Органические продукты</h3>
                   <p>Сертифицированные органические орехи и сухофрукты из ЕС</p>
@@ -298,7 +298,7 @@ export function Content() {
             <!-- Слайд 8 -->
             <div class="swiper-slide">
               <div class="portfolio-card">
-                <img src="/public/img/img008.jpg" alt="Экзотические фрукты" class="portfolio-image">
+                <img src="/img/img008.jpg" alt="Экзотические фрукты" class="portfolio-image">
                 <div class="portfolio-content" style="display: none;">
                   <h3>Экзотические фрукты</h3>
                   <p>Сушеные манго, папайя, ананасы из Таиланда и Филиппин</p>
@@ -309,7 +309,7 @@ export function Content() {
             <!-- Слайд 9 -->
             <div class="swiper-slide">
               <div class="portfolio-card">
-                <img src="/public/img/img009.jpg" alt="Зерновые" class="portfolio-image">
+                <img src="/img/img009.jpg" alt="Зерновые" class="portfolio-image">
                 <div class="portfolio-content" style="display: none;">
                   <h3>Зерновые культуры</h3>
                   <p>Киноа, амарант, булгур и другие полезные зерна</p>
@@ -321,7 +321,7 @@ export function Content() {
             <!-- Слайд 11 -->
             <div class="swiper-slide">
               <div class="portfolio-card">
-                <img src="/public/img/img011.jpg" alt="Семена" class="portfolio-image">
+                <img src="/img/img011.jpg" alt="Семена" class="portfolio-image">
                 <div class="portfolio-content" style="display: none;">
                   <h3>Семена и злаки</h3>
                   <p>Семена чиа, льна, подсолнечника и тыквенные семечки</p>
@@ -332,7 +332,7 @@ export function Content() {
             <!-- Слайд 12 -->
             <div class="swiper-slide">
               <div class="portfolio-card">
-                <img src="/public/img/img012.jpg" alt="Кондитерские изделия" class="portfolio-image">
+                <img src="/img/img012.jpg" alt="Кондитерские изделия" class="portfolio-image">
                 <div class="portfolio-content" style="display: none;">
                   <h3>Кондитерские ингредиенты</h3>
                   <p>Какао-бобы, ваниль, кокосовая стружка для кондитерской промышленности</p>

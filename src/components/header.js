@@ -3,7 +3,7 @@ export function Header() {
 
   <section class="et-hero-tabs">
         <div class="logo">
-            <img src="/public/Logo2.png" alt="Logo">
+            <img src="/Logo2.png" alt="Logo">
         </div>
 
         <div class="menu-toggle" id="menuToggle">
@@ -20,7 +20,7 @@ export function Header() {
 
             <!-- Логотип вместо выбора языка -->
             <div class="et-hero-tab logo-tab">
-                <img src="/public/Logo2.png" alt="Logo" class="header-logo">
+                <img src="/Logo2.png" alt="Logo" class="header-logo">
             </div>
         </div>
     </section>
