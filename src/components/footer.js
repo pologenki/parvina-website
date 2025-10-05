@@ -6,7 +6,7 @@ export function Footer() {
         <div class="footer-top">
           <div class="footer-brand">
             <h3 class="footer-name">Parvina</h3>
-            <p class="footer-tagline">Product Designer</p>
+            <p class="footer-tagline">Import Manager & Trade Specialist</p>
           </div>
           
           <div class="footer-links">
@@ -24,21 +24,23 @@ export function Footer() {
             <div class="footer-column">
               <h4 class="footer-column-title">Services</h4>
               <ul class="footer-list">
-                <li><a href="#" class="footer-link">Product Design</a></li>
-                <li><a href="#" class="footer-link">UX/UI Design</a></li>
-                <li><a href="#" class="footer-link">Visual Design</a></li>
-                <li><a href="#" class="footer-link">Web Development</a></li>
-                <li><a href="#" class="footer-link">Content Design</a></li>
+                <li><a href="#services" class="footer-link">Supplier Sourcing</a></li>
+                <li><a href="#services" class="footer-link">Contract Negotiation</a></li>
+                <li><a href="#services" class="footer-link">Logistics Management</a></li>
+                <li><a href="#services" class="footer-link">Trade Documentation</a></li>
+                <li><a href="#services" class="footer-link">Quality Control</a></li>
+                <li><a href="#services" class="footer-link">Full-Service Import</a></li>
               </ul>
             </div>
             
             <div class="footer-column">
               <h4 class="footer-column-title">Connect</h4>
               <ul class="footer-list">
-                <li><a href="#" class="footer-link">LinkedIn</a></li>
-                <li><a href="#" class="footer-link">Dribbble</a></li>
-                <li><a href="#" class="footer-link">Behance</a></li>
-                <li><a href="#" class="footer-link">Instagram</a></li>
+                <li><a href="https://www.facebook.com/parvina.olive.1" class="footer-link" target="_blank">Facebook</a></li>
+                <li><a href="https://wa.me/79534107650" class="footer-link" target="_blank">WhatsApp</a></li>
+                <li><a href="https://mail.google.com/mail/?view=cm&to=pologenkip@gmail.com" class="footer-link" target="_blank">Gmail</a></li>
+                <li><a href="https://t.me/parvinaolive" class="footer-link" target="_blank">Telegram</a></li>
+                <li><a href="https://web.wechat.com/" class="footer-link" target="_blank">WeChat</a></li>
               </ul>
             </div>
           </div>
@@ -47,7 +49,7 @@ export function Footer() {
         <!-- Нижняя часть футера -->
         <div class="footer-bottom">
           <div class="footer-copyright">
-            <p>&copy; 2025 Created by  developer Pologenki. All rights reserved.</p>
+            <p>&copy; 2025 Created by developer Pologenki. All rights reserved.</p>
           </div>
           
           <div class="footer-legal">
@@ -57,5 +59,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  `
+  `;
 }

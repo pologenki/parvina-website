@@ -220,134 +220,182 @@ export function Content() {
       </div>
     </div>
 
-     <!-- Секция Portfolio с id -->
-    <section id="portfolio" class="portfolio-section">
-      <div class="portfolio-container">
-        <h2 class="portfolio-title">Успешные импортные проекты</h2>
-        
-        <!-- Swiper -->
-        <div class="swiper mySwiper">
-          <div class="swiper-wrapper">
-            <!-- Слайд 1 -->
-            <div class="swiper-slide">
-              <div class="portfolio-card">
-                <img src="/img/img001.jpg" alt="Импорт орехов" class="portfolio-image">
-                <div class="portfolio-content" style="display: none;">
-                  <h3>Премиальный импорт орехов</h3>
-                  <p>Поставки миндаля, грецких орехов и кешью из США, Турции и Вьетнама</p>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Слайд 2 -->
-            <div class="swiper-slide">
-              <div class="portfolio-card">
-                <img src="/img/img002.jpg" alt="Сухофрукты" class="portfolio-image">
-                <div class="portfolio-content" style="display: none;">
-                  <h3>Экспорт сухофруктов</h3>
-                  <p>Курага, изюм, чернослив и финики из Узбекистана, Турции и Ирана</p>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Слайд 3 -->
-            <div class="swiper-slide">
-              <div class="portfolio-card">
-                <img src="/img/img003.jpg" alt="Специи" class="portfolio-image">
-                <div class="portfolio-content" style="display: none;">
-                  <h3>Пряности и специи</h3>
-                  <p>Шафран, корица, кардамон и перец из Индии, Шри-Ланки и Марокко</p>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Слайд 4 -->
-            <div class="swiper-slide">
-              <div class="portfolio-card">
-                <img src="/img/img004.jpg" alt="Кофе" class="portfolio-image">
-                <div class="portfolio-content" style="display: none;">
-                  <h3>Спешиалти кофе</h3>
-                  <p>Отборные кофейные зерна из Бразилии, Колумбии и Эфиопии</p>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Слайд 5 -->
-            <div class="swiper-slide">
-              <div class="portfolio-card">
-                <img src="/img/img005.jpg" alt="Чай" class="portfolio-image">
-                <div class="portfolio-content" style="display: none;">
-                  <h3>Элитные сорта чая</h3>
-                  <p>Зеленый, черный и травяной чай из Китая, Индии и Кении</p>
-                </div>
-              </div>
-            </div>
-            
-            
-            <!-- Слайд 7 -->
-            <div class="swiper-slide">
-              <div class="portfolio-card">
-                <img src="/img/img007.jpg" alt="Органические продукты" class="portfolio-image">
-                <div class="portfolio-content" style="display: none;">
-                  <h3>Органические продукты</h3>
-                  <p>Сертифицированные органические орехи и сухофрукты из ЕС</p>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Слайд 8 -->
-            <div class="swiper-slide">
-              <div class="portfolio-card">
-                <img src="/img/img008.jpg" alt="Экзотические фрукты" class="portfolio-image">
-                <div class="portfolio-content" style="display: none;">
-                  <h3>Экзотические фрукты</h3>
-                  <p>Сушеные манго, папайя, ананасы из Таиланда и Филиппин</p>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Слайд 9 -->
-            <div class="swiper-slide">
-              <div class="portfolio-card">
-                <img src="/img/img009.jpg" alt="Зерновые" class="portfolio-image">
-                <div class="portfolio-content" style="display: none;">
-                  <h3>Зерновые культуры</h3>
-                  <p>Киноа, амарант, булгур и другие полезные зерна</p>
-                </div>
-              </div>
-            </div>
-            
-            
-            <!-- Слайд 11 -->
-            <div class="swiper-slide">
-              <div class="portfolio-card">
-                <img src="/img/img011.jpg" alt="Семена" class="portfolio-image">
-                <div class="portfolio-content" style="display: none;">
-                  <h3>Семена и злаки</h3>
-                  <p>Семена чиа, льна, подсолнечника и тыквенные семечки</p>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Слайд 12 -->
-            <div class="swiper-slide">
-              <div class="portfolio-card">
-                <img src="/img/img012.jpg" alt="Кондитерские изделия" class="portfolio-image">
-                <div class="portfolio-content" style="display: none;">
-                  <h3>Кондитерские ингредиенты</h3>
-                  <p>Какао-бобы, ваниль, кокосовая стружка для кондитерской промышленности</p>
-                </div>
+<!-- Секция Portfolio с id -->
+<section id="portfolio" class="portfolio-section">
+  <div class="portfolio-container">
+    <h2 class="portfolio-title">Successful Import Projects</h2>
+    
+    <!-- Swiper -->
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <!-- Слайд 1 -->
+        <div class="swiper-slide">
+          <div class="portfolio-card">
+            <img src="/img/img001.jpg" alt="Premium nuts import" class="portfolio-image">
+            <div class="portfolio-content">
+              <div class="project-badge">Completed</div>
+              <h3>Premium Nuts Supply Chain</h3>
+              <p>Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
+              <div class="project-stats">
+                <span>500+ tons</span>
+                <span>12 months</span>
               </div>
             </div>
           </div>
-          
-          <!-- Пагинация -->
-          <div class="swiper-pagination"></div>
-          
-
+        </div>
+        
+        <!-- Слайд 2 -->
+        <div class="swiper-slide">
+          <div class="portfolio-card">
+            <img src="/img/img002.jpg" alt="Dried fruits export" class="portfolio-image">
+            <div class="portfolio-content">
+              <div class="project-badge">Ongoing</div>
+              <h3>Dried Fruits Global Network</h3>
+              <p>Apricots, raisins, prunes and dates from Uzbekistan, Turkey and Iran</p>
+              <div class="project-stats">
+                <span>300+ tons</span>
+                <span>8 months</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Слайд 3 -->
+        <div class="swiper-slide">
+          <div class="portfolio-card">
+            <img src="/img/img003.jpg" alt="Spices import" class="portfolio-image">
+            <div class="portfolio-content">
+              <div class="project-badge">Completed</div>
+              <h3>Spices & Herbs Sourcing</h3>
+              <p>Saffron, cinnamon, cardamom and pepper from India, Sri Lanka and Morocco</p>
+              <div class="project-stats">
+                <span>100+ tons</span>
+                <span>6 months</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Слайд 4 -->
+        <div class="swiper-slide">
+          <div class="portfolio-card">
+            <img src="/img/img004.jpg" alt="Specialty coffee" class="portfolio-image">
+            <div class="portfolio-content">
+              <div class="project-badge">New Project</div>
+              <h3>Specialty Coffee Beans</h3>
+              <p>Premium coffee beans from Brazil, Colombia and Ethiopia</p>
+              <div class="project-stats">
+                <span>50+ tons</span>
+                <span>4 months</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Слайд 5 -->
+        <div class="swiper-slide">
+          <div class="portfolio-card">
+            <img src="/img/img005.jpg" alt="Premium teas" class="portfolio-image">
+            <div class="portfolio-content">
+              <div class="project-badge">Completed</div>
+              <h3>Premium Tea Selection</h3>
+              <p>Green, black and herbal teas from China, India and Kenya</p>
+              <div class="project-stats">
+                <span>80+ tons</span>
+                <span>7 months</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Слайд 7 -->
+        <div class="swiper-slide">
+          <div class="portfolio-card">
+            <img src="/img/img007.jpg" alt="Organic products" class="portfolio-image">
+            <div class="portfolio-content">
+              <div class="project-badge">Ongoing</div>
+              <h3>Organic Certification Project</h3>
+              <p>Certified organic nuts and dried fruits from European Union</p>
+              <div class="project-stats">
+                <span>200+ tons</span>
+                <span>10 months</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Слайд 8 -->
+        <div class="swiper-slide">
+          <div class="portfolio-card">
+            <img src="/img/img008.jpg" alt="Exotic fruits" class="portfolio-image">
+            <div class="portfolio-content">
+              <div class="project-badge">Completed</div>
+              <h3>Tropical Fruits Supply</h3>
+              <p>Dried mango, papaya, pineapple from Thailand and Philippines</p>
+              <div class="project-stats">
+                <span>150+ tons</span>
+                <span>5 months</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Слайд 9 -->
+        <div class="swiper-slide">
+          <div class="portfolio-card">
+            <img src="/img/img009.jpg" alt="Grains import" class="portfolio-image">
+            <div class="portfolio-content">
+              <div class="project-badge">New Project</div>
+              <h3>Healthy Grains Import</h3>
+              <p>Quinoa, amaranth, bulgur and other nutritious grains</p>
+              <div class="project-stats">
+                <span>120+ tons</span>
+                <span>3 months</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Слайд 11 -->
+        <div class="swiper-slide">
+          <div class="portfolio-card">
+            <img src="/img/img011.jpg" alt="Seeds import" class="portfolio-image">
+            <div class="portfolio-content">
+              <div class="project-badge">Ongoing</div>
+              <h3>Seeds & Superfoods</h3>
+              <p>Chia seeds, flax seeds, sunflower and pumpkin seeds</p>
+              <div class="project-stats">
+                <span>90+ tons</span>
+                <span>6 months</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Слайд 12 -->
+        <div class="swiper-slide">
+          <div class="portfolio-card">
+            <img src="/img/img012.jpg" alt="Confectionery ingredients" class="portfolio-image">
+            <div class="portfolio-content">
+              <div class="project-badge">Completed</div>
+              <h3>Confectionery Ingredients</h3>
+              <p>Cocoa beans, vanilla, coconut for pastry industry</p>
+              <div class="project-stats">
+                <span>180+ tons</span>
+                <span>9 months</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </section>
+      
+      <!-- Пагинация -->
+      <div class="swiper-pagination"></div>
+      
+
+    </div>
+  </div>
+</section>
 
     <!-- Секция Contact с id -->
     <section id="contact" class="contacts-section">
