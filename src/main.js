@@ -128,3 +128,31 @@ window.changeLanguage = async function(lang) {
 
 // Запускаем приложение
 initApp();
+
+// services.js или component.js
+export function initServiceCards() {
+  const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  
+  if (isMobile) {
+    const serviceCards = document.querySelectorAll('.service-card');
+    
+    serviceCards.forEach(card => {
+      card.style.pointerEvents = 'auto';
+      
+      card.addEventListener('touchstart', function() {
+        this.classList.add('mobile-active');
+      });
+      
+      card.addEventListener('touchend', function() {
+        setTimeout(() => {
+          this.classList.remove('mobile-active');
+        }, 150);
+      });
+    });
+  }
+}
+
+// И вызовите в основном файле
+document.addEventListener('DOMContentLoaded', function() {
+  initServiceCards();
+});
