@@ -164,7 +164,7 @@
 
 .social-icons {
   display: flex;
-  gap: 15px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
@@ -269,7 +269,7 @@
 
 @media (max-width: 480px) {
   .social-icons {
-    gap: 10px;
+    gap: 0px;
   }
   
   .social-icon {
