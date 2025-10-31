@@ -88,7 +88,7 @@ export function Content() {
             <!-- Card 1 -->
             <div class="pricing-card" data-modal="modal-cashew">
                 <div class="product-image">
-                    <img src="/public/goods/cashew.webp" alt="Cashew Nuts">
+                    <img src="/goods/cashew.webp" alt="Cashew Nuts">
                 </div>
                 <h3>Cashew Nuts</h3>
                 <p class="product-desc">AFI standard</p>
@@ -100,7 +100,7 @@ export function Content() {
             <!-- Card 2 -->
             <div class="pricing-card" data-modal="modal-walnuts">
                 <div class="product-image">
-                    <img src="/public/goods/walnut.jpg" alt="Walnut Kernels">
+                    <img src="/goods/walnut.jpg" alt="Walnut Kernels">
                 </div>
                 <h3>Walnut Kernels</h3>
                 <p class="product-desc">Extra Light Halves</p>
@@ -112,7 +112,7 @@ export function Content() {
             <!-- Card 3 -->
             <div class="pricing-card" data-modal="modal-dates">
                 <div class="product-image">
-                    <img src="/public/goods/dates.png" alt="Deglet Nour Dates">
+                    <img src="/goods/dates.png" alt="Deglet Nour Dates">
                 </div>
                 <h3>Dried Dates</h3>
                 <p class="product-desc">Deglet Nour Dates</p>
@@ -124,7 +124,7 @@ export function Content() {
             <!-- Card 4 -->
             <div class="pricing-card" data-modal="modal-papaya">
                 <div class="product-image">
-                    <img src="/public/goods/candied.jpg" alt="Dried Papaya Dice">
+                    <img src="/goods/candied.jpg" alt="Dried Papaya Dice">
                 </div>
                 <h3>Dried Papaya Dice</h3>
                 <p class="product-desc">Mixed/Natural 8-10 mm</p>
@@ -136,7 +136,7 @@ export function Content() {
             <!-- Card 5 -->
             <div class="pricing-card" data-modal="modal-mango">
                 <div class="product-image">
-                    <img src="/public/goods/mango.jpg" alt="Dried Mango">
+                    <img src="/goods/mango.jpg" alt="Dried Mango">
                 </div>
                 <h3>Dried Mango</h3>
                 <p class="product-desc">Sugar added, sugar FREE</p>
@@ -148,7 +148,7 @@ export function Content() {
             <!-- Card 6 -->
             <div class="pricing-card" data-modal="modal-walnuts-shell">
                 <div class="product-image">
-                    <img src="/public/goods/walnut in shell.webp" alt="Walnuts in shell">
+                    <img src="/goods/walnut in shell.webp" alt="Walnuts in shell">
                 </div>
                 <h3>Walnuts in shell</h3>
                 <p class="product-desc">All sizes, washed</p>
@@ -160,7 +160,7 @@ export function Content() {
             <!-- Card 7 -->
             <div class="pricing-card" data-modal="modal-peanuts">
                 <div class="product-image">
-                    <img src="/public/goods/redpeanuts.png" alt="Raw Peanuts">
+                    <img src="/goods/redpeanuts.png" alt="Raw Peanuts">
                 </div>
                 <h3>Raw Peanuts</h3>
                 <p class="product-desc">Sizes  40/50, 50/60</p>
@@ -172,7 +172,7 @@ export function Content() {
             <!-- Card 8 -->
             <div class="pricing-card" data-modal="modal-peanuts-blanched">
                 <div class="product-image">
-                    <img src="/public/goods/peanutSplit.jpg" alt="Blanched Peanuts">
+                    <img src="/goods/peanutSplit.jpg" alt="Blanched Peanuts">
                 </div>
                 <h3>Blanched Peanuts</h3>
                 <p class="product-desc">Whole,Splits</p>
@@ -184,7 +184,7 @@ export function Content() {
             <!-- Card 9 -->
             <div class="pricing-card" data-modal="modal-dried-fruits">
                 <div class="product-image">
-                    <img src="/public/goods/driedFruits.webp" alt="Dried Fruits Mix">
+                    <img src="/goods/driedFruits.webp" alt="Dried Fruits Mix">
                 </div>
                 <h3>Dried Fruits</h3>
                 <p class="product-desc"> Osmotically dehydrated fruits</p>
@@ -196,7 +196,7 @@ export function Content() {
             <!-- Card 10 -->
             <div class="pricing-card" data-modal="modal-banana-chips">
                 <div class="product-image">
-                    <img src="/public/goods/test.jpg" alt="Banana Chips">
+                    <img src="/goods/test.jpg" alt="Banana Chips">
                 </div>
                 <h3>Banana Chips</h3>
                 <p class="product-desc">Whole,Halves,Quarters</p>
