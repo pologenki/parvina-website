@@ -1,0 +1,57 @@
+{
+  "header": {
+    "home": "首页",
+    "about": "关于",
+    "services": "服务", 
+    "portfolio": "作品集",
+    "contact": "联系"
+  },
+  "about": {
+    "title": "你好！我是帕尔维娜",
+    "subtitle": "产品设计师",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta quisquam tempore consectetur deleniti eligendi assumenda mollitia laudantium magnam? Ipsum ad omnis, dolor adipisci rerum blanditiis molestias recusandae aperiam nobis vitae.",
+    "principles": "联系我："
+  },
+  "services": {
+    "title": "精彩服务",
+    "productDesign": "产品设计",
+    "uxDesign": "U/LX设计",
+    "visualDesign": "视觉设计",
+    "businessAnalysis": "业务分析", 
+    "webDevelopment": "网站开发",
+    "contentDesign": "内容设计",
+    "readMore": "了解更多",
+    "modalDescriptions": {
+      "productDesign": "研究表明，容器响应对企业可预测。我们创建以用户为中心的产品，解决实际问题。",
+      "uxDesign": "一些研究表明，计算机响应对企业可预测。我们设计直观的界面。",
+      "visualDesign": "一些研究表明，容器响应对企业可预测。我们创建视觉上令人惊叹的设计。",
+      "businessAnalysis": "一些研究表明，容器响应对企业可预测。我们分析业务需求。",
+      "webDevelopment": "使用现代技术创建响应式和交互式Web应用程序。",
+      "contentDesign": "制作引人入胜的内容策略，吸引受众。"
+    }
+  },
+  "portfolio": {
+    "title": "我的作品集"
+  },
+  "contact": {
+    "title": "联系我",
+    "firstName": "名字",
+    "lastName": "姓氏",
+    "email": "邮箱",
+    "message": "我们如何帮助您？",
+    "sendMessage": "发送消息",
+    "connectWithMe": "与我联系", 
+    "firstNamePlaceholder": "输入您的名字...",
+    "lastNamePlaceholder": "输入您的姓氏...",
+    "emailPlaceholder": "输入您的邮箱地址...",
+    "messagePlaceholder": "输入您的消息..."
+  },
+  "footer": {
+    "navigation": "导航",
+    "services": "服务",
+    "connect": "联系",
+    "copyright": "由开发者Pologenki创建。保留所有权利。",
+    "privacy": "隐私政策", 
+    "terms": "服务条款"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "header": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "contact": "Contact"
+  },
+  "about": {
+    "title": "Hello! I'm Parvina",
+    "subtitle": "Product Designer",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit...",
+    "principles": "Get In Touch:"
+  },
+  "services": {
+    "title": "Amazing services",
+    "productDesign": "Product Design",
+    "uxDesign": "U/LX Design",
+    "visualDesign": "Visual Design",
+    "businessAnalysis": "Business Analysis",
+    "webDevelopment": "Web Development",
+    "contentDesign": "Content Design",
+    "readMore": "Read More",
+    "modalDescriptions": {
+      "productDesign": "Before studies indicate that container responses...",
+      "uxDesign": "Some studies indicate that computer responses...",
+      "visualDesign": "Some studies indicate that container responses...",
+      "businessAnalysis": "Some studies indicate that container responses...",
+      "webDevelopment": "Creating responsive and interactive web applications...",
+      "contentDesign": "Crafting compelling content strategies that engage..."
+    }
+  },
+  "portfolio": {
+    "title": "My Portfolio"
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "message": "How can we help you?",
+    "sendMessage": "Send Message",
+    "connectWithMe": "Connect With Me",
+    "firstNamePlaceholder": "Enter your first name...",
+    "lastNamePlaceholder": "Enter your last name...",
+    "emailPlaceholder": "Enter your email address...",
+    "messagePlaceholder": "Enter your message..."
+  },
+  "footer": {
+    "navigation": "Navigation",
+    "services": "Services",
+    "connect": "Connect",
+    "copyright": "Created by developer Pologenki. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  }
+}
