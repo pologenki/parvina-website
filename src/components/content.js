@@ -739,7 +739,7 @@ Chinese osmotically dehydrated sour cherries with 45-55%sugar content. Small, un
                         <span class="type-price">2,60 USD/kg</span>
                     </div>
                     <div class="product-description">
-                        <p>Premium whole banana chips, vacuum-packed in a 6.8kg carton. Features golden color, crispy texture and natural banana flavor - ideal for snacks and food service.</p>
+                        <p>Premium whole banana chips, vacuum-packed in a 6.8kg carton. Features golden color, crispy texture and natural banana flavor - ideal for snacks and food service</p>
                     </div>
                 </div>
                 
