@@ -12,7 +12,7 @@ export function Header() {
         </div>
 
         <div class="et-hero-tabs-container" id="navMenu">
-            <a class="et-hero-tab" href="#prices">Prices</a> <!-- Изменил с #about на #prices -->
+            <a class="et-hero-tab" href="#products">Our Products</a> <!-- Изменил с #prices на #products -->
             <a class="et-hero-tab" href="#services">Services</a>
             <a class="et-hero-tab" href="#portfolio">My Portfolio</a>
             <a class="et-hero-tab" href="#contact">Get In Touch</a>

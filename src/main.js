@@ -7,26 +7,26 @@ import { initSectionScript } from './components/sectionScript.js';
 import { initLanguage, t, loadTranslations } from './utils/i18n.js';
 import { initContactForm } from './utils/emailService.js';
 
-// Импорт Swiper
+// Import Swiper
 import Swiper from 'swiper';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-// Импорт FontAwesome
+// Import FontAwesome
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
-// Функция для обновления текстов на странице
+// Function to update texts on the page
 function updatePageTexts() {
-  // Обновляем все элементы с data-i18n атрибутом
+  // Update all elements with data-i18n attribute
   const elements = document.querySelectorAll('[data-i18n]');
   elements.forEach(element => {
     const key = element.getAttribute('data-i18n');
     element.textContent = t(key);
   });
   
-  // Обновляем плейсхолдеры
+  // Update placeholders
   const placeholderElements = document.querySelectorAll('[data-i18n-placeholder]');
   placeholderElements.forEach(element => {
     const key = element.getAttribute('data-i18n-placeholder');
@@ -34,7 +34,7 @@ function updatePageTexts() {
   });
 }
 
-// Функция для рендеринга всего приложения
+// Function to render the entire application
 function renderApp() {
   document.querySelector('#app').innerHTML = `
     ${Header()}
@@ -42,10 +42,10 @@ function renderApp() {
     ${Footer()}
   `;
 
-  // Обновляем тексты после рендера
+  // Update texts after render
   updatePageTexts();
   
-  // Инициализируем все компоненты
+  // Initialize all components
   initHeaderMenu();
   initSectionScript();
   initSwiper();
@@ -53,12 +53,13 @@ function renderApp() {
   initScrollToTop();
   initProductModals();
   initServiceModals();
-  initPortfolioGallery(); // ← ДОБАВЬ ЭТУ СТРОКУ
-  // Обновляем активный язык в выпадающем списке
+  initPortfolioGallery(); // ← ADD THIS LINE
+  // Update active language in dropdown
   updateLanguageSelector();
+    initEmailLinks();
 }
 
-// Функция обновления селектора языка
+// Language selector update function
 function updateLanguageSelector() {
   const languageSelected = document.getElementById('languageSelected');
   const currentLang = localStorage.getItem('preferredLanguage') || 'en';
@@ -68,7 +69,7 @@ function updateLanguageSelector() {
   }
 }
 
-// Инициализация приложения
+// Application initialization
 async function initApp() {
   await initLanguage();
   renderApp();
@@ -121,27 +122,27 @@ function initSwiper() {
       }
     });
     
-    console.log('✅ Portfolio Swiper инициализирован успешно!');
+    console.log('✅ Portfolio Swiper initialized successfully!');
   }
 }
 
-// Глобальная функция для смены языка
+// Global function for language change
 window.changeLanguage = async function(lang) {
   await loadTranslations(lang);
   updatePageTexts();
   updateLanguageSelector();
 };
 
-// Запускаем приложение
+// Start the application
 initApp();
 
-// services.js или component.js
+// services.js or component.js
 function initServiceModals() {
     const serviceCards = document.querySelectorAll('.service-card[data-service-modal]');
     const serviceModals = document.querySelectorAll('.service-modal');
     const closeServiceButtons = document.querySelectorAll('.close-service-modal');
 
-    // Открытие модального окна при клике на карточку услуги
+    // Open modal window when clicking on service card
     serviceCards.forEach(card => {
         card.addEventListener('click', function(e) {
             const modalId = this.getAttribute('data-service-modal');
@@ -153,7 +154,7 @@ function initServiceModals() {
         });
     });
 
-    // Закрытие модального окна
+    // Close modal window
     closeServiceButtons.forEach(button => {
         button.addEventListener('click', function() {
             const modal = this.closest('.service-modal');
@@ -162,7 +163,7 @@ function initServiceModals() {
         });
     });
 
-    // Закрытие при клике вне модального окна
+    // Close when clicking outside modal window
     serviceModals.forEach(modal => {
         modal.addEventListener('click', function(e) {
             if (e.target === this) {
@@ -172,7 +173,7 @@ function initServiceModals() {
         });
     });
 
-    // Закрытие на Escape
+    // Close on Escape
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             serviceModals.forEach(modal => {
@@ -185,7 +186,7 @@ function initServiceModals() {
     });
 }
 
-// И вызовите в основном файле
+// And call in main file
 document.addEventListener('DOMContentLoaded', function() {
   initServiceCards();
 });
@@ -222,8 +223,8 @@ function initScrollToTop() {
       clearTimeout(hideTimeout);
     }
     
-    // Определяем время скрытия в зависимости от устройства
-    const hideDelay = window.innerWidth >= 768 ? 3000 : 500; // 3 секунды для десктопа, 0.5 для мобильных
+    // Define hide time depending on device
+    const hideDelay = window.innerWidth >= 768 ? 3000 : 500; // 3 seconds for desktop, 0.5 for mobile
     
     hideTimeout = setTimeout(() => {
       scrollToTop.classList.remove('show');
@@ -255,7 +256,7 @@ function initProductModals() {
     const closeButtons = document.querySelectorAll('.close-modal');
     const clickableProducts = document.querySelectorAll('.clickable-product');
 
-    // Функция закрытия модального окна с анимацией
+    // Function to close modal window with animation
     function closeModal(modal) {
         modal.classList.add('closing');
         document.body.style.overflow = '';
@@ -265,13 +266,13 @@ function initProductModals() {
         }, 300);
     }
 
-    // Обработка карточек С модальными окнами (первые 8 блоков)
+    // Handle cards WITH modal windows (first 8 blocks)
     pricingCards.forEach(card => {
         card.addEventListener('click', function(e) {
-            // Если кликнули на "Learn More" - открываем модальное окно
+            // If clicked on "Learn More" - open modal window
             if (e.target.closest('.btn-more')) {
                 e.preventDefault();
-                e.stopPropagation(); // Предотвращаем всплытие
+                e.stopPropagation(); // Prevent bubbling
                 const modalId = this.getAttribute('data-modal');
                 const modal = document.getElementById(modalId);
                 if (modal) {
@@ -281,7 +282,7 @@ function initProductModals() {
                 return;
             }
             
-            // Если кликнули на саму карточку (но не на кнопку) - тоже открываем модальное окно
+            // If clicked on the card itself (but not on the button) - also open modal window
             if (!e.target.closest('.btn-more')) {
                 const modalId = this.getAttribute('data-modal');
                 const modal = document.getElementById(modalId);
@@ -293,13 +294,13 @@ function initProductModals() {
         });
     });
 
-    // Обработка карточек БЕЗ модальных окон (последние 2 блока)
+    // Handle cards WITHOUT modal windows (last 2 blocks)
     pricingCardsNoModal.forEach(card => {
         card.addEventListener('click', function(e) {
-            // Если кликнули на "Learn More" - прокрутка к контактам
+            // If clicked on "Learn More" - scroll to contacts
             if (e.target.closest('.btn-more')) {
                 e.preventDefault();
-                e.stopPropagation(); // Предотвращаем всплытие
+                e.stopPropagation(); // Prevent bubbling
                 const contactSection = document.getElementById('contact');
                 if (contactSection) {
                     contactSection.scrollIntoView({
@@ -310,7 +311,7 @@ function initProductModals() {
                 return;
             }
             
-            // Если кликнули на саму карточку (но не на кнопку) - тоже прокрутка к контактам
+            // If clicked on the card itself (but not on the button) - also scroll to contacts
             if (!e.target.closest('.btn-more')) {
                 const contactSection = document.getElementById('contact');
                 if (contactSection) {
@@ -323,7 +324,7 @@ function initProductModals() {
         });
     });
 
-    // Закрытие модального окна с анимацией
+    // Close modal window with animation
     closeButtons.forEach(button => {
         button.addEventListener('click', function() {
             const modal = this.closest('.product-modal');
@@ -331,7 +332,7 @@ function initProductModals() {
         });
     });
 
-    // Закрытие при клике вне модального окна с анимацией
+    // Close when clicking outside modal window with animation
     modals.forEach(modal => {
         modal.addEventListener('click', function(e) {
             if (e.target === this) {
@@ -340,7 +341,7 @@ function initProductModals() {
         });
     });
 
-    // Обработка кликов по блокам продуктов в модальных окнах
+    // Handle clicks on product blocks in modal windows
     clickableProducts.forEach(product => {
         product.addEventListener('click', function(e) {
             const modal = this.closest('.product-modal');
@@ -360,7 +361,7 @@ function initProductModals() {
         });
     });
 
-    // Закрытие на Escape с анимацией
+    // Close on Escape with animation
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             modals.forEach(modal => {
@@ -388,7 +389,7 @@ function initPortfolioGallery() {
   let currentImageIndex = 0;
   let images = [];
 
-  // Собираем все изображения из карточек
+  // Collect all images from cards
   cardImages.forEach((card, index) => {
     const imgSrc = card.getAttribute('data-image-src');
     const imgAlt = card.getAttribute('data-image-alt');
@@ -405,10 +406,10 @@ function initPortfolioGallery() {
     });
   });
 
-  // Обновляем счетчик
+  // Update counter
   totalImagesSpan.textContent = images.length;
 
-  // Открытие галереи при клике на изображение
+  // Open gallery when clicking on image
   cardImages.forEach((card, index) => {
     card.addEventListener('click', (e) => {
       if (!e.target.classList.contains('project-badge')) {
@@ -438,7 +439,7 @@ function initPortfolioGallery() {
     imageDescription.textContent = currentImage.description;
     currentImageSpan.textContent = currentImageIndex + 1;
     
-    // Обновляем состояние кнопок навигации
+    // Update navigation button states
     prevBtn.disabled = currentImageIndex === 0;
     nextBtn.disabled = currentImageIndex === images.length - 1;
   }
@@ -457,19 +458,19 @@ function initPortfolioGallery() {
     }
   }
 
-  // События
+  // Events
   closeGalleryBtn.addEventListener('click', closeGallery);
   prevBtn.addEventListener('click', prevImage);
   nextBtn.addEventListener('click', nextImage);
 
-  // Закрытие по клику вне изображения
+  // Close by clicking outside image
   galleryModal.addEventListener('click', (e) => {
     if (e.target === galleryModal) {
       closeGallery();
     }
   });
 
-  // Навигация клавишами
+  // Keyboard navigation
   document.addEventListener('keydown', (e) => {
     if (!galleryModal.classList.contains('active')) return;
     
@@ -555,4 +556,104 @@ document.addEventListener('DOMContentLoaded', function() {
 
       /** */
 
+// Add to main.js
+function initEmailLinks() {
+  const emailLinks = document.querySelectorAll('.email-link');
+  
+  emailLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const email = 'info@pologenki.eu';
       
+      // Copy email
+      copyToClipboard(email);
+    });
+  });
+}
+
+function copyToClipboard(text) {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+  textarea.select();
+  textarea.setSelectionRange(0, 99999);
+  
+  try {
+    const successful = document.execCommand('copy');
+    document.body.removeChild(textarea);
+    
+    if (successful) {
+      showNotification('✓ Email copied: ' + text + '\nPlease paste it in your email client');
+    } else {
+      showNotification('📧 Please copy: ' + text);
+    }
+  } catch (err) {
+    document.body.removeChild(textarea);
+    showNotification('📧 Email: ' + text + '\nPlease copy it manually');
+  }
+}
+
+function showNotification(message) {
+  const notification = document.createElement('div');
+  notification.style.cssText = `
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.9);
+    color: white;
+    padding: 20px 25px;
+    border-radius: 10px;
+    z-index: 10000;
+    font-size: 16px;
+    text-align: center;
+    line-height: 1.5;
+    white-space: pre-line;
+    max-width: 300px;
+    border: 2px solid #4CAF50;
+  `;
+  notification.textContent = message;
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    if (document.body.contains(notification)) {
+      notification.style.opacity = '0';
+      notification.style.transition = 'opacity 0.3s';
+      setTimeout(() => {
+        if (document.body.contains(notification)) {
+          document.body.removeChild(notification);
+        }
+      }, 300);
+    }
+  }, 3000);
+}
+
+/** */
+function getLastTuesday() {
+    const today = new Date();
+    const dayOfWeek = today.getDay(); // 0-6 (Sunday=0, Monday=1, Tuesday=2)
+    
+    // If today is Tuesday (2) and time is after 10:00 AM, use today's date
+    // Otherwise use last Tuesday
+    let lastTuesday = new Date(today);
+    
+    if (dayOfWeek === 2 && today.getHours() >= 10) {
+        // Today is Tuesday and already after 10 AM - use today
+        return lastTuesday;
+    } else {
+        // Find last Tuesday
+        const daysSinceTuesday = (dayOfWeek + 5) % 7;
+        lastTuesday.setDate(today.getDate() - daysSinceTuesday);
+        return lastTuesday;
+    }
+}
+
+function formatDate(date) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+}
+
+// Set last Tuesday date
+document.getElementById('current-date').textContent = formatDate(getLastTuesday());

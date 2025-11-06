@@ -7,12 +7,12 @@ export function Footer() {
             <h3 class="footer-name">Parvina</h3>
             <p class="footer-tagline">Import Manager & Trade Specialist</p>
             
-            <!-- УБРАТЬ КОНТАКТНУЮ ФОРМУ ОТСЮДА -->
+            <!-- REMOVE CONTACT FORM FROM HERE -->
             <!-- 
             <div class="contact-form-section">
               <h4 class="form-title">Get In Touch</h4>
               <form id="contact-form" class="contact-form">
-                ... форма ...
+                ... form ...
               </form>
             </div>
             -->
@@ -22,7 +22,7 @@ export function Footer() {
             <div class="footer-column">
               <h4 class="footer-column-title">Navigation</h4>
               <ul class="footer-list">
-                <li><a href="#home" class="footer-link">Home</a></li>
+                <li><a href="#products" class="footer-link">Our Products</a></li> <!-- Changed from #home to #products -->
                 <li><a href="#about" class="footer-link">About</a></li>
                 <li><a href="#services" class="footer-link">Services</a></li>
                 <li><a href="#portfolio" class="footer-link">Portfolio</a></li>
@@ -46,8 +46,8 @@ export function Footer() {
               <h4 class="footer-column-title">Connect</h4>
               <ul class="footer-list">
                 <li><a href="https://www.facebook.com/parvina.olive.1" class="footer-link" target="_blank">Facebook</a></li>
-                <li><a href="https://wa.me/79534107650" class="footer-link" target="_blank">WhatsApp</a></li>
-                <li><a href="https://mail.google.com/mail/?view=cm&to=pologenkip@gmail.com" class="footer-link" target="_blank">Gmail</a></li>
+                <li><a href="https://wa.me/37258006670" class="footer-link" target="_blank">WhatsApp</a></li>
+                <li><a href="https://mail.google.com/mail/?view=cm&to=info@pologenki.eu" class="footer-link" target="_blank">Gmail</a></li>
                 <li><a href="https://t.me/parvinaolive" class="footer-link" target="_blank">Telegram</a></li>
                 <li><a href="https://web.wechat.com/" class="footer-link" target="_blank">WeChat</a></li>
               </ul>
@@ -67,7 +67,7 @@ export function Footer() {
         </div>
       </div>
 
-      <!-- Модальные окна остаются -->
+      <!-- Modal windows remain -->
       <div id="privacyModal" class="modal">
         <div class="modal-content">
           <span class="close-modal"></span>
@@ -129,8 +129,6 @@ export function Footer() {
             <h3>Contact Information</h3>
             <p>Parvina - Import Manager & Trade Specialist<br>
             Email: info@pologenki.eu<br>
-            Phone: +7 953 410 76 50</p>
-            
             <p><em>Last updated: ${new Date().getFullYear()}</em></p>
           </div>
         </div>

@@ -7,8 +7,7 @@
     padding: 0px 20px;
     background: #f8f9fa;
     min-height: 70vh;
-    display: flex
-;
+    display: flex;
     align-items: center;
 }
 
@@ -136,7 +135,7 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* Адаптивность для About Section */
+/* About Section Responsiveness */
 @media (max-width: 768px) {
     .about-content {
         flex-direction: column;
@@ -157,7 +156,7 @@
     }
 }
 
-/* Social Icons Styles в стиле Codepen */
+/* Social Icons Styles in Codepen style */
 .social-icons-wrapper {
   margin-top: 40px;
 }
@@ -212,7 +211,7 @@
   color: #fff;
 }
 
-/* Цвета для иконок при наведении */
+/* Hover colors for icons */
 .social-icon.facebook:hover:before {
   background: #1877F2;
 }
@@ -234,7 +233,7 @@
   background: #EA4335;
 }
 
-/* Анимация для иконок */
+/* Icon animations */
 .social-icon {
   animation: fadeInUp 0.6s ease forwards;
   opacity: 0;
@@ -254,7 +253,7 @@
   }
 }
 
-/* Адаптивность для иконок */
+/* Icons responsiveness */
 @media (max-width: 768px) {
   .social-icons {
     justify-content: center;
@@ -283,7 +282,6 @@
     margin-top: 30px;
   }
 }
-
 
 /* !Section 2 - Services Section */
 .services-section {
@@ -435,7 +433,7 @@ font-family: 'Playfair Display', serif;
     fill: currentColor;
 }
 
-/* Service Modal Styles - ПЕРЕИМЕНОВАНО */
+/* Service Modal Styles - RENAMED */
 .service-modal {
     display: none;
     position: fixed;
@@ -463,7 +461,7 @@ font-family: 'Playfair Display', serif;
     animation: slideDown 0.3s ease;
 }
 
-/* Крестики только в модальных окнах сервисов */
+/* Crosses only in service modals */
 .service-modal .close-service-modal {
     display: block;
     position: absolute;
@@ -533,7 +531,7 @@ font-family: 'Playfair Display', serif;
     }
 }
 
-/* Mobile Styles для Services */
+/* Mobile Styles for Services */
 @media (max-width: 768px) {
     .services-section {
         padding: 10px 20px;
@@ -552,8 +550,7 @@ position: absolute;
     height: 40px;
     background: #000000;
     border-radius: 50%;
-    display: flex
-;
+    display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -650,7 +647,7 @@ cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
 }
 
-/* Tablet Styles для Services */
+/* Tablet Styles for Services */
 @media (max-width: 1024px) and (min-width: 769px) {
     .services-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -692,7 +689,6 @@ cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
 /**/
 
-
 /* Section 3 - Portfolio Section */
 .portfolio-section {
     padding: 80px 0;
@@ -703,6 +699,10 @@ cubic-bezier(0.68, -0.55, 0.265, 1.55);
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+}
+
+.stat-label{
+  color: #666;
 }
 
 .portfolio-title {
@@ -782,7 +782,7 @@ cubic-bezier(0.68, -0.55, 0.265, 1.55);
     justify-content: center;
     align-items: center;
     text-align: center;
-    height: 70px;
+    height: 70px!important;
     background: none;
 }
 
@@ -804,8 +804,8 @@ cubic-bezier(0.68, -0.55, 0.265, 1.55);
     display: none;
 }
 
-/* Кнопки навигации в стиле сайта */
-/* Стили для кнопок навигации Swiper */
+/* Navigation buttons in site style */
+/* Swiper navigation button styles */
 .swiper-button-next,
 .swiper-button-prev {
   width: 50px;
@@ -830,7 +830,7 @@ cubic-bezier(0.68, -0.55, 0.265, 1.55);
   transform: scale(1.1);
 }
 
-/* Стили для пагинации */
+/* Pagination styles */
 .swiper-pagination-bullet {
   width: 12px;
   height: 12px;
@@ -845,7 +845,7 @@ cubic-bezier(0.68, -0.55, 0.265, 1.55);
   transform: scale(1.2);
 }
 
-/* Позиционирование кнопок */
+/* Button positioning */
 .swiper-button-next {
   right: 20px;
 }
@@ -854,7 +854,7 @@ cubic-bezier(0.68, -0.55, 0.265, 1.55);
   left: 20px;
 }
 
-/* Адаптивность для мобильных */
+/* Mobile responsiveness */
 @media (max-width: 768px) {
   .swiper-button-next,
   .swiper-button-prev {
@@ -875,7 +875,7 @@ cubic-bezier(0.68, -0.55, 0.265, 1.55);
     left: 10px;
   }
 }
-/* Пагинация в стиле сайта */
+/* Site style pagination */
 .swiper-pagination {
     bottom: 0px !important;
 }
@@ -895,7 +895,7 @@ cubic-bezier(0.68, -0.55, 0.265, 1.55);
     transform: scale(1.1);
 }
 
-/* Адаптивность для Portfolio Section */
+/* Portfolio Section Responsiveness */
 @media (max-width: 1024px) {
     .portfolio-section {
         padding: 60px 0;
@@ -1002,7 +1002,7 @@ cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
 }
 
-/* Гарантируем что скролл работает */
+/* Ensure scroll works */
 html, body {
     overflow-x: hidden;
     overflow-y: auto;
@@ -1014,7 +1014,7 @@ body {
     min-height: 100vh;
 }
 
-/* Убираем любые блокировки скролла */
+/* Remove any scroll blocking */
 body.menu-open {
     overflow: auto !important;
 }
@@ -1065,7 +1065,7 @@ body[style*="overflow: hidden"] {
   align-items: start;
 }
 
-/* Форма */
+/* Form */
 .contact-form-container {
   background: #f8f9fa;
   padding: 40px;
@@ -1139,7 +1139,7 @@ body[style*="overflow: hidden"] {
   transform: translateY(-2px);
 }
 
-/* Правая часть - соцсети в новом стиле */
+/* Right part - social media in new style */
 .contact-info-container {
   display: flex;
   flex-direction: column;
@@ -1234,7 +1234,7 @@ body[style*="overflow: hidden"] {
   color: #fff;
 }
 
-/* Цвета для соцсетей при наведении */
+/* Hover colors for social media */
 .social-card.facebook:hover .social-icon {
   background: #1877F2;
   border-color: #1877F2;
@@ -1261,7 +1261,7 @@ body[style*="overflow: hidden"] {
   border-color: #09B83E!important;
 }
 
-/* Адаптивность */
+/* Responsiveness */
 @media (max-width: 1024px) {
   .contacts-content {
     gap: 40px;
@@ -1353,7 +1353,7 @@ body[style*="overflow: hidden"] {
   padding: 0 20px;
 }
 
-/* Верхняя часть футера */
+/* Footer top part */
 .footer-top {
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -1443,7 +1443,7 @@ body[style*="overflow: hidden"] {
   width: 100%;
 }
 
-/* Нижняя часть футера */
+/* Footer bottom part */
 .footer-bottom {
   display: flex;
   justify-content: space-between;
@@ -1473,7 +1473,7 @@ body[style*="overflow: hidden"] {
   color: #000;
 }
 
-/* Адаптивность */
+/* Responsiveness */
 @media (max-width: 1024px) {
   .footer-top {
     gap: 40px;
@@ -1560,7 +1560,7 @@ body[style*="overflow: hidden"] {
 
 /**/
 
-/* Стили для уведомлений */
+/* Notification styles */
 .notification {
   position: fixed;
   top: 20px;
@@ -1615,13 +1615,13 @@ body[style*="overflow: hidden"] {
   }
 }
 
-/* Стили для состояния загрузки */
+/* Loading state styles */
 .send-message-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-/* Улучшенные стили формы */
+/* Improved form styles */
 .contact-form {
   position: relative;
 }
@@ -1680,7 +1680,7 @@ body[style*="overflow: hidden"] {
         .contact-icon {
             width: 24px;
             height: 24px;
-            margin-right: 15px;
+            margin-right: 0px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1766,6 +1766,7 @@ body[style*="overflow: hidden"] {
         font-size: 2rem;
         margin-bottom: 10px;
         color: #2a2a2a;
+
     }
 
     .section-subtitle {
@@ -1873,7 +1874,7 @@ body[style*="overflow: hidden"] {
 
     /**/
 
-/* Стрелка прокрутки наверх */
+/* Scroll to top arrow */
 .scroll-to-top {
   position: fixed;
   bottom: 30px;
@@ -1919,7 +1920,7 @@ body[style*="overflow: hidden"] {
   transform: translateY(-2px);
 }
 
-/* Мобильная версия */
+/* Mobile version */
 @media (max-width: 768px) {
   .scroll-to-top {
     width: 44px;
@@ -1946,7 +1947,7 @@ body[style*="overflow: hidden"] {
 
 }
 
-/* Для очень маленьких экранов */
+/* For very small screens */
 @media (max-width: 480px) {
   .scroll-to-top {
     width: 40px;
@@ -2228,7 +2229,7 @@ body[style*="overflow: hidden"] {
     max-width: 400px;
   }
   
-  /* На десктопе номера в одну линию */
+  /* Phone numbers in one line on desktop */
   .phone-numbers {
     flex-direction: row;
     gap: 15px;
@@ -2296,7 +2297,7 @@ body[style*="overflow: hidden"] {
   }
 }
 
-/*!Section2 Модальное окно цен*/
+/*!Section2 Price Modal*/
 
 /* Product Modals - Black & White Design */
 .product-modal {
@@ -2320,7 +2321,7 @@ body[style*="overflow: hidden"] {
     opacity: 1;
 }
 
-/* Анимация закрытия модального окна */
+/* Modal closing animation */
 .product-modal.closing {
     opacity: 0;
 }
@@ -2356,7 +2357,7 @@ body[style*="overflow: hidden"] {
     }
 }
 
-/* Красивый крестик с анимациями */
+/* Beautiful cross with animations */
 .close-modal {
     position: absolute;
     right: 25px;
@@ -2394,12 +2395,7 @@ body[style*="overflow: hidden"] {
     transform: rotate(-45deg);
 }
 
-
-
-
-
-
-/* Анимация появления крестика */
+/* Cross appearance animation */
 .modal-content .close-modal {
     animation: crossAppear 0.6s ease 0.3s both;
 }
@@ -2418,7 +2414,7 @@ body[style*="overflow: hidden"] {
     }
 }
 
-/* Анимация исчезновения крестика при закрытии */
+/* Cross disappearance animation when closing */
 .product-modal.closing .close-modal {
     animation: crossDisappear 0.3s ease both;
 }
@@ -2584,7 +2580,6 @@ body[style*="overflow: hidden"] {
 }
 
 .contact-btn:hover {
-    background: rgba(102, 177, 241, 0.8);
     color: #000000;
     transform: translateY(-2px);
 }
@@ -2605,7 +2600,7 @@ body[style*="overflow: hidden"] {
     box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
-/* Кастомный скроллбар */
+/* Custom scrollbar */
 .modal-body::-webkit-scrollbar {
     width: 6px;
 }
@@ -2693,7 +2688,7 @@ body[style*="overflow: hidden"] {
 
 /**/
 
-/* Красивый крестик с улучшенными анимациями */
+/* Beautiful cross with improved animations */
 .close-modal {
     position: absolute;
     right: 25px;
@@ -2731,8 +2726,6 @@ body[style*="overflow: hidden"] {
     transform: rotate(-45deg);
 }
 
-
-
 .close-modal:hover::before,
 .close-modal:hover::after {
     background: #000000;
@@ -2740,7 +2733,7 @@ body[style*="overflow: hidden"] {
     width: 20px;
 }
 
-/* Анимация появления крестика */
+/* Cross appearance animation */
 .modal-content .close-modal {
     animation: crossAppear 0.6s ease 0.3s both;
 }
@@ -2759,7 +2752,7 @@ body[style*="overflow: hidden"] {
     }
 }
 
-/* Анимация исчезновения крестика при закрытии */
+/* Cross disappearance animation when closing */
 .product-modal.closing .close-modal {
     animation: crossDisappear 0.3s ease both;
 }
@@ -2775,13 +2768,13 @@ body[style*="overflow: hidden"] {
     }
 }
 
-/* Убираем странную анимацию при активном нажатии */
+/* Remove strange animation when actively pressed */
 .close-modal:active {
     transform: scale(1.05);
     transition: transform 0.1s ease;
 }
 
-/* Альтернативный вариант - плавные вращения */
+/* Alternative option - smooth rotations */
 .close-modal {
     position: absolute;
     right: 25px;
@@ -2819,7 +2812,7 @@ body[style*="overflow: hidden"] {
     transform: rotate(-45deg);
 }
 
-/* Плавное наведение с вращением */
+/* Smooth hover with rotation */
 .close-modal:hover {
     background: rgba(102, 177, 241, 0.9);
     border-color: rgba(102, 177, 241, 0.9);
@@ -2832,7 +2825,7 @@ body[style*="overflow: hidden"] {
     background: #000000;
 }
 
-/* Анимация появления */
+/* Appearance animation */
 .modal-content .close-modal {
     animation: smoothAppear 0.5s ease 0.3s both;
 }
@@ -2848,7 +2841,7 @@ body[style*="overflow: hidden"] {
     }
 }
 
-/* Анимация исчезновения */
+/* Disappearance animation */
 .product-modal.closing .close-modal {
     animation: smoothDisappear 0.3s ease both;
 }
@@ -2864,13 +2857,12 @@ body[style*="overflow: hidden"] {
     }
 }
 
-/* Легкое нажатие */
+/* Light press */
 .close-modal:active {
     transform: scale(0.95);
 }
 
-
-/* Стили для кликабельных блоков продуктов */
+/* Styles for clickable product blocks */
 .clickable-product {
     cursor: pointer;
     transition: all 0.3s ease;
@@ -2883,7 +2875,7 @@ body[style*="overflow: hidden"] {
     border-color: rgba(102, 177, 241, 0.8);
 }
 
-/* Индикатор кликабельности */
+/* Clickability indicator */
 .clickable-product::after {
     content: '📞 Contact for price';
     position: absolute;
@@ -2900,7 +2892,6 @@ body[style*="overflow: hidden"] {
     transition: all 0.3s ease;
     white-space: nowrap;
 }
-
 
 .clickable-product:hover::after {
     opacity: 1;
@@ -2930,7 +2921,7 @@ body[style*="overflow: hidden"] {
     opacity: 1;
 }
 
-/* Анимация закрытия модального окна */
+/* Modal closing animation */
 .service-modal.closing {
     opacity: 0;
 }
@@ -2966,7 +2957,7 @@ body[style*="overflow: hidden"] {
     }
 }
 
-/* Правильный красивый крестик с плавными анимациями */
+/* Proper beautiful cross with smooth animations */
 .close-service-modal {
     position: absolute;
     right: 25px;
@@ -3007,7 +2998,7 @@ body[style*="overflow: hidden"] {
     transform: rotate(-45deg) translate(0, 0);
 }
 
-/* Анимация нажатия на крестик */
+/* Cross press animation */
 .close-service-modal:active {
     transform: scale(0.9) rotate(180deg);
     transition: transform 0.1s ease;
@@ -3021,7 +3012,7 @@ body[style*="overflow: hidden"] {
     transform: rotate(-45deg) scaleX(0.7);
 }
 
-/* Анимация появления крестика */
+/* Cross appearance animation */
 .service-modal-content .close-service-modal {
     animation: crossAppear 0.6s ease 0.3s both;
 }
@@ -3040,7 +3031,7 @@ body[style*="overflow: hidden"] {
     }
 }
 
-/* Анимация исчезновения крестика при закрытии */
+/* Cross disappearance animation when closing */
 .service-modal.closing .close-service-modal {
     animation: crossDisappear 0.3s ease both;
 }
@@ -3061,14 +3052,14 @@ body[style*="overflow: hidden"] {
 
 .modal-header {
     position: relative;
-    padding: 20px 50px 20px 20px; /* Увеличиваем правый отступ для крестика */
+    padding: 20px 50px 20px 20px; /* Increase right padding for cross */
 }
 
 .modal-header h3 {
     margin: 0;
     font-size: 1.4rem;
     line-height: 1.3;
-    padding-right: 10px; /* Дополнительный отступ от крестика */
+    padding-right: 10px; /* Additional padding from cross */
     word-wrap: break-word;
 }
 
@@ -3086,7 +3077,7 @@ body[style*="overflow: hidden"] {
     width: 20px;
 }
 
-/* Адаптивные стили для мобильных устройств */
+/* Responsive styles for mobile devices */
 @media (max-width: 768px) {
     .modal-header {
         padding: 15px 45px 15px 15px;
@@ -3141,14 +3132,6 @@ body[style*="overflow: hidden"] {
         width: 16px;
     }
 }
-
-
-
-
-
-
-
-
 
 /*!Slider*/
 
@@ -3242,8 +3225,6 @@ font-size: 30px;
 color: white;
 }
 
-
-
 .portfolio-card:hover .card-overlay {
   opacity: 1;
 }
@@ -3292,8 +3273,7 @@ color: white;
 }
 
 .portfolio-content h3 {
-  font-size: 1.3rem;
-  margin-bottom: 12px;
+  font-size: 1.1rem;
   color: #000;
   line-height: 1.3;
   font-weight: 600;
@@ -3416,9 +3396,9 @@ color: white;
   }
 }
 
-/* КРЕСТИК - ОБЯЗАТЕЛЬНО ВИДИМЫЙ */
+/* CROSS - MUST BE VISIBLE */
 .close-gallery-modal {
-  position: fixed !important; /* ФИКСИРОВАННАЯ ПОЗИЦИЯ */
+  position: fixed !important; /* FIXED POSITION */
   top: 20px !important;
   right: 20px !important;
   width: 50px !important;
@@ -3446,7 +3426,7 @@ color: white;
   border-color: #fff !important;
 }
 
-/* Стрелочки навигации */
+/* Navigation arrows */
 .gallery-nav {
   position: absolute;
   top: 50%;
@@ -3498,7 +3478,7 @@ color: white;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-/* Подпись к фото - ТОЛЬКО ЗАГОЛОВОК ОДНА СТРОКА */
+/* Photo caption - TITLE ONLY ONE LINE */
 .image-caption {
   position: absolute;
   bottom: 20px;
@@ -3528,7 +3508,7 @@ color: white;
   text-overflow: ellipsis;
 }
 
-/* УБИРАЕМ ОПИСАНИЕ ПОЛНОСТЬЮ */
+/* COMPLETELY REMOVE DESCRIPTION */
 .image-caption p {
   display: none !important;
 }
@@ -3552,13 +3532,13 @@ color: white;
     padding: 20px 5px 50px;
   }
   
-  /* Скрываем стрелочки слайдера на мобильных */
+  /* Hide slider arrows on mobile */
   .portfolio-swiper .swiper-button-next,
   .portfolio-swiper .swiper-button-prev {
     display: none !important;
   }
   
-  /* УВЕЛИЧИВАЕМ КАРТОЧКИ */
+  /* ENLARGE CARDS */
   .portfolio-card {
     height: 500px;
     margin: 0 5px;
@@ -3573,12 +3553,12 @@ color: white;
   }
   
   .portfolio-content {
-    padding: 15px 12px;
+    padding: 15px 12px!important;
   }
   
   .portfolio-content h3 {
     font-size: 1.2rem;
-    margin-bottom: 8px;
+    margin-bottom: 0px;
   }
   
   .portfolio-content p {
@@ -3593,7 +3573,7 @@ color: white;
     right: 15px;
   }
   
-  /* ГАЛЕРЕЯ НА МОБИЛЬНЫХ */
+  /* GALLERY ON MOBILE */
   .gallery-modal-content {
     padding: 0;
   }
@@ -3601,7 +3581,7 @@ color: white;
   .gallery-image-container {
     max-width: 100%;
     max-height: 100%;
-    padding: 70px 10px 60px 10px; /* Больше места сверху для крестика */
+    padding: 70px 10px 60px 10px; /* More space at top for cross */
     width: 100%;
     height: 100%;
   }
@@ -3614,7 +3594,7 @@ color: white;
     object-fit: contain;
   }
   
-  /* КРЕСТИК НА МОБИЛЬНЫХ - ОБЯЗАТЕЛЬНО ВИДИМЫЙ */
+  /* CROSS ON MOBILE - MUST BE VISIBLE */
   .close-gallery-modal {
     position: fixed !important;
     top: 115px !important;
@@ -3629,7 +3609,7 @@ color: white;
     z-index: 10003 !important;
   }
   
-  /* Стрелочки на мобильных */
+  /* Arrows on mobile */
   .gallery-nav {
     width: 40px;
     height: 40px;
@@ -3653,7 +3633,7 @@ color: white;
     background: rgba(255, 255, 255, 0.95);
   }
   
-  /* Подпись на мобильных - ТОЛЬКО ЗАГОЛОВОК ОДНА СТРОКА */
+  /* Caption on mobile - TITLE ONLY ONE LINE */
   .image-caption {
     bottom: 15px;
     padding: 8px 16px;
@@ -3686,14 +3666,14 @@ color: white;
   }
   
   .portfolio-content h3 {
-    font-size: 1.1rem;
+    font-size: 1.0rem;
   }
   
   .portfolio-content p {
     font-size: 0.85rem;
   }
   
-  /* ГАЛЕРЕЯ */
+  /* GALLERY */
   .gallery-image-container {
     padding: 60px 5px 50px 5px;
   }
@@ -3703,7 +3683,7 @@ color: white;
     max-width: 98vw;
   }
   
-  /* КРЕСТИК */
+  /* CROSS */
   .close-gallery-modal {
     top: 10px !important;
     right: 10px !important;
@@ -3736,7 +3716,7 @@ color: white;
   }
 }
 
-/* Большие экраны */
+/* Large screens */
 @media (min-width: 1400px) {
   .portfolio-card {
     height: 700px;
@@ -3769,14 +3749,14 @@ color: white;
   text-decoration: none !important;
 }
 
-/* Мобильные 768px и меньше - ФИКСИРУЕМ У ЗАГОЛОВКА */
+/* Mobile 768px and less - FIX AT TITLE */
 @media (max-width: 768px) {
   .close-gallery-modal {
     position: fixed !important;
     top: auto !important;
-    bottom: 90px !important; /* Фиксируем над заголовком */
-    right: 50% !important; /* Центрируем по горизонтали */
-    transform: translateX(50%) !important; /* Точное центрирование */
+    bottom: 90px !important; /* Fix above title */
+    right: 50% !important; /* Center horizontally */
+    transform: translateX(50%) !important; /* Exact centering */
     margin-right: 0 !important;
     width: 44px !important;
     height: 44px !important;
@@ -3787,10 +3767,10 @@ color: white;
   }
 }
 
-/* Маленькие мобильные 480px и меньше */
+/* Small mobile 480px and less */
 @media (max-width: 480px) {
   .close-gallery-modal {
-    bottom: 80px !important; /* Регулируем высоту */
+    bottom: 80px !important; /* Adjust height */
     width: 40px !important;
     height: 40px !important;
     font-size: 1.1rem !important;
@@ -3798,9 +3778,6 @@ color: white;
 }
 
 /**/
-
-
-
 
 .portfolio-swiper .swiper-button-prev svg,
 .portfolio-swiper .swiper-button-next svg {
@@ -3814,7 +3791,7 @@ color: white;
 
 .portfolio-swiper .swiper-pagination {
     position: relative !important;
-    margin-top: 40px !important; /* опускаем вниз через отступ */
+    margin-top: 40px !important; /* lower through margin */
 }
 
 .portfolio-section {
@@ -3919,7 +3896,7 @@ color: white;
 
       /**/
 
-      /* Стили для формы в футере */
+      /* Footer form styles */
 .footer-brand .contact-form-section {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
@@ -3953,9 +3930,7 @@ color: white;
   border-color: white;
 }
 
-
 /*!Infinite autoplay carousel*/
-
 
 .partners-section {
   padding: 40px 0;
@@ -4007,4 +3982,392 @@ color: white;
 @keyframes scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(calc(-250px * 7))}
+}
+
+/**/
+
+.email-copy-item {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.email-copy-item:hover {
+  background-color: #f5f5f5;
+}
+
+.copy-hint {
+  font-size: 12px;
+  color: #666;
+  margin-left: 10px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.email-copy-item:hover .copy-hint {
+  opacity: 1;
+}
+
+.social-icon {
+  cursor: pointer;
+}
+
+/**/
+
+/* Force reduce portfolio card height */
+.portfolio-card {
+    height: 380px !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.card-image {
+    height: 450px !important;
+    flex-shrink: 0 !important;
+}
+
+.portfolio-content {
+    padding: 8px 12px 12px 12px !important;
+    flex-grow: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    text-align: center !important;
+    height: auto !important;
+    min-height: 90px !important;
+    max-height: 110px !important;
+}
+
+.portfolio-card-title {
+    font-size: 1rem !important;
+    line-height: 1.1 !important;
+    margin-bottom: 4px !important;
+    font-weight: 600 !important;
+}
+
+.portfolio-card-desc {
+    font-size: 0.8rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: 8px !important;
+}
+
+.project-stats {
+    margin-top: auto !important;
+    padding-top: 6px !important;
+    gap: 12px !important;
+}
+
+/* Important: disable auto-height for Swiper */
+.swiper-slide {
+    height: auto !important;
+}
+
+.swiper-slide .portfolio-card {
+    height: 100% !important;
+}
+
+/**/
+/* Update date subtitle styles */
+.price-update-date {
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    font-style: italic;
+    position: relative;
+    padding: 10px 0;
+}
+
+.price-update-date span {
+    font-weight: 600;
+    color: black;
+    background: linear-gradient(45deg, black);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    padding: 2px 8px;
+    border-radius: 4px;
+    position: relative;
+}
+
+.price-update-date span::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(231, 76, 60, 0.1);
+    border-radius: 4px;
+    z-index: -1;
+}
+
+/* Appearance animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.price-update-date {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Mobile device responsiveness */
+@media (max-width: 768px) {
+    .price-update-date {
+        font-size: 1rem;
+        margin-bottom: 30px;
+        padding: 8px 15px;
+    }
+    
+    .price-update-date span {
+        font-size: 1.05rem;
+        display: inline-block;
+        margin-top: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .price-update-date {
+        font-size: 0.95rem;
+        margin-bottom: 25px;
+    }
+    
+    .price-update-date span {
+        font-size: 1rem;
+    }
+}
+
+/* Mobile hover fixes */
+@media (max-width: 768px) {
+    /* Remove hover effects on mobile for service cards */
+    .service-card:hover::before {
+        left: -100%;
+    }
+    
+    .service-card:hover {
+        transform: none;
+    }
+    
+    .service-card:hover .service-icon {
+        border-color: #000;
+        color: #000;
+    }
+    
+    .service-card:hover .service-name,
+    .service-card:hover .service-description {
+        color: #000;
+    }
+    
+    .service-card:hover .read-more-btn {
+        background: #000;
+        color: #fff;
+        border-color: #000;
+        transform: none;
+    }
+    
+    /* Add active state for mobile touch */
+    .service-card:active {
+        background: #000;
+        transform: scale(0.98);
+    }
+    
+    .service-card:active .service-icon {
+        border-color: #fff;
+        color: #fff;
+    }
+    
+    .service-card:active .service-name,
+    .service-card:active .service-description {
+        color: #fff;
+    }
+    
+    .service-card:active .read-more-btn {
+        background: #fff;
+        color: #000;
+        border-color: #fff;
+    }
+    
+    /* Fix for social icons hover on mobile */
+    .social-icon:hover:before {
+        transform: scale(0);
+    }
+    
+    .social-icon:hover i {
+        color: #000;
+    }
+    
+    .social-icon:active:before {
+        transform: scale(1);
+    }
+    
+    .social-icon:active i {
+        color: #fff;
+    }
+    
+    /* Fix for pricing cards hover on mobile */
+    .pricing-card:hover {
+        transform: none;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    }
+    
+    .pricing-card:active {
+        transform: scale(0.98);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Fix for contact items hover on mobile */
+    .contact-item:hover {
+        background: rgba(255,255,255,0.7);
+        transform: none;
+        box-shadow: none;
+    }
+    
+    .contact-item:active {
+        background: white;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    /* Fix for social cards hover on mobile */
+    .social-card:hover::before {
+        left: -100%;
+    }
+    
+    .social-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    
+    .social-card:hover .social-icon {
+        border-color: #000;
+        color: #000;
+    }
+    
+    .social-card:hover .social-name {
+        color: #000;
+    }
+    
+    .social-card:active::before {
+        left: 0;
+    }
+    
+    .social-card:active {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .social-card:active .social-icon {
+        border-color: #fff;
+        color: #fff;
+    }
+    
+    .social-card:active .social-name {
+        color: #fff;
+    }
+    
+    /* Fix for buttons hover on mobile */
+    .btn-talk:hover,
+    .btn-cv:hover,
+    .send-message-btn:hover,
+    .btn-more:hover {
+        transform: none;
+    }
+    
+    .btn-talk:active,
+    .btn-cv:active,
+    .send-message-btn:active,
+    .btn-more:active {
+        transform: scale(0.98);
+    }
+    
+    /* Fix for scroll to top button hover on mobile */
+    .scroll-to-top:hover {
+        transform: translateY(0) scale(1);
+        background: white;
+        color: black;
+        border-color: black;
+    }
+    
+    .scroll-to-top:active {
+        background: black;
+        transform: translateY(-3px) scale(1.05);
+        color: white;
+        border-color: white;
+    }
+    
+    /* Fix for portfolio cards hover on mobile */
+    .portfolio-card:hover {
+        transform: none;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .portfolio-card:active {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Fix for product type hover on mobile */
+    .product-type:hover {
+        transform: none;
+        box-shadow: none;
+        border-color: #000000;
+    }
+    
+    .product-type:active {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+
+    }
+    
+    /* Disable hover effects for clickable products on mobile */
+    .clickable-product:hover::after {
+        opacity: 0;
+        bottom: -10px;
+    }
+    
+    .clickable-product:active::after {
+        opacity: 1;
+        bottom: -15px;
+    }
+}
+
+/* Additional fix for touch devices */
+@media (hover: none) and (pointer: coarse) {
+    /* Disable all hover effects on touch devices */
+    .service-card:hover::before,
+    .social-card:hover::before,
+    .social-icon:hover:before {
+        transform: scale(0) !important;
+    }
+    
+    .service-card:hover,
+    .pricing-card:hover,
+    .portfolio-card:hover,
+    .social-card:hover,
+    .contact-item:hover,
+    .product-type:hover {
+        transform: none !important;
+    }
+    
+    /* Keep only active states for touch */
+    *:active {
+        transition: all 0.1s ease !important;
+    }
+}
+
+/**/
+
+/* Отключаем стандартное сообщение валидации */
+input:invalid, textarea:invalid {
+  box-shadow: none;
+}
+
+input:-moz-ui-invalid, textarea:-moz-ui-invalid {
+  box-shadow: none;
 }

@@ -1,10 +1,10 @@
 export function initSectionScript() {
-    // Обработчик для карточек и кнопок
+    // Handler for cards and buttons
     const serviceCards = document.querySelectorAll('.service-card');
     
     serviceCards.forEach(card => {
         card.addEventListener('click', function(e) {
-            // Открываем модальное окно при клике на любую часть карточки
+            // Open modal window when clicking on any part of the card
             const modalId = this.getAttribute('data-modal');
             const modal = document.getElementById(modalId);
             if (modal) {
@@ -14,7 +14,7 @@ export function initSectionScript() {
         });
     });
 
-    // Закрытие модальных окон
+    // Close modal windows
     const closeButtons = document.querySelectorAll('.close-modal');
     closeButtons.forEach(button => {
         button.addEventListener('click', function() {
@@ -24,7 +24,7 @@ export function initSectionScript() {
         });
     });
 
-    // Закрытие при клике вне модального окна
+    // Close when clicking outside modal window
     const modals = document.querySelectorAll('.modal');
     modals.forEach(modal => {
         modal.addEventListener('click', function(e) {
@@ -35,7 +35,7 @@ export function initSectionScript() {
         });
     });
 
-    // Закрытие на Escape
+    // Close on Escape
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             modals.forEach(modal => {
