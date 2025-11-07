@@ -5,6 +5,9 @@
     <link rel="icon" type="image/svg+xml" href="/Logo2.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
+    <!-- Netlify Identity for CMS -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    
     <!-- Meta tags for SEO -->
     <meta name="description" content="Professional import manager specializing in nuts, dried fruits, spices, coffee and related products. Reliable international supply chains.">
     <meta name="keywords" content="import manager, trade specialist, nuts, dried fruits, spices, coffee, international trade, supply chain">
@@ -76,5 +79,18 @@
         <div id="app"></div>
         <script type="module" src="/src/main.js"></script>
     </div>
+
+    <!-- Netlify Identity Redirect -->
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
   </body>
 </html>
