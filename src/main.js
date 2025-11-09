@@ -6,6 +6,7 @@ import { initHeaderMenu } from './components/headerScript.js';
 import { initSectionScript } from './components/sectionScript.js';
 import { initLanguage, t, loadTranslations } from './utils/i18n.js';
 import { initContactForm } from './utils/emailService.js';
+import { loadCMSData, renderProducts, updateProductPrices } from './utils/cms-loader.js';
 
 // Import Swiper
 import Swiper from 'swiper';
@@ -19,14 +20,12 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 
 // Function to update texts on the page
 function updatePageTexts() {
-  // Update all elements with data-i18n attribute
   const elements = document.querySelectorAll('[data-i18n]');
   elements.forEach(element => {
     const key = element.getAttribute('data-i18n');
     element.textContent = t(key);
   });
   
-  // Update placeholders
   const placeholderElements = document.querySelectorAll('[data-i18n-placeholder]');
   placeholderElements.forEach(element => {
     const key = element.getAttribute('data-i18n-placeholder');
@@ -34,8 +33,27 @@ function updatePageTexts() {
   });
 }
 
+// Function to initialize products
+async function initializeProducts() {
+  console.log('🔄 Initializing products...');
+  try {
+    const productsData = await loadCMSData();
+    if (productsData) {
+      renderProducts(productsData);
+      // Re-initialize product modals after rendering
+      setTimeout(() => {
+        initProductModals();
+      }, 100);
+    }
+  } catch (error) {
+    console.error('❌ Error initializing products:', error);
+  }
+}
+
 // Function to render the entire application
-function renderApp() {
+async function renderApp() {
+  console.log('🔄 Rendering app...');
+  
   document.querySelector('#app').innerHTML = `
     ${Header()}
     ${Content()}
@@ -45,18 +63,23 @@ function renderApp() {
   // Update texts after render
   updatePageTexts();
   
+  // Initialize products
+  await initializeProducts();
+  
   // Initialize all components
   initHeaderMenu();
   initSectionScript();
   initSwiper();
   initContactForm();
   initScrollToTop();
-  initProductModals();
   initServiceModals();
-  initPortfolioGallery(); // ← ADD THIS LINE
+  initPortfolioGallery();
+  
   // Update active language in dropdown
   updateLanguageSelector();
-    initEmailLinks();
+  initEmailLinks();
+  
+  console.log('✅ App rendered successfully!');
 }
 
 // Language selector update function
@@ -71,8 +94,9 @@ function updateLanguageSelector() {
 
 // Application initialization
 async function initApp() {
+  console.log('🚀 Starting application...');
   await initLanguage();
-  renderApp();
+  await renderApp();
 }
 
 function initSwiper() {
@@ -133,10 +157,40 @@ window.changeLanguage = async function(lang) {
   updateLanguageSelector();
 };
 
+// Function for refreshing prices
+window.refreshPrices = async function() {
+  const productsData = await loadCMSData();
+  if (productsData) {
+    updateProductPrices(productsData);
+    
+    // Show notification
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      z-index: 10000;
+      font-size: 14px;
+    `;
+    notification.textContent = 'Prices updated successfully!';
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      if (document.body.contains(notification)) {
+        document.body.removeChild(notification);
+      }
+    }, 3000);
+  }
+};
+
 // Start the application
 initApp();
 
-// services.js or component.js
+// Service Modals
 function initServiceModals() {
     const serviceCards = document.querySelectorAll('.service-card[data-service-modal]');
     const serviceModals = document.querySelectorAll('.service-modal');
@@ -186,21 +240,7 @@ function initServiceModals() {
     });
 }
 
-// And call in main file
-document.addEventListener('DOMContentLoaded', function() {
-  initServiceCards();
-});
-
-    // Script for automatic current date
-    document.addEventListener('DOMContentLoaded', function() {
-        const now = new Date();
-        const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-        const dateString = now.toLocaleDateString('en-GB', options); // Changed to English format
-        document.getElementById('current-date').textContent = dateString;
-    });
-
-    /**ScrolToTop */
-
+// Scroll to Top
 function initScrollToTop() {
   const scrollToTop = document.getElementById('scrollToTop');
   const pricingSection = document.querySelector('.pricing-section');
@@ -247,11 +287,9 @@ function initScrollToTop() {
   setTimeout(checkScroll, 200);
 }
 
-/** */
-
+// Product Modals
 function initProductModals() {
     const pricingCards = document.querySelectorAll('.pricing-card[data-modal]');
-    const pricingCardsNoModal = document.querySelectorAll('.pricing-card:not([data-modal])');
     const modals = document.querySelectorAll('.product-modal');
     const closeButtons = document.querySelectorAll('.close-modal');
     const clickableProducts = document.querySelectorAll('.clickable-product');
@@ -266,7 +304,7 @@ function initProductModals() {
         }, 300);
     }
 
-    // Handle cards WITH modal windows (first 8 blocks)
+    // Handle cards WITH modal windows
     pricingCards.forEach(card => {
         card.addEventListener('click', function(e) {
             // If clicked on "Learn More" - open modal window
@@ -289,36 +327,6 @@ function initProductModals() {
                 if (modal) {
                     modal.classList.add('active');
                     document.body.style.overflow = 'hidden';
-                }
-            }
-        });
-    });
-
-    // Handle cards WITHOUT modal windows (last 2 blocks)
-    pricingCardsNoModal.forEach(card => {
-        card.addEventListener('click', function(e) {
-            // If clicked on "Learn More" - scroll to contacts
-            if (e.target.closest('.btn-more')) {
-                e.preventDefault();
-                e.stopPropagation(); // Prevent bubbling
-                const contactSection = document.getElementById('contact');
-                if (contactSection) {
-                    contactSection.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-                return;
-            }
-            
-            // If clicked on the card itself (but not on the button) - also scroll to contacts
-            if (!e.target.closest('.btn-more')) {
-                const contactSection = document.getElementById('contact');
-                if (contactSection) {
-                    contactSection.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
                 }
             }
         });
@@ -373,7 +381,7 @@ function initProductModals() {
     });
 }
 
-/** Gallery Modal Function */
+// Gallery Modal Function
 function initPortfolioGallery() {
   const galleryModal = document.getElementById('galleryModal');
   const galleryImage = document.getElementById('galleryImage');
@@ -488,75 +496,7 @@ function initPortfolioGallery() {
   });
 }
 
-// Service Cards Function
-function initServiceCards() {
-  const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-  
-  if (isMobile) {
-    const serviceCards = document.querySelectorAll('.service-card');
-    
-    serviceCards.forEach(card => {
-      card.style.pointerEvents = 'auto';
-      
-      card.addEventListener('touchstart', function() {
-        this.classList.add('mobile-active');
-      });
-      
-      card.addEventListener('touchend', function() {
-        setTimeout(() => {
-          this.classList.remove('mobile-active');
-        }, 150);
-      });
-    });
-  }
-}
-
-/**Footer-Privacy Policy */
-document.addEventListener('DOMContentLoaded', function() {
-        // Privacy Policy Modal
-        const privacyModal = document.getElementById('privacyModal');
-        const termsModal = document.getElementById('termsModal');
-        const closeButtons = document.querySelectorAll('.close-modal');
-        
-        // Privacy Policy
-        document.querySelector('a[href="#privacy-policy"]').addEventListener('click', function(e) {
-          e.preventDefault();
-          privacyModal.style.display = 'block';
-          document.body.style.overflow = 'hidden';
-        });
-        
-        // Terms of Service
-        document.querySelector('a[href="#terms-of-service"]').addEventListener('click', function(e) {
-          e.preventDefault();
-          termsModal.style.display = 'block';
-          document.body.style.overflow = 'hidden';
-        });
-        
-        // Close modals
-        closeButtons.forEach(button => {
-          button.addEventListener('click', function() {
-            privacyModal.style.display = 'none';
-            termsModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-          });
-        });
-        
-        // Close on background click
-        window.addEventListener('click', function(e) {
-          if (e.target === privacyModal) {
-            privacyModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-          }
-          if (e.target === termsModal) {
-            termsModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-          }
-        });
-      });
-
-      /** */
-
-// Add to main.js
+// Email Links
 function initEmailLinks() {
   const emailLinks = document.querySelectorAll('.email-link');
   
@@ -630,30 +570,7 @@ function showNotification(message) {
   }, 3000);
 }
 
-/** */
-function getLastTuesday() {
-    const today = new Date();
-    const dayOfWeek = today.getDay(); // 0-6 (Sunday=0, Monday=1, Tuesday=2)
-    
-    // If today is Tuesday (2) and time is after 10:00 AM, use today's date
-    // Otherwise use last Tuesday
-    let lastTuesday = new Date(today);
-    
-    if (dayOfWeek === 2 && today.getHours() >= 10) {
-        // Today is Tuesday and already after 10 AM - use today
-        return lastTuesday;
-    } else {
-        // Find last Tuesday
-        const daysSinceTuesday = (dayOfWeek + 5) % 7;
-        lastTuesday.setDate(today.getDate() - daysSinceTuesday);
-        return lastTuesday;
-    }
-}
-
-function formatDate(date) {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return date.toLocaleDateString('en-US', options);
-}
-
-// Set last Tuesday date
-document.getElementById('current-date').textContent = formatDate(getLastTuesday());
+// Auto-refresh prices every 5 minutes
+setInterval(() => {
+  window.refreshPrices();
+}, 300000);
