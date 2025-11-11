@@ -6,23 +6,13 @@ export function Footer() {
           <div class="footer-brand">
             <h3 class="footer-name">Parvina</h3>
             <p class="footer-tagline">Import Manager & Trade Specialist</p>
-            
-            <!-- REMOVE CONTACT FORM FROM HERE -->
-            <!-- 
-            <div class="contact-form-section">
-              <h4 class="form-title">Get In Touch</h4>
-              <form id="contact-form" class="contact-form">
-                ... form ...
-              </form>
-            </div>
-            -->
           </div>
           
           <div class="footer-links">
             <div class="footer-column">
               <h4 class="footer-column-title">Navigation</h4>
               <ul class="footer-list">
-                <li><a href="#products" class="footer-link">Our Products</a></li> <!-- Changed from #home to #products -->
+                <li><a href="#products" class="footer-link">Our Products</a></li>
                 <li><a href="#about" class="footer-link">About</a></li>
                 <li><a href="#services" class="footer-link">Services</a></li>
                 <li><a href="#portfolio" class="footer-link">Portfolio</a></li>
@@ -61,13 +51,13 @@ export function Footer() {
           </div>
           
           <div class="footer-legal">
-            <a href="#privacy-policy" class="footer-legal-link">Privacy Policy</a>
-            <a href="#terms-of-service" class="footer-legal-link">Terms of Service</a>
+            <a href="#privacy-policy" class="footer-legal-link" id="privacy-policy-link">Privacy Policy</a>
+            <a href="#terms-of-service" class="footer-legal-link" id="terms-of-service-link">Terms of Service</a>
           </div>
         </div>
       </div>
 
-      <!-- Modal windows remain -->
+      <!-- Modal windows -->
       <div id="privacyModal" class="modal">
         <div class="modal-content">
           <span class="close-modal"></span>
@@ -108,7 +98,7 @@ export function Footer() {
 
       <div id="termsModal" class="modal">
         <div class="modal-content">
-          <span class="close-modal">&times;</span>
+          <span class="close-modal"></span>
           <h2>Terms of Service</h2>
           <div class="policy-text">
             <h3>Business Services</h3>

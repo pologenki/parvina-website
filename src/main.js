@@ -1,3 +1,4 @@
+// main.js
 import './style.css'
 import { Header } from './components/header.js'
 import { Content } from './components/content.js'
@@ -40,14 +41,13 @@ async function initializeProducts() {
     const productsData = await loadCMSData();
     if (productsData) {
       renderProducts(productsData);
-      // Re-initialize product modals after rendering
-      setTimeout(() => {
-        initProductModals();
-      }, 100);
     }
   } catch (error) {
-    console.error('❌ Error initializing products:', error);
+    console.error('❌ Error:', error);
   }
+  
+  // Инициализируем модалки сразу
+  initProductModals();
 }
 
 // Function to render the entire application
@@ -74,6 +74,7 @@ async function renderApp() {
   initScrollToTop();
   initServiceModals();
   initPortfolioGallery();
+  initFooterModals();
   
   // Update active language in dropdown
   updateLanguageSelector();
@@ -103,50 +104,63 @@ function initSwiper() {
   const swiperElement = document.querySelector('.portfolio-swiper');
   
   if (swiperElement) {
-    const swiper = new Swiper('.portfolio-swiper', {
-      modules: [Navigation, Pagination, Autoplay],
-      loop: true,
-      slidesPerView: 1,
-      spaceBetween: 30,
-      centeredSlides: true,
-      
-      autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
-      },
-      
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-        dynamicBullets: true,
-      },
-      
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      
-      breakpoints: {
-        640: {
-          slidesPerView: 1,
-          spaceBetween: 20,
+    // Ждем немного чтобы DOM полностью загрузился
+    setTimeout(() => {
+      const swiper = new Swiper('.portfolio-swiper', {
+        modules: [Navigation, Pagination, Autoplay],
+        loop: true,
+        slidesPerView: 1,
+        spaceBetween: 30,
+        centeredSlides: true,
+        
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
         },
-        768: {
-          slidesPerView: 2,
-          spaceBetween: 25,
+        
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+          dynamicBullets: true,
         },
-        1024: {
-          slidesPerView: 3,
-          spaceBetween: 30,
+        
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
         },
-        1200: {
-          slidesPerView: 3,
-          spaceBetween: 40,
+        
+        // Важные настройки для мобильных
+        touchEventsTarget: 'container',
+        simulateTouch: true,
+        touchRatio: 1,
+        touchAngle: 45,
+        grabCursor: true,
+        allowTouchMove: true,
+        
+        breakpoints: {
+          640: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 25,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+          },
+          1200: {
+            slidesPerView: 3,
+            spaceBetween: 40,
+          }
         }
-      }
-    });
-    
-    console.log('✅ Portfolio Swiper initialized successfully!');
+      });
+      
+      console.log('✅ Portfolio Swiper initialized successfully!');
+    }, 100);
+  } else {
+    console.log('❌ Portfolio Swiper element not found');
   }
 }
 
@@ -187,8 +201,65 @@ window.refreshPrices = async function() {
   }
 };
 
-// Start the application
-initApp();
+// Footer Modals Function
+function initFooterModals() {
+  const privacyLink = document.getElementById('privacy-policy-link');
+  const termsLink = document.getElementById('terms-of-service-link');
+  const privacyModal = document.getElementById('privacyModal');
+  const termsModal = document.getElementById('termsModal');
+  
+  // Open modals when links are clicked
+  if (privacyLink && privacyModal) {
+    privacyLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      privacyModal.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    });
+  }
+  
+  if (termsLink && termsModal) {
+    termsLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      termsModal.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    });
+  }
+  
+  // Close modals when clicking the X
+  const closeButtons = document.querySelectorAll('.modal .close-modal');
+  closeButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const modal = this.closest('.modal');
+      if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    });
+  });
+  
+  // Close modals when clicking outside
+  const modals = document.querySelectorAll('.modal');
+  modals.forEach(modal => {
+    modal.addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    });
+  });
+  
+  // Close modals with Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      modals.forEach(modal => {
+        if (modal.style.display === 'block') {
+          modal.style.display = 'none';
+          document.body.style.overflow = '';
+        }
+      });
+    }
+  });
+}
 
 // Service Modals
 function initServiceModals() {
@@ -212,8 +283,10 @@ function initServiceModals() {
     closeServiceButtons.forEach(button => {
         button.addEventListener('click', function() {
             const modal = this.closest('.service-modal');
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
         });
     });
 
@@ -263,12 +336,9 @@ function initScrollToTop() {
       clearTimeout(hideTimeout);
     }
     
-    // Define hide time depending on device
-    const hideDelay = window.innerWidth >= 768 ? 3000 : 500; // 3 seconds for desktop, 0.5 for mobile
-    
     hideTimeout = setTimeout(() => {
       scrollToTop.classList.remove('show');
-    }, hideDelay);
+    }, 3000);
   }
   
   function checkScroll() {
@@ -287,97 +357,192 @@ function initScrollToTop() {
   setTimeout(checkScroll, 200);
 }
 
-// Product Modals
+// Product Modals - SIMPLE AND RELIABLE VERSION
 function initProductModals() {
-    const pricingCards = document.querySelectorAll('.pricing-card[data-modal]');
-    const modals = document.querySelectorAll('.product-modal');
-    const closeButtons = document.querySelectorAll('.close-modal');
-    const clickableProducts = document.querySelectorAll('.clickable-product');
-
-    // Function to close modal window with animation
-    function closeModal(modal) {
-        modal.classList.add('closing');
-        document.body.style.overflow = '';
+    console.log('🔄 Init product modals - simple version');
+    
+    let currentModalIndex = 0;
+    let productModals = [];
+    
+    // Собираем все модальные окна продуктов
+    function updateModalsList() {
+        productModals = Array.from(document.querySelectorAll('.product-modal'));
+        console.log(`📦 Found ${productModals.length} product modals`);
         
-        setTimeout(() => {
-            modal.classList.remove('active', 'closing');
-        }, 300);
+        // Скрываем стрелочки на мобильных устройствах
+        toggleNavigationVisibility();
     }
-
-    // Handle cards WITH modal windows
-    pricingCards.forEach(card => {
-        card.addEventListener('click', function(e) {
-            // If clicked on "Learn More" - open modal window
-            if (e.target.closest('.btn-more')) {
-                e.preventDefault();
-                e.stopPropagation(); // Prevent bubbling
-                const modalId = this.getAttribute('data-modal');
-                const modal = document.getElementById(modalId);
-                if (modal) {
-                    modal.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                }
-                return;
-            }
-            
-            // If clicked on the card itself (but not on the button) - also open modal window
-            if (!e.target.closest('.btn-more')) {
-                const modalId = this.getAttribute('data-modal');
-                const modal = document.getElementById(modalId);
-                if (modal) {
-                    modal.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                }
-            }
-        });
-    });
-
-    // Close modal window with animation
-    closeButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const modal = this.closest('.product-modal');
-            closeModal(modal);
-        });
-    });
-
-    // Close when clicking outside modal window with animation
-    modals.forEach(modal => {
-        modal.addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal(this);
-            }
-        });
-    });
-
-    // Handle clicks on product blocks in modal windows
-    clickableProducts.forEach(product => {
-        product.addEventListener('click', function(e) {
-            const modal = this.closest('.product-modal');
-            if (modal) {
-                closeModal(modal);
-            }
-            
-            setTimeout(() => {
-                const contactSection = document.getElementById('contact');
-                if (contactSection) {
-                    contactSection.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            }, 350);
-        });
-    });
-
-    // Close on Escape with animation
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            modals.forEach(modal => {
-                if (modal.classList.contains('active')) {
-                    closeModal(modal);
-                }
+    
+    // Проверка мобильного устройства
+    function isMobileDevice() {
+        return window.innerWidth <= 768;
+    }
+    
+    // Показать/скрыть навигацию в зависимости от устройства
+    function toggleNavigationVisibility() {
+        const navigationElements = document.querySelectorAll('.modal-navigation');
+        if (isMobileDevice()) {
+            navigationElements.forEach(nav => {
+                nav.style.display = 'none';
+            });
+        } else {
+            navigationElements.forEach(nav => {
+                nav.style.display = 'flex';
             });
         }
+    }
+    
+    // Функция закрытия модального окна
+    function closeModal(modal) {
+        if (modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+    
+    // Функция переключения модального окна
+    function switchModal(direction) {
+        if (productModals.length === 0) return;
+        
+        productModals[currentModalIndex].classList.remove('active');
+        
+        if (direction === 'next') {
+            currentModalIndex = (currentModalIndex + 1) % productModals.length;
+        } else {
+            currentModalIndex = (currentModalIndex - 1 + productModals.length) % productModals.length;
+        }
+        
+        productModals[currentModalIndex].classList.add('active');
+    }
+    
+    // ПРОСТЫЕ ОБРАБОТЧИКИ
+    function initAllHandlers() {
+        // 1. Открытие модальных окон
+        document.querySelectorAll('.pricing-card[data-modal]').forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (e.target.closest('.btn-more')) {
+                    e.preventDefault();
+                }
+                
+                const modalId = this.getAttribute('data-modal');
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    currentModalIndex = productModals.findIndex(m => m.id === modalId);
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+        
+        // 2. Закрытие крестиком
+        document.querySelectorAll('.product-modal .close-modal').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const modal = this.closest('.product-modal');
+                closeModal(modal);
+            });
+        });
+        
+        // 3. Клик вне модального окна
+        productModals.forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal(this);
+                }
+            });
+        });
+        
+        // 4. Навигационные стрелки
+        document.querySelectorAll('.modal-prev').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (!isMobileDevice()) {
+                    switchModal('prev');
+                }
+            });
+        });
+        
+        document.querySelectorAll('.modal-next').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (!isMobileDevice()) {
+                    switchModal('next');
+                }
+            });
+        });
+        
+        // 5. Кликабельные продукты
+        document.querySelectorAll('.clickable-product').forEach(product => {
+            product.addEventListener('click', function(e) {
+                e.preventDefault();
+                const modal = this.closest('.product-modal');
+                if (modal) {
+                    closeModal(modal);
+                }
+                
+                setTimeout(() => {
+                    const contactSection = document.getElementById('contact');
+                    if (contactSection) {
+                        contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }, 300);
+            });
+        });
+        
+        // 6. Escape для закрытия
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const activeModal = document.querySelector('.product-modal.active');
+                if (activeModal) {
+                    closeModal(activeModal);
+                }
+            }
+            
+            // Навигация стрелками клавиатуры
+            if (!isMobileDevice() && document.querySelector('.product-modal.active')) {
+                if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    switchModal('prev');
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    switchModal('next');
+                }
+            }
+        });
+        
+        // 7. Свайпы для мобильных
+        if (isMobileDevice()) {
+            let startX = 0;
+            
+            productModals.forEach(modal => {
+                modal.addEventListener('touchstart', function(e) {
+                    startX = e.touches[0].clientX;
+                }, { passive: true });
+                
+                modal.addEventListener('touchend', function(e) {
+                    const endX = e.changedTouches[0].clientX;
+                    const diffX = startX - endX;
+                    
+                    if (Math.abs(diffX) > 50) {
+                        if (diffX > 0) {
+                            switchModal('next');
+                        } else {
+                            switchModal('prev');
+                        }
+                    }
+                }, { passive: true });
+            });
+        }
+    }
+    
+    // Инициализация
+    updateModalsList();
+    initAllHandlers();
+    
+    // При изменении размера окна
+    window.addEventListener('resize', function() {
+        updateModalsList();
+        toggleNavigationVisibility();
     });
 }
 
@@ -385,10 +550,7 @@ function initProductModals() {
 function initPortfolioGallery() {
   const galleryModal = document.getElementById('galleryModal');
   const galleryImage = document.getElementById('galleryImage');
-  const imageTitle = document.getElementById('imageTitle');
-  const imageDescription = document.getElementById('imageDescription');
-  const currentImageSpan = document.getElementById('currentImage');
-  const totalImagesSpan = document.getElementById('totalImages');
+  const galleryModalContent = document.querySelector('.gallery-modal-content');
   const closeGalleryBtn = document.querySelector('.close-gallery-modal');
   const prevBtn = document.querySelector('.gallery-prev');
   const nextBtn = document.querySelector('.gallery-next');
@@ -397,25 +559,19 @@ function initPortfolioGallery() {
   let currentImageIndex = 0;
   let images = [];
 
+  if (!galleryModal) return;
+
   // Collect all images from cards
   cardImages.forEach((card, index) => {
     const imgSrc = card.getAttribute('data-image-src');
     const imgAlt = card.getAttribute('data-image-alt');
-    const cardContent = card.closest('.portfolio-card').querySelector('.portfolio-content');
-    const title = cardContent.querySelector('h3').textContent;
-    const description = cardContent.querySelector('p').textContent;
     
     images.push({
       src: imgSrc,
       alt: imgAlt,
-      title: title,
-      description: description,
       index: index
     });
   });
-
-  // Update counter
-  totalImagesSpan.textContent = images.length;
 
   // Open gallery when clicking on image
   cardImages.forEach((card, index) => {
@@ -441,15 +597,10 @@ function initPortfolioGallery() {
   function updateGallery() {
     const currentImage = images[currentImageIndex];
     
-    galleryImage.src = currentImage.src;
-    galleryImage.alt = currentImage.alt;
-    imageTitle.textContent = currentImage.title;
-    imageDescription.textContent = currentImage.description;
-    currentImageSpan.textContent = currentImageIndex + 1;
-    
-    // Update navigation button states
-    prevBtn.disabled = currentImageIndex === 0;
-    nextBtn.disabled = currentImageIndex === images.length - 1;
+    if (currentImage) {
+      galleryImage.src = currentImage.src;
+      galleryImage.alt = currentImage.alt;
+    }
   }
 
   function nextImage() {
@@ -467,31 +618,30 @@ function initPortfolioGallery() {
   }
 
   // Events
-  closeGalleryBtn.addEventListener('click', closeGallery);
-  prevBtn.addEventListener('click', prevImage);
-  nextBtn.addEventListener('click', nextImage);
+  if (closeGalleryBtn) closeGalleryBtn.addEventListener('click', closeGallery);
+  if (prevBtn) prevBtn.addEventListener('click', prevImage);
+  if (nextBtn) nextBtn.addEventListener('click', nextImage);
 
-  // Close by clicking outside image
+  // Close by clicking anywhere on the modal
   galleryModal.addEventListener('click', (e) => {
-    if (e.target === galleryModal) {
-      closeGallery();
-    }
+    closeGallery();
   });
+
+  // Prevent closing when clicking on the content area (image, buttons, etc.)
+  if (galleryModalContent) {
+    galleryModalContent.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+  }
 
   // Keyboard navigation
   document.addEventListener('keydown', (e) => {
     if (!galleryModal.classList.contains('active')) return;
     
     switch(e.key) {
-      case 'Escape':
-        closeGallery();
-        break;
-      case 'ArrowLeft':
-        prevImage();
-        break;
-      case 'ArrowRight':
-        nextImage();
-        break;
+      case 'Escape': closeGallery(); break;
+      case 'ArrowLeft': prevImage(); break;
+      case 'ArrowRight': nextImage(); break;
     }
   });
 }
@@ -504,8 +654,6 @@ function initEmailLinks() {
     link.addEventListener('click', function(e) {
       e.preventDefault();
       const email = 'info@pologenki.eu';
-      
-      // Copy email
       copyToClipboard(email);
     });
   });
@@ -525,13 +673,13 @@ function copyToClipboard(text) {
     document.body.removeChild(textarea);
     
     if (successful) {
-      showNotification('✓ Email copied: ' + text + '\nPlease paste it in your email client');
+      showNotification('✓ Email copied: ' + text);
     } else {
       showNotification('📧 Please copy: ' + text);
     }
   } catch (err) {
     document.body.removeChild(textarea);
-    showNotification('📧 Email: ' + text + '\nPlease copy it manually');
+    showNotification('📧 Email: ' + text);
   }
 }
 
@@ -559,13 +707,7 @@ function showNotification(message) {
   
   setTimeout(() => {
     if (document.body.contains(notification)) {
-      notification.style.opacity = '0';
-      notification.style.transition = 'opacity 0.3s';
-      setTimeout(() => {
-        if (document.body.contains(notification)) {
-          document.body.removeChild(notification);
-        }
-      }, 300);
+      document.body.removeChild(notification);
     }
   }, 3000);
 }
@@ -574,3 +716,6 @@ function showNotification(message) {
 setInterval(() => {
   window.refreshPrices();
 }, 300000);
+
+// Start the application
+initApp();
