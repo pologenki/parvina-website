@@ -4416,23 +4416,27 @@ input:-moz-ui-invalid, textarea:-moz-ui-invalid {
 /* Mobile optimizations - скрываем стрелочки */
 @media (max-width: 768px) {
   .modal-navigation {
-    display: none !important;
+        display: block!important;
+    position: absolute!important;
+    top: 50%!important;
+    left: 0!important;
+    right: 0!important;
+    display: flex!important;
+    justify-content: space-between!important;
+    padding: 0 !important;
+    transform: translateY(-50%)!important;
+    z-index: 10!important;
   }
+
+
   
   .modal-counter {
-    top: 15px;
-    left: 15px;
+    top: 5px;
+    left: 10px;
     font-size: 12px;
     padding: 4px 8px;
   }
   
-  /* Увеличиваем область для свайпа */
-  .product-modal .modal-content {
-    touch-action: pan-y;
-  }
-}
 
-/* Add to your existing product modal styles */
-.product-modal .modal-content {
-  position: relative;
+
 }

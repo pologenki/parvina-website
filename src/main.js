@@ -104,14 +104,49 @@ function initSwiper() {
   const swiperElement = document.querySelector('.portfolio-swiper');
   
   if (swiperElement) {
-    // Ждем немного чтобы DOM полностью загрузился
+    // Убедимся, что Swiper инициализируется только когда все изображения загружены
+    const images = swiperElement.querySelectorAll('img');
+    let imagesLoaded = 0;
+    
+    if (images.length === 0) {
+      initializeSwiper();
+      return;
+    }
+    
+    images.forEach(img => {
+      if (img.complete) {
+        imagesLoaded++;
+      } else {
+        img.addEventListener('load', () => {
+          imagesLoaded++;
+          if (imagesLoaded === images.length) {
+            initializeSwiper();
+          }
+        });
+        img.addEventListener('error', () => {
+          imagesLoaded++;
+          if (imagesLoaded === images.length) {
+            initializeSwiper();
+          }
+        });
+      }
+    });
+    
+    if (imagesLoaded === images.length) {
+      initializeSwiper();
+    }
+  } else {
+    console.log('❌ Portfolio Swiper element not found');
+  }
+  
+  function initializeSwiper() {
     setTimeout(() => {
       const swiper = new Swiper('.portfolio-swiper', {
         modules: [Navigation, Pagination, Autoplay],
         loop: true,
         slidesPerView: 1,
         spaceBetween: 30,
-        centeredSlides: true,
+        centeredSlides: false,
         
         autoplay: {
           delay: 5000,
@@ -122,22 +157,39 @@ function initSwiper() {
           el: '.swiper-pagination',
           clickable: true,
           dynamicBullets: true,
+          renderBullet: function (index, className) {
+            return '<span class="' + className + '">' + (index + 1) + '</span>';
+          },
         },
         
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
+          disabledClass: 'swiper-button-disabled',
         },
         
-        // Важные настройки для мобильных
+        // Улучшенные настройки для touch
         touchEventsTarget: 'container',
         simulateTouch: true,
         touchRatio: 1,
         touchAngle: 45,
         grabCursor: true,
-        allowTouchMove: true,
+        shortSwipes: true,
+        longSwipes: true,
+        longSwipesRatio: 0.5,
+        longSwipesMs: 300,
+        followFinger: true,
+        threshold: 5,
+        
+        // Предотвращение случайных кликов при свайпе
+        preventClicks: true,
+        preventClicksPropagation: true,
         
         breakpoints: {
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 15,
+          },
           640: {
             slidesPerView: 1,
             spaceBetween: 20,
@@ -154,13 +206,38 @@ function initSwiper() {
             slidesPerView: 3,
             spaceBetween: 40,
           }
+        },
+        
+        // События для отладки
+        on: {
+          init: function () {
+            console.log('✅ Swiper initialized successfully!');
+          },
+          slideChange: function () {
+            console.log('🔄 Slide changed to:', this.activeIndex);
+          }
         }
       });
       
-      console.log('✅ Portfolio Swiper initialized successfully!');
+      // Добавим обработчики для лучшей навигации
+      const nextBtn = document.querySelector('.swiper-button-next');
+      const prevBtn = document.querySelector('.swiper-button-prev');
+      
+      if (nextBtn) {
+        nextBtn.style.cursor = 'pointer';
+        nextBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+        });
+      }
+      
+      if (prevBtn) {
+        prevBtn.style.cursor = 'pointer';
+        prevBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+        });
+      }
+      
     }, 100);
-  } else {
-    console.log('❌ Portfolio Swiper element not found');
   }
 }
 
@@ -357,9 +434,9 @@ function initScrollToTop() {
   setTimeout(checkScroll, 200);
 }
 
-// Product Modals - SIMPLE AND RELIABLE VERSION
+// Product Modals - UPDATED VERSION WITH BETTER NAVIGATION
 function initProductModals() {
-    console.log('🔄 Init product modals - simple version');
+    console.log('🔄 Init product modals - updated version');
     
     let currentModalIndex = 0;
     let productModals = [];
@@ -369,27 +446,31 @@ function initProductModals() {
         productModals = Array.from(document.querySelectorAll('.product-modal'));
         console.log(`📦 Found ${productModals.length} product modals`);
         
-        // Скрываем стрелочки на мобильных устройствах
+        // Обновляем видимость навигации
         toggleNavigationVisibility();
     }
     
-    // Проверка мобильного устройства
+    // Проверка мобильного устройства - ОБНОВЛЕННАЯ ЛОГИКА
     function isMobileDevice() {
-        return window.innerWidth <= 768;
+        return window.innerWidth < 1024; // Увеличили до 1024px для лучшей доступности
     }
     
-    // Показать/скрыть навигацию в зависимости от устройства
+    // Показать/скрыть навигацию в зависимости от устройства - ОБНОВЛЕННАЯ ФУНКЦИЯ
     function toggleNavigationVisibility() {
         const navigationElements = document.querySelectorAll('.modal-navigation');
-        if (isMobileDevice()) {
-            navigationElements.forEach(nav => {
-                nav.style.display = 'none';
-            });
-        } else {
-            navigationElements.forEach(nav => {
-                nav.style.display = 'flex';
-            });
-        }
+        
+        // Всегда показываем навигацию, но меняем стили для мобильных
+        navigationElements.forEach(nav => {
+            nav.style.display = 'flex';
+            
+            if (isMobileDevice()) {
+                nav.style.opacity = '0.7';
+                nav.style.transform = 'scale(0.9)';
+            } else {
+                nav.style.opacity = '1';
+                nav.style.transform = 'scale(1)';
+            }
+        });
     }
     
     // Функция закрытия модального окна
@@ -413,15 +494,23 @@ function initProductModals() {
         }
         
         productModals[currentModalIndex].classList.add('active');
+        
+        // Добавляем анимацию перехода
+        const activeModal = productModals[currentModalIndex];
+        activeModal.style.animation = 'none';
+        setTimeout(() => {
+            activeModal.style.animation = 'fadeIn 0.3s ease-in-out';
+        }, 10);
     }
     
-    // ПРОСТЫЕ ОБРАБОТЧИКИ
+    // УЛУЧШЕННЫЕ ОБРАБОТЧИКИ
     function initAllHandlers() {
         // 1. Открытие модальных окон
         document.querySelectorAll('.pricing-card[data-modal]').forEach(card => {
             card.addEventListener('click', function(e) {
-                if (e.target.closest('.btn-more')) {
-                    e.preventDefault();
+                // Предотвращаем открытие при клике на кнопку "Learn More" (она должна работать отдельно)
+                if (e.target.classList.contains('btn-more') || e.target.closest('.btn-more')) {
+                    return; // Позволяем стандартному поведению ссылки
                 }
                 
                 const modalId = this.getAttribute('data-modal');
@@ -430,20 +519,43 @@ function initProductModals() {
                     currentModalIndex = productModals.findIndex(m => m.id === modalId);
                     modal.classList.add('active');
                     document.body.style.overflow = 'hidden';
+                    
+                    // Добавляем анимацию
+                    modal.style.animation = 'fadeIn 0.3s ease-in-out';
                 }
             });
         });
         
-        // 2. Закрытие крестиком
+        // 2. Отдельные обработчики для кнопок "Learn More"
+        document.querySelectorAll('.btn-more').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const card = this.closest('.pricing-card');
+                const modalId = card.getAttribute('data-modal');
+                const modal = document.getElementById(modalId);
+                
+                if (modal) {
+                    currentModalIndex = productModals.findIndex(m => m.id === modalId);
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Добавляем анимацию
+                    modal.style.animation = 'fadeIn 0.3s ease-in-out';
+                }
+            });
+        });
+        
+        // 3. Закрытие крестиком
         document.querySelectorAll('.product-modal .close-modal').forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
+                e.stopPropagation();
                 const modal = this.closest('.product-modal');
                 closeModal(modal);
             });
         });
         
-        // 3. Клик вне модального окна
+        // 4. Клик вне модального окна
         productModals.forEach(modal => {
             modal.addEventListener('click', function(e) {
                 if (e.target === this) {
@@ -452,29 +564,28 @@ function initProductModals() {
             });
         });
         
-        // 4. Навигационные стрелки
+        // 5. Навигационные стрелки - УБИРАЕМ ПРОВЕРКУ НА МОБИЛЬНЫЕ УСТРОЙСТВА
         document.querySelectorAll('.modal-prev').forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
-                if (!isMobileDevice()) {
-                    switchModal('prev');
-                }
+                e.stopPropagation();
+                switchModal('prev');
             });
         });
         
         document.querySelectorAll('.modal-next').forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
-                if (!isMobileDevice()) {
-                    switchModal('next');
-                }
+                e.stopPropagation();
+                switchModal('next');
             });
         });
         
-        // 5. Кликабельные продукты
+        // 6. Кликабельные продукты
         document.querySelectorAll('.clickable-product').forEach(product => {
             product.addEventListener('click', function(e) {
                 e.preventDefault();
+                e.stopPropagation();
                 const modal = this.closest('.product-modal');
                 if (modal) {
                     closeModal(modal);
@@ -489,7 +600,7 @@ function initProductModals() {
             });
         });
         
-        // 6. Escape для закрытия
+        // 7. Escape для закрытия
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 const activeModal = document.querySelector('.product-modal.active');
@@ -498,8 +609,8 @@ function initProductModals() {
                 }
             }
             
-            // Навигация стрелками клавиатуры
-            if (!isMobileDevice() && document.querySelector('.product-modal.active')) {
+            // Навигация стрелками клавиатуры - УБИРАЕМ ПРОВЕРКУ НА МОБИЛЬНЫЕ
+            if (document.querySelector('.product-modal.active')) {
                 if (e.key === 'ArrowLeft') {
                     e.preventDefault();
                     switchModal('prev');
@@ -510,29 +621,33 @@ function initProductModals() {
             }
         });
         
-        // 7. Свайпы для мобильных
-        if (isMobileDevice()) {
-            let startX = 0;
+        // 8. Свайпы для мобильных устройств
+        let touchStartX = 0;
+        let touchStartY = 0;
+        
+        productModals.forEach(modal => {
+            modal.addEventListener('touchstart', function(e) {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+            }, { passive: true });
             
-            productModals.forEach(modal => {
-                modal.addEventListener('touchstart', function(e) {
-                    startX = e.touches[0].clientX;
-                }, { passive: true });
+            modal.addEventListener('touchend', function(e) {
+                const touchEndX = e.changedTouches[0].clientX;
+                const touchEndY = e.changedTouches[0].clientY;
                 
-                modal.addEventListener('touchend', function(e) {
-                    const endX = e.changedTouches[0].clientX;
-                    const diffX = startX - endX;
-                    
-                    if (Math.abs(diffX) > 50) {
-                        if (diffX > 0) {
-                            switchModal('next');
-                        } else {
-                            switchModal('prev');
-                        }
+                const diffX = touchStartX - touchEndX;
+                const diffY = touchStartY - touchEndY;
+                
+                // Проверяем, что это горизонтальный свайп (не вертикальный)
+                if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+                    if (diffX > 0) {
+                        switchModal('next');
+                    } else {
+                        switchModal('prev');
                     }
-                }, { passive: true });
-            });
-        }
+                }
+            }, { passive: true });
+        });
     }
     
     // Инициализация
@@ -542,8 +657,58 @@ function initProductModals() {
     // При изменении размера окна
     window.addEventListener('resize', function() {
         updateModalsList();
-        toggleNavigationVisibility();
     });
+    
+    // Добавляем CSS анимации
+    addModalAnimations();
+}
+
+// Функция для добавления CSS анимаций
+function addModalAnimations() {
+    if (!document.getElementById('modalAnimations')) {
+        const style = document.createElement('style');
+        style.id = 'modalAnimations';
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            .product-modal.active {
+                animation: fadeIn 0.3s ease-in-out;
+            }
+            
+            /* Улучшенные стили для мобильной навигации */
+            @media (max-width: 1023px) {
+                .modal-navigation {
+                    opacity: 0.7 !important;
+                    transform: scale(0.9) !important;
+                }
+                
+                .modal-prev, .modal-next {
+                    min-width: 44px !important;
+                    min-height: 44px !important;
+                    font-size: 20px !important;
+                }
+            }
+            
+            @media (max-width: 767px) {
+                .modal-navigation {
+                    opacity: 0.8 !important;
+                    transform: scale(0.95) !important;
+                    margin: 0 -5px!important;
+                }
+                
+                .modal-prev, .modal-next {
+                    min-width: 25px !important;
+                    min-height: 25px !important;
+                    font-size: 18px !important;
+
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
 }
 
 // Gallery Modal Function
@@ -554,39 +719,69 @@ function initPortfolioGallery() {
   const closeGalleryBtn = document.querySelector('.close-gallery-modal');
   const prevBtn = document.querySelector('.gallery-prev');
   const nextBtn = document.querySelector('.gallery-next');
+  const currentImageSpan = document.getElementById('currentImage');
+  const totalImagesSpan = document.getElementById('totalImages');
+  const imageTitle = document.getElementById('imageTitle');
+  const imageDescription = document.getElementById('imageDescription');
   
   const cardImages = document.querySelectorAll('.card-image');
   let currentImageIndex = 0;
   let images = [];
 
-  if (!galleryModal) return;
+  if (!galleryModal) {
+    console.log('❌ Gallery modal not found');
+    return;
+  }
 
-  // Collect all images from cards
+  // Собираем все данные для галереи
   cardImages.forEach((card, index) => {
-    const imgSrc = card.getAttribute('data-image-src');
-    const imgAlt = card.getAttribute('data-image-alt');
+    const imgElement = card.querySelector('img');
+    const content = card.closest('.swiper-slide').querySelector('.portfolio-content');
     
-    images.push({
-      src: imgSrc,
-      alt: imgAlt,
-      index: index
-    });
+    if (imgElement) {
+      images.push({
+        src: imgElement.src,
+        alt: imgElement.alt,
+        title: content ? content.querySelector('h3')?.textContent || 'Project Title' : 'Project Title',
+        description: content ? content.querySelector('p')?.textContent || 'Project description' : 'Project description',
+        index: index
+      });
+    }
   });
 
-  // Open gallery when clicking on image
+  // Обновляем счетчик общего количества
+  if (totalImagesSpan) {
+    totalImagesSpan.textContent = images.length;
+  }
+
+  // Открытие галереи при клике на карточку
   cardImages.forEach((card, index) => {
     card.addEventListener('click', (e) => {
-      if (!e.target.classList.contains('project-badge')) {
+      // Проверяем, не кликнули ли мы на иконку увеличения
+      if (!e.target.closest('.zoom-icon') && !e.target.classList.contains('zoom-icon')) {
         openGallery(index);
       }
     });
+    
+    // Отдельный обработчик для иконки увеличения
+    const zoomIcon = card.querySelector('.zoom-icon');
+    if (zoomIcon) {
+      zoomIcon.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openGallery(index);
+      });
+    }
   });
 
   function openGallery(index) {
+    if (index < 0 || index >= images.length) return;
+    
     currentImageIndex = index;
     updateGallery();
     galleryModal.classList.add('active');
     document.body.style.overflow = 'hidden';
+    
+    console.log(`🖼️ Opening gallery at index: ${index}`);
   }
 
   function closeGallery() {
@@ -597,53 +792,135 @@ function initPortfolioGallery() {
   function updateGallery() {
     const currentImage = images[currentImageIndex];
     
-    if (currentImage) {
+    if (!currentImage) return;
+    
+    // Показываем загрузку
+    galleryImage.style.opacity = '0';
+    
+    // Предзагрузка изображения
+    const img = new Image();
+    img.onload = () => {
       galleryImage.src = currentImage.src;
       galleryImage.alt = currentImage.alt;
-    }
+      galleryImage.style.opacity = '1';
+      
+      // Обновляем счетчик
+      if (currentImageSpan) {
+        currentImageSpan.textContent = currentImageIndex + 1;
+      }
+      
+      // Обновляем заголовок и описание
+      if (imageTitle) {
+        imageTitle.textContent = currentImage.title;
+      }
+      if (imageDescription) {
+        imageDescription.textContent = currentImage.description;
+      }
+    };
+    
+    img.onerror = () => {
+      console.error('❌ Failed to load image:', currentImage.src);
+      galleryImage.style.opacity = '1';
+    };
+    
+    img.src = currentImage.src;
   }
 
   function nextImage() {
     if (currentImageIndex < images.length - 1) {
       currentImageIndex++;
-      updateGallery();
+    } else {
+      currentImageIndex = 0; // Зацикливаем
     }
+    updateGallery();
   }
 
   function prevImage() {
     if (currentImageIndex > 0) {
       currentImageIndex--;
-      updateGallery();
+    } else {
+      currentImageIndex = images.length - 1; // Зацикливаем
     }
+    updateGallery();
   }
 
-  // Events
-  if (closeGalleryBtn) closeGalleryBtn.addEventListener('click', closeGallery);
-  if (prevBtn) prevBtn.addEventListener('click', prevImage);
-  if (nextBtn) nextBtn.addEventListener('click', nextImage);
+  // Обработчики событий
+  if (closeGalleryBtn) {
+    closeGalleryBtn.addEventListener('click', closeGallery);
+  }
+  
+  if (prevBtn) {
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      prevImage();
+    });
+  }
+  
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      nextImage();
+    });
+  }
 
-  // Close by clicking anywhere on the modal
+  // Закрытие по клику на фон
   galleryModal.addEventListener('click', (e) => {
-    closeGallery();
+    if (e.target === galleryModal) {
+      closeGallery();
+    }
   });
 
-  // Prevent closing when clicking on the content area (image, buttons, etc.)
+  // Предотвращаем закрытие при клике на контент
   if (galleryModalContent) {
     galleryModalContent.addEventListener('click', (e) => {
       e.stopPropagation();
     });
   }
 
-  // Keyboard navigation
+  // Навигация с клавиатуры
   document.addEventListener('keydown', (e) => {
     if (!galleryModal.classList.contains('active')) return;
     
     switch(e.key) {
-      case 'Escape': closeGallery(); break;
-      case 'ArrowLeft': prevImage(); break;
-      case 'ArrowRight': nextImage(); break;
+      case 'Escape':
+        closeGallery();
+        break;
+      case 'ArrowLeft':
+        prevImage();
+        break;
+      case 'ArrowRight':
+        nextImage();
+        break;
     }
   });
+
+  // Свайпы для мобильных устройств
+  let touchStartX = 0;
+  let touchEndX = 0;
+  
+  galleryModal.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  galleryModal.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }, { passive: true });
+
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    const diffX = touchStartX - touchEndX;
+    
+    if (Math.abs(diffX) > swipeThreshold) {
+      if (diffX > 0) {
+        nextImage(); // Свайп влево -> следующее изображение
+      } else {
+        prevImage(); // Свайп вправо -> предыдущее изображение
+      }
+    }
+  }
+
+  console.log(`✅ Gallery initialized with ${images.length} images`);
 }
 
 // Email Links
