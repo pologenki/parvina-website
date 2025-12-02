@@ -72,7 +72,7 @@ export function Content() {
       </div>
       
       <div class="about-image">
-        <img src="/myfoto.jpg" alt="Parvina - Import Manager" class="profile-photo">
+        <img src="/photo4.png" alt="Parvina - Import Manager" class="profile-photo">
       </div>
     </div>
   </div>
