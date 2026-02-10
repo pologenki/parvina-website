@@ -22,6 +22,9 @@ import "swiper/css/pagination";
 // Import FontAwesome
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
+// Global slider instance
+let portfolioSwiper = null;
+
 // Function to update texts on the page
 function updatePageTexts() {
   // Update all elements with data-i18n attribute
@@ -43,7 +46,7 @@ function updatePageTexts() {
 
   // Update placeholders
   const placeholderElements = document.querySelectorAll(
-    "[data-i18n-placeholder]"
+    "[data-i18n-placeholder]",
   );
   placeholderElements.forEach((element) => {
     const key = element.getAttribute("data-i18n-placeholder");
@@ -65,7 +68,7 @@ function updatePageTexts() {
 
 // Language selector update function
 function updateLanguageSelector() {
-  const languageCurrent = document.getElementById("languageCurrent");
+  const languageCurrent = document.querySelector(".language-current");
   const languageCode = languageCurrent?.querySelector(".language-code");
   const currentLang = getCurrentLanguage();
 
@@ -76,12 +79,18 @@ function updateLanguageSelector() {
 
 // Инициализация переключателя языка
 function initLanguageSwitcher() {
-  const languageCurrent = document.getElementById("languageCurrent");
+  const languageCurrent = document.querySelector(".language-current");
   const languageDropdown = document.querySelector(".language-dropdown");
   const languageOptions = document.querySelectorAll(".language-option");
 
   if (languageCurrent && languageDropdown) {
-    // Переключение видимости dropdown
+    // Открытие dropdown при наведении мышки
+    languageCurrent.addEventListener("mouseenter", (e) => {
+      e.stopPropagation();
+      languageDropdown.classList.add("active");
+    });
+
+    // Переключение видимости dropdown при клике
     languageCurrent.addEventListener("click", (e) => {
       e.stopPropagation();
       languageDropdown.classList.toggle("active");
@@ -102,6 +111,19 @@ function initLanguageSwitcher() {
         // Показываем уведомление
         showLanguageNotification(lang);
       });
+    });
+
+    // Закрытие dropdown при уходе мышки с элементов
+    languageCurrent.addEventListener("mouseleave", () => {
+      setTimeout(() => {
+        if (!languageDropdown.matches(":hover")) {
+          languageDropdown.classList.remove("active");
+        }
+      }, 100);
+    });
+
+    languageDropdown.addEventListener("mouseleave", () => {
+      languageDropdown.classList.remove("active");
     });
 
     // Закрытие dropdown при клике вне
@@ -195,6 +217,10 @@ async function renderApp() {
   // Initialize all components
   initHeaderMenu();
   initSectionScript();
+
+  // Add small delay to ensure DOM is ready for Swiper
+  await new Promise((resolve) => setTimeout(resolve, 50));
+
   initSwiper();
   initContactForm();
   initScrollToTop();
@@ -208,6 +234,10 @@ async function renderApp() {
   initLanguageSwitcher();
   updateLanguageSelector();
 
+  // Add logo handlers after DOM is ready
+  console.log("🔄 Calling addLogoHandlers() from renderApp()");
+  addLogoHandlers();
+
   // Set current date
   setCurrentDate();
 }
@@ -219,10 +249,16 @@ async function initApp() {
 }
 
 function initSwiper() {
+  // Destroy previous swiper instance if it exists
+  if (portfolioSwiper) {
+    portfolioSwiper.destroy();
+    portfolioSwiper = null;
+  }
+
   const swiperElement = document.querySelector(".portfolio-swiper");
 
   if (swiperElement) {
-    const swiper = new Swiper(".portfolio-swiper", {
+    portfolioSwiper = new Swiper(".portfolio-swiper", {
       modules: [Navigation, Pagination, Autoplay],
       loop: true,
       slidesPerView: 1,
@@ -283,7 +319,7 @@ initApp();
 // Services Modal Function
 function initServiceModals() {
   const serviceCards = document.querySelectorAll(
-    ".service-card[data-service-modal]"
+    ".service-card[data-service-modal]",
   );
   const serviceModals = document.querySelectorAll(".service-modal");
   const closeServiceButtons = document.querySelectorAll(".close-service-modal");
@@ -363,7 +399,7 @@ function formatDate(date) {
   // Используем язык сайта для форматирования даты
   return date.toLocaleDateString(
     currentLang === "ru" ? "ru-RU" : currentLang === "cn" ? "zh-CN" : "en-US",
-    options
+    options,
   );
 }
 
@@ -425,11 +461,21 @@ function initScrollToTop() {
 function initProductModals() {
   const pricingCards = document.querySelectorAll(".pricing-card[data-modal]");
   const pricingCardsNoModal = document.querySelectorAll(
-    ".pricing-card:not([data-modal])"
+    ".pricing-card:not([data-modal])",
   );
   const modals = document.querySelectorAll(".product-modal");
   const closeButtons = document.querySelectorAll(".close-modal");
   const clickableProducts = document.querySelectorAll(".clickable-product");
+
+  // Modal navigation buttons
+  const modalPrevButtons = document.querySelectorAll(".modal-prev");
+  const modalNextButtons = document.querySelectorAll(".modal-next");
+
+  // Array of all modal IDs for navigation
+  const modalIds = Array.from(document.querySelectorAll(".product-modal")).map(
+    (modal) => modal.id,
+  );
+  let currentModalIndex = 0;
 
   // Function to close modal window with animation
   function closeModal(modal) {
@@ -439,6 +485,43 @@ function initProductModals() {
     setTimeout(() => {
       modal.classList.remove("active", "closing");
     }, 300);
+  }
+
+  // Function to switch between modals
+  function switchModal(direction) {
+    const activeModal = document.querySelector(".product-modal.active");
+    if (!activeModal) return;
+
+    const currentIndex = modalIds.indexOf(activeModal.id);
+    let newIndex;
+
+    if (direction === "next") {
+      newIndex = (currentIndex + 1) % modalIds.length;
+    } else {
+      newIndex = (currentIndex - 1 + modalIds.length) % modalIds.length;
+    }
+
+    // Close current modal
+    closeModal(activeModal);
+
+    // Open new modal after animation
+    setTimeout(() => {
+      const newModal = document.getElementById(modalIds[newIndex]);
+      if (newModal) {
+        newModal.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+    }, 350);
+  }
+
+  // Update modal counter
+  function updateModalCounter(modal) {
+    const modalId = modal.id;
+    const modalIndex = modalIds.indexOf(modalId) + 1;
+    const counter = modal.querySelector(".modal-counter");
+    if (counter) {
+      counter.textContent = `${modalIndex}/${modalIds.length}`;
+    }
   }
 
   // Handle cards WITH modal windows
@@ -545,6 +628,56 @@ function initProductModals() {
         }
       });
     }
+
+    // Handle arrow keys for modal navigation
+    if (e.key === "ArrowLeft") {
+      const activeModal = document.querySelector(".product-modal.active");
+      if (activeModal) {
+        switchModal("prev");
+      }
+    }
+    if (e.key === "ArrowRight") {
+      const activeModal = document.querySelector(".product-modal.active");
+      if (activeModal) {
+        switchModal("next");
+      }
+    }
+  });
+
+  // Modal navigation button handlers
+  modalPrevButtons.forEach((button) => {
+    button.addEventListener("click", function (e) {
+      e.stopPropagation();
+      switchModal("prev");
+    });
+  });
+
+  modalNextButtons.forEach((button) => {
+    button.addEventListener("click", function (e) {
+      e.stopPropagation();
+      switchModal("next");
+    });
+  });
+
+  // Update counter when modal opens
+  modals.forEach((modal) => {
+    const observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        if (
+          mutation.type === "attributes" &&
+          mutation.attributeName === "class"
+        ) {
+          if (modal.classList.contains("active")) {
+            updateModalCounter(modal);
+          }
+        }
+      });
+    });
+
+    observer.observe(modal, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
   });
 }
 
@@ -618,24 +751,16 @@ function initPortfolioGallery() {
     if (imageDescription)
       imageDescription.textContent = currentImage.description;
     if (currentImageSpan) currentImageSpan.textContent = currentImageIndex + 1;
-
-    // Update navigation button states
-    if (prevBtn) prevBtn.disabled = currentImageIndex === 0;
-    if (nextBtn) nextBtn.disabled = currentImageIndex === images.length - 1;
   }
 
   function nextImage() {
-    if (currentImageIndex < images.length - 1) {
-      currentImageIndex++;
-      updateGallery();
-    }
+    currentImageIndex = (currentImageIndex + 1) % images.length;
+    updateGallery();
   }
 
   function prevImage() {
-    if (currentImageIndex > 0) {
-      currentImageIndex--;
-      updateGallery();
-    }
+    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+    updateGallery();
   }
 
   // Events
@@ -785,7 +910,7 @@ function copyToClipboard(text) {
 
     if (successful) {
       showNotification(
-        "✓ Email copied: " + text + "\nPlease paste it in your email client"
+        "✓ Email copied: " + text + "\nPlease paste it in your email client",
       );
     } else {
       showNotification("📧 Please copy: " + text);
@@ -834,4 +959,76 @@ function showNotification(message) {
 // Initialize service cards
 document.addEventListener("DOMContentLoaded", function () {
   initServiceCards();
+
+  // Auto-scroll to top on page load
+  window.scrollTo(0, 0);
+
+  // Handle hash navigation - scroll to element if hash exists
+  if (window.location.hash) {
+    const targetElement = document.querySelector(window.location.hash);
+    if (targetElement) {
+      setTimeout(() => {
+        targetElement.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }
+  }
 });
+
+// Function to add logo click handlers
+function addLogoHandlers() {
+  console.log("🔄 addLogoHandlers() called");
+
+  // Get all logo elements
+  const logoElements = document.querySelectorAll(".logo, .logo-tab");
+
+  console.log("🔄 Adding logo handlers. Found elements:", logoElements.length);
+
+  // Check if about section exists
+  const aboutSection = document.querySelector("#about");
+  console.log("🔍 About section found:", !!aboutSection);
+  if (aboutSection) {
+    console.log("📍 About section ID:", aboutSection.id);
+    console.log("📍 About section class:", aboutSection.className);
+  }
+
+  logoElements.forEach((logoElement, index) => {
+    // Remove any existing onclick handlers
+    logoElement.onclick = null;
+
+    console.log(
+      `🎯 Adding handler to logo element ${index}:`,
+      logoElement.className,
+    );
+
+    // Add new click handler
+    logoElement.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      console.log("🔄 Logo clicked! Scrolling to about-section...");
+      console.log("🔍 Clicked element:", this.className);
+
+      // Find the about-section block
+      const aboutSection = document.querySelector("#about");
+      if (aboutSection) {
+        console.log("✅ About section found, scrolling...");
+        aboutSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      } else {
+        console.log("❌ About section not found, scrolling to top");
+        // Final fallback to top of page
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+    });
+  });
+
+  console.log("✅ Logo handlers added successfully!");
+}
+
+// Make function available globally
+window.addLogoHandlers = addLogoHandlers;

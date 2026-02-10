@@ -84,7 +84,55 @@
     "readMore": "Read More"
   },
   "portfolio": {
-    "title": "Successful Import Projects"
+    "title": "Successful Import Projects",
+    "description1": "Almonds, walnuts and cashews from USA, Turkey and Vietnam",
+    "project1": {
+      "title": "Gulfood Dubai 2023"
+    },
+    "project2": {
+      "title": "Gulfood Dubai 2023"
+    },
+    "project3": {
+      "title": "Cashew processing and packaging insight, Vietnam"
+    },
+    "project4": {
+      "title": "Gulfood Dubai 2025"
+    },
+    "project5": {
+      "title": "Meeting with Russian Ambassador."
+    },
+    "project6": {
+      "title": "Gulfood Dubai 2022"
+    },
+    "project7": {
+      "title": "Gulfood Dubai 2025"
+    },
+    "project8": {
+      "title": "Anuga Cologne 2025"
+    },
+    "project9": {
+      "title": "Anuga Cologne 2025"
+    },
+    "project10": {
+      "title": "Meeting another cashew supplier and investors"
+    },
+    "project11": {
+      "title": "Gulfood Dubai 2025"
+    },
+    "detail1": "Meeting with a regular supplier of dates from Tunisia",
+    "detail2": "Discovering reliable suppliers of nuts and dried fruits worldwide.",
+    "detail3": "Maintaining reliable partnerships.",
+    "detail4": "Indian stand",
+    "detail5": "Strengthening trade relations.",
+    "detail6": "Connecting with international nut suppliers for long-term partnerships.",
+    "detail7": "Scouting trusted nut suppliers for global markets.",
+    "detail8": "Exploring international markets for nuts and dried fruits.",
+    "detail9": "Securing supply chain connections.",
+    "detail10": "Life is buzzing here — ideas are born and deals are made! A true celebration of flavors and opportunities."
+  },
+  "gallery": {
+    "projectTitle": "Project Title",
+    "projectDescription": "Project description"
   },
   "contact": {
     "title": "Get In Touch",
@@ -101,7 +149,9 @@
   "footer": {
     "navigation": "Navigation",
     "services": "Services",
-    "connect": "Connect"
+    "connect": "Connect",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
   },
   "modal": {
     "close": "Close",

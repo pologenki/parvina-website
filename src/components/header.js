@@ -1,7 +1,7 @@
 export function Header() {
   return `
   <section class="et-hero-tabs">
-    <div class="logo" onclick="window.location.reload()" style="cursor: pointer;">
+    <div class="logo" style="cursor: pointer;">
       <img src="/Logo2.png" alt="Logo">
     </div>
 
@@ -33,7 +33,7 @@ export function Header() {
       <a class="et-hero-tab" href="#contact" data-i18n="nav.contact">Get In Touch</a>
 
       <!-- Логотип вместо выбора языка -->
-      <div class="et-hero-tab logo-tab" onclick="window.location.reload()" style="cursor: pointer;">
+      <div class="et-hero-tab logo-tab" style="cursor: pointer;">
         <img src="/Logo2.png" alt="Logo" class="header-logo">
       </div>
     </div>

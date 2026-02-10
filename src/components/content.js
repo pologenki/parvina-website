@@ -84,8 +84,8 @@ export function Content() {
         
         <div class="about-image">
           <img src="${personal.about.photo}" alt="${
-    personal.about.title
-  }" class="profile-photo" id="aboutPhoto">
+            personal.about.title
+          }" class="profile-photo" id="aboutPhoto">
         </div>
       </div>
     </div>
@@ -226,8 +226,8 @@ export function Content() {
       <span class="close-modal"></span>
       <div class="modal-counter">1/10</div>
       <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev">‹</button>
-        <button class="modal-next" data-i18n="modal.next">›</button>
+        <button class="modal-prev" data-i18n="modal.prev"><</button>
+        <button class="modal-next" data-i18n="modal.next">></button>
       </div>
       <div class="modal-header">
         <h3 data-i18n="modals.cashew.title">Cashew Nuts - Premium Quality</h3>
@@ -284,8 +284,8 @@ export function Content() {
       <span class="close-modal"></span>
       <div class="modal-counter">2/10</div>
       <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev">‹</button>
-        <button class="modal-next" data-i18n="modal.next">›</button>
+        <button class="modal-prev" data-i18n="modal.prev"><</button>
+        <button class="modal-next" data-i18n="modal.next">></button>
       </div>
       <div class="modal-header">
         <h3 data-i18n="products.walnuts.title">Walnut Kernels</h3>
@@ -342,8 +342,8 @@ export function Content() {
       <span class="close-modal"></span>
       <div class="modal-counter">3/10</div>
       <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev">‹</button>
-        <button class="modal-next" data-i18n="modal.next">›</button>
+        <button class="modal-prev" data-i18n="modal.prev"><</button>
+        <button class="modal-next" data-i18n="modal.next">></button>
       </div>
       <div class="modal-header">
         <h3 data-i18n="modals.dates.title">Deglet Nour - Tunisian Dates</h3>
@@ -390,8 +390,8 @@ export function Content() {
       <span class="close-modal"></span>
       <div class="modal-counter">4/10</div>
       <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev">‹</button>
-        <button class="modal-next" data-i18n="modal.next">›</button>
+        <button class="modal-prev" data-i18n="modal.prev"><</button>
+        <button class="modal-next" data-i18n="modal.next">></button>
       </div>
       <div class="modal-header">
         <h3 data-i18n="products.papaya.title">Dried Papaya Dice</h3>
@@ -448,8 +448,8 @@ export function Content() {
       <span class="close-modal"></span>
       <div class="modal-counter">5/10</div>
       <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev">‹</button>
-        <button class="modal-next" data-i18n="modal.next">›</button>
+        <button class="modal-prev" data-i18n="modal.prev"><</button>
+        <button class="modal-next" data-i18n="modal.next">></button>
       </div>
       <div class="modal-header">
         <h3 data-i18n="modals.mango.title">Dried Mango Quality</h3>
@@ -506,8 +506,8 @@ export function Content() {
       <span class="close-modal"></span>
       <div class="modal-counter">6/10</div>
       <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev">‹</button>
-        <button class="modal-next" data-i18n="modal.next">›</button>
+        <button class="modal-prev" data-i18n="modal.prev"><</button>
+        <button class="modal-next" data-i18n="modal.next">></button>
       </div>
       <div class="modal-header">
         <h3 data-i18n="products.walnutsShell.title">Walnuts in shell</h3>
@@ -574,8 +574,8 @@ export function Content() {
       <span class="close-modal"></span>
       <div class="modal-counter">7/10</div>
       <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev">‹</button>
-        <button class="modal-next" data-i18n="modal.next">›</button>
+        <button class="modal-prev" data-i18n="modal.prev"><</button>
+        <button class="modal-next" data-i18n="modal.next">></button>
       </div>
       <div class="modal-header">
         <h3 data-i18n="products.peanuts.title">Raw Peanuts</h3>
@@ -632,8 +632,8 @@ export function Content() {
       <span class="close-modal"></span>
       <div class="modal-counter">8/10</div>
       <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev">‹</button>
-        <button class="modal-next" data-i18n="modal.next">›</button>
+        <button class="modal-prev" data-i18n="modal.prev"><</button>
+        <button class="modal-next" data-i18n="modal.next">></button>
       </div>
       <div class="modal-header">
         <h3 data-i18n="products.peanutsBlanched.title">Blanched Peanuts</h3>
@@ -710,8 +710,8 @@ export function Content() {
       <span class="close-modal"></span>
       <div class="modal-counter">9/10</div>
       <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev">‹</button>
-        <button class="modal-next" data-i18n="modal.next">›</button>
+        <button class="modal-prev" data-i18n="modal.prev"><</button>
+        <button class="modal-next" data-i18n="modal.next">></button>
       </div>
       <div class="modal-header">
         <h3 data-i18n="modals.driedFruits.title">Osmotically Dehydrated Cherry</h3>
@@ -788,8 +788,8 @@ export function Content() {
       <span class="close-modal"></span>
       <div class="modal-counter">10/10</div>
       <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev">‹</button>
-        <button class="modal-next" data-i18n="modal.next">›</button>
+        <button class="modal-prev" data-i18n="modal.prev"><</button>
+        <button class="modal-next" data-i18n="modal.next">></button>
       </div>
       <div class="modal-header">
         <h3 data-i18n="products.bananaChips.title">Banana Chips</h3>
@@ -991,8 +991,8 @@ export function Content() {
     </div>
   </div>
 
-  <!-- Portfolio section with id - только для английской версии -->
-  ${isEn ? `<section id="portfolio" class="portfolio-section">` : ""}
+  <!-- Portfolio section -->
+  <section id="portfolio" class="portfolio-section">
     <div class="portfolio-container">
       <h2 class="portfolio-title" data-i18n="portfolio.title">Successful Import Projects</h2>
       
@@ -1011,7 +1011,7 @@ export function Content() {
                 </div>
               </div>
               <div class="portfolio-content">
-                <h3>Gulfood Dubai 2023</h3>
+                <h3 data-i18n="portfolio.project1.title">Gulfood Dubai 2023</h3>
                 <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
                 <div class="project-stats">
                   <div class="stat">
@@ -1034,7 +1034,7 @@ export function Content() {
                 </div>
               </div>
               <div class="portfolio-content">
-                <h3>Gulfood Dubai 2023</h3>
+                <h3 data-i18n="portfolio.project2.title">Gulfood Dubai 2023</h3>
                 <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
                 <div class="project-stats">
                   <div class="stat">
@@ -1057,7 +1057,7 @@ export function Content() {
                 </div>
               </div>
               <div class="portfolio-content">
-                <h3>Cashew processing and packaging insight, Vietnam</h3>
+                <h3 data-i18n="portfolio.project3.title">Cashew processing and packaging insight, Vietnam</h3>
                 <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
                 <div class="project-stats">
                   <div class="stat">
@@ -1080,7 +1080,7 @@ export function Content() {
                 </div>
               </div>
               <div class="portfolio-content">
-                <h3>Gulfood Dubai 2025</h3>
+                <h3 data-i18n="portfolio.project4.title">Gulfood Dubai 2025</h3>
                 <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
                 <div class="project-stats">
                   <div class="stat">
@@ -1103,7 +1103,7 @@ export function Content() {
                 </div>
               </div>
               <div class="portfolio-content">
-                <h3>Meeting with Russian Ambassador.</h3>
+                <h3 data-i18n="portfolio.project5.title">Meeting with Russian Ambassador.</h3>
                 <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
                 <div class="project-stats">
                   <div class="stat">
@@ -1126,7 +1126,7 @@ export function Content() {
                 </div>
               </div>
               <div class="portfolio-content">
-                <h3>Gulfood Dubai 2022</h3>
+                <h3 data-i18n="portfolio.project6.title">Gulfood Dubai 2022</h3>
                 <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
                 <div class="project-stats">
                   <div class="stat">
@@ -1149,7 +1149,7 @@ export function Content() {
                 </div>
               </div>
               <div class="portfolio-content">
-                <h3>Gulfood Dubai 2025</h3>
+                <h3 data-i18n="portfolio.project7.title">Gulfood Dubai 2025</h3>
                 <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
                 <div class="project-stats">
                   <div class="stat">
@@ -1172,11 +1172,11 @@ export function Content() {
                 </div>
               </div>
               <div class="portfolio-content">
-                <h3>Anuga Cologne 2025</h3>
+                <h3 data-i18n="portfolio.project8.title">Anuga Cologne 2025</h3>
                 <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
                 <div class="project-stats">
                   <div class="stat">
-                    <span class="stat-label" data-i18n="portfolio.detail8">Exploring international markets for nuts and dried fruits.</span>
+                    <span class="stat-label" data-i18n="portfolio.detail9">Securing supply chain connections.</span>
                   </div>
                 </div>
               </div>
@@ -1195,7 +1195,7 @@ export function Content() {
                 </div>
               </div>
               <div class="portfolio-content">
-                <h3>Anuga Cologne 2025</h3>
+                <h3 data-i18n="portfolio.project9.title">Anuga Cologne 2025</h3>
                 <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
                 <div class="project-stats">
                   <div class="stat">
@@ -1218,7 +1218,7 @@ export function Content() {
                 </div>
               </div>
               <div class="portfolio-content">
-                <h3>Meeting another cashew supplier and investors</h3>
+                <h3 data-i18n="portfolio.project10.title">Meeting another cashew supplier and investors</h3>
                 <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
                 <div class="project-stats">
                   <div class="stat">
@@ -1241,7 +1241,7 @@ export function Content() {
                 </div>
               </div>
               <div class="portfolio-content">
-                <h3>Gulfood Dubai 2025</h3>
+                <h3 data-i18n="portfolio.project11.title">Gulfood Dubai 2025</h3>
                 <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
                 <div class="project-stats">
                   <div class="stat">
@@ -1261,39 +1261,39 @@ export function Content() {
         <div class="swiper-pagination"></div>
       </div>
     </div>
-  ${isEn ? `</section>` : ""}
+  </section>
 
-  <!-- Gallery modal window - только для английской версии -->
-  ${isEn ? `<div class="gallery-modal" id="galleryModal">` : ""}
+  <!-- Gallery modal window -->
+  <div class="gallery-modal" id="galleryModal">
     <div class="gallery-modal-content">
       <div class="close-gallery-modal">
         <i class="fas fa-times"></i>
       </div>
       
+      <!-- Navigation -->
+      <button class="gallery-nav gallery-prev">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="gallery-nav gallery-next">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+
       <div class="gallery-image-container">
         <img src="" alt="" class="gallery-image" id="galleryImage">
         
-        <!-- Navigation -->
-        <button class="gallery-nav gallery-prev">
-          <i class="fas fa-chevron-left"></i>
-        </button>
-        <button class="gallery-nav gallery-next">
-          <i class="fas fa-chevron-right"></i>
-        </button>
-        
         <!-- Counter -->
         <div class="gallery-counter">
-          <span id="currentImage">1</span> / <span id="totalImages">10</span>
+          <span id="currentImage">1</span> / <span id="totalImages">11</span>
         </div>
         
         <!-- Description -->
         <div class="image-caption">
-          <h3 id="imageTitle">Project Title</h3>
-          <p id="imageDescription">Project description</p>
+          <h3 id="imageTitle" data-i18n="gallery.projectTitle">Project Title</h3>
+          <p id="imageDescription" data-i18n="gallery.projectDescription">Project description</p>
         </div>
       </div>
     </div>
-  ${isEn ? `</div>` : ""}
+  </div>
 
   <!-- Contact section with id -->
   <section id="contact" class="contacts-section">
