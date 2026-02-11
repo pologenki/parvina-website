@@ -2369,48 +2369,8 @@ body[style*="overflow: hidden"] {
   }
 }
 
-/* Beautiful cross with animations */
-.close-modal {
-  position: absolute;
-  right: 25px;
-  top: 25px;
-  width: 60px;
-  height: 60px;
-  background: #000000;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 10;
-  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  border: 3px solid #000000;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-}
 
-.close-modal::before,
-.close-modal::after {
-  content: "";
-  position: absolute;
-  width: 24px;
-  height: 3px;
-  background: #ffffff;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
 
-.close-modal::before {
-  transform: rotate(45deg);
-}
-
-.close-modal::after {
-  transform: rotate(-45deg);
-}
-
-/* Cross appearance animation */
-.modal-content .close-modal {
-  animation: crossAppear 0.6s ease 0.3s both;
-}
 
 @keyframes crossAppear {
   0% {
@@ -2426,10 +2386,7 @@ body[style*="overflow: hidden"] {
   }
 }
 
-/* Cross disappearance animation when closing */
-.product-modal.closing .close-modal {
-  animation: crossDisappear 0.3s ease both;
-}
+
 
 @keyframes crossDisappear {
   0% {
@@ -2540,7 +2497,7 @@ body[style*="overflow: hidden"] {
   overflow: hidden;
   text-overflow: ellipsis;
   word-wrap: break-word;
-  max-height: 4.2em;
+  max-height: 4.4em;
 }
 
 .product-features {
@@ -2725,13 +2682,6 @@ body[style*="overflow: hidden"] {
   transition: all 0.3s ease;
 }
 
-.close-modal::before {
-  transform: rotate(45deg);
-}
-
-.close-modal::after {
-  transform: rotate(-45deg);
-}
 
 .close-modal:hover::before,
 .close-modal:hover::after {
@@ -2740,10 +2690,7 @@ body[style*="overflow: hidden"] {
   width: 20px;
 }
 
-/* Cross appearance animation */
-.modal-content .close-modal {
-  animation: crossAppear 0.6s ease 0.3s both;
-}
+
 
 @keyframes crossAppear {
   0% {
@@ -2775,30 +2722,9 @@ body[style*="overflow: hidden"] {
   }
 }
 
-/* Remove strange animation when actively pressed */
-.close-modal:active {
-  transform: scale(1.05);
-  transition: transform 0.1s ease;
-}
 
-/* Alternative option - smooth rotations */
-.close-modal {
-  position: absolute;
-  right: 25px;
-  top: 25px;
-  width: 60px;
-  height: 60px;
-  background: #000000;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 10;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 3px solid #000000;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-}
+
+
 
 .close-modal::before,
 .close-modal::after {
@@ -2823,14 +2749,10 @@ body[style*="overflow: hidden"] {
 .close-modal:hover {
   background: rgba(102, 177, 241, 0.9);
   border-color: rgba(102, 177, 241, 0.9);
-  transform: rotate(90deg) scale(1.05);
   box-shadow: 0 12px 35px rgba(102, 177, 241, 0.4);
 }
 
-.close-modal:hover::before,
-.close-modal:hover::after {
-  background: #000000;
-}
+
 
 /* Appearance animation */
 .modal-content .close-modal {
@@ -4401,103 +4323,7 @@ textarea:-moz-ui-invalid {
   z-index: 10;
 }
 
-.modal-prev,
-.modal-next {
-  width: 40px;
-  height: 40px;
-  background: rgba(0, 0, 0, 0.9);
-  color: white !important;
-  border: none;
-  border-radius: 50%;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
 
-.modal-prev:hover,
-.modal-next:hover {
-  background: rgba(0, 0, 0, 0.95);
-  transform: scale(1.1);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-}
-
-.modal-prev:active,
-.modal-next:active {
-  transform: scale(0.95);
-}
-
-/* Specific styling for arrow symbols */
-.modal-prev::before {
-  content: "<";
-  font-size: 16px !important;
-  color: white !important;
-  display: block;
-}
-
-.modal-next::before {
-  content: ">";
-  font-size: 16px !important;
-  color: white !important;
-  display: block;
-}
-
-/* Alternative styling for arrow symbols using text content */
-.modal-prev,
-.modal-next {
-  color: white !important;
-}
-
-/* Force white color for all content in navigation buttons */
-.modal-prev *,
-.modal-next * {
-  color: white !important;
-}
-
-/* Ensure all pseudo-elements are white */
-.modal-prev::before,
-.modal-next::before,
-.modal-prev::after,
-.modal-next::after {
-  color: white !important;
-}
-
-/* Force display of text content for buttons */
-.modal-prev,
-.modal-next {
-  text-indent: 0 !important;
-  overflow: visible !important;
-}
-
-/* Additional styles to ensure symbols are visible */
-.modal-prev,
-.modal-next {
-  position: relative;
-}
-
-.modal-prev::before,
-.modal-next::before {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-}
-
-/* Hide the default text content */
-.modal-prev,
-.modal-next {
-  text-indent: -9999px;
-  overflow: hidden;
-}
 
 .modal-counter {
   position: absolute;
@@ -4551,4 +4377,57 @@ textarea:-moz-ui-invalid {
   .modal-navigation {
     padding: 0 10px;
   }
+}
+
+/**/
+
+
+.modal-prev,
+.modal-next {
+    width: 35px;
+    height: 35px;
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .3s ease;
+    position: relative;
+}
+
+/* Сама стрелка */
+.modal-prev::before,
+.modal-next::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-top: 2px solid white;
+    border-right: 2px solid white;
+    margin-left: 3px;
+}
+
+
+
+.modal-next::before{
+  margin-right: 6px;
+}
+
+
+/* Повороты */
+.modal-prev::before {
+    transform: rotate(-135deg); /* влево */
+}
+
+.modal-next::before {
+    transform: rotate(45deg); /* вправо */
+}
+
+/* Hover эффект */
+.modal-prev:hover,
+.modal-next:hover {
+    background: rgba(0, 0, 0, 0.95);
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
 }

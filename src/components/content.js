@@ -226,8 +226,8 @@ export function Content() {
       <span class="close-modal"></span>
       <div class="modal-counter">1/10</div>
       <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev"><</button>
-        <button class="modal-next" data-i18n="modal.next">></button>
+        <button class="modal-prev" data-i18n="modal.prev"></button>
+        <button class="modal-next" data-i18n="modal.next"></button>
       </div>
       <div class="modal-header">
         <h3 data-i18n="modals.cashew.title">Cashew Nuts - Premium Quality</h3>
@@ -284,8 +284,8 @@ export function Content() {
       <span class="close-modal"></span>
       <div class="modal-counter">2/10</div>
       <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev"><</button>
-        <button class="modal-next" data-i18n="modal.next">></button>
+        <button class="modal-prev" data-i18n="modal.prev"></button>
+        <button class="modal-next" data-i18n="modal.next"></button>
       </div>
       <div class="modal-header">
         <h3 data-i18n="products.walnuts.title">Walnut Kernels</h3>
@@ -342,8 +342,8 @@ export function Content() {
       <span class="close-modal"></span>
       <div class="modal-counter">3/10</div>
       <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev"><</button>
-        <button class="modal-next" data-i18n="modal.next">></button>
+        <button class="modal-prev" data-i18n="modal.prev"></button>
+        <button class="modal-next" data-i18n="modal.next"></button>
       </div>
       <div class="modal-header">
         <h3 data-i18n="modals.dates.title">Deglet Nour - Tunisian Dates</h3>
@@ -390,8 +390,8 @@ export function Content() {
       <span class="close-modal"></span>
       <div class="modal-counter">4/10</div>
       <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev"><</button>
-        <button class="modal-next" data-i18n="modal.next">></button>
+        <button class="modal-prev" data-i18n="modal.prev"></button>
+        <button class="modal-next" data-i18n="modal.next"></button>
       </div>
       <div class="modal-header">
         <h3 data-i18n="products.papaya.title">Dried Papaya Dice</h3>
@@ -448,8 +448,8 @@ export function Content() {
       <span class="close-modal"></span>
       <div class="modal-counter">5/10</div>
       <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev"><</button>
-        <button class="modal-next" data-i18n="modal.next">></button>
+        <button class="modal-prev" data-i18n="modal.prev"></button>
+        <button class="modal-next" data-i18n="modal.next"></button>
       </div>
       <div class="modal-header">
         <h3 data-i18n="modals.mango.title">Dried Mango Quality</h3>
@@ -506,8 +506,8 @@ export function Content() {
       <span class="close-modal"></span>
       <div class="modal-counter">6/10</div>
       <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev"><</button>
-        <button class="modal-next" data-i18n="modal.next">></button>
+        <button class="modal-prev" data-i18n="modal.prev"></button>
+        <button class="modal-next" data-i18n="modal.next"></button>
       </div>
       <div class="modal-header">
         <h3 data-i18n="products.walnutsShell.title">Walnuts in shell</h3>
@@ -574,8 +574,8 @@ export function Content() {
       <span class="close-modal"></span>
       <div class="modal-counter">7/10</div>
       <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev"><</button>
-        <button class="modal-next" data-i18n="modal.next">></button>
+        <button class="modal-prev" data-i18n="modal.prev"></button>
+        <button class="modal-next" data-i18n="modal.next"></button>
       </div>
       <div class="modal-header">
         <h3 data-i18n="products.peanuts.title">Raw Peanuts</h3>
@@ -632,8 +632,8 @@ export function Content() {
       <span class="close-modal"></span>
       <div class="modal-counter">8/10</div>
       <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev"><</button>
-        <button class="modal-next" data-i18n="modal.next">></button>
+        <button class="modal-prev" data-i18n="modal.prev"></button>
+        <button class="modal-next" data-i18n="modal.next"></button>
       </div>
       <div class="modal-header">
         <h3 data-i18n="products.peanutsBlanched.title">Blanched Peanuts</h3>
@@ -710,8 +710,8 @@ export function Content() {
       <span class="close-modal"></span>
       <div class="modal-counter">9/10</div>
       <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev"><</button>
-        <button class="modal-next" data-i18n="modal.next">></button>
+        <button class="modal-prev" data-i18n="modal.prev"></button>
+        <button class="modal-next" data-i18n="modal.next"></button>
       </div>
       <div class="modal-header">
         <h3 data-i18n="modals.driedFruits.title">Osmotically Dehydrated Cherry</h3>
@@ -788,8 +788,8 @@ export function Content() {
       <span class="close-modal"></span>
       <div class="modal-counter">10/10</div>
       <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev"><</button>
-        <button class="modal-next" data-i18n="modal.next">></button>
+        <button class="modal-prev" data-i18n="modal.prev"></button>
+        <button class="modal-next" data-i18n="modal.next"></button>
       </div>
       <div class="modal-header">
         <h3 data-i18n="products.bananaChips.title">Banana Chips</h3>
@@ -927,7 +927,7 @@ export function Content() {
   <!-- Service Modal Windows -->
   <div class="service-modal" id="modal1">
     <div class="service-modal-content">
-      <div class="close-service-modal"></div>
+      <div class="close-modal"></div>
       <div class="service-modal-icon">
         <i class="fas fa-search-dollar"></i>
       </div>
@@ -938,7 +938,7 @@ export function Content() {
 
   <div class="service-modal" id="modal2">
     <div class="service-modal-content">
-      <div class="close-service-modal"></div>
+      <div class="close-modal"></div>
       <div class="service-modal-icon">
         <i class="fas fa-handshake"></i>
       </div>
@@ -949,7 +949,7 @@ export function Content() {
 
   <div class="service-modal" id="modal3">
     <div class="service-modal-content">
-      <div class="close-service-modal"></div>
+      <div class="close-modal"></div>
       <div class="service-modal-icon">
         <i class="fas fa-shipping-fast"></i>
       </div>
@@ -960,7 +960,7 @@ export function Content() {
 
   <div class="service-modal" id="modal4">
     <div class="service-modal-content">
-      <div class="close-service-modal"></div>
+      <div class="close-modal"></div>
       <div class="service-modal-icon">
         <i class="fas fa-file-contract"></i>
       </div>
@@ -971,7 +971,7 @@ export function Content() {
 
   <div class="service-modal" id="modal5">
     <div class="service-modal-content">
-      <div class="close-service-modal"></div>
+      <div class="close-modal"></div>
       <div class="service-modal-icon">
         <i class="fas fa-clipboard-check"></i>
       </div>
@@ -982,7 +982,7 @@ export function Content() {
 
   <div class="service-modal" id="modal6">
     <div class="service-modal-content">
-      <div class="close-service-modal"></div>
+      <div class="close-modal"></div>
       <div class="service-modal-icon">
         <i class="fas fa-tasks"></i>
       </div>

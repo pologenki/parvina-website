@@ -218,6 +218,7 @@ async function renderApp() {
   initHeaderMenu();
   initSectionScript();
 
+
   // Add small delay to ensure DOM is ready for Swiper
   await new Promise((resolve) => setTimeout(resolve, 50));
 
