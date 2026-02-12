@@ -11,8 +11,9 @@ function getPersonalData() {
 export function Footer() {
   const personal = getPersonalData();
 
-  // Privacy Policy texts
+  // Privacy Policy texts (полные, уже с заголовками)
   const privacyBodyEn = `
+    <h2>Privacy Policy</h2>
     <p><strong>Parvina - Import Manager & Trade Specialist</strong> is committed to protecting your privacy.</p>
     <h3>Information We Collect</h3>
     <p>We may collect the following information when you contact us:</p>
@@ -37,7 +38,9 @@ export function Footer() {
     <p>For privacy-related questions: <a href="mailto:info@pologenki.eu">info@pologenki.eu</a></p>
     <p><em>Last updated: 2026</em></p>
   `;
+  
   const privacyBodyRu = `
+    <h2>Политика конфиденциальности</h2>
     <p><strong>Parvina — Импорт-менеджер и торговый специалист</strong> уважает вашу конфиденциальность.</p>
     <h3>Какие данные мы собираем</h3>
     <p>Мы можем собирать следующую информацию при обращении к нам:</p>
@@ -62,8 +65,10 @@ export function Footer() {
     <p>По вопросам конфиденциальности: <a href="mailto:info@pologenki.eu">info@pologenki.eu</a></p>
     <p><em>Последнее обновление: 2026</em></p>
   `;
-  // Terms of Service texts
+
+  // Terms of Service texts (полные, уже с заголовками)
   const termsBodyEn = `
+    <h2>Terms of Service</h2>
     <h3>Business Services</h3>
     <p>Parvina provides import management and trade specialist services. All product prices and specifications are subject to change based on market conditions and availability.</p>
     <h3>Inquiries and Agreements</h3>
@@ -78,7 +83,9 @@ export function Footer() {
     <p>Parvina - Import Manager & Trade Specialist<br>Email: <a href="mailto:info@pologenki.eu">info@pologenki.eu</a></p>
     <p><em>Last updated: 2026</em></p>
   `;
+  
   const termsBodyRu = `
+    <h2>Условия использования</h2>
     <h3>Деловые услуги</h3>
     <p>Parvina предоставляет услуги по управлению импортом и торговым операциям. Все цены и спецификации продуктов могут меняться в зависимости от рыночных условий и наличия.</p>
     <h3>Запросы и соглашения</h3>
@@ -129,21 +136,11 @@ export function Footer() {
             <div class="footer-column">
               <h4 class="footer-column-title" data-i18n="footer.connect">Connect</h4>
               <ul class="footer-list">
-                <li><a href="${
-                  personal.contacts.socials.facebook
-                }" class="footer-link" target="_blank">Facebook</a></li>
-                <li><a href="${
-                  personal.contacts.socials.whatsapp
-                }" class="footer-link" target="_blank">WhatsApp</a></li>
-                <li><a href="${
-                  personal.contacts.socials.gmail
-                }" class="footer-link" target="_blank">Gmail</a></li>
-                <li><a href="${
-                  personal.contacts.socials.telegram
-                }" class="footer-link" target="_blank">Telegram</a></li>
-                <li><a href="${
-                  personal.contacts.socials.wechat
-                }" class="footer-link" target="_blank">WeChat</a></li>
+                <li><a href="${personal.contacts.socials.facebook}" class="footer-link" target="_blank">Facebook</a></li>
+                <li><a href="${personal.contacts.socials.whatsapp}" class="footer-link" target="_blank">WhatsApp</a></li>
+                <li><a href="${personal.contacts.socials.gmail}" class="footer-link" target="_blank">Gmail</a></li>
+                <li><a href="${personal.contacts.socials.telegram}" class="footer-link" target="_blank">Telegram</a></li>
+                <li><a href="${personal.contacts.socials.wechat}" class="footer-link" target="_blank">WeChat</a></li>
               </ul>
             </div>
           </div>
@@ -161,20 +158,19 @@ export function Footer() {
         </div>
       </div>
       
-      <!-- Modal windows (оставляем как есть) -->
+      <!-- Модальные окна (БЕЗ ДУБЛИРУЮЩИХСЯ ЗАГОЛОВКОВ) -->
       <div id="privacyModal" class="modal" style="display:none;">
         <div class="modal-content">
-          <span class="close-modal">&times;</span>
-          <h2>${personal.lang === "ru" ? "Политика конфиденциальности" : "Privacy Policy"}</h2>
+          <span class="close-modal"></span>
           <div class="modal-body">
             ${personal.lang === "ru" ? privacyBodyRu : privacyBodyEn}
           </div>
         </div>
       </div>
+      
       <div id="termsModal" class="modal" style="display:none;">
         <div class="modal-content">
-          <span class="close-modal">&times;</span>
-          <h2>${personal.lang === "ru" ? "Условия использования" : "Terms of Service"}</h2>
+          <span class="close-modal"></span>
           <div class="modal-body">
             ${personal.lang === "ru" ? termsBodyRu : termsBodyEn}
           </div>
