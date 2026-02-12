@@ -25,6 +25,28 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 // Global slider instance
 let portfolioSwiper = null;
 
+// Scroll management for modals
+let modalOpenCount = 0;
+
+function preventBodyScroll() {
+  modalOpenCount++;
+ if (modalOpenCount === 1) {
+    document.body.style.overflow = 'hidden';
+    // Preserve the scrollbar width to prevent layout shift
+    document.body.style.paddingRight = window.innerWidth - document.documentElement.clientWidth + 'px';
+  }
+}
+
+function allowBodyScroll() {
+  if (modalOpenCount > 0) {
+    modalOpenCount--;
+    if (modalOpenCount === 0) {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    }
+  }
+}
+
 // Function to update texts on the page
 function updatePageTexts() {
   // Update all elements with data-i18n attribute
@@ -370,7 +392,7 @@ function initServiceModals() {
       const modal = document.getElementById(modalId);
       if (modal) {
         modal.classList.add("active");
-        document.body.style.overflow = "hidden";
+        preventBodyScroll();
       }
     });
   });
@@ -380,7 +402,7 @@ function initServiceModals() {
     button.addEventListener("click", function () {
       const modal = this.closest(".service-modal");
       modal.classList.remove("active");
-      document.body.style.overflow = "";
+      allowBodyScroll();
     });
   });
 
@@ -389,7 +411,7 @@ function initServiceModals() {
     modal.addEventListener("click", function (e) {
       if (e.target === this) {
         this.classList.remove("active");
-        document.body.style.overflow = "";
+        allowBodyScroll();
       }
     });
   });
@@ -400,7 +422,7 @@ function initServiceModals() {
       serviceModals.forEach((modal) => {
         if (modal.classList.contains("active")) {
           modal.classList.remove("active");
-          document.body.style.overflow = "";
+          allowBodyScroll();
         }
       });
     }
@@ -519,7 +541,7 @@ function initProductModals() {
   // Function to close modal window with animation
   function closeModal(modal) {
     modal.classList.add("closing");
-    document.body.style.overflow = "";
+    allowBodyScroll();
 
     setTimeout(() => {
       modal.classList.remove("active", "closing");
@@ -548,7 +570,7 @@ function initProductModals() {
       const newModal = document.getElementById(modalIds[newIndex]);
       if (newModal) {
         newModal.classList.add("active");
-        document.body.style.overflow = "hidden";
+        preventBodyScroll();
       }
     }, 350);
   }
@@ -574,7 +596,7 @@ function initProductModals() {
         const modal = document.getElementById(modalId);
         if (modal) {
           modal.classList.add("active");
-          document.body.style.overflow = "hidden";
+          preventBodyScroll();
         }
         return;
       }
@@ -585,7 +607,7 @@ function initProductModals() {
         const modal = document.getElementById(modalId);
         if (modal) {
           modal.classList.add("active");
-          document.body.style.overflow = "hidden";
+          preventBodyScroll();
         }
       }
     });
@@ -773,12 +795,12 @@ function initPortfolioGallery() {
     currentImageIndex = index;
     updateGallery();
     galleryModal.classList.add("active");
-    document.body.style.overflow = "hidden";
+    preventBodyScroll();
   }
 
   function closeGallery() {
     galleryModal.classList.remove("active");
-    document.body.style.overflow = "";
+    allowBodyScroll();
   }
 
   function updateGallery() {
@@ -805,7 +827,7 @@ function initPortfolioGallery() {
   // Events
   if (closeGalleryBtn) {
     closeGalleryBtn.addEventListener("click", closeGallery);
-  }
+ }
   if (prevBtn) {
     prevBtn.addEventListener("click", prevImage);
   }
@@ -874,7 +896,7 @@ function initFooterModals() {
     privacyLink.addEventListener("click", function (e) {
       e.preventDefault();
       privacyModal.style.display = "block";
-      document.body.style.overflow = "hidden";
+      preventBodyScroll();
     });
   }
 
@@ -882,7 +904,7 @@ function initFooterModals() {
     termsLink.addEventListener("click", function (e) {
       e.preventDefault();
       termsModal.style.display = "block";
-      document.body.style.overflow = "hidden";
+      preventBodyScroll();
     });
   }
 
@@ -892,7 +914,7 @@ function initFooterModals() {
       const modal = this.closest(".modal");
       if (modal) {
         modal.style.display = "none";
-        document.body.style.overflow = "";
+        allowBodyScroll();
       }
     });
   });
@@ -902,7 +924,7 @@ function initFooterModals() {
     modal.addEventListener("click", function (e) {
       if (e.target === this) {
         this.style.display = "none";
-        document.body.style.overflow = "";
+        allowBodyScroll();
       }
     });
   });
@@ -912,7 +934,7 @@ function initFooterModals() {
       modals.forEach((modal) => {
         if (modal.style.display === "block") {
           modal.style.display = "none";
-          document.body.style.overflow = "";
+          allowBodyScroll();
         }
       });
     }

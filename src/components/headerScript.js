@@ -1,4 +1,25 @@
 // headerScript.js
+let scrollLockCounter = 0;
+
+function preventBodyScroll() {
+  scrollLockCounter++;
+  if (scrollLockCounter === 1) {
+    const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.overflow = 'hidden';
+    document.body.style.paddingRight = scrollBarWidth + 'px';
+  }
+}
+
+function allowBodyScroll() {
+  if (scrollLockCounter > 0) {
+    scrollLockCounter--;
+    if (scrollLockCounter === 0) {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    }
+  }
+}
+
 export function initHeaderMenu() {
   // Burger menu functionality
   const menuToggle = document.getElementById("menuToggle");
@@ -21,7 +42,13 @@ export function initHeaderMenu() {
     this.classList.toggle("active");
     navMenu.classList.toggle("active");
     overlay.classList.toggle("active");
-    document.body.classList.toggle("menu-open");
+    
+    // Toggle body scroll based on menu state
+    if (navMenu.classList.contains("active")) {
+      preventBodyScroll();
+    } else {
+      allowBodyScroll();
+    }
   });
 
   // Language dropdown functionality is handled in main.js via initLanguageSwitcher()
@@ -33,6 +60,9 @@ export function initHeaderMenu() {
     this.classList.remove("active");
     document.body.classList.remove("menu-open");
     if (languageDropdown) languageDropdown.classList.remove("active");
+    
+    // Allow body scroll when menu closes
+    allowBodyScroll();
   });
 
   // Close mobile menu on menu item click
@@ -46,6 +76,9 @@ export function initHeaderMenu() {
         navMenu.classList.remove("active");
         overlay.classList.remove("active");
         document.body.classList.remove("menu-open");
+        
+        // Allow body scroll when menu closes
+        allowBodyScroll();
       }
     });
   });

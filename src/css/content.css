@@ -2134,6 +2134,73 @@ body[style*="overflow: hidden"] {
     width: 40px;
     height: 40px;
   }
+
+  /* Product modals for very small screens */
+  .modal-content {
+    width: 98%;
+    margin: 5px;
+    margin-top: 70px !important;
+    max-height: 92vh;
+  }
+
+  .modal-header {
+    padding: 12px 12px 10px;
+  }
+
+  .modal-header h3 {
+    font-size: 1rem;
+  }
+
+  .modal-body {
+    padding: 12px;
+    max-height: 58vh;
+  }
+
+  .product-type {
+    padding: 12px;
+  }
+
+  .product-type h4 {
+    font-size: 0.9rem;
+    line-height: 1.2;
+    min-height: 1.2em;
+  }
+
+  .type-price,
+  .type-no-price {
+    font-size: 0.8rem;
+    padding: 2px 6px;
+  }
+
+  .product-description p {
+    font-size: 0.8rem;
+    line-height: 1.3;
+    -webkit-line-clamp: 5;
+    max-height: 6.5em;
+  }
+
+  .feature-list li {
+    font-size: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .contact-btn {
+    padding: 7px 14px;
+    font-size: 0.8rem;
+  }
+
+  .close-modal {
+    right: 8px;
+    top: 8px;
+    width: 24px;
+    height: 24px;
+  }
+
+  .close-modal::before,
+  .close-modal::after {
+    width: 12px;
+    height: 2px;
+  }
 }
 
 /* About Section */
@@ -2320,14 +2387,13 @@ body[style*="overflow: hidden"] {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(8px);
   opacity: 0;
   transition: all 0.4s ease;
 }
 
 .product-modal.active {
-  display: flex;
+ display: flex;
   align-items: center;
   justify-content: center;
   opacity: 1;
@@ -2353,9 +2419,30 @@ body[style*="overflow: hidden"] {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   position: relative;
   border: 2px solid #000000;
-  overflow: hidden;
+  /* Убираем overflow: hidden чтобы позволить прокрутку внутри modal-body */
+  overflow: visible;
   animation: modalSlideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+}
+
+/* Добавляем стили для modal-body как в footer */
+.modal-body {
+  max-height: 70vh;
+  overflow-y: auto;
+  flex: 1;
+  padding: 30px;
+}
+
+/* Если у нас уже есть modal-body, то применяем к нему те же стили */
+.product-modal .modal-body {
+  max-height: 60vh;
+  overflow-y: auto;
+  flex: 1;
+  padding: 30px;
+  width: 100%;
 }
 
 @keyframes modalSlideIn {
@@ -2594,59 +2681,234 @@ body[style*="overflow: hidden"] {
     margin: 10px;
     border-radius: 10px;
     margin-top: 100px!important;
-
+    max-height: 85vh;
   }
 
   .modal-header {
-    padding: 25px 20px 20px;
+    padding: 20px 20px 15px;
   }
 
   .modal-header h3 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+    margin: 0 0 10px;
   }
 
   .modal-body {
     padding: 20px;
-    max-height: 67vh;
+    max-height: 65vh;
+    overflow-y: auto;
+  }
+
+  .product-types {
+    gap: 18px;
   }
 
   .product-type {
-    padding: 12px;
-  }
-
-  .close-modal {
-    right: 15px;
-    top: 15px;
-    width: 50px;
-    height: 50px;
-  }
-
-  .close-modal::before,
-  .close-modal::after {
-    width: 20px;
+    padding: 18px;
   }
 
   .product-type-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
-    margin-bottom: 10px;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+  }
+
+  .product-type h4 {
+    font-size: 1rem;
+    margin: 0;
+    line-height: 1.3;
+    min-height: 1.3em;
+  }
+
+  .type-price,
+  .type-no-price {
+    font-size: 0.95rem;
+    padding: 4px 10px;
+    align-self: flex-start;
+  }
+
+  .product-description {
+    margin-bottom: 12px;
+  }
+
+  .product-description p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-height: 5.6em;
+  }
+
+  .product-features {
+    margin-top: 12px;
+    padding-top: 10px;
+  }
+
+  .feature-list {
+    gap: 6px;
+  }
+
+  .feature-list li {
+    font-size: 0.85rem;
+    line-height: 1.3;
+    gap: 5px;
+  }
+
+  .feature-list li::before {
+    font-size: 0.8rem;
+    margin-top: 0;
+  }
+
+  .contact-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    margin-top: 12px;
+  }
+
+  .close-modal {
+    right: 15px;
+    top: 15px;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #000000;
+  }
+
+  .close-modal::before,
+  .close-modal::after {
+    width: 16px;
+    height: 2px;
+  }
+
+  /* Adjustments for service modals */
+  .service-modal-content {
+    width: 95%;
+    margin: 20px auto;
+    max-width: 95%;
+    margin-top: 50px !important;
+  }
+
+  /* Adjustments for gallery modals */
+  .gallery-modal-content {
+    padding: 10px;
+  }
+
+  .gallery-image-container {
+    padding: 60px 10px 50px 10px;
+  }
+
+  .gallery-image {
+    max-height: 70vh;
+  }
+
+  .close-gallery-modal {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .modal-content {
+    width: 98%;
+    margin: 5px;
+    margin-top: 80px !important;
+    max-height: 90vh;
+  }
+
+  .modal-header {
+    padding: 15px 15px 10px;
+  }
+
+  .modal-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .modal-body {
+    padding: 15px;
+    max-height: 60vh;
+  }
+
+  .product-type {
+    padding: 15px;
   }
 
   .product-type h4 {
     font-size: 0.95rem;
+    line-height: 1.25;
+    min-height: 1.25em;
   }
 
-  .type-price {
-    font-size: 1rem;
+  .type-price,
+  .type-no-price {
+    font-size: 0.85rem;
     padding: 3px 8px;
-    align-self: flex-start;
   }
 
   .product-description p {
     font-size: 0.85rem;
-    line-height: 1.3;
-    max-height: 3.9em;
+    line-height: 1.35;
+    -webkit-line-clamp: 4;
+    max-height: 5.4em;
+  }
+
+  .feature-list li {
+    font-size: 0.8rem;
+    line-height: 1.25;
+  }
+
+  .contact-btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+
+  .close-modal {
+    right: 10px;
+    top: 10px;
+    width: 26px;
+    height: 26px;
+  }
+
+  .close-modal::before,
+  .close-modal::after {
+    width: 14px;
+    height: 2px;
+  }
+
+  /* Gallery modal adjustments */
+  .gallery-image-container {
+    padding: 50px 5px 40px 5px;
+  }
+
+  .gallery-image {
+    max-height: 65vh;
+  }
+
+  .close-gallery-modal {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+  }
+
+  .image-caption {
+    padding: 6px 12px;
+    max-width: 90%;
+  }
+
+  .image-caption h3 {
+    font-size: 0.85rem;
+  }
+
+  /* Service modal adjustments */
+  .service-modal-content {
+    width: 98%;
+    margin: 15px auto;
+    margin-top: 40px !important;
   }
 }
 
@@ -2837,7 +3099,6 @@ body[style*="overflow: hidden"] {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(8px);
   opacity: 0;
   transition: all 0.4s ease;
@@ -2869,9 +3130,22 @@ body[style*="overflow: hidden"] {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   position: relative;
   border: 2px solid #000000;
-  overflow: hidden;
+  /* Убираем overflow: hidden чтобы позволить прокрутку внутри modal-body */
+  overflow: visible;
   animation: modalSlideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+}
+
+/* Добавляем стили для modal-body как в footer для сервисных модальных окон */
+.service-modal .modal-body {
+ max-height: 60vh;
+  overflow-y: auto;
+  flex: 1;
+  padding: 30px;
+  width: 100%;
 }
 
 @keyframes modalSlideIn {
@@ -3439,6 +3713,130 @@ body[style*="overflow: hidden"] {
 /* COMPLETELY REMOVE DESCRIPTION */
 .image-caption p {
   display: none !important;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .gallery-modal-content {
+    padding: 0;
+  }
+
+  .gallery-image-container {
+    max-width: 100%;
+    max-height: 100%;
+    padding: 70px 10px 60px 10px; /* More space at top for cross */
+    width: 100%;
+    height: 100%;
+  }
+
+  .gallery-image {
+    max-height: 85vh;
+    max-width: 95vw;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* CROSS ON MOBILE - MUST BE VISIBLE */
+  .close-gallery-modal {
+    position: fixed !important;
+    top: 115px !important;
+    right: 15px !important;
+    width: 45px !important;
+    height: 45px !important;
+    background: #fff !important;
+    font-size: 1.3rem !important;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.6) !important;
+    border: 2px solid #000 !important;
+    display: flex !important;
+    z-index: 10003 !important;
+  }
+
+  /* Arrows on mobile */
+  .gallery-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.95);
+    z-index: 10002;
+  }
+
+  .gallery-prev {
+    left: 10px;
+  }
+
+  .gallery-next {
+    right: 10px;
+  }
+
+  .gallery-counter {
+    top: 15px;
+    left: 15px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  /* Caption on mobile - TITLE ONLY ONE LINE */
+  .image-caption {
+    bottom: 15px;
+    padding: 8px 16px;
+    max-width: 85%;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 6px;
+  }
+
+  .image-caption h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+  .gallery-image-container {
+    padding: 60px 5px 50px 5px;
+  }
+
+  .gallery-image {
+    max-height: 80vh;
+    max-width: 98vw;
+  }
+
+  /* CROSS */
+  .close-gallery-modal {
+    top: 10px !important;
+    right: 10px !important;
+    width: 42px !important;
+    height: 42px !important;
+    font-size: 1.2rem !important;
+  }
+
+  .gallery-nav {
+    width: 38px;
+    height: 38px;
+  }
+
+  .gallery-prev {
+    left: 5px;
+  }
+
+  .gallery-next {
+    right: 5px;
+  }
+
+  .image-caption {
+    bottom: 10px;
+    padding: 6px 12px;
+    max-width: 90%;
+  }
+
+  .image-caption h3 {
+    font-size: 0.9rem;
+  }
 }
 
 /* Mobile Styles */

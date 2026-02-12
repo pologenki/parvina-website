@@ -1,10 +1,32 @@
-// sectionScript.js - ОПТИМИЗИРОВАННАЯ ВЕРСИЯ БЕЗ ДУБЛИРОВАНИЯ ОБРАБОТЧИКОВ
+// sectionScript.js - ОПТИМИЗИРОВАННАЯ ВЕРСИЯ С ЦЕНТРАЛИЗОВАННЫМ УПРАВЛЕНИЕМ ПРОКРУТКОЙ
 let isModalOpen = false;
 let currentModal = null;
 let eventListenersSet = false; // Флаг для отслеживания установки обработчиков
 
+// Централизованное управление прокруткой - используем ту же систему, что и в других частях приложения
+let modalOpenCount = 0;
+
+function preventBodyScroll() {
+  modalOpenCount++;
+  if (modalOpenCount === 1) {
+    const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.overflow = 'hidden';
+    document.body.style.paddingRight = scrollBarWidth + 'px';
+  }
+}
+
+function allowBodyScroll() {
+  if (modalOpenCount > 0) {
+    modalOpenCount--;
+    if (modalOpenCount === 0) {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    }
+  }
+}
+
 export function initSectionScript() {
-    console.log('🎯 Модальные окна: оптимизированная версия');
+    console.log('🎯 Модальные окна: оптимизированная версия с централизованным управлением прокруткой');
     
     // Устанавливаем обработчики только один раз
     if (!eventListenersSet) {
@@ -99,21 +121,17 @@ function handleModalBackgroundClick(e) {
 function openModal(modal) {
     currentModal = modal;
     modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+    preventBodyScroll(); // Используем централизованную функцию для управления прокруткой
     document.body.classList.add('modal-open');
     isModalOpen = true;
     
     console.log('✅ Открыто модальное окно:', modal.id);
-    
-    // Добавляем класс к body для стилизации
-    document.body.style.paddingRight = window.innerWidth - document.documentElement.clientWidth + 'px';
 }
 
 function closeModal(modal) {
     modal.classList.remove('active');
-    document.body.style.overflow = 'auto';
+    allowBodyScroll(); // Используем централизованную функцию для управления прокруткой
     document.body.classList.remove('modal-open');
-    document.body.style.paddingRight = '';
     
     isModalOpen = false;
     currentModal = null;
