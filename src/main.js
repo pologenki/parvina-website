@@ -57,6 +57,39 @@ function updatePageTexts() {
     }
   });
 
+  // Update titles
+  const titleElements = document.querySelectorAll("[data-i18n-title]");
+  titleElements.forEach((element) => {
+    const key = element.getAttribute("data-i18n-title");
+    const text = t(key);
+
+    if (text && text !== key) {
+      element.title = text;
+    }
+  });
+
+  // Update alt attributes
+  const altElements = document.querySelectorAll("[data-i18n-alt]");
+  altElements.forEach((element) => {
+    const key = element.getAttribute("data-i18n-alt");
+    const text = t(key);
+
+    if (text && text !== key) {
+      element.alt = text;
+    }
+  });
+
+  // Update aria-label attributes
+  const ariaLabelElements = document.querySelectorAll("[data-i18n-aria-label]");
+  ariaLabelElements.forEach((element) => {
+    const key = element.getAttribute("data-i18n-aria-label");
+    const text = t(key);
+
+    if (text && text !== key) {
+      element.setAttribute("aria-label", text);
+    }
+  });
+
   // Update page title
   const pageTitle = document.querySelector("title");
   if (pageTitle) {
@@ -309,9 +342,14 @@ function initSwiper() {
 // Global function for language change
 window.changeLanguage = async function (lang) {
   await loadTranslations(lang);
-  // Перерисовываем весь контент для обновления персональных данных
-  await renderApp();
+  // Update texts without full re-render
+  updatePageTexts();
   updateLanguageSelector();
+  // Re-initialize components that depend on language-specific content
+  initHeaderMenu();
+  initSectionScript();
+ initContactForm();
+ initFooterModals();
 };
 
 // Start the application

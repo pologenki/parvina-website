@@ -1,36 +1,50 @@
-// sectionScript.js - ФИНАЛЬНАЯ ОПТИМИЗИРОВАННАЯ ВЕРСИЯ
+// sectionScript.js - ОПТИМИЗИРОВАННАЯ ВЕРСИЯ БЕЗ ДУБЛИРОВАНИЯ ОБРАБОТЧИКОВ
 let isModalOpen = false;
 let currentModal = null;
+let eventListenersSet = false; // Флаг для отслеживания установки обработчиков
 
 export function initSectionScript() {
     console.log('🎯 Модальные окна: оптимизированная версия');
     
-    // Очищаем старые обработчики и устанавливаем новые
-    setupModalHandlers();
-    
-    // Также устанавливаем обработчики при изменении языка/рендере
-    setupMutationObserver();
-    
-    console.log('✅ Модальные окна готовы');
+    // Устанавливаем обработчики только один раз
+    if (!eventListenersSet) {
+        setupModalHandlers();
+        eventListenersSet = true;
+        console.log('✅ Обработчики установлены');
+    } else {
+        // Если обработчики уже были установлены, просто обновляем их
+        updateModalHandlers();
+        console.log('🔄 Обработчики обновлены');
+    }
 }
 
 function setupModalHandlers() {
     console.log('🔄 Настройка обработчиков...');
     
+    // Устанавливаем обработчики для карточек услуг
     document.querySelectorAll('.service-card').forEach(card => {
-        const newCard = card.cloneNode(true);
-        card.parentNode.replaceChild(newCard, card);
-
-        newCard.addEventListener('click', handleCardClick, false);
+        // Удаляем существующий обработчик, если он есть
+        card.removeEventListener('click', handleCardClick, false);
+        // Добавляем новый обработчик
+        card.addEventListener('click', handleCardClick, false);
     });
     
-    // 2. Обработчики для модальных окон
+    // Устанавливаем обработчики для модальных окон
     document.querySelectorAll('.service-modal').forEach(modal => {
         setupModalCloseHandlers(modal);
     });
     
-    // 3. Глобальный обработчик Escape
+    // Устанавливаем глобальный обработчик Escape
+    document.removeEventListener('keydown', handleEscape, false);
     document.addEventListener('keydown', handleEscape, false);
+}
+
+function updateModalHandlers() {
+    // Обновляем обработчики без дублирования
+    document.querySelectorAll('.service-card').forEach(card => {
+        card.removeEventListener('click', handleCardClick, false);
+        card.addEventListener('click', handleCardClick, false);
+    });
 }
 
 function handleCardClick(e) {
@@ -55,24 +69,31 @@ function setupModalCloseHandlers(modal) {
     // Кнопка закрытия
     const closeBtn = modal.querySelector('.close-modal');
     if (closeBtn) {
-        const newCloseBtn = closeBtn.cloneNode(true);
-        closeBtn.parentNode.replaceChild(newCloseBtn, closeBtn);
-        
-        newCloseBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            e.preventDefault();
-            console.log('❌ Закрытие по крестику');
-            closeModal(modal);
-        }, false);
+        // Удаляем существующий обработчик
+        closeBtn.removeEventListener('click', handleCloseClick, false);
+        // Добавляем новый обработчик
+        closeBtn.addEventListener('click', handleCloseClick, false);
     }
     
-    // Закрытие по клику на фон
-    modal.addEventListener('click', function(e) {
-        if (e.target === this) {
-            console.log('🎯 Закрытие по фону');
-            closeModal(this);
-        }
-    }, false);
+    // Удаляем существующий обработчик клика по фону
+    modal.removeEventListener('click', handleModalBackgroundClick, false);
+    // Добавляем новый обработчик клика по фону
+    modal.addEventListener('click', handleModalBackgroundClick, false);
+}
+
+function handleCloseClick(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    console.log('❌ Закрытие по крестику');
+    const modal = this.closest('.service-modal');
+    closeModal(modal);
+}
+
+function handleModalBackgroundClick(e) {
+    if (e.target === this) {
+        console.log('🎯 Закрытие по фону');
+        closeModal(this);
+    }
 }
 
 function openModal(modal) {
@@ -111,40 +132,6 @@ function handleEscape(e) {
         console.log('⎋ Escape нажата');
         closeModal(currentModal);
     }
-}
-
-function setupMutationObserver() {
-    // Отслеживаем изменения DOM для переинициализации
-    const observer = new MutationObserver(function(mutations) {
-        let shouldReinitialize = false;
-        
-        mutations.forEach(function(mutation) {
-            if (mutation.addedNodes.length > 0) {
-                // Проверяем, были ли добавлены элементы, связанные с модальными окнами
-                mutation.addedNodes.forEach(node => {
-                    if (node.nodeType === 1) { // Element node
-                        if (node.classList && 
-                            (node.classList.contains('service-card') || 
-                             node.classList.contains('service-modal') ||
-                             node.querySelector('.service-card') || 
-                             node.querySelector('.service-modal'))) {
-                            shouldReinitialize = true;
-                        }
-                    }
-                });
-            }
-        });
-        
-        if (shouldReinitialize) {
-            console.log('🔄 DOM изменился, переинициализируем модальные окна');
-            setTimeout(setupModalHandlers, 100);
-        }
-    });
-    
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
 }
 
 // Экспортируем функции для глобального использования
