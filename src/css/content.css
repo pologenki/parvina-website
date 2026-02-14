@@ -2143,10 +2143,6 @@ body[style*="overflow: hidden"] {
     max-height: 92vh;
   }
 
-  .modal-header {
-    padding: 12px 12px 10px;
-  }
-
   .modal-header h3 {
     font-size: 1rem;
   }
@@ -2154,10 +2150,6 @@ body[style*="overflow: hidden"] {
   .modal-body {
     padding: 12px;
     max-height: 58vh;
-  }
-
-  .product-type {
-    padding: 12px;
   }
 
   .product-type h4 {
@@ -2393,7 +2385,7 @@ body[style*="overflow: hidden"] {
 }
 
 .product-modal.active {
- display: flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   opacity: 1;
@@ -2456,9 +2448,6 @@ body[style*="overflow: hidden"] {
   }
 }
 
-
-
-
 @keyframes crossAppear {
   0% {
     opacity: 0;
@@ -2472,8 +2461,6 @@ body[style*="overflow: hidden"] {
     transform: scale(1) rotate(0deg);
   }
 }
-
-
 
 @keyframes crossDisappear {
   0% {
@@ -2680,17 +2667,12 @@ body[style*="overflow: hidden"] {
     width: 95%;
     margin: 10px;
     border-radius: 10px;
-    margin-top: 100px!important;
+    margin-top: 100px !important;
     max-height: 85vh;
-  }
-
-  .modal-header {
-    padding: 20px 20px 15px;
   }
 
   .modal-header h3 {
     font-size: 1.2rem;
-    margin: 0 0 10px;
   }
 
   .modal-body {
@@ -2701,10 +2683,6 @@ body[style*="overflow: hidden"] {
 
   .product-types {
     gap: 18px;
-  }
-
-  .product-type {
-    padding: 18px;
   }
 
   .product-type-header {
@@ -2730,11 +2708,11 @@ body[style*="overflow: hidden"] {
   }
 
   .product-description {
-    margin-bottom: 12px;
+    margin-bottom: 12px !important;
   }
 
   .product-description p {
-    font-size: 0.9rem;
+    font-size: 1.1rem !important;
     line-height: 1.4;
     margin: 0;
     display: -webkit-box;
@@ -2821,10 +2799,6 @@ body[style*="overflow: hidden"] {
     max-height: 90vh;
   }
 
-  .modal-header {
-    padding: 15px 15px 10px;
-  }
-
   .modal-header h3 {
     font-size: 1.1rem;
   }
@@ -2839,20 +2813,20 @@ body[style*="overflow: hidden"] {
   }
 
   .product-type h4 {
-    font-size: 0.95rem;
+    font-size: 1.3rem;
     line-height: 1.25;
     min-height: 1.25em;
   }
 
   .type-price,
   .type-no-price {
-    font-size: 0.85rem;
+    font-size: 1.1rem;
     padding: 3px 8px;
   }
 
   .product-description p {
     font-size: 0.85rem;
-    line-height: 1.35;
+    line-height: 1.3 !important;
     -webkit-line-clamp: 4;
     max-height: 5.4em;
   }
@@ -2944,15 +2918,12 @@ body[style*="overflow: hidden"] {
   transition: all 0.3s ease;
 }
 
-
 .close-modal:hover::before,
 .close-modal:hover::after {
   background: #000000;
   transform: rotate(0deg);
   width: 20px;
 }
-
-
 
 @keyframes crossAppear {
   0% {
@@ -2984,15 +2955,11 @@ body[style*="overflow: hidden"] {
   }
 }
 
-
-
-
-
 .close-modal::before,
 .close-modal::after {
   content: "";
   position: absolute;
-  width: 24px!important;
+  width: 24px !important;
   height: 3px;
   background: #ffffff;
   border-radius: 2px;
@@ -3013,8 +2980,6 @@ body[style*="overflow: hidden"] {
   border-color: rgba(102, 177, 241, 0.9);
   box-shadow: 0 12px 35px rgba(102, 177, 241, 0.4);
 }
-
-
 
 /* Appearance animation */
 .modal-content .close-modal {
@@ -3141,7 +3106,7 @@ body[style*="overflow: hidden"] {
 
 /* Добавляем стили для modal-body как в footer для сервисных модальных окон */
 .service-modal .modal-body {
- max-height: 60vh;
+  max-height: 60vh;
   overflow-y: auto;
   flex: 1;
   padding: 30px;
@@ -3283,7 +3248,6 @@ body[style*="overflow: hidden"] {
 
 .modal-header {
   position: relative;
-  padding: 20px 50px 20px 20px; /* Increase right padding for cross */
 }
 
 .modal-header h3 {
@@ -3310,13 +3274,8 @@ body[style*="overflow: hidden"] {
 
 /* Responsive styles for mobile devices */
 @media (max-width: 768px) {
-  .modal-header {
-    padding: 15px 45px 15px 15px;
-  }
-
   .modal-header h3 {
     font-size: 1.2rem;
-    padding-right: 10px;
   }
 
   .close-modal {
@@ -3343,12 +3302,8 @@ body[style*="overflow: hidden"] {
 }
 
 @media (max-width: 480px) {
-  .modal-header {
-    padding: 12px 40px 12px 12px !important;
-  }
-
   .modal-header h3 {
-    font-size: 1.1rem;
+    font-size: 1.3rem !important;
   }
 
   .close-modal {
@@ -4751,8 +4706,6 @@ textarea:-moz-ui-invalid {
   z-index: 10;
 }
 
-
-
 .modal-counter {
   position: absolute;
   top: 20px;
@@ -4767,97 +4720,186 @@ textarea:-moz-ui-invalid {
 
 /* Mobile optimizations */
 @media (max-width: 768px) {
+  /* Hide navigation arrows on mobile to encourage swipe gestures */
   .modal-navigation {
+    display: none;
+  }
+
+  /* Show swipe hint for mobile users */
+  .swipe-hint {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #4b5563;
+    z-index: 10;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    animation: swipeHintFadeIn 0.5s ease 0.3s both;
+  }
+
+  @keyframes swipeHintFadeIn {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  .swipe-hint-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: #f3f4f6;
+    border-radius: 50%;
+    font-size: 0.8rem;
+  }
+
+  .product-modal .modal-body {
+    max-height: 60vh;
+    overflow-y: auto;
+    flex: 1;
+    padding: 0px 11px;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Completely disable touch actions on modal content */
+  .product-modal .modal-content {
+    touch-action: none;
+    overscroll-behavior: contain;
+  }
+
+  /* Add visual swipe indicators on the sides */
+  .modal-content::before,
+  .modal-content::after {
+    content: "";
     position: absolute;
     top: 50%;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 15px;
     transform: translateY(-50%);
-    z-index: 10;
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+    pointer-events: none;
   }
 
-  .modal-prev,
-  .modal-next {
-    width: 35px;
-    height: 35px;
-    font-size: 16px;
+  .modal-content::before {
+    left: 10px;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.15) 0%,
+      rgba(0, 0, 0, 0.05) 100%
+    );
+    clip-path: polygon(60% 50%, 0% 0%, 0% 100%);
   }
 
-  .modal-counter {
-    top: 8px;
-    left: 12px;
-    font-size: 12px;
-    padding: 4px 8px;
+  .modal-content::after {
+    right: 10px;
+    background: linear-gradient(
+      -90deg,
+      rgba(0, 0, 0, 0.15) 0%,
+      rgba(0, 0, 0, 0.05) 100%
+    );
+    clip-path: polygon(40% 50%, 100% 0%, 100% 100%);
+  }
+
+  /* Animate indicators on touch */
+  .product-modal.active .modal-content::before,
+  .product-modal.active .modal-content::after {
+    animation: swipeIndicatorPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes swipeIndicatorPulse {
+    0%,
+    100% {
+      opacity: 0.3;
+      transform: translateY(-50%) scale(1);
+    }
+    50% {
+      opacity: 0.7;
+      transform: translateY(-50%) scale(1.1);
+    }
   }
 }
 
 @media (max-width: 480px) {
-  .modal-prev,
-  .modal-next {
-    width: 30px;
-    height: 30px;
-    font-size: 14px;
+  .swipe-hint {
+    font-size: 0.75rem;
+    padding: 6px 12px;
   }
 
-  .modal-navigation {
-    padding: 0 10px;
+  .swipe-hint-icon {
+    width: 20px;
+    height: 20px;
+    font-size: 0.7rem;
   }
 }
 
 /**/
 
-
 .modal-prev,
 .modal-next {
-    width: 35px;
-    height: 35px;
-    background: rgba(0, 0, 0, 0.7);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all .3s ease;
-    position: relative;
+  width: 35px;
+  height: 35px;
+  background: rgba(0, 0, 0, 0.7);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
 /* Сама стрелка */
 .modal-prev::before,
 .modal-next::before {
-    content: "";
-    width: 5px;
-    height: 5px;
-    border-top: 2px solid white;
-    border-right: 2px solid white;
-    margin-left: 3px;
-}
-
-
-
-.modal-next::before{
-  margin-right: 6px;
-}
-
-
-/* Повороты */
-.modal-prev::before {
-    transform: rotate(-135deg); /* влево */
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-top: 2px solid white;
+  border-right: 2px solid white;
+  margin-left: 3px;
 }
 
 .modal-next::before {
-    transform: rotate(45deg); /* вправо */
+  margin-right: 6px;
+}
+
+/* Повороты */
+.modal-prev::before {
+  transform: rotate(-135deg); /* влево */
+}
+
+.modal-next::before {
+  transform: rotate(45deg); /* вправо */
 }
 
 /* Hover эффект */
 .modal-prev:hover,
 .modal-next:hover {
-    background: rgba(0, 0, 0, 0.95);
-    transform: scale(1.1);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.95);
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
 }
-
-

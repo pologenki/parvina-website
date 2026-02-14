@@ -27,13 +27,22 @@ let portfolioSwiper = null;
 
 // Scroll management for modals
 let modalOpenCount = 0;
+let savedScrollPosition = 0;
 
 function preventBodyScroll() {
   modalOpenCount++;
- if (modalOpenCount === 1) {
-    document.body.style.overflow = 'hidden';
+  if (modalOpenCount === 1) {
+    // Save current scroll position
+    savedScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+    // Completely block scrolling with position: fixed
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${savedScrollPosition}px`;
+    document.body.style.width = "100%";
+    document.body.style.overflow = "hidden";
     // Preserve the scrollbar width to prevent layout shift
-    document.body.style.paddingRight = window.innerWidth - document.documentElement.clientWidth + 'px';
+    document.body.style.paddingRight =
+      window.innerWidth - document.documentElement.clientWidth + "px";
   }
 }
 
@@ -41,8 +50,15 @@ function allowBodyScroll() {
   if (modalOpenCount > 0) {
     modalOpenCount--;
     if (modalOpenCount === 0) {
-      document.body.style.overflow = '';
-      document.body.style.paddingRight = '';
+      // Restore scroll position
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
+
+      // Restore scroll position
+      window.scrollTo(0, savedScrollPosition);
     }
   }
 }
@@ -143,24 +159,26 @@ function initLanguageSwitcher() {
     languageCurrent.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
-      
+
       // Toggle the dropdown
       languageDropdown.classList.toggle("active");
     });
 
     // Открытие dropdown при наведении мыши (только для десктопа)
     languageCurrent.addEventListener("mouseenter", (e) => {
-      if (window.innerWidth > 768) { // Только на десктопе
+      if (window.innerWidth > 768) {
+        // Только на десктопе
         languageDropdown.classList.add("active");
       }
     });
 
     // Закрытие dropdown при уходе мыши (только для десктопа)
     languageCurrent.addEventListener("mouseleave", (e) => {
-      if (window.innerWidth > 768) { // Только на десктопе
+      if (window.innerWidth > 768) {
+        // Только на десктопе
         // Задержка перед закрытием, чтобы пользователь мог навести на опцию
         setTimeout(() => {
-          if (!languageDropdown.matches(':hover')) {
+          if (!languageDropdown.matches(":hover")) {
             languageDropdown.classList.remove("active");
           }
         }, 100);
@@ -169,7 +187,8 @@ function initLanguageSwitcher() {
 
     // Также закрываем при уходе с dropdown (для десктопа)
     languageDropdown.addEventListener("mouseleave", (e) => {
-      if (window.innerWidth > 768) { // Только на десктопе
+      if (window.innerWidth > 768) {
+        // Только на десктопе
         languageDropdown.classList.remove("active");
       }
     });
@@ -283,7 +302,6 @@ async function renderApp() {
   initHeaderMenu();
   initSectionScript();
 
-
   // Add small delay to ensure DOM is ready for Swiper
   await new Promise((resolve) => setTimeout(resolve, 50));
 
@@ -392,13 +410,13 @@ window.changeLanguage = async function (lang) {
   const navMenu = document.getElementById("navMenu");
   const overlay = document.querySelector(".menu-overlay");
   const languageDropdown = document.querySelector(".language-dropdown");
-  
+
   if (menuToggle) menuToggle.classList.remove("active");
   if (navMenu) navMenu.classList.remove("active");
   if (overlay) overlay.classList.remove("active");
   if (languageDropdown) languageDropdown.classList.remove("active");
   document.body.classList.remove("menu-open");
-  
+
   // Re-initialize all components after language change and re-render
   setTimeout(() => {
     initHeaderMenu();
@@ -763,8 +781,104 @@ function initProductModals() {
     });
   });
 
+  // Touch swipe support for mobile devices
+  let touchStartX = 0;
+  let touchEndX = 0;
+  let touchStartY = 0;
+  let touchEndY = 0;
+  const minSwipeDistance = 50; // Minimum distance for swipe to be recognized
+
+  modals.forEach((modal) => {
+    const modalContent = modal.querySelector(".modal-content");
+
+    modalContent.addEventListener(
+      "touchstart",
+      function (e) {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+      },
+      { passive: false },
+    );
+
+    modalContent.addEventListener(
+      "touchmove",
+      function (e) {
+        const touchX = e.changedTouches[0].screenX;
+        const touchY = e.changedTouches[0].screenY;
+        const diffX = touchX - touchStartX;
+        const diffY = touchY - touchStartY;
+
+        // Prevent ALL default touch behaviors inside modal
+        // Only allow vertical scroll inside modal-body
+        const isTouchingModalBody = e.target.closest('.modal-body');
+
+        if (!isTouchingModalBody) {
+          e.preventDefault();
+        } else {
+          // Inside modal-body, only allow vertical scroll
+          if (Math.abs(diffX) > Math.abs(diffY)) {
+            // Horizontal movement detected - prevent it
+            e.preventDefault();
+          }
+        }
+      },
+      { passive: false },
+    );
+
+    modalContent.addEventListener(
+      "touchend",
+      function (e) {
+        touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
+        handleSwipe();
+      },
+      { passive: true },
+    );
+
+    function handleSwipe() {
+      const diffX = touchEndX - touchStartX;
+      const diffY = touchEndY - touchStartY;
+      const absDiffX = Math.abs(diffX);
+      const absDiffY = Math.abs(diffY);
+
+      // Only recognize swipe if:
+      // 1. Horizontal distance is greater than minimum
+      // 2. Horizontal movement is significantly greater than vertical (at least 2x)
+      // 3. Horizontal movement is at least 50px
+      if (absDiffX > minSwipeDistance && absDiffX > absDiffY * 2) {
+        // Swipe left (go to next modal)
+        if (diffX < 0) {
+          switchModal("next");
+        }
+
+        // Swipe right (go to previous modal)
+        if (diffX > 0) {
+          switchModal("prev");
+        }
+      }
+    }
+  });
+
   // Update counter when modal opens
   modals.forEach((modal) => {
+    // Add swipe hint element if it doesn't exist
+    if (!modal.querySelector('.swipe-hint')) {
+      const swipeHint = document.createElement('div');
+      swipeHint.className = 'swipe-hint';
+      swipeHint.innerHTML = `
+        <div class="swipe-hint-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M2 8h12M8 2v12"/>
+          </svg>
+        </div>
+        <span data-i18n="modal.swipeHint">Swipe to navigate</span>
+      `;
+      const modalContent = modal.querySelector('.modal-content');
+      if (modalContent) {
+        modalContent.appendChild(swipeHint);
+      }
+    }
+
     const observer = new MutationObserver(function (mutations) {
       mutations.forEach(function (mutation) {
         if (
@@ -870,7 +984,7 @@ function initPortfolioGallery() {
   // Events
   if (closeGalleryBtn) {
     closeGalleryBtn.addEventListener("click", closeGallery);
- }
+  }
   if (prevBtn) {
     prevBtn.addEventListener("click", prevImage);
   }

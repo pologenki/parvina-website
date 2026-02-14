@@ -154,7 +154,10 @@
     "terms": "Terms of Service"
   },
   "modal": {
-    "close": "Close"
+    "close": "Close",
+    "prev": "Previous",
+    "next": "Next",
+    "swipeHint": "Swipe to navigate"
   },
   "modals": {
     "cashew": {
