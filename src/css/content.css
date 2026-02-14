@@ -3148,6 +3148,36 @@ body[style*="overflow: hidden"] {
   width: 100%;
 }
 
+/* Animation for service modal close button */
+.service-modal-content .close-service-modal {
+  animation: smoothAppear 0.5s ease 0.3s both;
+}
+
+/* Add the same animation to service modal close button */
+.service-modal-content .close-modal {
+  animation: smoothAppear 0.5s ease 0.3s both;
+}
+
+/* Apply the same animation as product modals */
+.service-modal-content .close-service-modal {
+  animation: crossAppear 0.6s ease 0.3s both;
+}
+
+/* Apply animation to service modals as well */
+.service-modal-content .close-modal {
+  animation: smoothAppear 0.5s ease 0.3s both;
+}
+
+/* Add the same animation as product modals to service modals */
+.service-modal-content .close-modal {
+  animation: smoothAppear 0.5s ease 0.3s both;
+}
+
+/* Add the same animation to service modal close button as in product modals */
+.service-modal-content .close-modal {
+  animation: smoothAppear 0.5s ease 0.3s both;
+}
+
 @keyframes modalSlideIn {
   from {
     opacity: 0;
@@ -3176,6 +3206,11 @@ body[style*="overflow: hidden"] {
   transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   border: 3px solid #000000;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Apply the same animation as product modals */
+.service-modal-content .close-service-modal {
+  animation: crossAppear 0.6s ease 0.3s both;
 }
 
 .close-service-modal::before,
@@ -3211,11 +3246,6 @@ body[style*="overflow: hidden"] {
 
 .close-service-modal:active::after {
   transform: rotate(-45deg) scaleX(0.7);
-}
-
-/* Cross appearance animation */
-.service-modal-content .close-service-modal {
-  animation: crossAppear 0.6s ease 0.3s both;
 }
 
 @keyframes crossAppear {

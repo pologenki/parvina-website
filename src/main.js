@@ -139,16 +139,39 @@ function initLanguageSwitcher() {
   const languageOptions = document.querySelectorAll(".language-option");
 
   if (languageCurrent && languageDropdown) {
-    // Открытие dropdown при наведении мышки
-    languageCurrent.addEventListener("mouseenter", (e) => {
+    // Открытие dropdown при клике (работает на всех устройствах)
+    languageCurrent.addEventListener("click", (e) => {
+      e.preventDefault();
       e.stopPropagation();
-      languageDropdown.classList.add("active");
+      
+      // Toggle the dropdown
+      languageDropdown.classList.toggle("active");
     });
 
-    // Переключение видимости dropdown при клике
-    languageCurrent.addEventListener("click", (e) => {
-      e.stopPropagation();
-      languageDropdown.classList.toggle("active");
+    // Открытие dropdown при наведении мыши (только для десктопа)
+    languageCurrent.addEventListener("mouseenter", (e) => {
+      if (window.innerWidth > 768) { // Только на десктопе
+        languageDropdown.classList.add("active");
+      }
+    });
+
+    // Закрытие dropdown при уходе мыши (только для десктопа)
+    languageCurrent.addEventListener("mouseleave", (e) => {
+      if (window.innerWidth > 768) { // Только на десктопе
+        // Задержка перед закрытием, чтобы пользователь мог навести на опцию
+        setTimeout(() => {
+          if (!languageDropdown.matches(':hover')) {
+            languageDropdown.classList.remove("active");
+          }
+        }, 100);
+      }
+    });
+
+    // Также закрываем при уходе с dropdown (для десктопа)
+    languageDropdown.addEventListener("mouseleave", (e) => {
+      if (window.innerWidth > 768) { // Только на десктопе
+        languageDropdown.classList.remove("active");
+      }
     });
 
     // Выбор языка
@@ -168,20 +191,7 @@ function initLanguageSwitcher() {
       });
     });
 
-    // Закрытие dropdown при уходе мышки с элементов
-    languageCurrent.addEventListener("mouseleave", () => {
-      setTimeout(() => {
-        if (!languageDropdown.matches(":hover")) {
-          languageDropdown.classList.remove("active");
-        }
-      }, 100);
-    });
-
-    languageDropdown.addEventListener("mouseleave", () => {
-      languageDropdown.classList.remove("active");
-    });
-
-    // Закрытие dropdown при клике вне
+    // Закрытие dropdown при клике вне (работает на всех устройствах)
     document.addEventListener("click", (e) => {
       if (
         !languageCurrent.contains(e.target) &&
@@ -364,14 +374,47 @@ function initSwiper() {
 // Global function for language change
 window.changeLanguage = async function (lang) {
   await loadTranslations(lang);
-  // Update texts without full re-render
+  // Re-render the entire content to update language-specific content
+  const appContainer = document.querySelector("#app");
+  if (appContainer) {
+    appContainer.innerHTML = `
+      ${Header()}
+      ${Content()}
+      ${Footer()}
+    `;
+  }
+
+  // Update texts after re-rendering
   updatePageTexts();
   updateLanguageSelector();
-  // Re-initialize components that depend on language-specific content
-  initHeaderMenu();
-  initSectionScript();
- initContactForm();
- initFooterModals();
+  // Close any open mobile menus after language change
+  const menuToggle = document.getElementById("menuToggle");
+  const navMenu = document.getElementById("navMenu");
+  const overlay = document.querySelector(".menu-overlay");
+  const languageDropdown = document.querySelector(".language-dropdown");
+  
+  if (menuToggle) menuToggle.classList.remove("active");
+  if (navMenu) navMenu.classList.remove("active");
+  if (overlay) overlay.classList.remove("active");
+  if (languageDropdown) languageDropdown.classList.remove("active");
+  document.body.classList.remove("menu-open");
+  
+  // Re-initialize all components after language change and re-render
+  setTimeout(() => {
+    initHeaderMenu();
+    initSectionScript();
+    initSwiper(); // Reinitialize swiper after content update
+    initContactForm();
+    initScrollToTop();
+    initProductModals();
+    initServiceModals();
+    initPortfolioGallery();
+    initFooterModals();
+    initEmailLinks();
+    initLanguageSwitcher(); // Reinitialize language switcher after content update
+    addLogoHandlers();
+    setCurrentDate();
+  }, 50);
 };
 
 // Start the application
@@ -383,7 +426,7 @@ function initServiceModals() {
     ".service-card[data-service-modal]",
   );
   const serviceModals = document.querySelectorAll(".service-modal");
-  const closeServiceButtons = document.querySelectorAll(".close-service-modal");
+  const closeServiceButtons = document.querySelectorAll(".close-modal");
 
   // Open modal window when clicking on service card
   serviceCards.forEach((card) => {

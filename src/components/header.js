@@ -1,7 +1,7 @@
 export function Header() {
   return `
   <section class="et-hero-tabs">
-    <div class="logo" style="cursor: pointer;">
+    <div class="logo">
       <img src="/Logo2.png" alt="Logo">
     </div>
 

@@ -537,15 +537,9 @@ body {
 }
 
 .logo {
-  cursor: pointer;
   transition: all 0.3s ease;
   padding: 10px;
   border-radius: 5px;
-}
-
-.logo:hover {
-  transform: scale(1.05);
-  background: rgba(255, 255, 255, 0.1);
 }
 
 .header-logo {
@@ -559,9 +553,6 @@ body {
   filter: brightness(1.1);
 }
 
-.logo:hover img {
-  filter: brightness(1.1);
-}
 
 /* For mobile version you can hide duplicate logo */
 @media (max-width: 768px) {
