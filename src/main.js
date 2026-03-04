@@ -865,14 +865,6 @@ function initProductModals() {
     if (!modal.querySelector('.swipe-hint')) {
       const swipeHint = document.createElement('div');
       swipeHint.className = 'swipe-hint';
-      swipeHint.innerHTML = `
-        <div class="swipe-hint-icon">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M2 8h12M8 2v12"/>
-          </svg>
-        </div>
-        <span data-i18n="modal.swipeHint">Swipe to navigate</span>
-      `;
       const modalContent = modal.querySelector('.modal-content');
       if (modalContent) {
         modalContent.appendChild(swipeHint);
