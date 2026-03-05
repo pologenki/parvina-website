@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 
 export default defineConfig({
-  base: '/parvina-website/'
+  base: '/parvina-website/',
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
@@ -14,6 +14,4 @@ export default defineConfig({
       allow: ['..']
     }
   }
-
 });
-
