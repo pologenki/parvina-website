@@ -3,7 +3,7 @@ export function Header() {
   return `
   <section class="et-hero-tabs">
         <div class="logo" onclick="window.location.reload()" style="cursor: pointer;">
-            <img src="/Logo2.png" alt="Logo">
+            <img src="${BASE}/Logo2.png" alt="Logo">
         </div>
 
         <div class="menu-toggle" id="menuToggle">
