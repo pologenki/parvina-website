@@ -1,3 +1,5 @@
+const BASE = import.meta.env.BASE_URL;
+
 export function Content() {
   return `
   
@@ -72,7 +74,7 @@ export function Content() {
       </div>
       
       <div class="about-image">
-        <img src="/photo5.jpg" alt="Parvina - Import Manager" class="profile-photo">
+        <img src="${BASE}photo5.jpg" alt="Parvina - Import Manager" class="profile-photo">
       </div>
     </div>
   </div>
@@ -89,7 +91,7 @@ export function Content() {
             <!-- Card 1 -->
             <div class="pricing-card" data-modal="modal-cashew">
                 <div class="product-image">
-                    <img src="/goods/cashew.webp" alt="Cashew Nuts">
+                    <img src="${BASE}goods/test.jpg" alt="Banana Chips">
                 </div>
                 <h3>Cashew Nuts</h3>
                 <p class="product-desc">AFI standard</p>
@@ -101,7 +103,7 @@ export function Content() {
             <!-- Card 2 -->
             <div class="pricing-card" data-modal="modal-walnuts">
                 <div class="product-image">
-                    <img src="/goods/walnut.jpg" alt="Walnut Kernels">
+                    <img src="${BASE}goods/walnut.jpg" alt="Walnut Kernels">
                 </div>
                 <h3>Walnut Kernels</h3>
                 <p class="product-desc">Extra Light Halves</p>
@@ -113,7 +115,7 @@ export function Content() {
             <!-- Card 3 -->
             <div class="pricing-card" data-modal="modal-dates">
                 <div class="product-image">
-                    <img src="/goods/dates.png" alt="Deglet Nour Dates">
+                    <img src="${BASE}goods/dates.png" alt="Deglet Nour Dates">
                 </div>
                 <h3>Dried Dates</h3>
                 <p class="product-desc">Deglet Nour Dates</p>
@@ -125,7 +127,7 @@ export function Content() {
             <!-- Card 4 -->
             <div class="pricing-card" data-modal="modal-papaya">
                 <div class="product-image">
-                    <img src="/goods/candied.jpg" alt="Dried Papaya Dice">
+                    <img src="${BASE}goods/candied.jpg" alt="Dried Papaya Dice">
                 </div>
                 <h3>Dried Papaya Dice</h3>
                 <p class="product-desc">Mixed/Natural 8-10 mm</p>
@@ -137,7 +139,7 @@ export function Content() {
             <!-- Card 5 -->
             <div class="pricing-card" data-modal="modal-mango">
                 <div class="product-image">
-                    <img src="/goods/mango.jpg" alt="Dried Mango">
+                    <img src="${BASE}goods/mango.jpg" alt="Dried Mango">
                 </div>
                 <h3>Dried Mango</h3>
                 <p class="product-desc">Sugar added, sugar FREE</p>
@@ -149,7 +151,7 @@ export function Content() {
             <!-- Card 6 -->
             <div class="pricing-card" data-modal="modal-walnuts-shell">
                 <div class="product-image">
-                    <img src="/goods/walnut in shell.webp" alt="Walnuts in shell">
+                    <img src="${BASE}goods/walnut in shell.webp" alt="Walnuts in shell">
                 </div>
                 <h3>Walnuts in shell</h3>
                 <p class="product-desc">All sizes, washed</p>
@@ -161,7 +163,7 @@ export function Content() {
             <!-- Card 7 -->
             <div class="pricing-card" data-modal="modal-peanuts">
                 <div class="product-image">
-                    <img src="/goods/redpeanuts.png" alt="Raw Peanuts">
+                    <img src="${BASE}goods/redpeanuts.png" alt="Raw Peanuts">
                 </div>
                 <h3>Raw Peanuts</h3>
                 <p class="product-desc">Sizes  40/50, 50/60</p>
@@ -173,7 +175,7 @@ export function Content() {
             <!-- Card 8 -->
             <div class="pricing-card" data-modal="modal-peanuts-blanched">
                 <div class="product-image">
-                    <img src="/goods/peanutSplit.jpg" alt="Blanched Peanuts">
+                    <img src="${BASE}goods/peanutSplit.jpg" alt="Blanched Peanuts">
                 </div>
                 <h3>Blanched Peanuts</h3>
                 <p class="product-desc">Whole,Splits</p>
@@ -185,7 +187,7 @@ export function Content() {
             <!-- Card 9 -->
             <div class="pricing-card" data-modal="modal-dried-fruits">
                 <div class="product-image">
-                    <img src="/goods/driedFruits.webp" alt="Dried Fruits Mix">
+                    <img src="${BASE}goods/driedFruits.webp" alt="Dried Fruits Mix">
                 </div>
                 <h3>Dried Fruits</h3>
                 <p class="product-desc"> Osmotically dehydrated fruits</p>
@@ -197,7 +199,7 @@ export function Content() {
             <!-- Card 10 -->
             <div class="pricing-card" data-modal="modal-banana-chips">
                 <div class="product-image">
-                    <img src="/goods/test.jpg" alt="Banana Chips">
+                    <img src="${BASE}goods/test.jpg" alt="Banana Chips">
                 </div>
                 <h3>Banana Chips</h3>
                 <p class="product-desc">Whole,Halves,Quarters</p>
@@ -988,8 +990,8 @@ export function Content() {
         <!-- Slide 1 -->
         <div class="swiper-slide">
           <div class="portfolio-card">
-            <div class="card-image" data-image-src="/img/img016.jpg" data-image-alt="Premium nuts import">
-              <img src="/img/img016.jpg" alt="Premium nuts import" class="portfolio-image">
+                <div class="card-image" data-image-src="${BASE}img/img016.jpg" data-image-alt="Premium nuts import">
+                  <img src="${BASE}img/img016.jpg" alt="Premium nuts import" class="portfolio-image">
               <div class="card-overlay">
                 <div class="zoom-icon">
                   <i class="fas fa-expand"></i>
@@ -1011,8 +1013,8 @@ export function Content() {
         <!-- Slide 2 -->
         <div class="swiper-slide">
           <div class="portfolio-card">
-            <div class="card-image" data-image-src="/img/img002.jpg" data-image-alt="Premium nuts import">
-              <img src="/img/img002.jpg" alt="Premium nuts import" class="portfolio-image">
+                <div class="card-image" data-image-src="${BASE}img/img002.jpg" data-image-alt="Premium nuts import">
+              <img src="${BASE}img/img002.jpg" alt="Premium nuts import" class="portfolio-image">
               <div class="card-overlay">
                 <div class="zoom-icon">
                   <i class="fas fa-expand"></i>
@@ -1035,8 +1037,8 @@ export function Content() {
         <!-- Slide 3 -->
         <div class="swiper-slide">
           <div class="portfolio-card">
-            <div class="card-image" data-image-src="/img/img003.jpg" data-image-alt="Premium nuts import">
-              <img src="/img/img003.jpg" alt="Premium nuts import" class="portfolio-image">
+                <div class="card-image" data-image-src="${BASE}img/img003.jpg" data-image-alt="Premium nuts import">
+              <img src="${BASE}img/img003.jpg" alt="Premium nuts import" class="portfolio-image">
               <div class="card-overlay">
                 <div class="zoom-icon">
                   <i class="fas fa-expand"></i>
@@ -1058,8 +1060,8 @@ export function Content() {
         <!-- Slide 4 -->
         <div class="swiper-slide">
           <div class="portfolio-card">
-            <div class="card-image" data-image-src="/img/img017.jpg" data-image-alt="Premium nuts import">
-              <img src="/img/img017.jpg" alt="Premium nuts import" class="portfolio-image">
+                <div class="card-image" data-image-src="${BASE}img/img017.jpg" data-image-alt="Premium nuts import">
+              <img src="${BASE}img/img017.jpg" alt="Premium nuts import" class="portfolio-image">
               <div class="card-overlay">
                 <div class="zoom-icon">
                   <i class="fas fa-expand"></i>
@@ -1081,8 +1083,8 @@ export function Content() {
         <!-- Slide 5 -->
         <div class="swiper-slide">
           <div class="portfolio-card">
-            <div class="card-image" data-image-src="/img/img005.jpg" data-image-alt="Premium nuts import">
-              <img src="/img/img005.jpg" alt="Premium nuts import" class="portfolio-image">
+                <div class="card-image" data-image-src="${BASE}img/img005.jpg" data-image-alt="Premium nuts import">
+              <img src="${BASE}img/img005.jpg" alt="Premium nuts import" class="portfolio-image">
               <div class="card-overlay">
                 <div class="zoom-icon">
                   <i class="fas fa-expand"></i>
@@ -1104,8 +1106,8 @@ export function Content() {
         <!-- Slide 6 -->
         <div class="swiper-slide">
           <div class="portfolio-card">
-            <div class="card-image" data-image-src="/img/img007.jpg" data-image-alt="Premium nuts import">
-              <img src="/img/img007.jpg" alt="Premium nuts import" class="portfolio-image">
+                <div class="card-image" data-image-src="${BASE}img/img007.jpg" data-image-alt="Premium nuts import">
+              <img src="${BASE}img/img007.jpg" alt="Premium nuts import" class="portfolio-image">
               <div class="card-overlay">
                 <div class="zoom-icon">
                   <i class="fas fa-expand"></i>
@@ -1127,8 +1129,8 @@ export function Content() {
         <!-- Slide 7 -->
         <div class="swiper-slide">
           <div class="portfolio-card">
-            <div class="card-image" data-image-src="/img/img008.jpg" data-image-alt="Premium nuts import">
-              <img src="/img/img008.jpg" alt="Premium nuts import" class="portfolio-image">
+                <div class="card-image" data-image-src="${BASE}img/img008.jpg" data-image-alt="Premium nuts import">
+              <img src="${BASE}img/img008.jpg" alt="Premium nuts import" class="portfolio-image">
               <div class="card-overlay">
                 <div class="zoom-icon">
                   <i class="fas fa-expand"></i>
@@ -1150,8 +1152,8 @@ export function Content() {
         <!-- Slide 8 -->
         <div class="swiper-slide">
           <div class="portfolio-card">
-            <div class="card-image" data-image-src="/img/img013.jpg" data-image-alt="Premium nuts import">
-              <img src="/img/img013.jpg" alt="Premium nuts import" class="portfolio-image">
+                <div class="card-image" data-image-src="${BASE}img/img013.jpg" data-image-alt="Premium nuts import">
+              <img src="${BASE}img/img013.jpg" alt="Premium nuts import" class="portfolio-image">
               <div class="card-overlay">
                 <div class="zoom-icon">
                   <i class="fas fa-expand"></i>
@@ -1173,8 +1175,8 @@ export function Content() {
                 <!-- Slide 9 -->
         <div class="swiper-slide">
           <div class="portfolio-card">
-            <div class="card-image" data-image-src="/img/img014.jpg" data-image-alt="Premium nuts import">
-              <img src="/img/img014.jpg" alt="Premium nuts import" class="portfolio-image">
+                <div class="card-image" data-image-src="${BASE}img/img014.jpg" data-image-alt="Premium nuts import">
+              <img src="${BASE}img/img014.jpg" alt="Premium nuts import" class="portfolio-image">
               <div class="card-overlay">
                 <div class="zoom-icon">
                   <i class="fas fa-expand"></i>
@@ -1196,8 +1198,8 @@ export function Content() {
                         <!-- Slide 10 -->
         <div class="swiper-slide">
           <div class="portfolio-card">
-            <div class="card-image" data-image-src="/img/img012.jpg" data-image-alt="Premium nuts import">
-              <img src="/img/img012.jpg" alt="Premium nuts import" class="portfolio-image">
+                <div class="card-image" data-image-src="${BASE}img/img012.jpg" data-image-alt="Premium nuts import">
+              <img src="${BASE}img/img012.jpg" alt="Premium nuts import" class="portfolio-image">
               <div class="card-overlay">
                 <div class="zoom-icon">
                   <i class="fas fa-expand"></i>
