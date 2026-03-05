@@ -1,9 +1,9 @@
-// components/header.js
 export function Header() {
+  const BASE = import.meta.env.BASE_URL;
   return `
   <section class="et-hero-tabs">
         <div class="logo" onclick="window.location.reload()" style="cursor: pointer;">
-            <img src="/Logo2.png" alt="Logo">
+            <img src="${BASE}Logo2.png" alt="Logo">
         </div>
 
         <div class="menu-toggle" id="menuToggle">
@@ -18,9 +18,8 @@ export function Header() {
             <a class="et-hero-tab" href="#portfolio">My Portfolio</a>
             <a class="et-hero-tab" href="#contact">Get In Touch</a>
 
-            <!-- Логотип вместо выбора языка -->
             <div class="et-hero-tab logo-tab" onclick="window.location.reload()" style="cursor: pointer;">
-                <img src="/Logo2.png" alt="Logo" class="header-logo">
+                <img src="${BASE}Logo2.png" alt="Logo" class="header-logo">
             </div>
         </div>
     </section>
