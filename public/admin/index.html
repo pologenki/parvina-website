@@ -265,7 +265,6 @@
   .card-input:focus { border-color: var(--dark); background: var(--white); }
   .card-input.price { color: var(--dark); font-weight: 500; }
 
-  /* ── VARIANTS ── */
   .variants-header {
     display: flex;
     align-items: center;
@@ -296,47 +295,99 @@
 
   .variants-body {
     display: none;
-    padding: 0 1.25rem 1.25rem;
+    padding: 0.75rem 1.25rem 1.25rem;
     border-top: 1px solid var(--border);
     background: var(--bg);
   }
 
   .variants-body.open { display: block; }
 
+  /* single variant block */
   .variant-item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.6rem 0;
-    border-bottom: 1px solid var(--border);
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    position: relative;
   }
 
-  .variant-item:last-child { border-bottom: none; }
+  .variant-item:last-child { margin-bottom: 0; }
 
-  .variant-name {
-    flex: 1;
-    font-size: 0.8rem;
+  .variant-mini-label {
+    display: block;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     color: var(--muted);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    margin-bottom: 0.3rem;
+  }
+
+  .variant-field { margin-bottom: 0.5rem; }
+  .variant-field:last-child { margin-bottom: 0; }
+
+  .variant-row-2col {
+    display: grid;
+    grid-template-columns: 1fr 148px;
+    gap: 0.5rem;
+    margin-bottom: 0;
   }
 
   .variant-input {
-    width: 140px;
-    flex-shrink: 0;
+    width: 100%;
     border: 1px solid var(--border);
-    background: var(--white);
-    padding: 0.4rem 0.6rem;
+    background: var(--bg);
+    padding: 0.45rem 0.7rem;
     font-family: 'Jost', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: var(--dark);
+    font-size: 0.85rem;
+    color: var(--text);
     outline: none;
     transition: border-color 0.2s;
   }
 
-  .variant-input:focus { border-color: var(--dark); }
+  .variant-input:focus { border-color: var(--dark); background: var(--white); }
+  .variant-input.price { color: var(--dark); font-weight: 500; }
+
+  textarea.variant-input {
+    resize: none;
+    height: 52px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .variant-delete-btn {
+    position: absolute;
+    top: 0.45rem;
+    right: 0.45rem;
+    background: transparent;
+    border: none;
+    color: var(--danger);
+    font-size: 0.75rem;
+    cursor: pointer;
+    opacity: 0.3;
+    padding: 0.1rem 0.35rem;
+    transition: opacity 0.2s;
+    line-height: 1;
+  }
+
+  .variant-delete-btn:hover { opacity: 1; }
+
+  .btn-add-variant {
+    width: 100%;
+    margin-top: 0.6rem;
+    background: transparent;
+    border: 1px dashed var(--border);
+    color: var(--muted);
+    padding: 0.5rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-add-variant:hover { border-color: var(--dark); color: var(--dark); }
 
   /* ── STATUS ── */
   .status-bar {
@@ -478,6 +529,35 @@ async function fetchProducts() {
   }
 }
 
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function buildVariantHTML(i, j, v) {
+  return `
+    <div class="variant-item" id="variant-${i}-${j}">
+      <button class="variant-delete-btn" onclick="deleteVariant(${i},${j})" title="Delete variant">✕</button>
+      <div class="variant-field">
+        <span class="variant-mini-label">Variant Name</span>
+        <input class="variant-input" value="${esc(v.name)}"
+          oninput="updV(${i},${j},'name',this.value)" placeholder="e.g. WW320 - Whole White">
+      </div>
+      <div class="variant-row-2col">
+        <div>
+          <span class="variant-mini-label">Description</span>
+          <textarea class="variant-input"
+            oninput="updV(${i},${j},'desc',this.value)" placeholder="Packing, port, quality notes...">${esc(v.desc)}</textarea>
+        </div>
+        <div>
+          <span class="variant-mini-label">Price</span>
+          <input class="variant-input price" value="${esc(v.price)}"
+            oninput="updV(${i},${j},'price',this.value)" placeholder="0,00 USD/kg">
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 function renderGrid() {
   const grid = document.getElementById('productsGrid');
   grid.innerHTML = data.products.map((p, i) => `
@@ -491,48 +571,62 @@ function renderGrid() {
         <div class="card-field">
           <label class="card-label">Product Name</label>
           <input class="card-input" value="${esc(p.name)}"
-            onchange="upd(${i},'name',this.value)">
+            oninput="upd(${i},'name',this.value)">
         </div>
         <div class="card-field">
           <label class="card-label">Main Price</label>
           <input class="card-input price" value="${esc(p.mainPrice)}"
-            onchange="upd(${i},'mainPrice',this.value)">
+            oninput="upd(${i},'mainPrice',this.value)">
         </div>
         <div class="card-field">
           <label class="card-label">Origin</label>
           <input class="card-input" value="${esc(p.origin)}"
-            onchange="upd(${i},'origin',this.value)">
+            oninput="upd(${i},'origin',this.value)">
         </div>
         <div class="card-field">
           <label class="card-label">Description</label>
           <input class="card-input" value="${esc(p.desc)}"
-            onchange="upd(${i},'desc',this.value)">
+            oninput="upd(${i},'desc',this.value)">
         </div>
       </div>
       <div class="variants-header" onclick="toggleV(this)">
-        <span class="variants-label">${p.variants.length} variants — click to edit</span>
+        <span class="variants-label" id="vlabel-${i}">${p.variants.length} variants — click to edit</span>
         <span class="variants-arrow">▼</span>
       </div>
       <div class="variants-body">
-        ${p.variants.map((v,j) => `
-          <div class="variant-item">
-            <span class="variant-name" title="${esc(v.name)}">${esc(v.name)}</span>
-            <input class="variant-input" value="${esc(v.price)}"
-              onchange="updV(${i},${j},'price',this.value)">
-          </div>
-        `).join('')}
+        <div id="vlist-${i}">
+          ${p.variants.map((v,j) => buildVariantHTML(i,j,v)).join('')}
+        </div>
+        <button class="btn-add-variant" onclick="addVariant(${i})">+ Add variant</button>
       </div>
     </div>
   `).join('');
 }
 
+function addVariant(i) {
+  data.products[i].variants.push({ name: '', price: '', desc: '' });
+  const j = data.products[i].variants.length - 1;
+  document.getElementById(`vlist-${i}`).insertAdjacentHTML('beforeend', buildVariantHTML(i, j, { name:'', price:'', desc:'' }));
+  updateVLabel(i);
+  document.getElementById(`variant-${i}-${j}`).querySelector('.variant-input').focus();
+}
+
+function deleteVariant(i, j) {
+  if (data.products[i].variants.length <= 1) { showToast('At least one variant required', 'fail'); return; }
+  data.products[i].variants.splice(j, 1);
+  const list = document.getElementById(`vlist-${i}`);
+  list.innerHTML = data.products[i].variants.map((v, nj) => buildVariantHTML(i, nj, v)).join('');
+  updateVLabel(i);
+}
+
+function updateVLabel(i) {
+  const el = document.getElementById(`vlabel-${i}`);
+  if (el) el.textContent = `${data.products[i].variants.length} variants — click to edit`;
+}
+
 function toggleV(header) {
   header.querySelector('.variants-arrow').classList.toggle('open');
   header.nextElementSibling.classList.toggle('open');
-}
-
-function esc(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
 }
 
 function upd(i, f, v) { data.products[i][f] = v; }
