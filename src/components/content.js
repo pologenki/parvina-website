@@ -191,13 +191,13 @@ export function Content() {
       <h2 class="section-title" data-i18n="products.title">Our Products</h2>
       <p class="price-update-date" data-i18n="products.lastUpdated">Prices last updated: <span id="current-date"></span></p>
       
-      <div class="pricing-grid">
-        <p class="price">${getPriceText(product.mainPrice, lang)}</p>
+ <div class="pricing-grid">
+        ${renderProductCards(products, lang)}
       </div>
     </div>
   </section>
 
- <p class="price">${getPriceText(product.mainPrice, lang)}</p>
+
     
   <!-- Services section -->
   <section id="services" class="services-section">
