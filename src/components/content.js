@@ -20,15 +20,14 @@ export async function loadProducts() {
   }
 }
 
-function getProductText(product, field) {
-  const lang = getCurrentLanguage();
+function getProductText(product, field, lang) {
   if (lang === "ru" && product[field + "_ru"]) {
     return product[field + "_ru"];
   }
   return product[field] || "";
 }
 
-function getPriceText(price) {
+function getPriceText(price, lang) {
   const lang = getCurrentLanguage();
   if (price === "Price on request") {
     return lang === "ru" ? "Цена по запросу" : "Price on request";
@@ -36,12 +35,12 @@ function getPriceText(price) {
   return price;
 }
 
-function renderProductCards(products) {
+function renderProductCards(products, lang) {
   return products.map((product, index) => {
-    const name = getProductText(product, "name");
-    const desc = getProductText(product, "desc");
-    const origin = getProductText(product, "origin");
-    const originLabel = getCurrentLanguage() === "ru" ? "Происхождение" : "Origin";
+    const name = getProductText(product, "name", lang);
+    const desc = getProductText(product, "desc", lang);
+    const origin = getProductText(product, "origin", lang);
+    const originLabel = lang === "ru" ? "Происхождение" : "Origin";
 
     return `
       <div class="pricing-card" data-modal="modal-${product.id}">
@@ -107,6 +106,7 @@ function renderProductModals(products) {
 
 export function Content() {
   const personal = getPersonalData();
+  const lang = getCurrentLanguage();
   const products = productsData ? productsData.products : [];
 
   // Генерируем HTML для телефонов
@@ -192,12 +192,12 @@ export function Content() {
       <p class="price-update-date" data-i18n="products.lastUpdated">Prices last updated: <span id="current-date"></span></p>
       
       <div class="pricing-grid">
-        ${renderProductCards(products)}
+        ${renderProductCards(products, lang)}
       </div>
     </div>
   </section>
 
-  ${renderProductModals(products)}
+  ${renderProductModals(products, lang)}
     
   <!-- Services section -->
   <section id="services" class="services-section">
