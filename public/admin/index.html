@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pologenki — Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --dark: #1a1a1a;
+    --accent: #2c2c2c;
+    --gold: #b8960c;
+    --border: #e0e0e0;
+    --bg: #f8f7f4;
+    --white: #ffffff;
+    --text: #1a1a1a;
+    --muted: #888;
+    --success: #4a8c5c;
+    --danger: #c0392b;
+  }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── LOGIN ── */
+  .login-wrap {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+  }
+
+  .login-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 3rem 3.5rem;
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+  }
+
+  .login-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--dark);
+    margin-bottom: 0.3rem;
+  }
+
+  .login-sub {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+  }
+
+  .form-label {
+    display: block;
+    text-align: left;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .form-input {
+    width: 100%;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    padding: 0.75rem 1rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text);
+    outline: none;
+    margin-bottom: 1.5rem;
+    transition: border-color 0.2s;
+  }
+
+  .form-input:focus { border-color: var(--dark); }
+
+  .btn-dark {
+    width: 100%;
+    background: var(--dark);
+    color: var(--white);
+    border: none;
+    padding: 0.85rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-dark:hover { background: #333; }
+
+  /* ── HEADER ── */
+  .site-header {
+    display: none;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 64px;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .site-header.visible { display: flex; }
+
+  .header-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--dark);
+  }
+
+  .header-center {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .header-actions { display: flex; gap: 0.75rem; align-items: center; }
+
+  .btn-publish {
+    background: var(--dark);
+    color: var(--white);
+    border: none;
+    padding: 0.55rem 1.4rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-publish:hover { background: #333; }
+  .btn-publish:disabled { background: #ccc; cursor: not-allowed; }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 0.55rem 1rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-outline:hover { border-color: var(--dark); color: var(--dark); }
+
+  /* ── MAIN ── */
+  .admin-main {
+    display: none;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 6rem;
+  }
+
+  .admin-main.visible { display: block; }
+
+  .page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  .page-meta {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 2.5rem;
+  }
+
+  /* ── GRID ── */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .product-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+
+  .product-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+
+  .card-image-wrap {
+    height: 160px;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .card-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card-num {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    background: var(--white);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--border);
+  }
+
+  .card-body { padding: 1.25rem; }
+
+  .card-field { margin-bottom: 1rem; }
+  .card-field:last-child { margin-bottom: 0; }
+
+  .card-label {
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.35rem;
+  }
+
+  .card-input {
+    width: 100%;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    padding: 0.5rem 0.75rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.875rem;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .card-input:focus { border-color: var(--dark); background: var(--white); }
+  .card-input.price { color: var(--dark); font-weight: 500; }
+
+  /* ── VARIANTS ── */
+  .variants-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.25rem;
+    border-top: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+
+  .variants-header:hover { background: var(--bg); }
+
+  .variants-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .variants-arrow {
+    font-size: 0.7rem;
+    color: var(--muted);
+    transition: transform 0.2s;
+  }
+
+  .variants-arrow.open { transform: rotate(180deg); }
+
+  .variants-body {
+    display: none;
+    padding: 0 1.25rem 1.25rem;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+  }
+
+  .variants-body.open { display: block; }
+
+  .variant-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .variant-item:last-child { border-bottom: none; }
+
+  .variant-name {
+    flex: 1;
+    font-size: 0.8rem;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .variant-input {
+    width: 140px;
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+    background: var(--white);
+    padding: 0.4rem 0.6rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--dark);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .variant-input:focus { border-color: var(--dark); }
+
+  /* ── STATUS ── */
+  .status-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    padding: 0.7rem 2rem;
+    display: none;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .status-bar.visible { display: flex; }
+
+  .status-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--success);
+    flex-shrink: 0;
+  }
+
+  .status-dot.busy { background: var(--gold); animation: blink 1s infinite; }
+  .status-dot.err { background: var(--danger); }
+
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    top: 80px; right: 2rem;
+    background: var(--dark);
+    color: var(--white);
+    padding: 0.75rem 1.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: all 0.3s;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  .toast.show { opacity: 1; transform: translateY(0); }
+  .toast.ok { background: var(--success); }
+  .toast.fail { background: var(--danger); }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="loginWrap">
+  <div class="login-card">
+    <div class="login-logo">Pologenki</div>
+    <div class="login-sub">Product Management</div>
+    <label class="form-label">GitHub Access Token</label>
+    <input class="form-input" type="password" id="tokenInput" placeholder="ghp_...">
+    <button class="btn-dark" onclick="doLogin()">Enter Dashboard</button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header" id="siteHeader">
+  <div class="header-logo">Pologenki</div>
+  <div class="header-center" id="headerMeta">Product Prices</div>
+  <div class="header-actions">
+    <button class="btn-publish" id="publishBtn" onclick="publishChanges()">Publish Changes</button>
+    <button class="btn-outline" onclick="doLogout()">Exit</button>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="admin-main" id="adminMain">
+  <div class="page-title">Products & Prices</div>
+  <div class="page-meta" id="pageMeta">Loading...</div>
+  <div class="products-grid" id="productsGrid"></div>
+</main>
+
+<!-- STATUS -->
+<div class="status-bar" id="statusBar">
+  <div class="status-dot" id="statusDot"></div>
+  <span id="statusText">Ready</span>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const REPO = 'pologenki/parvina-website';
+const PATH = 'public/data/products.json';
+let token = '', data = null, sha = '';
+
+function doLogin() {
+  const t = document.getElementById('tokenInput').value.trim();
+  if (!t) return;
+  token = t;
+  sessionStorage.setItem('pg_tok', t);
+  enterAdmin();
+}
+
+function doLogout() {
+  sessionStorage.removeItem('pg_tok');
+  token = ''; data = null; sha = '';
+  document.getElementById('loginWrap').style.display = 'flex';
+  document.getElementById('siteHeader').classList.remove('visible');
+  document.getElementById('adminMain').classList.remove('visible');
+  document.getElementById('statusBar').classList.remove('visible');
+}
+
+async function enterAdmin() {
+  document.getElementById('loginWrap').style.display = 'none';
+  document.getElementById('siteHeader').classList.add('visible');
+  document.getElementById('adminMain').classList.add('visible');
+  document.getElementById('statusBar').classList.add('visible');
+  await fetchProducts();
+}
+
+async function fetchProducts() {
+  setStatus('busy', 'Loading products...');
+  try {
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
+      headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    if (!r.ok) throw new Error('Auth failed — check your token');
+    const json = await r.json();
+    sha = json.sha;
+    data = JSON.parse(atob(json.content.replace(/\n/g,'')));
+    document.getElementById('pageMeta').textContent =
+      `${data.products.length} products · Last updated: ${data.lastUpdated || '—'}`;
+    document.getElementById('headerMeta').textContent =
+      `Last updated: ${data.lastUpdated || '—'}`;
+    renderGrid();
+    setStatus('ok', 'Ready');
+  } catch(e) {
+    setStatus('err', e.message);
+    showToast(e.message, 'fail');
+  }
+}
+
+function renderGrid() {
+  const grid = document.getElementById('productsGrid');
+  grid.innerHTML = data.products.map((p, i) => `
+    <div class="product-card">
+      <div class="card-image-wrap">
+        <img src="https://raw.githubusercontent.com/${REPO}/master/public/${p.image}"
+          onerror="this.style.display='none'">
+        <span class="card-num">${String(i+1).padStart(2,'0')}</span>
+      </div>
+      <div class="card-body">
+        <div class="card-field">
+          <label class="card-label">Product Name</label>
+          <input class="card-input" value="${esc(p.name)}"
+            onchange="upd(${i},'name',this.value)">
+        </div>
+        <div class="card-field">
+          <label class="card-label">Main Price</label>
+          <input class="card-input price" value="${esc(p.mainPrice)}"
+            onchange="upd(${i},'mainPrice',this.value)">
+        </div>
+        <div class="card-field">
+          <label class="card-label">Origin</label>
+          <input class="card-input" value="${esc(p.origin)}"
+            onchange="upd(${i},'origin',this.value)">
+        </div>
+        <div class="card-field">
+          <label class="card-label">Description</label>
+          <input class="card-input" value="${esc(p.desc)}"
+            onchange="upd(${i},'desc',this.value)">
+        </div>
+      </div>
+      <div class="variants-header" onclick="toggleV(this)">
+        <span class="variants-label">${p.variants.length} variants — click to edit</span>
+        <span class="variants-arrow">▼</span>
+      </div>
+      <div class="variants-body">
+        ${p.variants.map((v,j) => `
+          <div class="variant-item">
+            <span class="variant-name" title="${esc(v.name)}">${esc(v.name)}</span>
+            <input class="variant-input" value="${esc(v.price)}"
+              onchange="updV(${i},${j},'price',this.value)">
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleV(header) {
+  header.querySelector('.variants-arrow').classList.toggle('open');
+  header.nextElementSibling.classList.toggle('open');
+}
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+}
+
+function upd(i, f, v) { data.products[i][f] = v; }
+function updV(i, j, f, v) { data.products[i].variants[j][f] = v; }
+
+async function publishChanges() {
+  const btn = document.getElementById('publishBtn');
+  btn.disabled = true;
+  setStatus('busy', 'Publishing...');
+  data.lastUpdated = new Date().toISOString().split('T')[0];
+
+  try {
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `token ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: `Update prices ${data.lastUpdated}`,
+        content, sha
+      })
+    });
+    if (!r.ok) throw new Error('Publish failed');
+    const json = await r.json();
+    sha = json.content.sha;
+    document.getElementById('pageMeta').textContent =
+      `${data.products.length} products · Last updated: ${data.lastUpdated}`;
+    document.getElementById('headerMeta').textContent =
+      `Last updated: ${data.lastUpdated}`;
+    setStatus('ok', 'Published successfully');
+    showToast('✓ Published! Site updates in ~2 min.', 'ok');
+  } catch(e) {
+    setStatus('err', e.message);
+    showToast(e.message, 'fail');
+  }
+  btn.disabled = false;
+}
+
+function setStatus(type, text) {
+  const d = document.getElementById('statusDot');
+  d.className = 'status-dot' + (type==='busy'?' busy':type==='err'?' err':'');
+  document.getElementById('statusText').textContent = text;
+}
+
+function showToast(msg, type='') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (type ? ' '+type : '');
+  setTimeout(() => t.className = 'toast', 3500);
+}
+
+window.onload = () => {
+  const saved = sessionStorage.getItem('pg_tok');
+  if (saved) { token = saved; enterAdmin(); }
+};
+</script>
+</body>
+</html>
