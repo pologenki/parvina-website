@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-03-05",
+  "lastUpdated": "2026-03-06",
   "products": [
     {
       "id": "cashew",
@@ -7,12 +7,28 @@
       "desc": "AFI standard",
       "origin": "Vietnam",
       "image": "goods/test.jpg",
-      "mainPrice": "7,30 USD/kg",
+      "mainPrice": "6,30 USD/kg",
       "variants": [
-        { "name": "WW320 - Whole White", "price": "7,30 USD/kg", "desc": "Quality AFI standart. 20/22.68 kg PE vacuum bag/carton packing. FOB HCM" },
-        { "name": "WW450 - Whole White", "price": "7,25 USD/kg", "desc": "Quality AFI standart. 20/22.68 kg PE vacuum bag/carton packing. FOB HCM." },
-        { "name": "WS - White Split", "price": "6,20 USD/kg", "desc": "Quality AFI standart. 20/22.68 kg PE vacuum bag/carton packing. FOB HCM." },
-        { "name": "Other grades", "price": "Price on request", "desc": "WW210, WW240, WW320, WW450, WS, LWP, LP, DW and etc." }
+        {
+          "name": "WW320 - Whole White",
+          "price": "7,30 USD/kg",
+          "desc": "Quality AFI standart. 20/22.68 kg PE vacuum bag/carton packing. FOB HCM"
+        },
+        {
+          "name": "WW450 - Whole White",
+          "price": "7,25 USD/kg",
+          "desc": "Quality AFI standart. 20/22.68 kg PE vacuum bag/carton packing. FOB HCM."
+        },
+        {
+          "name": "WS - White Split",
+          "price": "6,20 USD/kg",
+          "desc": "Quality AFI standart. 20/22.68 kg PE vacuum bag/carton packing. FOB HCM."
+        },
+        {
+          "name": "Other grades",
+          "price": "Price on request",
+          "desc": "WW210, WW240, WW320, WW450, WS, LWP, LP, DW and etc."
+        }
       ]
     },
     {
@@ -23,10 +39,26 @@
       "image": "goods/walnut.jpg",
       "mainPrice": "5,45 USD/kg",
       "variants": [
-        { "name": "Xingfu - ELH", "price": "5,45 USD/kg", "desc": "Xingfu type Extra Light Halves 80%, 2025 crop. 10 kg packing. FOB Tianjin port." },
-        { "name": "Yunnan - ELH", "price": "5,55 USD/kg", "desc": "Yunnan type Extra Light Halves 80%, 2025 crop. 10 kg packing. FOB Tianjin port." },
-        { "name": "185 - ELH", "price": "5,85 USD/kg", "desc": "185 type Extra Light Halves 80%, 2025 crop. 10 kg packing. FOB Tianjin port." },
-        { "name": "Xin2 - ELH", "price": "6,20 USD/kg", "desc": "Xin2 type Extra Light Halves 80%, 2025 crop. 10 kg packing. FOB Tianjin port." }
+        {
+          "name": "Xingfu - ELH",
+          "price": "5,45 USD/kg",
+          "desc": "Xingfu type Extra Light Halves 80%, 2025 crop. 10 kg packing. FOB Tianjin port."
+        },
+        {
+          "name": "Yunnan - ELH",
+          "price": "5,55 USD/kg",
+          "desc": "Yunnan type Extra Light Halves 80%, 2025 crop. 10 kg packing. FOB Tianjin port."
+        },
+        {
+          "name": "185 - ELH",
+          "price": "5,85 USD/kg",
+          "desc": "185 type Extra Light Halves 80%, 2025 crop. 10 kg packing. FOB Tianjin port."
+        },
+        {
+          "name": "Xin2 - ELH",
+          "price": "6,20 USD/kg",
+          "desc": "Xin2 type Extra Light Halves 80%, 2025 crop. 10 kg packing. FOB Tianjin port."
+        }
       ]
     },
     {
@@ -37,9 +69,21 @@
       "image": "goods/dates.png",
       "mainPrice": "1,85 USD/kg",
       "variants": [
-        { "name": "Deglet Nour - 5 kg", "price": "1,85 USD/kg", "desc": "Tunisian Dates Deglet Nour packing in 5 kg carton. FOB Tunisian port." },
-        { "name": "Deglet Nour - 200 gr", "price": "2,05 USD/kg", "desc": "Tunisian Dates Deglet Nour packing in 200 gr tray. FOB Tunisian port." },
-        { "name": "Deglet Nour - without glucose", "price": "2,20 USD/kg", "desc": "Tunisian Dates Deglet Nour packing in 200 gr tray glucose FREE. FOB Tunisian port." }
+        {
+          "name": "Deglet Nour - 5 kg",
+          "price": "1,85 USD/kg",
+          "desc": "Tunisian Dates Deglet Nour packing in 5 kg carton. FOB Tunisian port."
+        },
+        {
+          "name": "Deglet Nour - 200 gr",
+          "price": "2,05 USD/kg",
+          "desc": "Tunisian Dates Deglet Nour packing in 200 gr tray. FOB Tunisian port."
+        },
+        {
+          "name": "Deglet Nour - without glucose",
+          "price": "2,20 USD/kg",
+          "desc": "Tunisian Dates Deglet Nour packing in 200 gr tray glucose FREE. FOB Tunisian port."
+        }
       ]
     },
     {
@@ -50,10 +94,26 @@
       "image": "goods/candied.jpg",
       "mainPrice": "2,10 USD/kg",
       "variants": [
-        { "name": "Mixed Color - 8-10 mm", "price": "2,10 USD/kg", "desc": "Dried Papaya Dice mixed color (Green, Red, Yellow, Orange). Size 8-10 mm. FOB Shantou port." },
-        { "name": "Natural Color - 8-10 mm", "price": "2,20 USD/kg", "desc": "Dried Papaya Dice Natural color. Size 8-10 mm. FOB Shantou port." },
-        { "name": "Mixed Color - 3-5 mm", "price": "2,30 USD/kg", "desc": "Dried Papaya Dice mixed color (Green, Red, Yellow, Orange). Size 3-5 mm. FOB Shantou port." },
-        { "name": "Natural Color - 3-5 mm", "price": "2,40 USD/kg", "desc": "Dried Papaya Dice Natural color. Size 3-5 mm. FOB Shantou port." }
+        {
+          "name": "Mixed Color - 8-10 mm",
+          "price": "2,10 USD/kg",
+          "desc": "Dried Papaya Dice mixed color (Green, Red, Yellow, Orange). Size 8-10 mm. FOB Shantou port."
+        },
+        {
+          "name": "Natural Color - 8-10 mm",
+          "price": "2,20 USD/kg",
+          "desc": "Dried Papaya Dice Natural color. Size 8-10 mm. FOB Shantou port."
+        },
+        {
+          "name": "Mixed Color - 3-5 mm",
+          "price": "2,30 USD/kg",
+          "desc": "Dried Papaya Dice mixed color (Green, Red, Yellow, Orange). Size 3-5 mm. FOB Shantou port."
+        },
+        {
+          "name": "Natural Color - 3-5 mm",
+          "price": "2,40 USD/kg",
+          "desc": "Dried Papaya Dice Natural color. Size 3-5 mm. FOB Shantou port."
+        }
       ]
     },
     {
@@ -64,10 +124,26 @@
       "image": "goods/mango.jpg",
       "mainPrice": "4,50 USD/kg",
       "variants": [
-        { "name": "Dried Mango - 5 kg", "price": "4,50 USD/kg", "desc": "Delicious, soft-dried mango slices. Lightly sweetened and packaged in 5 kg bulk carton. FOB HCM." },
-        { "name": "Dried Mango - 500 g", "price": "5,00 USD/kg", "desc": "Delicious soft-dried mango slices, lightly sweetened, in 500g branded bags. FOB HCM." },
-        { "name": "Dried Mango - 5 kg. Sugar FREE", "price": "Price on request", "desc": "Delicious, soft-dried mango slices. No sugar added and packaged in 5 kg bulk carton. FOB HCM." },
-        { "name": "Dried Mango - 500 g. Sugar FREE", "price": "Price on request", "desc": "Delicious soft-dried mango slices, no sugar added, in 500g branded bags. FOB HCM." }
+        {
+          "name": "Dried Mango - 5 kg",
+          "price": "4,50 USD/kg",
+          "desc": "Delicious, soft-dried mango slices. Lightly sweetened and packaged in 5 kg bulk carton. FOB HCM."
+        },
+        {
+          "name": "Dried Mango - 500 g",
+          "price": "5,00 USD/kg",
+          "desc": "Delicious soft-dried mango slices, lightly sweetened, in 500g branded bags. FOB HCM."
+        },
+        {
+          "name": "Dried Mango - 5 kg. Sugar FREE",
+          "price": "Price on request",
+          "desc": "Delicious, soft-dried mango slices. No sugar added and packaged in 5 kg bulk carton. FOB HCM."
+        },
+        {
+          "name": "Dried Mango - 500 g. Sugar FREE",
+          "price": "Price on request",
+          "desc": "Delicious soft-dried mango slices, no sugar added, in 500g branded bags. FOB HCM."
+        }
       ]
     },
     {
@@ -78,11 +154,31 @@
       "image": "goods/walnut in shell.webp",
       "mainPrice": "2,20 USD/kg",
       "variants": [
-        { "name": "33 (Sansan)", "price": "2,40 USD/kg", "desc": "Ideal Walnut (Sansan 33) features a thin, hand-crackable shell and a high yield of sweet, light-colored kernels." },
-        { "name": "185", "price": "2,90 USD/kg", "desc": "Compared to the 33 variety, the 185 walnut has an even thinner, paper-shell that can be crushed between your fingers and an even higher kernel yield of up to 68%." },
-        { "name": "Xin 2 (Xinjiang 2)", "price": "3,30 USD/kg", "desc": "The Xin 2 walnut features an extremely thin shell that can be cracked by hand, yielding up to 67% of a light-colored, sweet kernel with excellent flavor." },
-        { "name": "Yunnan", "price": "2,80 USD/kg", "desc": "The Yunnan walnut features a moderately thin shell that typically requires tools to crack, yielding about 50-55% of a kernel." },
-        { "name": "Xinfu / Xinfeng", "price": "2,50 USD/kg", "desc": "Features a thick, hard shell requiring a cracker, with large light-colored sweet kernels and 50-55% kernel yield." }
+        {
+          "name": "33 (Sansan)",
+          "price": "2,40 USD/kg",
+          "desc": "Ideal Walnut (Sansan 33) features a thin, hand-crackable shell and a high yield of sweet, light-colored kernels."
+        },
+        {
+          "name": "185",
+          "price": "2,90 USD/kg",
+          "desc": "Compared to the 33 variety, the 185 walnut has an even thinner, paper-shell that can be crushed between your fingers and an even higher kernel yield of up to 68%."
+        },
+        {
+          "name": "Xin 2 (Xinjiang 2)",
+          "price": "3,30 USD/kg",
+          "desc": "The Xin 2 walnut features an extremely thin shell that can be cracked by hand, yielding up to 67% of a light-colored, sweet kernel with excellent flavor."
+        },
+        {
+          "name": "Yunnan",
+          "price": "2,80 USD/kg",
+          "desc": "The Yunnan walnut features a moderately thin shell that typically requires tools to crack, yielding about 50-55% of a kernel."
+        },
+        {
+          "name": "Xinfu / Xinfeng",
+          "price": "2,50 USD/kg",
+          "desc": "Features a thick, hard shell requiring a cracker, with large light-colored sweet kernels and 50-55% kernel yield."
+        }
       ]
     },
     {
@@ -93,10 +189,26 @@
       "image": "goods/redpeanuts.png",
       "mainPrice": "1,20 USD/kg",
       "variants": [
-        { "name": "Bold - 40/50", "price": "2,20 USD/kg", "desc": "Indian Bold 40/50 raw peanuts. Large, uniform kernels, mild flavor, high nutritional value." },
-        { "name": "Bold - 50/60", "price": "2,10 USD/kg", "desc": "Indian raw peanuts Bold 50/60. Large, uniform kernels, mild and sweet flavor, high yield." },
-        { "name": "TJ - 40/50", "price": "2,80 USD/kg", "desc": "Indian TJ 40/50 raw peanuts. Large, uniform kernel size, high oleic content for better shelf life." },
-        { "name": "TJ - 50/60", "price": "2,50 USD/kg", "desc": "Indian TJ 50/60 raw peanuts. Large, uniform kernels, high oleic acid content for superior shelf-life." }
+        {
+          "name": "Bold - 40/50",
+          "price": "2,20 USD/kg",
+          "desc": "Indian Bold 40/50 raw peanuts. Large, uniform kernels, mild flavor, high nutritional value."
+        },
+        {
+          "name": "Bold - 50/60",
+          "price": "2,10 USD/kg",
+          "desc": "Indian raw peanuts Bold 50/60. Large, uniform kernels, mild and sweet flavor, high yield."
+        },
+        {
+          "name": "TJ - 40/50",
+          "price": "2,80 USD/kg",
+          "desc": "Indian TJ 40/50 raw peanuts. Large, uniform kernel size, high oleic content for better shelf life."
+        },
+        {
+          "name": "TJ - 50/60",
+          "price": "2,50 USD/kg",
+          "desc": "Indian TJ 50/60 raw peanuts. Large, uniform kernels, high oleic acid content for superior shelf-life."
+        }
       ]
     },
     {
@@ -107,12 +219,36 @@
       "image": "goods/peanutSplit.jpg",
       "mainPrice": "Price on request",
       "variants": [
-        { "name": "Whole-Bold 40/50", "price": "Price on request", "desc": "Large, uniform kernels with mild, sweet flavor. Ideal for premium snacks and confectionery." },
-        { "name": "Whole-Bold 50/60", "price": "Price on request", "desc": "Medium-large, consistent kernels offering rich taste. Perfect for peanut butter and food processing." },
-        { "name": "Whole-Java 40/50", "price": "Price on request", "desc": "Extra-large selected kernels with delicate flavor. Excellent for chocolate coating and gourmet applications." },
-        { "name": "Whole-Java 50/60", "price": "Price on request", "desc": "Premium uniform kernels delivering superior blanching quality. Optimal for high-end food manufacturing." },
-        { "name": "Blanched Splits - Bold 40/50", "price": "Price on request", "desc": "Premium, large peanut halves from selected Bold kernels, ideal for crunchy peanut butter." },
-        { "name": "Blanched Splits - Bold 50/60", "price": "Price on request", "desc": "Consistent, medium-large peanut halves offering excellent yield and a rich flavor." }
+        {
+          "name": "Whole-Bold 40/50",
+          "price": "Price on request",
+          "desc": "Large, uniform kernels with mild, sweet flavor. Ideal for premium snacks and confectionery."
+        },
+        {
+          "name": "Whole-Bold 50/60",
+          "price": "Price on request",
+          "desc": "Medium-large, consistent kernels offering rich taste. Perfect for peanut butter and food processing."
+        },
+        {
+          "name": "Whole-Java 40/50",
+          "price": "Price on request",
+          "desc": "Extra-large selected kernels with delicate flavor. Excellent for chocolate coating and gourmet applications."
+        },
+        {
+          "name": "Whole-Java 50/60",
+          "price": "Price on request",
+          "desc": "Premium uniform kernels delivering superior blanching quality. Optimal for high-end food manufacturing."
+        },
+        {
+          "name": "Blanched Splits - Bold 40/50",
+          "price": "Price on request",
+          "desc": "Premium, large peanut halves from selected Bold kernels, ideal for crunchy peanut butter."
+        },
+        {
+          "name": "Blanched Splits - Bold 50/60",
+          "price": "Price on request",
+          "desc": "Consistent, medium-large peanut halves offering excellent yield and a rich flavor."
+        }
       ]
     },
     {
@@ -123,12 +259,36 @@
       "image": "goods/driedFruits.webp",
       "mainPrice": "2,90 USD/kg",
       "variants": [
-        { "name": "Osmotically Dehydrated Cherry", "price": "Price on request", "desc": "Chinese osmotically dehydrated sour cherries with 45-55% sugar content. Small, uniform berries." },
-        { "name": "Osmotically Dehydrated Strawberry", "price": "Price on request", "desc": "Osmotically dehydrated strawberries from China, 45-55% sugar content. Chewy texture with intense berry flavor." },
-        { "name": "Osmotically Dehydrated Kumquat in Sugar Powder", "price": "Price on request", "desc": "Whole Chinese kumquats with 45-55% sugar content, coated in icing sugar." },
-        { "name": "Osmotically Dehydrated Kumquat in Sugar", "price": "Price on request", "desc": "Osmotically dehydrated kumquats from China, 45-55% sugar content, rolled in crystal sugar." },
-        { "name": "Dried Apple Rings", "price": "Price on request", "desc": "Natural dried apple rings from China with no sugar added. Chewy texture with concentrated apple flavor." },
-        { "name": "Dried Apple Cubes/Dices", "price": "Price on request", "desc": "Chinese dried apple cubes containing only natural fruit sugars. Uniform pieces with pure apple taste." }
+        {
+          "name": "Osmotically Dehydrated Cherry",
+          "price": "Price on request",
+          "desc": "Chinese osmotically dehydrated sour cherries with 45-55% sugar content. Small, uniform berries."
+        },
+        {
+          "name": "Osmotically Dehydrated Strawberry",
+          "price": "Price on request",
+          "desc": "Osmotically dehydrated strawberries from China, 45-55% sugar content. Chewy texture with intense berry flavor."
+        },
+        {
+          "name": "Osmotically Dehydrated Kumquat in Sugar Powder",
+          "price": "Price on request",
+          "desc": "Whole Chinese kumquats with 45-55% sugar content, coated in icing sugar."
+        },
+        {
+          "name": "Osmotically Dehydrated Kumquat in Sugar",
+          "price": "Price on request",
+          "desc": "Osmotically dehydrated kumquats from China, 45-55% sugar content, rolled in crystal sugar."
+        },
+        {
+          "name": "Dried Apple Rings",
+          "price": "Price on request",
+          "desc": "Natural dried apple rings from China with no sugar added. Chewy texture with concentrated apple flavor."
+        },
+        {
+          "name": "Dried Apple Cubes/Dices",
+          "price": "Price on request",
+          "desc": "Chinese dried apple cubes containing only natural fruit sugars. Uniform pieces with pure apple taste."
+        }
       ]
     },
     {
@@ -139,8 +299,16 @@
       "image": "goods/test.jpg",
       "mainPrice": "2,80 USD/kg",
       "variants": [
-        { "name": "Banana Chips Whole, 6.8kg Carton", "price": "2,60 USD/kg", "desc": "Premium whole banana chips, vacuum-packed in a 6.8kg carton. Golden color, crispy texture." },
-        { "name": "Banana Chips Halves/Quarters", "price": "2,88 USD/kg", "desc": "Uniform banana chips in halves and quarters, packed in a 6.8kg carton. Perfect for confectionery and bakery." }
+        {
+          "name": "Banana Chips Whole, 6.8kg Carton",
+          "price": "2,60 USD/kg",
+          "desc": "Premium whole banana chips, vacuum-packed in a 6.8kg carton. Golden color, crispy texture."
+        },
+        {
+          "name": "Banana Chips Halves/Quarters",
+          "price": "2,88 USD/kg",
+          "desc": "Uniform banana chips in halves and quarters, packed in a 6.8kg carton. Perfect for confectionery and bakery."
+        }
       ]
     }
   ]
