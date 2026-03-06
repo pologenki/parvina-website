@@ -50,14 +50,14 @@ function renderProductCards(products, lang) {
         <h3>${name}</h3>
         <p class="product-desc">${desc}</p>
         <p class="product-origin">${originLabel}: ${origin}</p>
-        <p class="price">${getPriceText(product.mainPrice)}</p>
+        <p class="price">${getPriceText(product.mainPrice, lang)}</p>
         <a href="#" class="btn-more" data-i18n="products.learnMore">${t("products.learnMore")}</a>
       </div>
     `;
   }).join("");
 }
 
-function renderProductModals(products) {
+function renderProductModals(products, lang) {
   return products.map((product, index) => {
     const name = getProductText(product, "name", lang);
     const total = products.length;
