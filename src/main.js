@@ -1,6 +1,5 @@
 import "./style.css";
 import { Header } from "./components/header.js";
-import { Content } from "./components/content.js";
 import { Footer } from "./components/footer.js";
 import { initHeaderMenu } from "./components/headerScript.js";
 import { initSectionScript } from "./components/sectionScript.js";
