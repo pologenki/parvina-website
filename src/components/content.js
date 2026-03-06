@@ -35,6 +35,7 @@ function getPriceText(price, lang) {
 }
 
 function renderProductCards(products, lang) {
+  console.log("renderProductCards lang:", lang);
   return products.map((product, index) => {
     const name = getProductText(product, "name", lang);
     const desc = getProductText(product, "desc", lang);
