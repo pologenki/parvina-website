@@ -59,14 +59,14 @@ function renderProductCards(products, lang) {
 
 function renderProductModals(products) {
   return products.map((product, index) => {
-    const name = getProductText(product, "name");
+    const name = getProductText(product, "name", lang);
     const total = products.length;
     const counter = `${index + 1}/${total}`;
 
     const variants = product.variants.map(variant => {
-      const variantName = getProductText(variant, "name");
-      const variantDesc = getProductText(variant, "desc");
-      const variantPrice = getPriceText(variant.price);
+const variantName = getProductText(variant, "name", lang);
+const variantDesc = getProductText(variant, "desc", lang);
+const variantPrice = getPriceText(variant.price, lang);
 
       return `
         <div class="product-type clickable-product" data-contact="true">
@@ -192,12 +192,12 @@ export function Content() {
       <p class="price-update-date" data-i18n="products.lastUpdated">Prices last updated: <span id="current-date"></span></p>
       
       <div class="pricing-grid">
-        ${renderProductCards(products, lang)}
+        <p class="price">${getPriceText(product.mainPrice, lang)}</p>
       </div>
     </div>
   </section>
 
-  ${renderProductModals(products, lang)}
+ <p class="price">${getPriceText(product.mainPrice, lang)}</p>
     
   <!-- Services section -->
   <section id="services" class="services-section">
