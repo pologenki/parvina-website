@@ -196,7 +196,7 @@ export function Content() {
       </div>
     </div>
   </section>
-
+${renderProductModals(products, lang)}
 
     
   <!-- Services section -->
