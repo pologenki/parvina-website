@@ -3,7 +3,7 @@ import { personalRu } from "../content/content-ru.js";
 import { getCurrentLanguage, t } from "../utils/i18n.js";
 
 function getPersonalData() {
-  const lang = getCurrentLanguage();
+  const lang = localStorage.getItem('preferredLanguage') || 'en';
   return lang === "ru" ? personalRu : personalEn;
 }
 
@@ -105,7 +105,7 @@ function renderProductModals(products) {
 
 export function Content() {
   const personal = getPersonalData();
-  const lang = getCurrentLanguage();
+  const lang = localStorage.getItem('preferredLanguage') || 'en';
   const products = productsData ? productsData.products : [];
 
   // Генерируем HTML для телефонов
