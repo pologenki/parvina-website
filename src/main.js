@@ -328,7 +328,6 @@ async function renderApp() {
 // Application initialization
 async function initApp() {
   await initLanguage();
-  const { loadProducts } = await import("./components/content.js");
   await loadProducts();
   await renderApp();
 }
