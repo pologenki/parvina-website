@@ -1,15 +1,113 @@
 import { personalEn } from "../content/content-en.js";
 import { personalRu } from "../content/content-ru.js";
-import { getCurrentLanguage } from "../utils/i18n.js";
+import { getCurrentLanguage, t } from "../utils/i18n.js";
 
 function getPersonalData() {
   const lang = getCurrentLanguage();
   return lang === "ru" ? personalRu : personalEn;
 }
 
+// Load products from products.json and render
+let productsData = null;
+
+export async function loadProducts() {
+  try {
+    const response = await fetch("/data/products.json");
+    productsData = await response.json();
+  } catch (e) {
+    console.error("Failed to load products.json", e);
+    productsData = { products: [] };
+  }
+}
+
+function getProductText(product, field) {
+  const lang = getCurrentLanguage();
+  if (lang === "ru" && product[field + "_ru"]) {
+    return product[field + "_ru"];
+  }
+  return product[field] || "";
+}
+
+function getPriceText(price) {
+  const lang = getCurrentLanguage();
+  if (price === "Price on request") {
+    return lang === "ru" ? "Цена по запросу" : "Price on request";
+  }
+  return price;
+}
+
+function renderProductCards(products) {
+  return products.map((product, index) => {
+    const name = getProductText(product, "name");
+    const desc = getProductText(product, "desc");
+    const origin = getProductText(product, "origin");
+    const originLabel = getCurrentLanguage() === "ru" ? "Происхождение" : "Origin";
+
+    return `
+      <div class="pricing-card" data-modal="modal-${product.id}">
+        <div class="product-image">
+          <img src="/${product.image}" alt="${name}">
+        </div>
+        <h3>${name}</h3>
+        <p class="product-desc">${desc}</p>
+        <p class="product-origin">${originLabel}: ${origin}</p>
+        <p class="price">${getPriceText(product.mainPrice)}</p>
+        <a href="#" class="btn-more" data-i18n="products.learnMore">${t("products.learnMore")}</a>
+      </div>
+    `;
+  }).join("");
+}
+
+function renderProductModals(products) {
+  return products.map((product, index) => {
+    const name = getProductText(product, "name");
+    const total = products.length;
+    const counter = `${index + 1}/${total}`;
+
+    const variants = product.variants.map(variant => {
+      const variantName = getProductText(variant, "name");
+      const variantDesc = getProductText(variant, "desc");
+      const variantPrice = getPriceText(variant.price);
+
+      return `
+        <div class="product-type clickable-product" data-contact="true">
+          <div class="product-type-header">
+            <h4>${variantName}</h4>
+            <span class="type-price">${variantPrice}</span>
+          </div>
+          <div class="product-description">
+            <p>${variantDesc}</p>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    return `
+      <div class="product-modal" id="modal-${product.id}">
+        <div class="modal-content">
+          <span class="close-modal"></span>
+          <div class="modal-counter">${counter}</div>
+          <div class="modal-navigation">
+            <button class="modal-prev" data-i18n="modal.prev"></button>
+            <button class="modal-next" data-i18n="modal.next"></button>
+          </div>
+          <div class="modal-header">
+            <h3>${name}</h3>
+          </div>
+          <div class="modal-body">
+            <div class="product-types">
+              ${variants}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
 export function Content() {
   const personal = getPersonalData();
-  const isEn = personal.lang === "en";
+  const products = productsData ? productsData.products : [];
 
   // Генерируем HTML для телефонов
   const phonesHtml = personal.contacts.phones
@@ -74,7 +172,6 @@ export function Content() {
             </div>
           </div>
 
-          <!-- Social icons -->
           <div class="social-icons-wrapper">
             <div class="social-icons">
               ${socialsHtml}
@@ -83,9 +180,7 @@ export function Content() {
         </div>
         
         <div class="about-image">
-          <img src="${personal.about.photo}" alt="${
-            personal.about.title
-          }" class="profile-photo" id="aboutPhoto">
+          <img src="${personal.about.photo}" alt="${personal.about.title}" class="profile-photo" id="aboutPhoto">
         </div>
       </div>
     </div>
@@ -97,897 +192,128 @@ export function Content() {
       <p class="price-update-date" data-i18n="products.lastUpdated">Prices last updated: <span id="current-date"></span></p>
       
       <div class="pricing-grid">
-        <!-- Card 1 -->
-        <div class="pricing-card" data-modal="modal-cashew">
-          <div class="product-image">
-            <img src="/goods/cashew.webp" alt="Cashew Nuts">
-          </div>
-          <h3 data-i18n="products.cashew.title">Cashew Nuts</h3>
-          <p class="product-desc" data-i18n="products.cashew.desc">AFI standard</p>
-          <p class="product-origin" data-i18n="products.cashew.origin">Origin: Vietnam</p>
-          <p class="price">7,30 USD/kg</p>
-          <a href="#" class="btn-more" data-i18n="products.learnMore">Learn More</a>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="pricing-card" data-modal="modal-walnuts">
-          <div class="product-image">
-            <img src="/goods/walnut.jpg" alt="Walnut Kernels">
-          </div>
-          <h3 data-i18n="products.walnuts.title">Walnut Kernels</h3>
-          <p class="product-desc" data-i18n="products.walnuts.desc">Extra Light Halves</p>
-          <p class="product-origin" data-i18n="products.walnuts.origin">Origin: China</p>
-          <p class="price">5,45 USD/kg</p>
-          <a href="#" class="btn-more" data-i18n="products.learnMore">Learn More</a>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="pricing-card" data-modal="modal-dates">
-          <div class="product-image">
-            <img src="/goods/dates.png" alt="Deglet Nour Dates">
-          </div>
-          <h3 data-i18n="products.dates.title">Dried Dates</h3>
-          <p class="product-desc" data-i18n="products.dates.desc">Deglet Nour Dates</p>
-          <p class="product-origin" data-i18n="products.dates.origin">Origin: Tunisia</p>
-          <p class="price">1,85 USD/kg</p>
-          <a href="#" class="btn-more" data-i18n="products.learnMore">Learn More</a>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="pricing-card" data-modal="modal-papaya">
-          <div class="product-image">
-            <img src="/goods/candied.jpg" alt="Dried Papaya Dice">
-          </div>
-          <h3 data-i18n="products.papaya.title">Dried Papaya Dice</h3>
-          <p class="product-desc" data-i18n="products.papaya.desc">Mixed/Natural 8-10 mm</p>
-          <p class="product-origin" data-i18n="products.papaya.origin">Origin: China</p>
-          <p class="price">2,10 USD/kg</p>
-          <a href="#" class="btn-more" data-i18n="products.learnMore">Learn More</a>
-        </div>
-
-        <!-- Card 5 -->
-        <div class="pricing-card" data-modal="modal-mango">
-          <div class="product-image">
-            <img src="/goods/mango.jpg" alt="Dried Mango">
-          </div>
-          <h3 data-i18n="products.mango.title">Dried Mango</h3>
-          <p class="product-desc" data-i18n="products.mango.desc">Sugar added, sugar FREE</p>
-          <p class="product-origin" data-i18n="products.mango.origin">Origin: Vietnam, China</p>
-          <p class="price">4,50 USD/kg</p>
-          <a href="#" class="btn-more" data-i18n="products.learnMore">Learn More</a>
-        </div>
-
-        <!-- Card 6 -->
-        <div class="pricing-card" data-modal="modal-walnuts-shell">
-          <div class="product-image">
-            <img src="/goods/walnut in shell.webp" alt="Walnuts in shell">
-          </div>
-          <h3 data-i18n="products.walnutsShell.title">Walnuts in shell</h3>
-          <p class="product-desc" data-i18n="products.walnutsShell.desc">All sizes, washed</p>
-          <p class="product-origin" data-i18n="products.walnutsShell.origin">Origin: China</p>
-          <p class="price">2,20 USD/kg</p>
-          <a href="#" class="btn-more" data-i18n="products.learnMore">Learn More</a>
-        </div>
-
-        <!-- Card 7 -->
-        <div class="pricing-card" data-modal="modal-peanuts">
-          <div class="product-image">
-            <img src="/goods/redpeanuts.png" alt="Raw Peanuts">
-          </div>
-          <h3 data-i18n="products.peanuts.title">Raw Peanuts</h3>
-          <p class="product-desc" data-i18n="products.peanuts.desc">Sizes 40/50, 50/60</p>
-          <p class="product-origin" data-i18n="products.peanuts.origin">Origin: India</p>
-          <p class="price">1,20 USD/kg</p>
-          <a href="#" class="btn-more" data-i18n="products.learnMore">Learn More</a>
-        </div>
-
-        <!-- Card 8 -->
-        <div class="pricing-card" data-modal="modal-peanuts-blanched">
-          <div class="product-image">
-            <img src="/goods/peanutSplit.jpg" alt="Blanched Peanuts">
-          </div>
-          <h3 data-i18n="products.peanutsBlanched.title">Blanched Peanuts</h3>
-          <p class="product-desc" data-i18n="products.peanutsBlanched.desc">Whole, Splits</p>
-          <p class="product-origin" data-i18n="products.peanutsBlanched.origin">Origin: India</p>
-          <p class="price">1,4 USD/kg</p>
-          <a href="#" class="btn-more" data-i18n="products.learnMore">Learn More</a>
-        </div>
-
-        <!-- Card 9 -->
-        <div class="pricing-card" data-modal="modal-dried-fruits">
-          <div class="product-image">
-            <img src="/goods/driedFruits.webp" alt="Dried Fruits Mix">
-          </div>
-          <h3 data-i18n="products.driedFruits.title">Dried Fruits</h3>
-          <p class="product-desc" data-i18n="products.driedFruits.desc">Osmotically dehydrated fruits</p>
-          <p class="product-origin" data-i18n="products.driedFruits.origin">Origin: China</p>
-          <p class="price">2,90 USD/kg</p>
-          <a href="#" class="btn-more" data-i18n="products.learnMore">Learn More</a>
-        </div>
-
-        <!-- Card 10 -->
-        <div class="pricing-card" data-modal="modal-banana-chips">
-          <div class="product-image">
-            <img src="/goods/test.jpg" alt="Banana Chips">
-          </div>
-          <h3 data-i18n="products.bananaChips.title">Banana Chips</h3>
-          <p class="product-desc" data-i18n="products.bananaChips.desc">Whole, Halves, Quarters</p>
-          <p class="product-origin" data-i18n="products.bananaChips.origin">Origin: Philippines</p>
-          <p class="price">2,80 USD/kg</p>
-          <a href="#" class="btn-more" data-i18n="products.learnMore">Learn More</a>
-        </div>
+        ${renderProductCards(products)}
       </div>
     </div>
   </section>
 
-  <!-- Modal window for Cashew Nuts -->
-  <div class="product-modal" id="modal-cashew">
-    <div class="modal-content">
-      <span class="close-modal"></span>
-      <div class="modal-counter">1/10</div>
-      <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev"></button>
-        <button class="modal-next" data-i18n="modal.next"></button>
-      </div>
-      <div class="modal-header">
-        <h3 data-i18n="modals.cashew.title">Cashew Nuts - Premium Quality</h3>
-      </div>
-      <div class="modal-body">
-        <div class="product-types">
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>WW320 - Whole White</h4>
-              <span class="type-price">7,30 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.cashew.ww320">Quality AFI standard. 20/22.68 kg PE vacuum bag/carton packing. FOB HCM</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>WW450 - Whole White</h4>
-              <span class="type-price">7,25 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.cashew.ww450">Quality AFI standard. 20/22.68 kg PE vacuum bag/carton packing. FOB HCM.</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>WS - White Split</h4>
-              <span class="type-price">6,20 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.cashew.ws">Quality AFI standard. 20/22.68 kg PE vacuum bag/carton packing. FOB HCM.</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4 data-i18n="modals.cashew.otherGrades">Other grades</h4>
-              <span class="type-price" data-i18n="products.priceOnRequest">Price on request</span>
-            </div>
-            <div class="product-description">
-              <p>WW210, WW240, WW320, WW450, WS, LWP, LP, DW and etc.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal window for Walnuts -->
-  <div class="product-modal" id="modal-walnuts">
-    <div class="modal-content">
-      <span class="close-modal"></span>
-      <div class="modal-counter">2/10</div>
-      <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev"></button>
-        <button class="modal-next" data-i18n="modal.next"></button>
-      </div>
-      <div class="modal-header">
-        <h3 data-i18n="products.walnuts.title">Walnut Kernels</h3>
-      </div>
-      <div class="modal-body">
-        <div class="product-types">
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Xingfu - ELH</h4>
-              <span class="type-price">5,45 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.walnuts.xingfu">Xingfu type Extra Light Halves 80%, 2025 crop. 10 kg packing. FOB Tianjin port.</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Yunnan - ELH</h4>
-              <span class="type-price">5,55 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.walnuts.yunnan">Yunnan type Extra Light Halves 80%, 2025 crop. 10 kg packing. FOB Tianjin port.</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>185 - ELH</h4>
-              <span class="type-price">5,85 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.walnuts.185">185 type Extra Light Halves 80%, 2025 crop. 10 kg packing. FOB Tianjin port.</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Xin2 - ELH</h4>
-              <span class="type-price">6,20 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.walnuts.xin2">Xin2 type Extra Light Halves 80%, 2025 crop. 10 kg packing. FOB Tianjin port.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal window for Deglet Nour Dates -->
-  <div class="product-modal" id="modal-dates">
-    <div class="modal-content">
-      <span class="close-modal"></span>
-      <div class="modal-counter">3/10</div>
-      <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev"></button>
-        <button class="modal-next" data-i18n="modal.next"></button>
-      </div>
-      <div class="modal-header">
-        <h3 data-i18n="modals.dates.title">Deglet Nour - Tunisian Dates</h3>
-      </div>
-      <div class="modal-body">
-        <div class="product-types">
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Deglet Nour - 5 kg</h4>
-              <span class="type-price">1,85 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.dates.5kg">Tunisian Dates Deglet Nour packing in 5 kg carton. FOB Tunisian port</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Deglet Nour - 200 gr</h4>
-              <span class="type-price">2,05 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.dates.200gr">Tunisian Dates Deglet Nour packing in 200 gr tray. FOB Tunisian port</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Deglet Nour - without glucose</h4>
-              <span class="type-price">2,20 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.dates.noGlucose">Tunisian Dates Deglet Nour packing in 200 gr tray glucose FREE. FOB Tunisian port.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal window for Dried Papaya Dice -->
-  <div class="product-modal" id="modal-papaya">
-    <div class="modal-content">
-      <span class="close-modal"></span>
-      <div class="modal-counter">4/10</div>
-      <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev"></button>
-        <button class="modal-next" data-i18n="modal.next"></button>
-      </div>
-      <div class="modal-header">
-        <h3 data-i18n="products.papaya.title">Dried Papaya Dice</h3>
-      </div>
-      <div class="modal-body">
-        <div class="product-types">
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Mixed Color - 8-10 mm</h4>
-              <span class="type-price">2,10 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.papaya.mixed8">Dried Papaya Dice mixed color (Green, Red, Yellow, Orange). Size 8-10 mm. FOB Shantou port.</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Natural Color - 8-10 mm</h4>
-              <span class="type-price">2,20 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.papaya.natural8">Dried Papaya Dice Natural color. Size 8-10 mm. FOB Shantou port</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Mixed Color - 3-5 mm</h4>
-              <span class="type-price">2,30 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.papaya.mixed3">Dried Papaya Dice mixed color (Green, Red, Yellow, Orange). Size 3-5 mm. FOB Shantou port.</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Natural Color - 3-5 mm</h4>
-              <span class="type-price">2,40 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.papaya.natural3">Dried Papaya Dice Natural color. Size 3-5 mm. FOB Shantou port.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal window for Dried Mango -->
-  <div class="product-modal" id="modal-mango">
-    <div class="modal-content">
-      <span class="close-modal"></span>
-      <div class="modal-counter">5/10</div>
-      <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev"></button>
-        <button class="modal-next" data-i18n="modal.next"></button>
-      </div>
-      <div class="modal-header">
-        <h3 data-i18n="modals.mango.title">Dried Mango Quality</h3>
-      </div>
-      <div class="modal-body">
-        <div class="product-types">
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Dried Mango - 5 kg</h4>
-              <span class="type-price">4,50 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.mango.5kg">Delicious, soft-dried mango slices. Lightly sweetened and packaged in 5 kg bulk carton. FOB HCM.</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Dried Mango - 500 g</h4>
-              <span class="type-price">5,00 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.mango.500g">Delicious soft-dried mango slices, lightly sweetened, in 500g branded bags. FOB HCM.</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Dried Mango - 5 kg. Sugar FREE</h4>
-              <span class="type-price" data-i18n="products.priceOnRequest">Price on request</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.mango.5kgSugarFree">Delicious, soft-dried mango slices. No sugar added and packaged in 5 kg bulk carton. FOB HCM.</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Dried Mango - 500 g. Sugar FREE</h4>
-              <span class="type-price" data-i18n="products.priceOnRequest">Price on request</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.mango.500gSugarFree">Delicious soft-dried mango slices, no sugar added, in 500g branded bags. FOB HCM.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal window for Walnuts in shell -->
-  <div class="product-modal" id="modal-walnuts-shell">
-    <div class="modal-content">
-      <span class="close-modal"></span>
-      <div class="modal-counter">6/10</div>
-      <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev"></button>
-        <button class="modal-next" data-i18n="modal.next"></button>
-      </div>
-      <div class="modal-header">
-        <h3 data-i18n="products.walnutsShell.title">Walnuts in shell</h3>
-      </div>
-      <div class="modal-body">
-        <div class="product-types">
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>33 (Sansan)</h4>
-              <span class="type-price">2,40 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.walnutsShell.sansan">Ideal Walnut (Sansan 33) features a thin, hand-crackable shell and a high yield of sweet, light-colored kernels.</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>185</h4>
-              <span class="type-price">2,90 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.walnutsShell.185">Compared to the 33 variety, the 185 walnut has an even thinner, "paper-shell" that can be crushed between your fingers and an even higher kernel yield of up to 68%. A light-colored, sweet kernel.</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Xin 2 (Xinjiang 2)</h4>
-              <span class="type-price">3,30 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.walnutsShell.xin2">The Xin 2 walnut features an extremely thin shell that can be cracked by hand, yielding up to 67% of a light-colored, sweet kernel with excellent flavor.</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Yunnan</h4>
-              <span class="type-price">2,80 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.walnutsShell.yunnan">The Yunnan walnut features a moderately thin shell that typically requires tools to crack, yielding about 50-55% of a kernel known for its rich, robust flavor and deep golden color.</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Xinfu / Xinfeng</h4>
-              <span class="type-price">2,50 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.walnutsShell.xinfu">Features a thick, hard shell requiring a cracker, with large light-colored sweet kernels and 50-55% kernel yield.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal window for Raw Peanuts -->
-  <div class="product-modal" id="modal-peanuts">
-    <div class="modal-content">
-      <span class="close-modal"></span>
-      <div class="modal-counter">7/10</div>
-      <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev"></button>
-        <button class="modal-next" data-i18n="modal.next"></button>
-      </div>
-      <div class="modal-header">
-        <h3 data-i18n="products.peanuts.title">Raw Peanuts</h3>
-      </div>
-      <div class="modal-body">
-        <div class="product-types">
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Bold - 40/50</h4>
-              <span class="type-price">2,20 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.peanuts.bold4050">Indian Bold 40/50 raw peanuts are characterized by their large, uniform kernels, mild flavor, high nutritional value, and versatility for roasting, confectionery, or producing premium peanut butter.</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Bold - 50/60</h4>
-              <span class="type-price">2,10 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.peanuts.bold5060">Indian raw peanuts of the Bold 50/60 variety are characterized by their large, uniform kernels, mild and sweet flavor, high yield, and versatility for roasting, confectionery, and peanut butter production.</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>TJ - 40/50</h4>
-              <span class="type-price">2,80 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.peanuts.tj4050">Indian TJ 40/50 raw peanuts are characterized by their large, uniform kernel size, high oleic content for better shelf life, mild flavor, and excellent suitability for roasting, confectionery, and premium peanut butter.</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>TJ - 50/60</h4>
-              <span class="type-price">2,50 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.peanuts.tj5060">Indian TJ 50/60 raw peanuts are characterized by their large, uniform kernels, high oleic acid content for superior shelf-life, a mild flavor profile, and excellent suitability for roasting, confectionery, and high-quality peanut butter.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal window for Blanched Peanuts -->
-  <div class="product-modal" id="modal-peanuts-blanched">
-    <div class="modal-content">
-      <span class="close-modal"></span>
-      <div class="modal-counter">8/10</div>
-      <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev"></button>
-        <button class="modal-next" data-i18n="modal.next"></button>
-      </div>
-      <div class="modal-header">
-        <h3 data-i18n="products.peanutsBlanched.title">Blanched Peanuts</h3>
-      </div>
-      <div class="modal-body">
-        <div class="product-types">
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Whole-Bold 40/50</h4>
-              <span class="type-price" data-i18n="products.priceOnRequest">Price on request</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.blanchedPeanuts.wholeBold4050">Large, uniform kernels with mild, sweet flavor and clean nutty aroma. Ideal for premium snacks and confectionery.</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Whole-Bold 50/60</h4>
-              <span class="type-price" data-i18n="products.priceOnRequest">Price on request</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.blanchedPeanuts.wholeBold5060">Medium-large, consistent kernels offering rich taste and roasted fragrance. Perfect for peanut butter and food processing.</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Whole-Java 40/50</h4>
-              <span class="type-price" data-i18n="products.priceOnRequest">Price on request</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.blanchedPeanuts.wholeJava4050">Extra-large selected kernels with delicate flavor and subtle sweet notes. Excellent for chocolate coating and gourmet applications.</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Whole-Java 50/60</h4>
-              <span class="type-price" data-i18n="products.priceOnRequest">Price on request</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.blanchedPeanuts.wholeJava5060">Premium uniform kernels delivering superior blanching quality and well-balanced nutty profile. Optimal for high-end food manufacturing.</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Blanched Splits - Bold 40/50</h4>
-              <span class="type-price" data-i18n="products.priceOnRequest">Price on request</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.blanchedPeanuts.splitsBold4050">Premium, large peanut halves from selected Bold kernels, ideal for crunchy peanut butter and high-quality confectionery where a visible nut piece is desired.</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Blanched Splits - Bold 50/60</h4>
-              <span class="type-price" data-i18n="products.priceOnRequest">Price on request</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.blanchedPeanuts.splitsBold5060">Consistent, medium-large peanut halves offering excellent yield and a rich flavor, perfect for standard food manufacturing, baking, and snacks.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal window for Dried Fruits Mix -->
-  <div class="product-modal" id="modal-dried-fruits">
-    <div class="modal-content">
-      <span class="close-modal"></span>
-      <div class="modal-counter">9/10</div>
-      <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev"></button>
-        <button class="modal-next" data-i18n="modal.next"></button>
-      </div>
-      <div class="modal-header">
-        <h3 data-i18n="modals.driedFruits.title">Osmotically Dehydrated Cherry</h3>
-      </div>
-      <div class="modal-body">
-        <div class="product-types">
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Osmotically Dehydrated Cherry</h4>
-              <span class="type-price" data-i18n="products.priceOnRequest">Price on request</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.driedFruits.cherry">Size S Chinese osmotically dehydrated sour cherries with 45-55% sugar content. Small, uniform berries with balanced sweet-tart flavor, ideal for baking and confectionery.</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Osmotically Dehydrated Strawberry</h4>
-              <span class="type-price" data-i18n="products.priceOnRequest">Price on request</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.driedFruits.strawberry">Osmotically dehydrated strawberries from China, 45-55% sugar content. Chewy texture with intense berry flavor and natural aroma, perfect for desserts and snacks.</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Osmotically Dehydrated Kumquat in Sugar Powder</h4>
-              <span class="type-price" data-i18n="products.priceOnRequest">Price on request</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.driedFruits.kumquatPowder">Whole Chinese kumquats with 45-55% sugar content, coated in icing sugar. Characteristic sweet-tangy taste with soft texture, ready for direct consumption.</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Osmotically Dehydrated Kumquat in Sugar</h4>
-              <span class="type-price" data-i18n="products.priceOnRequest">Price on request</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.driedFruits.kumquatSugar">Osmotically dehydrated kumquats from China, 45-55% sugar content, rolled in crystal sugar. Crispy sugar coating contrasts with soft interior, excellent for decoration</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Dried Apple Rings</h4>
-              <span class="type-price" data-i18n="products.priceOnRequest">Price on request</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.driedFruits.appleRings">Natural dried apple rings from China with no sugar added. Chewy texture with concentrated apple flavor, perfect for healthy snacks and clean-label products</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Dried Apple Cubes/Dices</h4>
-              <span class="type-price" data-i18n="products.priceOnRequest">Price on request</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.driedFruits.appleCubes">Chinese dried apple cubes containing only natural fruit sugars. Uniform pieces with pure apple taste, ideal for baking, cereals and nutritional food applications</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal window for Banana Chips -->
-  <div class="product-modal" id="modal-banana-chips">
-    <div class="modal-content">
-      <span class="close-modal"></span>
-      <div class="modal-counter">10/10</div>
-      <div class="modal-navigation">
-        <button class="modal-prev" data-i18n="modal.prev"></button>
-        <button class="modal-next" data-i18n="modal.next"></button>
-      </div>
-      <div class="modal-header">
-        <h3 data-i18n="products.bananaChips.title">Banana Chips</h3>
-      </div>
-      <div class="modal-body">
-        <div class="product-types">
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Banana Chips Whole, 6.8kg Carton</h4>
-              <span class="type-price">2,60 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.bananaChips.whole">Premium whole banana chips, vacuum-packed in a 6.8kg carton. Features golden color, crispy texture and natural banana flavor - ideal for snacks and food service</p>
-            </div>
-          </div>
-          
-          <div class="product-type clickable-product" data-contact="true">
-            <div class="product-type-header">
-              <h4>Banana Chips Halves/Quarters</h4>
-              <span class="type-price">2,88 USD/kg</span>
-            </div>
-            <div class="product-description">
-              <p data-i18n="modals.bananaChips.halves">Uniform banana chips in halves and quarters, packed in a 6.8kg carton. Perfect for confectionery, bakery and muesli applications with consistent size and crispy texture</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  ${renderProductModals(products)}
     
-  <!-- Services section with id -->
+  <!-- Services section -->
   <section id="services" class="services-section">
     <div class="services-container">
       <h2 class="services-title" data-i18n="services.title">Import Management Services</h2>
       <div class="services-grid">
         <div class="service-card" data-service-modal="modal1">
-          <div class="service-icon">
-            <i class="fas fa-search-dollar"></i>
-          </div>
+          <div class="service-icon"><i class="fas fa-search-dollar"></i></div>
           <h3 class="service-name" data-i18n="services.supplierSourcing">Supplier Sourcing</h3>
-          <p class="service-description" data-i18n="services.supplierDescription">
-            Finding reliable suppliers worldwide with thorough due diligence and quality verification for nuts, dried fruits, and spices.
-          </p>
+          <p class="service-description" data-i18n="services.supplierDescription">Finding reliable suppliers worldwide with thorough due diligence and quality verification for nuts, dried fruits, and spices.</p>
           <div class="read-more-btn">
             <span data-i18n="services.readMore">Read More</span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="currentColor"/>
-            </svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="currentColor"/></svg>
           </div>
         </div>
         
         <div class="service-card" data-service-modal="modal2">
-          <div class="service-icon">
-            <i class="fas fa-handshake"></i>
-          </div>
+          <div class="service-icon"><i class="fas fa-handshake"></i></div>
           <h3 class="service-name" data-i18n="services.contractNegotiation">Contract Negotiation</h3>
-          <p class="service-description" data-i18n="services.contractDescription">
-            Securing optimal terms and pricing through expert negotiation while protecting client interests in international deals.
-          </p>
+          <p class="service-description" data-i18n="services.contractDescription">Securing optimal terms and pricing through expert negotiation while protecting client interests in international deals.</p>
           <div class="read-more-btn">
             <span data-i18n="services.readMore">Read More</span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="currentColor"/>
-            </svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="currentColor"/></svg>
           </div>
         </div>
         
         <div class="service-card" data-service-modal="modal3">
-          <div class="service-icon">
-            <i class="fas fa-shipping-fast"></i>
-          </div>
+          <div class="service-icon"><i class="fas fa-shipping-fast"></i></div>
           <h3 class="service-name" data-i18n="services.logisticsManagement">Logistics Management</h3>
-          <p class="service-description" data-i18n="services.logisticsDescription">
-            Coordinating seamless transportation with trusted partners and optimizing supply chain routes for cost efficiency.
-          </p>
+          <p class="service-description" data-i18n="services.logisticsDescription">Coordinating seamless transportation with trusted partners and optimizing supply chain routes for cost efficiency.</p>
           <div class="read-more-btn">
             <span data-i18n="services.readMore">Read More</span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="currentColor"/>
-            </svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="currentColor"/></svg>
           </div>
         </div>
         
         <div class="service-card" data-service-modal="modal4">
-          <div class="service-icon">
-            <i class="fas fa-file-contract"></i>
-          </div>
+          <div class="service-icon"><i class="fas fa-file-contract"></i></div>
           <h3 class="service-name" data-i18n="services.tradeDocumentation">Trade Documentation</h3>
-          <p class="service-description" data-i18n="services.documentationDescription">
-            Handling complete customs documentation and compliance to ensure smooth customs clearance and timely delivery.
-          </p>
+          <p class="service-description" data-i18n="services.documentationDescription">Handling complete customs documentation and compliance to ensure smooth customs clearance and timely delivery.</p>
           <div class="read-more-btn">
             <span data-i18n="services.readMore">Read More</span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="currentColor"/>
-            </svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="currentColor"/></svg>
           </div>
         </div>
         
         <div class="service-card" data-service-modal="modal5">
-          <div class="service-icon">
-            <i class="fas fa-clipboard-check"></i>
-          </div>
+          <div class="service-icon"><i class="fas fa-clipboard-check"></i></div>
           <h3 class="service-name" data-i18n="services.shipmentMonitoring">Shipment Monitoring</h3>
-          <p class="service-description" data-i18n="services.monitoringDescription">
-            Every shipment is tracked daily — from loading to final delivery. I monitor all logistics stages to ensure deadlines and product safety.
-          </p>
+          <p class="service-description" data-i18n="services.monitoringDescription">Every shipment is tracked daily — from loading to final delivery. I monitor all logistics stages to ensure deadlines and product safety.</p>
           <div class="read-more-btn">
             <span data-i18n="services.readMore">Read More</span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="currentColor"/>
-            </svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="currentColor"/></svg>
           </div>
         </div>
         
         <div class="service-card" data-service-modal="modal6">
-          <div class="service-icon">
-            <i class="fas fa-tasks"></i>
-          </div>
+          <div class="service-icon"><i class="fas fa-tasks"></i></div>
           <h3 class="service-name" data-i18n="services.fullServiceImport">Full-Service Import</h3>
-          <p class="service-description" data-i18n="services.importDescription">
-            End-to-end import solutions tailored to your business needs - from sourcing to final delivery at your warehouse.
-          </p>
+          <p class="service-description" data-i18n="services.importDescription">End-to-end import solutions tailored to your business needs - from sourcing to final delivery at your warehouse.</p>
           <div class="read-more-btn">
             <span data-i18n="services.readMore">Read More</span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="currentColor"/>
-            </svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="currentColor"/></svg>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Service Modal Windows -->
+  <!-- Service Modals -->
   <div class="service-modal" id="modal1">
     <div class="service-modal-content">
       <div class="close-modal"></div>
-      <div class="service-modal-icon">
-        <i class="fas fa-search-dollar"></i>
-      </div>
+      <div class="service-modal-icon"><i class="fas fa-search-dollar"></i></div>
       <h3 data-i18n="modals.service1.title">Supplier Sourcing & Verification</h3>
-      <p data-i18n="modals.service1.description">I conduct comprehensive market research to identify reputable suppliers of nuts, dried fruits, spices, and coffee from key producing regions. Each potential partner undergoes rigorous verification including factory audits, quality certification checks, and reference validation to ensure they meet international standards and your specific requirements.</p>
+      <p data-i18n="modals.service1.description">I conduct comprehensive market research to identify reputable suppliers of nuts, dried fruits, spices, and coffee from key producing regions.</p>
     </div>
   </div>
-
   <div class="service-modal" id="modal2">
     <div class="service-modal-content">
       <div class="close-modal"></div>
-      <div class="service-modal-icon">
-        <i class="fas fa-handshake"></i>
-      </div>
+      <div class="service-modal-icon"><i class="fas fa-handshake"></i></div>
       <h3 data-i18n="modals.service2.title">Contract Negotiation & Terms</h3>
-      <p data-i18n="modals.service2.description">Leveraging my expertise in international trade, I negotiate favorable terms covering pricing, payment conditions, delivery schedules, and quality specifications. I ensure contracts include comprehensive protection clauses for quality assurance, delivery timelines, and dispute resolution while maintaining strong supplier relationships for long-term cooperation.</p>
+      <p data-i18n="modals.service2.description">Leveraging my expertise in international trade, I negotiate favorable terms covering pricing, payment conditions, delivery schedules, and quality specifications.</p>
     </div>
   </div>
-
   <div class="service-modal" id="modal3">
     <div class="service-modal-content">
       <div class="close-modal"></div>
-      <div class="service-modal-icon">
-        <i class="fas fa-shipping-fast"></i>
-      </div>
+      <div class="service-modal-icon"><i class="fas fa-shipping-fast"></i></div>
       <h3 data-i18n="modals.service3.title">Logistics & Supply Chain Management</h3>
-      <p data-i18n="modals.service3.description">I coordinate with trusted freight forwarders, customs brokers, and transportation providers to design optimal shipping routes. My logistics management includes container booking, route optimization, cost analysis, and coordination between multiple parties to ensure timely and cost-effective delivery from origin to destination port.</p>
+      <p data-i18n="modals.service3.description">I coordinate with trusted freight forwarders, customs brokers, and transportation providers to design optimal shipping routes.</p>
     </div>
   </div>
-
   <div class="service-modal" id="modal4">
     <div class="service-modal-content">
       <div class="close-modal"></div>
-      <div class="service-modal-icon">
-        <i class="fas fa-file-contract"></i>
-      </div>
+      <div class="service-modal-icon"><i class="fas fa-file-contract"></i></div>
       <h3 data-i18n="modals.service4.title">International Trade Documentation</h3>
-      <p data-i18n="modals.service4.description">I manage the complete documentation process including commercial invoices, packing lists, certificates of origin, phytosanitary certificates, and customs declarations. My meticulous approach ensures compliance with both exporting and importing country regulations, preventing delays and additional costs during customs clearance.</p>
+      <p data-i18n="modals.service4.description">I manage the complete documentation process including commercial invoices, packing lists, certificates of origin, phytosanitary certificates, and customs declarations.</p>
     </div>
   </div>
-
   <div class="service-modal" id="modal5">
     <div class="service-modal-content">
       <div class="close-modal"></div>
-      <div class="service-modal-icon">
-        <i class="fas fa-clipboard-check"></i>
-      </div>
+      <div class="service-modal-icon"><i class="fas fa-clipboard-check"></i></div>
       <h3 data-i18n="modals.service5.title">Shipment Monitoring & Quality Assurance</h3>
-      <p data-i18n="modals.service5.description">I provide continuous tracking and monitoring of shipments from loading to final delivery. This includes regular updates, temperature control verification for sensitive products, and immediate problem-solving for any transit issues. I maintain constant communication with all parties to ensure your goods arrive in perfect condition and on schedule.</p>
+      <p data-i18n="modals.service5.description">I provide continuous tracking and monitoring of shipments from loading to final delivery.</p>
     </div>
   </div>
-
   <div class="service-modal" id="modal6">
     <div class="service-modal-content">
       <div class="close-modal"></div>
-      <div class="service-modal-icon">
-        <i class="fas fa-tasks"></i>
-      </div>
+      <div class="service-modal-icon"><i class="fas fa-tasks"></i></div>
       <h3 data-i18n="modals.service6.title">Comprehensive Import Solutions</h3>
-      <p data-i18n="modals.service6.description">As your dedicated import manager, I provide end-to-end solutions tailored to your specific business needs. From initial market research and supplier identification to final delivery coordination, I handle every aspect of the import process. My goal is to create seamless, efficient supply chains that allow you to focus on growing your business while I manage the complexities of international trade.</p>
+      <p data-i18n="modals.service6.description">As your dedicated import manager, I provide end-to-end solutions tailored to your specific business needs.</p>
     </div>
   </div>
 
@@ -996,297 +322,168 @@ export function Content() {
     <div class="portfolio-container">
       <h2 class="portfolio-title" data-i18n="portfolio.title">Successful Import Projects</h2>
       
-      <!-- Swiper -->
       <div class="swiper portfolio-swiper">
         <div class="swiper-wrapper">
-          <!-- Slide 1 -->
           <div class="swiper-slide">
             <div class="portfolio-card">
               <div class="card-image" data-image-src="/img/img016.jpg" data-image-alt="Premium nuts import">
                 <img src="/img/img016.jpg" alt="Premium nuts import" class="portfolio-image">
-                <div class="card-overlay">
-                  <div class="zoom-icon">
-                    <i class="fas fa-expand"></i>
-                  </div>
-                </div>
+                <div class="card-overlay"><div class="zoom-icon"><i class="fas fa-expand"></i></div></div>
               </div>
               <div class="portfolio-content">
                 <h3 data-i18n="portfolio.project1.title">Gulfood Dubai 2023</h3>
                 <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
-                <div class="project-stats">
-                  <div class="stat">
-                    <span class="stat-label" data-i18n="portfolio.detail1">Meeting with a regular supplier of dates from Tunisia</span>
-                  </div>
-                </div>
+                <div class="project-stats"><div class="stat"><span class="stat-label" data-i18n="portfolio.detail1">Meeting with a regular supplier of dates from Tunisia</span></div></div>
               </div>
             </div>
           </div>
-          
-          <!-- Slide 2 -->
           <div class="swiper-slide">
             <div class="portfolio-card">
               <div class="card-image" data-image-src="/img/img002.jpg" data-image-alt="Premium nuts import">
                 <img src="/img/img002.jpg" alt="Premium nuts import" class="portfolio-image">
-                <div class="card-overlay">
-                  <div class="zoom-icon">
-                    <i class="fas fa-expand"></i>
-                  </div>
-                </div>
+                <div class="card-overlay"><div class="zoom-icon"><i class="fas fa-expand"></i></div></div>
               </div>
               <div class="portfolio-content">
                 <h3 data-i18n="portfolio.project2.title">Gulfood Dubai 2023</h3>
                 <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
-                <div class="project-stats">
-                  <div class="stat">
-                    <span class="stat-label" data-i18n="portfolio.detail2">Discovering reliable suppliers of nuts and dried fruits worldwide.</span>
-                  </div>
-                </div>
+                <div class="project-stats"><div class="stat"><span class="stat-label" data-i18n="portfolio.detail2">Discovering reliable suppliers of nuts and dried fruits worldwide.</span></div></div>
               </div>
             </div>
           </div>
-
-          <!-- Slide 3 -->
           <div class="swiper-slide">
             <div class="portfolio-card">
               <div class="card-image" data-image-src="/img/img003.jpg" data-image-alt="Premium nuts import">
                 <img src="/img/img003.jpg" alt="Premium nuts import" class="portfolio-image">
-                <div class="card-overlay">
-                  <div class="zoom-icon">
-                    <i class="fas fa-expand"></i>
-                  </div>
-                </div>
+                <div class="card-overlay"><div class="zoom-icon"><i class="fas fa-expand"></i></div></div>
               </div>
               <div class="portfolio-content">
                 <h3 data-i18n="portfolio.project3.title">Cashew processing and packaging insight, Vietnam</h3>
                 <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
-                <div class="project-stats">
-                  <div class="stat">
-                    <span class="stat-label" data-i18n="portfolio.detail3">Maintaining reliable partnerships.</span>
-                  </div>
-                </div>
+                <div class="project-stats"><div class="stat"><span class="stat-label" data-i18n="portfolio.detail3">Maintaining reliable partnerships.</span></div></div>
               </div>
             </div>
           </div>
-          
-          <!-- Slide 4 -->
           <div class="swiper-slide">
             <div class="portfolio-card">
               <div class="card-image" data-image-src="/img/img017.jpg" data-image-alt="Premium nuts import">
                 <img src="/img/img017.jpg" alt="Premium nuts import" class="portfolio-image">
-                <div class="card-overlay">
-                  <div class="zoom-icon">
-                    <i class="fas fa-expand"></i>
-                  </div>
-                </div>
+                <div class="card-overlay"><div class="zoom-icon"><i class="fas fa-expand"></i></div></div>
               </div>
               <div class="portfolio-content">
                 <h3 data-i18n="portfolio.project4.title">Gulfood Dubai 2025</h3>
                 <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
-                <div class="project-stats">
-                  <div class="stat">
-                    <span class="stat-label" data-i18n="portfolio.detail4">Indian stand</span>
-                  </div>
-                </div>
+                <div class="project-stats"><div class="stat"><span class="stat-label" data-i18n="portfolio.detail4">Indian stand</span></div></div>
               </div>
             </div>
           </div>
-          
-          <!-- Slide 5 -->
           <div class="swiper-slide">
             <div class="portfolio-card">
               <div class="card-image" data-image-src="/img/img005.jpg" data-image-alt="Premium nuts import">
                 <img src="/img/img005.jpg" alt="Premium nuts import" class="portfolio-image">
-                <div class="card-overlay">
-                  <div class="zoom-icon">
-                    <i class="fas fa-expand"></i>
-                  </div>
-                </div>
+                <div class="card-overlay"><div class="zoom-icon"><i class="fas fa-expand"></i></div></div>
               </div>
               <div class="portfolio-content">
                 <h3 data-i18n="portfolio.project5.title">Meeting with Russian Ambassador.</h3>
                 <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
-                <div class="project-stats">
-                  <div class="stat">
-                    <span class="stat-label" data-i18n="portfolio.detail5">Strengthening trade relations.</span>
-                  </div>
-                </div>
+                <div class="project-stats"><div class="stat"><span class="stat-label" data-i18n="portfolio.detail5">Strengthening trade relations.</span></div></div>
               </div>
             </div>
           </div>
-          
-          <!-- Slide 6 -->
           <div class="swiper-slide">
             <div class="portfolio-card">
               <div class="card-image" data-image-src="/img/img007.jpg" data-image-alt="Premium nuts import">
                 <img src="/img/img007.jpg" alt="Premium nuts import" class="portfolio-image">
-                <div class="card-overlay">
-                  <div class="zoom-icon">
-                    <i class="fas fa-expand"></i>
-                  </div>
-                </div>
+                <div class="card-overlay"><div class="zoom-icon"><i class="fas fa-expand"></i></div></div>
               </div>
               <div class="portfolio-content">
                 <h3 data-i18n="portfolio.project6.title">Gulfood Dubai 2022</h3>
                 <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
-                <div class="project-stats">
-                  <div class="stat">
-                    <span class="stat-label" data-i18n="portfolio.detail6">Connecting with international nut suppliers for long-term partnerships.</span>
-                  </div>
-                </div>
+                <div class="project-stats"><div class="stat"><span class="stat-label" data-i18n="portfolio.detail6">Connecting with international nut suppliers for long-term partnerships.</span></div></div>
               </div>
             </div>
           </div>
-          
-          <!-- Slide 7 -->
           <div class="swiper-slide">
             <div class="portfolio-card">
               <div class="card-image" data-image-src="/img/img008.jpg" data-image-alt="Premium nuts import">
                 <img src="/img/img008.jpg" alt="Premium nuts import" class="portfolio-image">
-                <div class="card-overlay">
-                  <div class="zoom-icon">
-                    <i class="fas fa-expand"></i>
-                  </div>
-                </div>
+                <div class="card-overlay"><div class="zoom-icon"><i class="fas fa-expand"></i></div></div>
               </div>
               <div class="portfolio-content">
                 <h3 data-i18n="portfolio.project7.title">Gulfood Dubai 2025</h3>
                 <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
-                <div class="project-stats">
-                  <div class="stat">
-                    <span class="stat-label" data-i18n="portfolio.detail7">Scouting trusted nut suppliers for global markets.</span>
-                  </div>
-                </div>
+                <div class="project-stats"><div class="stat"><span class="stat-label" data-i18n="portfolio.detail7">Scouting trusted nut suppliers for global markets.</span></div></div>
               </div>
             </div>
           </div>
-          
-          <!-- Slide 8 -->
           <div class="swiper-slide">
             <div class="portfolio-card">
               <div class="card-image" data-image-src="/img/img013.jpg" data-image-alt="Premium nuts import">
                 <img src="/img/img013.jpg" alt="Premium nuts import" class="portfolio-image">
-                <div class="card-overlay">
-                  <div class="zoom-icon">
-                    <i class="fas fa-expand"></i>
-                  </div>
-                </div>
+                <div class="card-overlay"><div class="zoom-icon"><i class="fas fa-expand"></i></div></div>
               </div>
               <div class="portfolio-content">
                 <h3 data-i18n="portfolio.project8.title">Anuga Cologne 2025</h3>
                 <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
-                <div class="project-stats">
-                  <div class="stat">
-                    <span class="stat-label" data-i18n="portfolio.detail9">Securing supply chain connections.</span>
-                  </div>
-                </div>
+                <div class="project-stats"><div class="stat"><span class="stat-label" data-i18n="portfolio.detail9">Securing supply chain connections.</span></div></div>
               </div>
             </div>
           </div>
-          
-          <!-- Slide 9 -->
           <div class="swiper-slide">
             <div class="portfolio-card">
               <div class="card-image" data-image-src="/img/img014.jpg" data-image-alt="Premium nuts import">
                 <img src="/img/img014.jpg" alt="Premium nuts import" class="portfolio-image">
-                <div class="card-overlay">
-                  <div class="zoom-icon">
-                    <i class="fas fa-expand"></i>
-                  </div>
-                </div>
+                <div class="card-overlay"><div class="zoom-icon"><i class="fas fa-expand"></i></div></div>
               </div>
               <div class="portfolio-content">
                 <h3 data-i18n="portfolio.project9.title">Anuga Cologne 2025</h3>
                 <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
-                <div class="project-stats">
-                  <div class="stat">
-                    <span class="stat-label" data-i18n="portfolio.detail8">Exploring international markets for nuts and dried fruits.</span>
-                  </div>
-                </div>
+                <div class="project-stats"><div class="stat"><span class="stat-label" data-i18n="portfolio.detail8">Exploring international markets for nuts and dried fruits.</span></div></div>
               </div>
             </div>
           </div>
-          
-          <!-- Slide 10 -->
           <div class="swiper-slide">
             <div class="portfolio-card">
               <div class="card-image" data-image-src="/img/img012.jpg" data-image-alt="Premium nuts import">
                 <img src="/img/img012.jpg" alt="Premium nuts import" class="portfolio-image">
-                <div class="card-overlay">
-                  <div class="zoom-icon">
-                    <i class="fas fa-expand"></i>
-                  </div>
-                </div>
+                <div class="card-overlay"><div class="zoom-icon"><i class="fas fa-expand"></i></div></div>
               </div>
               <div class="portfolio-content">
                 <h3 data-i18n="portfolio.project10.title">Meeting another cashew supplier and investors</h3>
                 <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
-                <div class="project-stats">
-                  <div class="stat">
-                    <span class="stat-label" data-i18n="portfolio.detail9">Securing supply chain connections.</span>
-                  </div>
-                </div>
+                <div class="project-stats"><div class="stat"><span class="stat-label" data-i18n="portfolio.detail9">Securing supply chain connections.</span></div></div>
               </div>
             </div>
           </div>
-          
-          <!-- Slide 11 -->
           <div class="swiper-slide">
             <div class="portfolio-card">
               <div class="card-image" data-image-src="/img/img019.jpg" data-image-alt="Premium nuts import">
                 <img src="/img/img019.jpg" alt="Premium nuts import" class="portfolio-image">
-                <div class="card-overlay">
-                  <div class="zoom-icon">
-                    <i class="fas fa-expand"></i>
-                  </div>
-                </div>
+                <div class="card-overlay"><div class="zoom-icon"><i class="fas fa-expand"></i></div></div>
               </div>
               <div class="portfolio-content">
                 <h3 data-i18n="portfolio.project11.title">Gulfood Dubai 2025</h3>
                 <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
-                <div class="project-stats">
-                  <div class="stat">
-                    <span class="stat-label" data-i18n="portfolio.detail10">Life is buzzing here — ideas are born and deals are made! A true celebration of flavors and opportunities.</span>
-                  </div>
-                </div>
+                <div class="project-stats"><div class="stat"><span class="stat-label" data-i18n="portfolio.detail10">Life is buzzing here — ideas are born and deals are made!</span></div></div>
               </div>
             </div>
           </div>
         </div>
-        
-        <!-- Navigation -->
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
-        
-        <!-- Pagination -->
         <div class="swiper-pagination"></div>
       </div>
     </div>
   </section>
 
-  <!-- Gallery modal window -->
+  <!-- Gallery modal -->
   <div class="gallery-modal" id="galleryModal">
     <div class="gallery-modal-content">
-      <div class="close-gallery-modal">
-        <i class="fas fa-times"></i>
-      </div>
-      
-      <!-- Navigation -->
-      <button class="gallery-nav gallery-prev">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      <button class="gallery-nav gallery-next">
-        <i class="fas fa-chevron-right"></i>
-      </button>
-
+      <div class="close-gallery-modal"><i class="fas fa-times"></i></div>
+      <button class="gallery-nav gallery-prev"><i class="fas fa-chevron-left"></i></button>
+      <button class="gallery-nav gallery-next"><i class="fas fa-chevron-right"></i></button>
       <div class="gallery-image-container">
         <img src="" alt="" class="gallery-image" id="galleryImage">
-        
-        <!-- Counter -->
-        <div class="gallery-counter">
-          <span id="currentImage">1</span> / <span id="totalImages">11</span>
-        </div>
-        
-        <!-- Description -->
+        <div class="gallery-counter"><span id="currentImage">1</span> / <span id="totalImages">11</span></div>
         <div class="image-caption">
           <h3 id="imageTitle" data-i18n="gallery.projectTitle">Project Title</h3>
           <p id="imageDescription" data-i18n="gallery.projectDescription">Project description</p>
@@ -1295,107 +492,56 @@ export function Content() {
     </div>
   </div>
 
-  <!-- Contact section with id -->
+  <!-- Contact section -->
   <section id="contact" class="contacts-section">
     <div class="contacts-container">
       <h2 class="contacts-title" data-i18n="contact.title">Get In Touch</h2>
-      
       <div class="contacts-content">
-        <!-- Left part - form -->
         <div class="contact-form-container">
           <form class="contact-form" id="contact-form">
             <div class="name-fields">
               <div class="form-group">
                 <label for="firstName" data-i18n="contact.firstName">First Name</label>
-                <input type="text" id="firstName" name="first_name" 
-                       data-i18n-placeholder="contact.firstNamePlaceholder" 
-                       placeholder="Enter your first name" required>
+                <input type="text" id="firstName" name="first_name" data-i18n-placeholder="contact.firstNamePlaceholder" placeholder="Enter your first name" required>
               </div>
               <div class="form-group">
                 <label for="lastName" data-i18n="contact.lastName">Last Name</label>
-                <input type="text" id="lastName" name="last_name" 
-                       data-i18n-placeholder="contact.lastNamePlaceholder" 
-                       placeholder="Enter your last name" required>
+                <input type="text" id="lastName" name="last_name" data-i18n-placeholder="contact.lastNamePlaceholder" placeholder="Enter your last name" required>
               </div>
             </div>
-            
             <div class="form-group">
               <label for="email" data-i18n="contact.email">Email</label>
-              <input type="email" id="email" name="user_email" 
-                     data-i18n-placeholder="contact.emailPlaceholder" 
-                     placeholder="Enter your email address" required>
+              <input type="email" id="email" name="user_email" data-i18n-placeholder="contact.emailPlaceholder" placeholder="Enter your email address" required>
             </div>
-            
             <div class="form-group">
               <label for="message" data-i18n="contact.message">How can we help you?</label>
-              <textarea id="message" name="message" rows="5" 
-                        data-i18n-placeholder="contact.messagePlaceholder" 
-                        placeholder="Enter your message" required></textarea>
+              <textarea id="message" name="message" rows="5" data-i18n-placeholder="contact.messagePlaceholder" placeholder="Enter your message" required></textarea>
             </div>
-            
-            <button type="submit" class="send-message-btn" data-i18n="contact.sendMessage">
-              Send Message
-            </button>
+            <button type="submit" class="send-message-btn" data-i18n="contact.sendMessage">Send Message</button>
           </form>
         </div>
-        
-        <!-- Right part - social media -->
         <div class="contact-info-container">
           <div class="social-section">
             <div class="social-grid">
-              <a href="${
-                personal.contacts.socials.facebook
-              }" class="social-card facebook" target="_blank">
-                <div class="social-icon">
-                  <i class="fab fa-facebook-f"></i>
-                </div>
-                <div class="social-text">
-                  <span class="social-name">Facebook</span>
-                </div>
+              <a href="${personal.contacts.socials.facebook}" class="social-card facebook" target="_blank">
+                <div class="social-icon"><i class="fab fa-facebook-f"></i></div>
+                <div class="social-text"><span class="social-name">Facebook</span></div>
               </a>
-              
-              <a href="${
-                personal.contacts.socials.whatsapp
-              }" class="social-card whatsapp" target="_blank">
-                <div class="social-icon">
-                  <i class="fab fa-whatsapp"></i>
-                </div>
-                <div class="social-text">
-                  <span class="social-name">WhatsApp</span>
-                </div>
+              <a href="${personal.contacts.socials.whatsapp}" class="social-card whatsapp" target="_blank">
+                <div class="social-icon"><i class="fab fa-whatsapp"></i></div>
+                <div class="social-text"><span class="social-name">WhatsApp</span></div>
               </a>
-              
-              <a href="${
-                personal.contacts.socials.gmail
-              }" class="social-card gmail" target="_blank">
-                <div class="social-icon">
-                  <i class="fab fa-google"></i>
-                </div>
-                <div class="social-text">
-                  <span class="social-name">Gmail</span>
-                </div>
+              <a href="${personal.contacts.socials.gmail}" class="social-card gmail" target="_blank">
+                <div class="social-icon"><i class="fab fa-google"></i></div>
+                <div class="social-text"><span class="social-name">Gmail</span></div>
               </a>
-              
-              <a href="${
-                personal.contacts.socials.telegram
-              }" class="social-card telegram" target="_blank">
-                <div class="social-icon">
-                  <i class="fab fa-telegram"></i>
-                </div>
-                <div class="social-text">
-                  <span class="social-name">Telegram</span>
-                </div>
+              <a href="${personal.contacts.socials.telegram}" class="social-card telegram" target="_blank">
+                <div class="social-icon"><i class="fab fa-telegram"></i></div>
+                <div class="social-text"><span class="social-name">Telegram</span></div>
               </a>
-              
-              <a href="${
-                personal.contacts.socials.wechat
-              }" class="social-card whatsapp" target="_blank">
-                <div class="social-icon">
-                  <i class="fab fa-weixin"></i>
-                </div>
-                <div class="social-text">
-                  <span class="social-name">WeChat</span>
-                </div>
+              <a href="${personal.contacts.socials.wechat}" class="social-card whatsapp" target="_blank">
+                <div class="social-icon"><i class="fab fa-weixin"></i></div>
+                <div class="social-text"><span class="social-name">WeChat</span></div>
               </a>
             </div>
           </div>
@@ -1404,7 +550,6 @@ export function Content() {
     </div>
   </section>
 
-  <!-- Scroll to top arrow -->
   <div class="scroll-to-top" id="scrollToTop">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path d="M18 15l-6-6-6 6"/>

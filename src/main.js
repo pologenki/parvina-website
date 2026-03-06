@@ -11,7 +11,7 @@ import {
   getCurrentLanguage,
 } from "./utils/i18n.js";
 import { initContactForm } from "./utils/emailService.js";
-
+import { Content, loadProducts } from "./components/content.js";
 // Import Swiper
 import Swiper from "swiper";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
@@ -329,6 +329,8 @@ async function renderApp() {
 // Application initialization
 async function initApp() {
   await initLanguage();
+  const { loadProducts } = await import("./components/content.js");
+  await loadProducts();
   await renderApp();
 }
 
@@ -392,7 +394,8 @@ function initSwiper() {
 // Global function for language change
 window.changeLanguage = async function (lang) {
   await loadTranslations(lang);
-  // Re-render the entire content to update language-specific content
+  const { loadProducts } = await import("./components/content.js");
+  await loadProducts();
   const appContainer = document.querySelector("#app");
   if (appContainer) {
     appContainer.innerHTML = `
