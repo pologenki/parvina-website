@@ -393,7 +393,6 @@ function initSwiper() {
 // Global function for language change
 window.changeLanguage = async function (lang) {
   await loadTranslations(lang);
-  const { loadProducts } = await import("./components/content.js");
   await loadProducts();
   const appContainer = document.querySelector("#app");
   if (appContainer) {
