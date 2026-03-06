@@ -28,7 +28,6 @@ function getProductText(product, field, lang) {
 }
 
 function getPriceText(price, lang) {
-  const lang = getCurrentLanguage();
   if (price === "Price on request") {
     return lang === "ru" ? "Цена по запросу" : "Price on request";
   }
