@@ -19,6 +19,8 @@
     --muted: #888;
     --success: #4a8c5c;
     --danger: #c0392b;
+    --en: #2563eb;
+    --ru: #c0392b;
   }
 
   body {
@@ -192,10 +194,24 @@
     margin-bottom: 2.5rem;
   }
 
+  /* ── LANG BADGE ── */
+  .lang-badge {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: 0.1rem 0.4rem;
+    border-radius: 2px;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+  }
+  .lang-badge.en { background: #dbeafe; color: var(--en); }
+  .lang-badge.ru { background: #fde8e8; color: var(--ru); }
+
   /* ── GRID ── */
   .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
     gap: 1.5rem;
   }
 
@@ -264,7 +280,20 @@
 
   .card-input:focus { border-color: var(--dark); background: var(--white); }
   .card-input.price { color: var(--dark); font-weight: 500; }
+  .card-input.en:focus { border-color: var(--en); }
+  .card-input.ru:focus { border-color: var(--ru); }
 
+  /* two-column EN/RU fields */
+  .bilingual-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .bilingual-row .card-field { margin-bottom: 0; }
+
+  /* ── VARIANTS ── */
   .variants-header {
     display: flex;
     align-items: center;
@@ -302,7 +331,6 @@
 
   .variants-body.open { display: block; }
 
-  /* single variant block */
   .variant-item {
     background: var(--white);
     border: 1px solid var(--border);
@@ -329,7 +357,14 @@
     display: grid;
     grid-template-columns: 1fr 148px;
     gap: 0.5rem;
-    margin-bottom: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .variant-desc-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
   }
 
   .variant-input {
@@ -346,10 +381,12 @@
 
   .variant-input:focus { border-color: var(--dark); background: var(--white); }
   .variant-input.price { color: var(--dark); font-weight: 500; }
+  .variant-input.en:focus { border-color: var(--en); }
+  .variant-input.ru:focus { border-color: var(--ru); }
 
   textarea.variant-input {
     resize: none;
-    height: 52px;
+    height: 60px;
     font-size: 0.8rem;
     color: var(--muted);
     line-height: 1.4;
@@ -418,7 +455,6 @@
 
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
 
-  /* ── TOAST ── */
   .toast {
     position: fixed;
     top: 80px; right: 2rem;
@@ -544,14 +580,21 @@ function buildVariantHTML(i, j, v) {
       </div>
       <div class="variant-row-2col">
         <div>
-          <span class="variant-mini-label">Description</span>
-          <textarea class="variant-input"
-            oninput="updV(${i},${j},'desc',this.value)" placeholder="Packing, port, quality notes...">${esc(v.desc)}</textarea>
-        </div>
-        <div>
           <span class="variant-mini-label">Price</span>
           <input class="variant-input price" value="${esc(v.price)}"
             oninput="updV(${i},${j},'price',this.value)" placeholder="0,00 USD/kg">
+        </div>
+      </div>
+      <div class="variant-desc-row">
+        <div>
+          <span class="variant-mini-label">Description <span class="lang-badge en">EN</span></span>
+          <textarea class="variant-input en"
+            oninput="updV(${i},${j},'desc',this.value)" placeholder="Packing, port, quality notes...">${esc(v.desc)}</textarea>
+        </div>
+        <div>
+          <span class="variant-mini-label">Description <span class="lang-badge ru">RU</span></span>
+          <textarea class="variant-input ru"
+            oninput="updV(${i},${j},'desc_ru',this.value)" placeholder="Упаковка, порт, качество...">${esc(v.desc_ru)}</textarea>
         </div>
       </div>
     </div>
@@ -568,26 +611,52 @@ function renderGrid() {
         <span class="card-num">${String(i+1).padStart(2,'0')}</span>
       </div>
       <div class="card-body">
-        <div class="card-field">
-          <label class="card-label">Product Name</label>
-          <input class="card-input" value="${esc(p.name)}"
-            oninput="upd(${i},'name',this.value)">
+
+        <div class="bilingual-row">
+          <div class="card-field">
+            <label class="card-label">Name <span class="lang-badge en">EN</span></label>
+            <input class="card-input en" value="${esc(p.name)}"
+              oninput="upd(${i},'name',this.value)" placeholder="Product name">
+          </div>
+          <div class="card-field">
+            <label class="card-label">Name <span class="lang-badge ru">RU</span></label>
+            <input class="card-input ru" value="${esc(p.name_ru)}"
+              oninput="upd(${i},'name_ru',this.value)" placeholder="Название товара">
+          </div>
         </div>
+
         <div class="card-field">
           <label class="card-label">Main Price</label>
           <input class="card-input price" value="${esc(p.mainPrice)}"
             oninput="upd(${i},'mainPrice',this.value)">
         </div>
-        <div class="card-field">
-          <label class="card-label">Origin</label>
-          <input class="card-input" value="${esc(p.origin)}"
-            oninput="upd(${i},'origin',this.value)">
+
+        <div class="bilingual-row">
+          <div class="card-field">
+            <label class="card-label">Origin <span class="lang-badge en">EN</span></label>
+            <input class="card-input en" value="${esc(p.origin)}"
+              oninput="upd(${i},'origin',this.value)" placeholder="e.g. Vietnam">
+          </div>
+          <div class="card-field">
+            <label class="card-label">Origin <span class="lang-badge ru">RU</span></label>
+            <input class="card-input ru" value="${esc(p.origin_ru)}"
+              oninput="upd(${i},'origin_ru',this.value)" placeholder="напр. Вьетнам">
+          </div>
         </div>
-        <div class="card-field">
-          <label class="card-label">Description</label>
-          <input class="card-input" value="${esc(p.desc)}"
-            oninput="upd(${i},'desc',this.value)">
+
+        <div class="bilingual-row">
+          <div class="card-field">
+            <label class="card-label">Description <span class="lang-badge en">EN</span></label>
+            <input class="card-input en" value="${esc(p.desc)}"
+              oninput="upd(${i},'desc',this.value)" placeholder="Short description">
+          </div>
+          <div class="card-field">
+            <label class="card-label">Description <span class="lang-badge ru">RU</span></label>
+            <input class="card-input ru" value="${esc(p.desc_ru)}"
+              oninput="upd(${i},'desc_ru',this.value)" placeholder="Краткое описание">
+          </div>
         </div>
+
       </div>
       <div class="variants-header" onclick="toggleV(this)">
         <span class="variants-label" id="vlabel-${i}">${p.variants.length} variants — click to edit</span>
@@ -604,9 +673,9 @@ function renderGrid() {
 }
 
 function addVariant(i) {
-  data.products[i].variants.push({ name: '', price: '', desc: '' });
+  data.products[i].variants.push({ name: '', price: '', desc: '', desc_ru: '' });
   const j = data.products[i].variants.length - 1;
-  document.getElementById(`vlist-${i}`).insertAdjacentHTML('beforeend', buildVariantHTML(i, j, { name:'', price:'', desc:'' }));
+  document.getElementById(`vlist-${i}`).insertAdjacentHTML('beforeend', buildVariantHTML(i, j, { name:'', price:'', desc:'', desc_ru:'' }));
   updateVLabel(i);
   document.getElementById(`variant-${i}-${j}`).querySelector('.variant-input').focus();
 }
