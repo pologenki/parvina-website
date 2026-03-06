@@ -54,9 +54,10 @@ async function initializeProducts() {
 async function renderApp() {
   console.log('🔄 Rendering app...');
   
+const contentHTML = await Content();
   document.querySelector('#app').innerHTML = `
     ${Header()}
-    ${Content()}
+    ${contentHTML}
     ${Footer()}
   `;
 
