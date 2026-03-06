@@ -17,6 +17,6 @@ export const personalRu = {
       gmail: '#'
     }
   },
-  footerBrand: 'Константин'
+  footerBrand: 'Парвина'
 };
 
