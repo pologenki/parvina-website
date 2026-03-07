@@ -1279,7 +1279,7 @@ function initFlipSlider() {
       const title = lang === 'ru' ? s.title_ru : s.title;
       const desc = lang === 'ru' ? s.desc_ru : s.desc;
       return `
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card" onclick="event.currentTarget.classList.toggle('flipped')">
           <div class="flip-inner">
             <div class="flip-front">
               <img src="${s.img}" alt="${title}">
