@@ -354,3 +354,31 @@
   top: 0 !important;
   bottom: 0 !important;
 }
+
+.flip-slider-track .flip-back {
+  padding: 1.5rem !important;
+  justify-content: flex-start !important;
+}
+
+.flip-slider-track .back-title {
+  font-size: 1.2rem !important;
+  margin-bottom: 0.75rem !important;
+}
+
+.flip-slider-track .back-desc {
+  font-size: 0.78rem !important;
+  line-height: 1.6 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 4 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  flex: none !important;
+}
+
+.flip-slider-track .back-decoration {
+  margin-bottom: 1rem !important;
+}
+
+.flip-slider-track .back-actions {
+  margin-top: 1rem !important;
+}
