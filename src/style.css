@@ -2,7 +2,7 @@
 @import './css/header.css';
 @import './css/footer.css';
 @import './css/content.css';
-
+@import './css/portfolio-flip.css';
 
  body {
         margin: 0;
