@@ -552,7 +552,10 @@ async function fetchProducts() {
     if (!r.ok) throw new Error('Auth failed — check your token');
     const json = await r.json();
     sha = json.sha;
-    data = JSON.parse(atob(json.content.replace(/\n/g,'')));
+    const binary = atob(json.content.replace(/\n/g,''));
+const bytes = new Uint8Array(binary.length);
+for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+data = JSON.parse(new TextDecoder('utf-8').decode(bytes));
     document.getElementById('pageMeta').textContent =
       `${data.products.length} products · Last updated: ${data.lastUpdated || '—'}`;
     document.getElementById('headerMeta').textContent =
