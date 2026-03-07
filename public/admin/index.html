@@ -708,7 +708,10 @@ async function publishChanges() {
   data.lastUpdated = new Date().toISOString().split('T')[0];
 
   try {
-    const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+    const jsonStr = JSON.stringify(data, null, 2);
+const bytes = new TextEncoder().encode(jsonStr);
+const binStr = Array.from(bytes).map(b => String.fromCharCode(b)).join('');
+const content = btoa(binStr);
     const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
       method: 'PUT',
       headers: {
