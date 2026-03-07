@@ -4,49 +4,49 @@
     {
       "id": "cashew",
       "name": "Cashew Nuts",
-      "name_ru": "ÐÐµÑÑÑ",
+      "name_ru": "Кешью",
       "desc": "AFI standard",
-      "desc_ru": "Ð¡ÑÐ°Ð½Ð´Ð°ÑÑ AFI",
+      "desc_ru": "Стандарт AFI",
       "origin": "Vietnam",
-      "origin_ru": "ТЕСТИРУЕМ",
+      "origin_ru": "Вьетнам",
       "image": "goods/cashew.webp",
-      "mainPrice": "6,30 USD/kg",
+      "mainPrice": "7,30 USD/kg",
       "variants": [
         {
           "name": "WW320 - Whole White",
           "price": "7,30 USD/kg",
           "desc": "Quality AFI standard. 20/22.68 kg PE vacuum bag/carton packing. FOB HCM",
-          "desc_ru": "ÐÐ°ÑÐµÑÑÐ²Ð¾ ÑÑÐ°Ð½Ð´Ð°ÑÑÐ° AFI. 20/22.68 ÐºÐ³ PE Ð²Ð°ÐºÑÑÐ¼Ð½ÑÐ¹ Ð¿Ð°ÐºÐµÑ/ÐºÐ°ÑÑÐ¾Ð½Ð½Ð°Ñ ÑÐ¿Ð°ÐºÐ¾Ð²ÐºÐ°. FOB HCM"
+          "desc_ru": "Качество стандарта AFI. 20/22.68 кг PE вакуумный пакет/картонная упаковка. FOB HCM"
         },
         {
           "name": "WW450 - Whole White",
           "price": "7,25 USD/kg",
           "desc": "Quality AFI standard. 20/22.68 kg PE vacuum bag/carton packing. FOB HCM.",
-          "desc_ru": "ÐÐ°ÑÐµÑÑÐ²Ð¾ ÑÑÐ°Ð½Ð´Ð°ÑÑÐ° AFI. 20/22.68 ÐºÐ³ PE Ð²Ð°ÐºÑÑÐ¼Ð½ÑÐ¹ Ð¿Ð°ÐºÐµÑ/ÐºÐ°ÑÑÐ¾Ð½Ð½Ð°Ñ ÑÐ¿Ð°ÐºÐ¾Ð²ÐºÐ°. FOB HCM."
+          "desc_ru": "Качество стандарта AFI. 20/22.68 кг PE вакуумный пакет/картонная упаковка. FOB HCM."
         },
         {
           "name": "WS - White Split",
           "price": "6,20 USD/kg",
           "desc": "Quality AFI standard. 20/22.68 kg PE vacuum bag/carton packing. FOB HCM.",
-          "desc_ru": "ÐÐ°ÑÐµÑÑÐ²Ð¾ ÑÑÐ°Ð½Ð´Ð°ÑÑÐ° AFI. 20/22.68 ÐºÐ³ PE Ð²Ð°ÐºÑÑÐ¼Ð½ÑÐ¹ Ð¿Ð°ÐºÐµÑ/ÐºÐ°ÑÑÐ¾Ð½Ð½Ð°Ñ ÑÐ¿Ð°ÐºÐ¾Ð²ÐºÐ°. FOB HCM."
+          "desc_ru": "Качество стандарта AFI. 20/22.68 кг PE вакуумный пакет/картонная упаковка. FOB HCM."
         },
         {
           "name": "Other grades",
-          "name_ru": "ÐÑÑÐ³Ð¸Ðµ ÑÐ¾ÑÑÐ°",
+          "name_ru": "Другие сорта",
           "price": "Price on request",
           "desc": "WW210, WW240, WW320, WW450, WS, LWP, LP, DW and etc.",
-          "desc_ru": "WW210, WW240, WW320, WW450, WS, LWP, LP, DW Ð¸ Ð´Ñ."
+          "desc_ru": "WW210, WW240, WW320, WW450, WS, LWP, LP, DW и др."
         }
       ]
     },
     {
       "id": "walnuts",
       "name": "Walnut Kernels",
-      "name_ru": "Ð¯Ð´ÑÐ° Ð³ÑÐµÑÐºÐ¾Ð³Ð¾ Ð¾ÑÐµÑÐ°",
+      "name_ru": "Ядра грецкого ореха",
       "desc": "Extra Light Halves",
-      "desc_ru": "Ð­ÐºÑÑÑÐ° ÑÐ²ÐµÑÐ»ÑÐµ Ð¿Ð¾Ð»Ð¾Ð²Ð¸Ð½ÐºÐ¸",
+      "desc_ru": "Экстра светлые половинки",
       "origin": "China",
-      "origin_ru": "ÐÐ¸ÑÐ°Ð¹",
+      "origin_ru": "Китай",
       "image": "goods/walnut.jpg",
       "mainPrice": "5,45 USD/kg",
       "variants": [
@@ -54,36 +54,36 @@
           "name": "Xingfu - ELH",
           "price": "5,45 USD/kg",
           "desc": "Xingfu type Extra Light Halves 80%, 2025 crop. 10 kg packing. FOB Tianjin port.",
-          "desc_ru": "Ð¢Ð¸Ð¿ Xingfu Ð­ÐºÑÑÑÐ° Ð¡Ð²ÐµÑÐ»ÑÐµ ÐÐ¾Ð»Ð¾Ð²Ð¸Ð½ÐºÐ¸ 80%, ÑÑÐ¾Ð¶Ð°Ð¹ 2025. Ð£Ð¿Ð°ÐºÐ¾Ð²ÐºÐ° 10 ÐºÐ³. FOB Ð¿Ð¾ÑÑ Ð¢ÑÐ½ÑÑÐ·Ð¸Ð½Ñ."
+          "desc_ru": "Тип Xingfu Экстра Светлые Половинки 80%, урожай 2025. Упаковка 10 кг. FOB порт Тяньцзинь."
         },
         {
           "name": "Yunnan - ELH",
           "price": "5,55 USD/kg",
           "desc": "Yunnan type Extra Light Halves 80%, 2025 crop. 10 kg packing. FOB Tianjin port.",
-          "desc_ru": "Ð¢Ð¸Ð¿ Yunnan Ð­ÐºÑÑÑÐ° Ð¡Ð²ÐµÑÐ»ÑÐµ ÐÐ¾Ð»Ð¾Ð²Ð¸Ð½ÐºÐ¸ 80%, ÑÑÐ¾Ð¶Ð°Ð¹ 2025. Ð£Ð¿Ð°ÐºÐ¾Ð²ÐºÐ° 10 ÐºÐ³. FOB Ð¿Ð¾ÑÑ Ð¢ÑÐ½ÑÑÐ·Ð¸Ð½Ñ."
+          "desc_ru": "Тип Yunnan Экстра Светлые Половинки 80%, урожай 2025. Упаковка 10 кг. FOB порт Тяньцзинь."
         },
         {
           "name": "185 - ELH",
           "price": "5,85 USD/kg",
           "desc": "185 type Extra Light Halves 80%, 2025 crop. 10 kg packing. FOB Tianjin port.",
-          "desc_ru": "Ð¢Ð¸Ð¿ 185 Ð­ÐºÑÑÑÐ° Ð¡Ð²ÐµÑÐ»ÑÐµ ÐÐ¾Ð»Ð¾Ð²Ð¸Ð½ÐºÐ¸ 80%, ÑÑÐ¾Ð¶Ð°Ð¹ 2025. Ð£Ð¿Ð°ÐºÐ¾Ð²ÐºÐ° 10 ÐºÐ³. FOB Ð¿Ð¾ÑÑ Ð¢ÑÐ½ÑÑÐ·Ð¸Ð½Ñ."
+          "desc_ru": "Тип 185 Экстра Светлые Половинки 80%, урожай 2025. Упаковка 10 кг. FOB порт Тяньцзинь."
         },
         {
           "name": "Xin2 - ELH",
           "price": "6,20 USD/kg",
           "desc": "Xin2 type Extra Light Halves 80%, 2025 crop. 10 kg packing. FOB Tianjin port.",
-          "desc_ru": "Ð¢Ð¸Ð¿ Xin2 Ð­ÐºÑÑÑÐ° Ð¡Ð²ÐµÑÐ»ÑÐµ ÐÐ¾Ð»Ð¾Ð²Ð¸Ð½ÐºÐ¸ 80%, ÑÑÐ¾Ð¶Ð°Ð¹ 2025. Ð£Ð¿Ð°ÐºÐ¾Ð²ÐºÐ° 10 ÐºÐ³. FOB Ð¿Ð¾ÑÑ Ð¢ÑÐ½ÑÑÐ·Ð¸Ð½Ñ."
+          "desc_ru": "Тип Xin2 Экстра Светлые Половинки 80%, урожай 2025. Упаковка 10 кг. FOB порт Тяньцзинь."
         }
       ]
     },
     {
       "id": "dates",
       "name": "Dried Dates",
-      "name_ru": "Ð¡ÑÑÐµÐ½ÑÐµ ÑÐ¸Ð½Ð¸ÐºÐ¸",
+      "name_ru": "Сушеные финики",
       "desc": "Deglet Nour Dates",
-      "desc_ru": "Ð¤Ð¸Ð½Ð¸ÐºÐ¸ ÐÐµÐ³Ð»ÐµÑ ÐÑÑ",
+      "desc_ru": "Финики Деглет Нур",
       "origin": "Tunisia",
-      "origin_ru": "Ð¢ÑÐ½Ð¸Ñ",
+      "origin_ru": "Тунис",
       "image": "goods/dates.png",
       "mainPrice": "1,85 USD/kg",
       "variants": [
@@ -91,30 +91,30 @@
           "name": "Deglet Nour - 5 kg",
           "price": "1,85 USD/kg",
           "desc": "Tunisian Dates Deglet Nour packing in 5 kg carton. FOB Tunisian port.",
-          "desc_ru": "Ð¢ÑÐ½Ð¸ÑÑÐºÐ¸Ðµ ÑÐ¸Ð½Ð¸ÐºÐ¸ ÐÐµÐ³Ð»ÐµÑ ÐÑÑ, ÑÐ¿Ð°ÐºÐ¾Ð²ÐºÐ° 5 ÐºÐ³ ÐºÐ°ÑÑÐ¾Ð½. FOB ÑÑÐ½Ð¸ÑÑÐºÐ¸Ð¹ Ð¿Ð¾ÑÑ."
+          "desc_ru": "Тунисские финики Деглет Нур, упаковка 5 кг картон. FOB тунисский порт."
         },
         {
           "name": "Deglet Nour - 200 gr",
           "price": "2,05 USD/kg",
           "desc": "Tunisian Dates Deglet Nour packing in 200 gr tray. FOB Tunisian port.",
-          "desc_ru": "Ð¢ÑÐ½Ð¸ÑÑÐºÐ¸Ðµ ÑÐ¸Ð½Ð¸ÐºÐ¸ ÐÐµÐ³Ð»ÐµÑ ÐÑÑ, ÑÐ¿Ð°ÐºÐ¾Ð²ÐºÐ° 200 Ð³Ñ Ð»Ð¾ÑÐ¾Ðº. FOB ÑÑÐ½Ð¸ÑÑÐºÐ¸Ð¹ Ð¿Ð¾ÑÑ."
+          "desc_ru": "Тунисские финики Деглет Нур, упаковка 200 гр лоток. FOB тунисский порт."
         },
         {
           "name": "Deglet Nour - without glucose",
           "price": "2,20 USD/kg",
           "desc": "Tunisian Dates Deglet Nour packing in 200 gr tray glucose FREE. FOB Tunisian port.",
-          "desc_ru": "Ð¢ÑÐ½Ð¸ÑÑÐºÐ¸Ðµ ÑÐ¸Ð½Ð¸ÐºÐ¸ ÐÐµÐ³Ð»ÐµÑ ÐÑÑ, ÑÐ¿Ð°ÐºÐ¾Ð²ÐºÐ° 200 Ð³Ñ Ð»Ð¾ÑÐ¾Ðº ÐÐÐ Ð³Ð»ÑÐºÐ¾Ð·Ñ. FOB ÑÑÐ½Ð¸ÑÑÐºÐ¸Ð¹ Ð¿Ð¾ÑÑ."
+          "desc_ru": "Тунисские финики Деглет Нур, упаковка 200 гр лоток БЕЗ глюкозы. FOB тунисский порт."
         }
       ]
     },
     {
       "id": "papaya",
       "name": "Dried Papaya Dice",
-      "name_ru": "Ð¡ÑÑÐµÐ½Ð°Ñ Ð¿Ð°Ð¿Ð°Ð¹Ñ ÐºÑÐ±Ð¸ÐºÐ°Ð¼Ð¸",
+      "name_ru": "Сушеная папайя кубиками",
       "desc": "Mixed/Natural 8-10 mm",
-      "desc_ru": "Ð¡Ð¼ÐµÑÐ°Ð½Ð½ÑÐ¹/ÐÐ°ÑÑÑÐ°Ð»ÑÐ½ÑÐ¹ 8-10 Ð¼Ð¼",
+      "desc_ru": "Смешанный/Натуральный 8-10 мм",
       "origin": "China",
-      "origin_ru": "ÐÐ¸ÑÐ°Ð¹",
+      "origin_ru": "Китай",
       "image": "goods/candied.jpg",
       "mainPrice": "2,10 USD/kg",
       "variants": [
@@ -122,36 +122,36 @@
           "name": "Mixed Color - 8-10 mm",
           "price": "2,10 USD/kg",
           "desc": "Dried Papaya Dice mixed color (Green, Red, Yellow, Orange). Size 8-10 mm. FOB Shantou port.",
-          "desc_ru": "Ð¡ÑÑÐµÐ½Ð°Ñ Ð¿Ð°Ð¿Ð°Ð¹Ñ ÐºÑÐ±Ð¸ÐºÐ°Ð¼Ð¸ ÑÐ¼ÐµÑÐ°Ð½Ð½Ð¾Ð³Ð¾ ÑÐ²ÐµÑÐ° (Ð·ÐµÐ»ÐµÐ½ÑÐ¹, ÐºÑÐ°ÑÐ½ÑÐ¹, Ð¶ÐµÐ»ÑÑÐ¹, Ð¾ÑÐ°Ð½Ð¶ÐµÐ²ÑÐ¹). Ð Ð°Ð·Ð¼ÐµÑ 8-10 Ð¼Ð¼. FOB Ð¿Ð¾ÑÑ Ð¨Ð°Ð½ÑÑÐ¾Ñ."
+          "desc_ru": "Сушеная папайя кубиками смешанного цвета (зеленый, красный, желтый, оранжевый). Размер 8-10 мм. FOB порт Шаньтоу."
         },
         {
           "name": "Natural Color - 8-10 mm",
           "price": "2,20 USD/kg",
           "desc": "Dried Papaya Dice Natural color. Size 8-10 mm. FOB Shantou port.",
-          "desc_ru": "Ð¡ÑÑÐµÐ½Ð°Ñ Ð¿Ð°Ð¿Ð°Ð¹Ñ ÐºÑÐ±Ð¸ÐºÐ°Ð¼Ð¸ Ð½Ð°ÑÑÑÐ°Ð»ÑÐ½Ð¾Ð³Ð¾ ÑÐ²ÐµÑÐ°. Ð Ð°Ð·Ð¼ÐµÑ 8-10 Ð¼Ð¼. FOB Ð¿Ð¾ÑÑ Ð¨Ð°Ð½ÑÑÐ¾Ñ."
+          "desc_ru": "Сушеная папайя кубиками натурального цвета. Размер 8-10 мм. FOB порт Шаньтоу."
         },
         {
           "name": "Mixed Color - 3-5 mm",
           "price": "2,30 USD/kg",
           "desc": "Dried Papaya Dice mixed color (Green, Red, Yellow, Orange). Size 3-5 mm. FOB Shantou port.",
-          "desc_ru": "Ð¡ÑÑÐµÐ½Ð°Ñ Ð¿Ð°Ð¿Ð°Ð¹Ñ ÐºÑÐ±Ð¸ÐºÐ°Ð¼Ð¸ ÑÐ¼ÐµÑÐ°Ð½Ð½Ð¾Ð³Ð¾ ÑÐ²ÐµÑÐ° (Ð·ÐµÐ»ÐµÐ½ÑÐ¹, ÐºÑÐ°ÑÐ½ÑÐ¹, Ð¶ÐµÐ»ÑÑÐ¹, Ð¾ÑÐ°Ð½Ð¶ÐµÐ²ÑÐ¹). Ð Ð°Ð·Ð¼ÐµÑ 3-5 Ð¼Ð¼. FOB Ð¿Ð¾ÑÑ Ð¨Ð°Ð½ÑÑÐ¾Ñ."
+          "desc_ru": "Сушеная папайя кубиками смешанного цвета (зеленый, красный, желтый, оранжевый). Размер 3-5 мм. FOB порт Шаньтоу."
         },
         {
           "name": "Natural Color - 3-5 mm",
           "price": "2,40 USD/kg",
           "desc": "Dried Papaya Dice Natural color. Size 3-5 mm. FOB Shantou port.",
-          "desc_ru": "Ð¡ÑÑÐµÐ½Ð°Ñ Ð¿Ð°Ð¿Ð°Ð¹Ñ ÐºÑÐ±Ð¸ÐºÐ°Ð¼Ð¸ Ð½Ð°ÑÑÑÐ°Ð»ÑÐ½Ð¾Ð³Ð¾ ÑÐ²ÐµÑÐ°. Ð Ð°Ð·Ð¼ÐµÑ 3-5 Ð¼Ð¼. FOB Ð¿Ð¾ÑÑ Ð¨Ð°Ð½ÑÑÐ¾Ñ."
+          "desc_ru": "Сушеная папайя кубиками натурального цвета. Размер 3-5 мм. FOB порт Шаньтоу."
         }
       ]
     },
     {
       "id": "mango",
       "name": "Dried Mango",
-      "name_ru": "Ð¡ÑÑÐµÐ½ÑÐ¹ Ð¼Ð°Ð½Ð³Ð¾",
+      "name_ru": "Сушеный манго",
       "desc": "Sugar added, sugar FREE",
-      "desc_ru": "Ð¡ ÑÐ°ÑÐ°ÑÐ¾Ð¼, Ð±ÐµÐ· ÑÐ°ÑÐ°ÑÐ°",
+      "desc_ru": "С сахаром, без сахара",
       "origin": "Vietnam, China",
-      "origin_ru": "ÐÑÐµÑÐ½Ð°Ð¼, ÐÐ¸ÑÐ°Ð¹",
+      "origin_ru": "Вьетнам, Китай",
       "image": "goods/mango.jpg",
       "mainPrice": "4,50 USD/kg",
       "variants": [
@@ -159,36 +159,36 @@
           "name": "Dried Mango - 5 kg",
           "price": "4,50 USD/kg",
           "desc": "Delicious, soft-dried mango slices. Lightly sweetened and packaged in 5 kg bulk carton. FOB HCM.",
-          "desc_ru": "ÐÐºÑÑÐ½ÑÐµ, Ð¼ÑÐ³ÐºÐ¸Ðµ ÑÑÑÐµÐ½ÑÐµ Ð´Ð¾Ð»ÑÐºÐ¸ Ð¼Ð°Ð½Ð³Ð¾. ÐÐµÐ³ÐºÐ¾ Ð¿Ð¾Ð´ÑÐ»Ð°ÑÐµÐ½Ð½ÑÐµ Ð¸ ÑÐ¿Ð°ÐºÐ¾Ð²Ð°Ð½Ñ Ð² ÐºÐ¾ÑÐ¾Ð±ÐºÑ 5 ÐºÐ³. FOB HCM."
+          "desc_ru": "Вкусные, мягкие сушеные дольки манго. Легко подслащенные и упакованы в коробку 5 кг. FOB HCM."
         },
         {
           "name": "Dried Mango - 500 g",
           "price": "5,00 USD/kg",
           "desc": "Delicious soft-dried mango slices, lightly sweetened, in 500g branded bags. FOB HCM.",
-          "desc_ru": "ÐÐºÑÑÐ½ÑÐµ Ð¼ÑÐ³ÐºÐ¸Ðµ ÑÑÑÐµÐ½ÑÐµ Ð´Ð¾Ð»ÑÐºÐ¸ Ð¼Ð°Ð½Ð³Ð¾, ÑÐ»ÐµÐ³ÐºÐ° Ð¿Ð¾Ð´ÑÐ»Ð°ÑÐµÐ½Ð½ÑÐµ, Ð² ÑÐ¸ÑÐ¼ÐµÐ½Ð½ÑÑ Ð¿Ð°ÐºÐµÑÐ°Ñ Ð¿Ð¾ 500 Ð³. FOB HCM."
+          "desc_ru": "Вкусные мягкие сушеные дольки манго, слегка подслащенные, в фирменных пакетах по 500 г. FOB HCM."
         },
         {
           "name": "Dried Mango - 5 kg. Sugar FREE",
           "price": "Price on request",
           "desc": "Delicious, soft-dried mango slices. No sugar added and packaged in 5 kg bulk carton. FOB HCM.",
-          "desc_ru": "ÐÐºÑÑÐ½ÑÐµ, Ð¼ÑÐ³ÐºÐ¸Ðµ ÑÑÑÐµÐ½ÑÐµ Ð´Ð¾Ð»ÑÐºÐ¸ Ð¼Ð°Ð½Ð³Ð¾. ÐÐµÐ· Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ñ ÑÐ°ÑÐ°ÑÐ° Ð¸ ÑÐ¿Ð°ÐºÐ¾Ð²Ð°Ð½Ñ Ð² ÐºÐ¾ÑÐ¾Ð±ÐºÑ 5 ÐºÐ³. FOB HCM."
+          "desc_ru": "Вкусные, мягкие сушеные дольки манго. Без добавления сахара и упакованы в коробку 5 кг. FOB HCM."
         },
         {
           "name": "Dried Mango - 500 g. Sugar FREE",
           "price": "Price on request",
           "desc": "Delicious soft-dried mango slices, no sugar added, in 500g branded bags. FOB HCM.",
-          "desc_ru": "ÐÐºÑÑÐ½ÑÐµ Ð¼ÑÐ³ÐºÐ¸Ðµ ÑÑÑÐµÐ½ÑÐµ Ð´Ð¾Ð»ÑÐºÐ¸ Ð¼Ð°Ð½Ð³Ð¾, Ð±ÐµÐ· Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ñ ÑÐ°ÑÐ°ÑÐ°, Ð² ÑÐ¸ÑÐ¼ÐµÐ½Ð½ÑÑ Ð¿Ð°ÐºÐµÑÐ°Ñ Ð¿Ð¾ 500 Ð³. FOB HCM."
+          "desc_ru": "Вкусные мягкие сушеные дольки манго, без добавления сахара, в фирменных пакетах по 500 г. FOB HCM."
         }
       ]
     },
     {
       "id": "walnuts-shell",
       "name": "Walnuts in shell",
-      "name_ru": "ÐÑÐµÑÐºÐ¸Ðµ Ð¾ÑÐµÑÐ¸ Ð² ÑÐºÐ¾ÑÐ»ÑÐ¿Ðµ",
+      "name_ru": "Грецкие орехи в скорлупе",
       "desc": "All sizes, washed",
-      "desc_ru": "ÐÑÐµ ÑÐ°Ð·Ð¼ÐµÑÑ, Ð¼ÑÑÑÐµ",
+      "desc_ru": "Все размеры, мытые",
       "origin": "China",
-      "origin_ru": "ÐÐ¸ÑÐ°Ð¹",
+      "origin_ru": "Китай",
       "image": "goods/walnut in shell.webp",
       "mainPrice": "2,20 USD/kg",
       "variants": [
@@ -196,42 +196,42 @@
           "name": "33 (Sansan)",
           "price": "2,40 USD/kg",
           "desc": "Ideal Walnut (Sansan 33) features a thin, hand-crackable shell and a high yield of sweet, light-colored kernels.",
-          "desc_ru": "ÐÐ´ÐµÐ°Ð»ÑÐ½ÑÐ¹ Ð³ÑÐµÑÐºÐ¸Ð¹ Ð¾ÑÐµÑ (Ð¡Ð°Ð½ÑÐ°Ð½ 33) Ð¸Ð¼ÐµÐµÑ ÑÐ¾Ð½ÐºÑÑ, ÑÐ°ÑÐºÐ°Ð»ÑÐ²Ð°ÐµÐ¼ÑÑ Ð²ÑÑÑÐ½ÑÑ ÑÐºÐ¾ÑÐ»ÑÐ¿Ñ Ð¸ Ð²ÑÑÐ¾ÐºÐ¸Ð¹ Ð²ÑÑÐ¾Ð´ ÑÐ»Ð°Ð´ÐºÐ¸Ñ, ÑÐ²ÐµÑÐ»ÑÑ ÑÐ´ÐµÑ."
+          "desc_ru": "Идеальный грецкий орех (Сансан 33) имеет тонкую, раскалываемую вручную скорлупу и высокий выход сладких, светлых ядер."
         },
         {
           "name": "185",
           "price": "2,90 USD/kg",
           "desc": "Compared to the 33 variety, the 185 walnut has an even thinner, \"paper-shell\" that can be crushed between your fingers and an even higher kernel yield of up to 68%.",
-          "desc_ru": "ÐÐ¾ ÑÑÐ°Ð²Ð½ÐµÐ½Ð¸Ñ Ñ ÑÐ¾ÑÑÐ¾Ð¼ 33, Ð³ÑÐµÑÐºÐ¸Ð¹ Ð¾ÑÐµÑ 185 Ð¸Ð¼ÐµÐµÑ ÐµÑÐµ Ð±Ð¾Ð»ÐµÐµ ÑÐ¾Ð½ÐºÑÑ, Â«Ð±ÑÐ¼Ð°Ð¶Ð½ÑÑÂ» ÑÐºÐ¾ÑÐ»ÑÐ¿Ñ, ÐºÐ¾ÑÐ¾ÑÑÑ Ð¼Ð¾Ð¶Ð½Ð¾ ÑÐ°Ð·Ð´Ð°Ð²Ð¸ÑÑ Ð¿Ð°Ð»ÑÑÐ°Ð¼Ð¸, Ð¸ ÐµÑÐµ Ð±Ð¾Ð»ÐµÐµ Ð²ÑÑÐ¾ÐºÐ¸Ð¹ Ð²ÑÑÐ¾Ð´ ÑÐ´ÑÐ° Ð´Ð¾ 68%."
+          "desc_ru": "По сравнению с сортом 33, грецкий орех 185 имеет еще более тонкую, «бумажную» скорлупу, которую можно раздавить пальцами, и еще более высокий выход ядра до 68%."
         },
         {
           "name": "Xin 2 (Xinjiang 2)",
           "price": "3,30 USD/kg",
           "desc": "The Xin 2 walnut features an extremely thin shell that can be cracked by hand, yielding up to 67% of a light-colored, sweet kernel with excellent flavor.",
-          "desc_ru": "ÐÑÐµÑÐºÐ¸Ð¹ Ð¾ÑÐµÑ Xin 2 Ð¸Ð¼ÐµÐµÑ ÑÑÐµÐ·Ð²ÑÑÐ°Ð¹Ð½Ð¾ ÑÐ¾Ð½ÐºÑÑ ÑÐºÐ¾ÑÐ»ÑÐ¿Ñ, ÐºÐ¾ÑÐ¾ÑÑÑ Ð¼Ð¾Ð¶Ð½Ð¾ ÑÐ°ÑÐºÐ¾Ð»Ð¾ÑÑ Ð²ÑÑÑÐ½ÑÑ, Ñ Ð²ÑÑÐ¾Ð´Ð¾Ð¼ Ð´Ð¾ 67% ÑÐ²ÐµÑÐ»Ð¾Ð³Ð¾, ÑÐ»Ð°Ð´ÐºÐ¾Ð³Ð¾ ÑÐ´ÑÐ° Ñ Ð¾ÑÐ»Ð¸ÑÐ½ÑÐ¼ Ð²ÐºÑÑÐ¾Ð¼."
+          "desc_ru": "Грецкий орех Xin 2 имеет чрезвычайно тонкую скорлупу, которую можно расколоть вручную, с выходом до 67% светлого, сладкого ядра с отличным вкусом."
         },
         {
           "name": "Yunnan",
           "price": "2,80 USD/kg",
           "desc": "The Yunnan walnut features a moderately thin shell that typically requires tools to crack, yielding about 50-55% of a kernel known for its rich, robust flavor and deep golden color.",
-          "desc_ru": "ÐÑÐµÑÐºÐ¸Ð¹ Ð¾ÑÐµÑ Ð®Ð½ÑÐ½Ð°Ð½Ñ Ð¸Ð¼ÐµÐµÑ ÑÐ¼ÐµÑÐµÐ½Ð½Ð¾ ÑÐ¾Ð½ÐºÑÑ ÑÐºÐ¾ÑÐ»ÑÐ¿Ñ, Ð´Ð»Ñ ÑÐ°ÑÐºÐ°Ð»ÑÐ²Ð°Ð½Ð¸Ñ ÐºÐ¾ÑÐ¾ÑÐ¾Ð¹ Ð¾Ð±ÑÑÐ½Ð¾ ÑÑÐµÐ±ÑÑÑÑÑ Ð¸Ð½ÑÑÑÑÐ¼ÐµÐ½ÑÑ, Ñ Ð²ÑÑÐ¾Ð´Ð¾Ð¼ ÑÐ´ÑÐ° Ð¾ÐºÐ¾Ð»Ð¾ 50-55%."
+          "desc_ru": "Грецкий орех Юньнань имеет умеренно тонкую скорлупу, для раскалывания которой обычно требуются инструменты, с выходом ядра около 50-55%."
         },
         {
           "name": "Xinfu / Xinfeng",
           "price": "2,50 USD/kg",
           "desc": "Features a thick, hard shell requiring a cracker, with large light-colored sweet kernels and 50-55% kernel yield.",
-          "desc_ru": "ÐÐ¼ÐµÐµÑ ÑÐ¾Ð»ÑÑÑÑ, ÑÐ²ÐµÑÐ´ÑÑ ÑÐºÐ¾ÑÐ»ÑÐ¿Ñ, ÑÑÐµÐ±ÑÑÑÑÑ ÑÐ¸Ð¿ÑÐ¾Ð², Ñ ÐºÑÑÐ¿Ð½ÑÐ¼Ð¸ ÑÐ²ÐµÑÐ»ÑÐ¼Ð¸ ÑÐ»Ð°Ð´ÐºÐ¸Ð¼Ð¸ ÑÐ´ÑÐ°Ð¼Ð¸ Ð¸ Ð²ÑÑÐ¾Ð´Ð¾Ð¼ ÑÐ´ÑÐ° 50-55%."
+          "desc_ru": "Имеет толстую, твердую скорлупу, требующую щипцов, с крупными светлыми сладкими ядрами и выходом ядра 50-55%."
         }
       ]
     },
     {
       "id": "peanuts",
       "name": "Raw Peanuts",
-      "name_ru": "Ð¡ÑÑÐ¾Ð¹ Ð°ÑÐ°ÑÐ¸Ñ",
+      "name_ru": "Сырой арахис",
       "desc": "Sizes 40/50, 50/60",
-      "desc_ru": "Ð Ð°Ð·Ð¼ÐµÑÑ 40/50, 50/60",
+      "desc_ru": "Размеры 40/50, 50/60",
       "origin": "India",
-      "origin_ru": "ÐÐ½Ð´Ð¸Ñ",
+      "origin_ru": "Индия",
       "image": "goods/redpeanuts.png",
       "mainPrice": "1,20 USD/kg",
       "variants": [
@@ -239,36 +239,36 @@
           "name": "Bold - 40/50",
           "price": "2,20 USD/kg",
           "desc": "Indian Bold 40/50 raw peanuts are characterized by their large, uniform kernels, mild flavor, high nutritional value, and versatility for roasting, confectionery, or producing premium peanut butter.",
-          "desc_ru": "Ð¡ÑÑÐ¾Ð¹ Ð°ÑÐ°ÑÐ¸Ñ Indian Bold 40/50 ÑÐ°ÑÐ°ÐºÑÐµÑÐ¸Ð·ÑÐµÑÑÑ ÐºÑÑÐ¿Ð½ÑÐ¼Ð¸, Ð¾Ð´Ð½Ð¾ÑÐ¾Ð´Ð½ÑÐ¼Ð¸ ÑÐ´ÑÐ°Ð¼Ð¸, Ð¼ÑÐ³ÐºÐ¸Ð¼ Ð²ÐºÑÑÐ¾Ð¼, Ð²ÑÑÐ¾ÐºÐ¾Ð¹ Ð¿Ð¸ÑÐ°ÑÐµÐ»ÑÐ½Ð¾Ð¹ ÑÐµÐ½Ð½Ð¾ÑÑÑÑ Ð¸ ÑÐ½Ð¸Ð²ÐµÑÑÐ°Ð»ÑÐ½Ð¾ÑÑÑÑ Ð´Ð»Ñ Ð¾Ð±Ð¶Ð°ÑÐºÐ¸, ÐºÐ¾Ð½Ð´Ð¸ÑÐµÑÑÐºÐ¸Ñ Ð¸Ð·Ð´ÐµÐ»Ð¸Ð¹ Ð¸Ð»Ð¸ Ð¿ÑÐ¾Ð¸Ð·Ð²Ð¾Ð´ÑÑÐ²Ð° Ð°ÑÐ°ÑÐ¸ÑÐ¾Ð²Ð¾Ð³Ð¾ Ð¼Ð°ÑÐ»Ð°."
+          "desc_ru": "Сырой арахис Indian Bold 40/50 характеризуется крупными, однородными ядрами, мягким вкусом, высокой питательной ценностью и универсальностью для обжарки, кондитерских изделий или производства арахисового масла."
         },
         {
           "name": "Bold - 50/60",
           "price": "2,10 USD/kg",
           "desc": "Indian raw peanuts of the Bold 50/60 variety are characterized by their large, uniform kernels, mild and sweet flavor, high yield, and versatility for roasting, confectionery, and peanut butter production.",
-          "desc_ru": "Ð¡ÑÑÐ¾Ð¹ Ð°ÑÐ°ÑÐ¸Ñ Indian Bold 50/60 ÑÐ°ÑÐ°ÐºÑÐµÑÐ¸Ð·ÑÐµÑÑÑ ÐºÑÑÐ¿Ð½ÑÐ¼Ð¸, Ð¾Ð´Ð½Ð¾ÑÐ¾Ð´Ð½ÑÐ¼Ð¸ ÑÐ´ÑÐ°Ð¼Ð¸, Ð¼ÑÐ³ÐºÐ¸Ð¼ Ð¸ ÑÐ»Ð°Ð´ÐºÐ¸Ð¼ Ð²ÐºÑÑÐ¾Ð¼, Ð²ÑÑÐ¾ÐºÐ¸Ð¼ Ð²ÑÑÐ¾Ð´Ð¾Ð¼ Ð¸ ÑÐ½Ð¸Ð²ÐµÑÑÐ°Ð»ÑÐ½Ð¾ÑÑÑÑ Ð´Ð»Ñ Ð¾Ð±Ð¶Ð°ÑÐºÐ¸ Ð¸ ÐºÐ¾Ð½Ð´Ð¸ÑÐµÑÑÐºÐ¸Ñ Ð¸Ð·Ð´ÐµÐ»Ð¸Ð¹."
+          "desc_ru": "Сырой арахис Indian Bold 50/60 характеризуется крупными, однородными ядрами, мягким и сладким вкусом, высоким выходом и универсальностью для обжарки и кондитерских изделий."
         },
         {
           "name": "TJ - 40/50",
           "price": "2,80 USD/kg",
           "desc": "Indian TJ 40/50 raw peanuts are characterized by their large, uniform kernel size, high oleic content for better shelf life, mild flavor, and excellent suitability for roasting, confectionery, and premium peanut butter.",
-          "desc_ru": "Ð¡ÑÑÐ¾Ð¹ Ð°ÑÐ°ÑÐ¸Ñ Indian TJ 40/50 ÑÐ°ÑÐ°ÐºÑÐµÑÐ¸Ð·ÑÐµÑÑÑ ÐºÑÑÐ¿Ð½ÑÐ¼, Ð¾Ð´Ð½Ð¾ÑÐ¾Ð´Ð½ÑÐ¼ ÑÐ°Ð·Ð¼ÐµÑÐ¾Ð¼ ÑÐ´ÐµÑ, Ð²ÑÑÐ¾ÐºÐ¸Ð¼ ÑÐ¾Ð´ÐµÑÐ¶Ð°Ð½Ð¸ÐµÐ¼ Ð¾Ð»ÐµÐ¸Ð½Ð¾Ð²Ð¾Ð¹ ÐºÐ¸ÑÐ»Ð¾ÑÑ Ð´Ð»Ñ Ð»ÑÑÑÐµÐ³Ð¾ ÑÑÐ¾ÐºÐ° Ð³Ð¾Ð´Ð½Ð¾ÑÑÐ¸ Ð¸ Ð¼ÑÐ³ÐºÐ¸Ð¼ Ð²ÐºÑÑÐ¾Ð¼."
+          "desc_ru": "Сырой арахис Indian TJ 40/50 характеризуется крупным, однородным размером ядер, высоким содержанием олеиновой кислоты для лучшего срока годности и мягким вкусом."
         },
         {
           "name": "TJ - 50/60",
           "price": "2,50 USD/kg",
           "desc": "Indian TJ 50/60 raw peanuts are characterized by their large, uniform kernels, high oleic acid content for superior shelf-life, a mild flavor profile, and excellent suitability for roasting, confectionery, and high-quality peanut butter.",
-          "desc_ru": "Ð¡ÑÑÐ¾Ð¹ Ð°ÑÐ°ÑÐ¸Ñ Indian TJ 50/60 ÑÐ°ÑÐ°ÐºÑÐµÑÐ¸Ð·ÑÐµÑÑÑ ÐºÑÑÐ¿Ð½ÑÐ¼Ð¸, Ð¾Ð´Ð½Ð¾ÑÐ¾Ð´Ð½ÑÐ¼Ð¸ ÑÐ´ÑÐ°Ð¼Ð¸, Ð²ÑÑÐ¾ÐºÐ¸Ð¼ ÑÐ¾Ð´ÐµÑÐ¶Ð°Ð½Ð¸ÐµÐ¼ Ð¾Ð»ÐµÐ¸Ð½Ð¾Ð²Ð¾Ð¹ ÐºÐ¸ÑÐ»Ð¾ÑÑ Ð´Ð»Ñ Ð¿ÑÐµÐ²Ð¾ÑÑÐ¾Ð´Ð½Ð¾Ð³Ð¾ ÑÑÐ¾ÐºÐ° Ð³Ð¾Ð´Ð½Ð¾ÑÑÐ¸ Ð¸ Ð¼ÑÐ³ÐºÐ¸Ð¼ Ð²ÐºÑÑÐ¾Ð²ÑÐ¼ Ð¿ÑÐ¾ÑÐ¸Ð»ÐµÐ¼."
+          "desc_ru": "Сырой арахис Indian TJ 50/60 характеризуется крупными, однородными ядрами, высоким содержанием олеиновой кислоты для превосходного срока годности и мягким вкусовым профилем."
         }
       ]
     },
     {
       "id": "peanuts-blanched",
       "name": "Blanched Peanuts",
-      "name_ru": "ÐÐ»Ð°Ð½ÑÐ¸ÑÐ¾Ð²Ð°Ð½Ð½ÑÐ¹ Ð°ÑÐ°ÑÐ¸Ñ",
+      "name_ru": "Бланшированный арахис",
       "desc": "Whole, Splits",
-      "desc_ru": "Ð¦ÐµÐ»ÑÐ¹, Ð¿Ð¾Ð»Ð¾Ð²Ð¸Ð½ÐºÐ¸",
+      "desc_ru": "Целый, половинки",
       "origin": "India",
-      "origin_ru": "ÐÐ½Ð´Ð¸Ñ",
+      "origin_ru": "Индия",
       "image": "goods/peanutSplit.jpg",
       "mainPrice": "Price on request",
       "variants": [
@@ -276,48 +276,48 @@
           "name": "Whole-Bold 40/50",
           "price": "Price on request",
           "desc": "Large, uniform kernels with mild, sweet flavor and clean nutty aroma. Ideal for premium snacks and confectionery.",
-          "desc_ru": "ÐÑÑÐ¿Ð½ÑÐµ, Ð¾Ð´Ð½Ð¾ÑÐ¾Ð´Ð½ÑÐµ ÑÐ´ÑÐ° Ñ Ð¼ÑÐ³ÐºÐ¸Ð¼, ÑÐ»Ð°Ð´ÐºÐ¸Ð¼ Ð²ÐºÑÑÐ¾Ð¼ Ð¸ ÑÐ¸ÑÑÑÐ¼ Ð¾ÑÐµÑÐ¾Ð²ÑÐ¼ Ð°ÑÐ¾Ð¼Ð°ÑÐ¾Ð¼. ÐÐ´ÐµÐ°Ð»ÑÐ½Ð¾ Ð¿Ð¾Ð´ÑÐ¾Ð´ÑÑ Ð´Ð»Ñ Ð¿ÑÐµÐ¼Ð¸Ð°Ð»ÑÐ½ÑÑ Ð·Ð°ÐºÑÑÐ¾Ðº Ð¸ ÐºÐ¾Ð½Ð´Ð¸ÑÐµÑÑÐºÐ¸Ñ Ð¸Ð·Ð´ÐµÐ»Ð¸Ð¹."
+          "desc_ru": "Крупные, однородные ядра с мягким, сладким вкусом и чистым ореховым ароматом. Идеально подходят для премиальных закусок и кондитерских изделий."
         },
         {
           "name": "Whole-Bold 50/60",
           "price": "Price on request",
           "desc": "Medium-large, consistent kernels offering rich taste and roasted fragrance. Perfect for peanut butter and food processing.",
-          "desc_ru": "Ð¯Ð´ÑÐ° ÑÑÐµÐ´Ð½ÐµÐ³Ð¾ Ð¸ ÐºÑÑÐ¿Ð½Ð¾Ð³Ð¾ ÑÐ°Ð·Ð¼ÐµÑÐ° Ñ Ð½Ð°ÑÑÑÐµÐ½Ð½ÑÐ¼ Ð²ÐºÑÑÐ¾Ð¼ Ð¸ Ð¶Ð°ÑÐµÐ½ÑÐ¼ Ð°ÑÐ¾Ð¼Ð°ÑÐ¾Ð¼. ÐÐ´ÐµÐ°Ð»ÑÐ½Ð¾ Ð¿Ð¾Ð´ÑÐ¾Ð´ÑÑ Ð´Ð»Ñ Ð°ÑÐ°ÑÐ¸ÑÐ¾Ð²Ð¾Ð³Ð¾ Ð¼Ð°ÑÐ»Ð° Ð¸ Ð¿Ð¸ÑÐµÐ²Ð¾Ð¹ Ð¿ÑÐ¾Ð¼ÑÑÐ»ÐµÐ½Ð½Ð¾ÑÑÐ¸."
+          "desc_ru": "Ядра среднего и крупного размера с насыщенным вкусом и жареным ароматом. Идеально подходят для арахисового масла и пищевой промышленности."
         },
         {
           "name": "Whole-Java 40/50",
           "price": "Price on request",
           "desc": "Extra-large selected kernels with delicate flavor and subtle sweet notes. Excellent for chocolate coating and gourmet applications.",
-          "desc_ru": "ÐÑÑÐ¿Ð½ÑÐµ Ð¾ÑÐ±Ð¾ÑÐ½ÑÐµ ÑÐ´ÑÐ° Ñ Ð½ÐµÐ¶Ð½ÑÐ¼ Ð²ÐºÑÑÐ¾Ð¼ Ð¸ ÑÐ¾Ð½ÐºÐ¸Ð¼Ð¸ ÑÐ»Ð°Ð´ÐºÐ¸Ð¼Ð¸ Ð½Ð¾ÑÐ°Ð¼Ð¸. ÐÑÐ»Ð¸ÑÐ½Ð¾ Ð¿Ð¾Ð´ÑÐ¾Ð´ÑÑ Ð´Ð»Ñ ÑÐ¾ÐºÐ¾Ð»Ð°Ð´Ð½Ð¾Ð³Ð¾ Ð¿Ð¾ÐºÑÑÑÐ¸Ñ Ð¸ Ð³ÑÑÐ¼Ð°Ð½ÑÐºÐ¸Ñ Ð±Ð»ÑÐ´."
+          "desc_ru": "Крупные отборные ядра с нежным вкусом и тонкими сладкими нотами. Отлично подходят для шоколадного покрытия и гурманских блюд."
         },
         {
           "name": "Whole-Java 50/60",
           "price": "Price on request",
           "desc": "Premium uniform kernels delivering superior blanching quality and well-balanced nutty profile. Optimal for high-end food manufacturing.",
-          "desc_ru": "ÐÑÐµÐ¼Ð¸Ð°Ð»ÑÐ½ÑÐµ Ð¾Ð´Ð½Ð¾ÑÐ¾Ð´Ð½ÑÐµ ÑÐ´ÑÐ° Ñ Ð²ÑÑÐ¾ÐºÐ¸Ð¼ ÐºÐ°ÑÐµÑÑÐ²Ð¾Ð¼ Ð±Ð»Ð°Ð½ÑÐ¸ÑÐ¾Ð²Ð°Ð½Ð¸Ñ Ð¸ ÑÐ±Ð°Ð»Ð°Ð½ÑÐ¸ÑÐ¾Ð²Ð°Ð½Ð½ÑÐ¼ Ð¾ÑÐµÑÐ¾Ð²ÑÐ¼ Ð¿ÑÐ¾ÑÐ¸Ð»ÐµÐ¼. ÐÐ¿ÑÐ¸Ð¼Ð°Ð»ÑÐ½Ñ Ð´Ð»Ñ Ð²ÑÑÐ¾ÐºÐ¾ÐºÐ°ÑÐµÑÑÐ²ÐµÐ½Ð½Ð¾Ð³Ð¾ Ð¿Ð¸ÑÐµÐ²Ð¾Ð³Ð¾ Ð¿ÑÐ¾Ð¸Ð·Ð²Ð¾Ð´ÑÑÐ²Ð°."
+          "desc_ru": "Премиальные однородные ядра с высоким качеством бланширования и сбалансированным ореховым профилем. Оптимальны для высококачественного пищевого производства."
         },
         {
           "name": "Blanched Splits - Bold 40/50",
           "price": "Price on request",
           "desc": "Premium, large peanut halves from selected Bold kernels, ideal for crunchy peanut butter and high-quality confectionery where a visible nut piece is desired.",
-          "desc_ru": "ÐÑÐµÐ¼Ð¸Ð°Ð»ÑÐ½ÑÐµ, ÐºÑÑÐ¿Ð½ÑÐµ Ð¿Ð¾Ð»Ð¾Ð²Ð¸Ð½ÐºÐ¸ Ð°ÑÐ°ÑÐ¸ÑÐ° Ð¸Ð· Ð¾ÑÐ±Ð¾ÑÐ½ÑÑ ÑÐ´ÐµÑ Bold, Ð¸Ð´ÐµÐ°Ð»ÑÐ½Ð¾ Ð¿Ð¾Ð´ÑÐ¾Ð´ÑÑ Ð´Ð»Ñ ÑÑÑÑÑÑÑÐµÐ³Ð¾ Ð°ÑÐ°ÑÐ¸ÑÐ¾Ð²Ð¾Ð³Ð¾ Ð¼Ð°ÑÐ»Ð° Ð¸ Ð²ÑÑÐ¾ÐºÐ¾ÐºÐ°ÑÐµÑÑÐ²ÐµÐ½Ð½ÑÑ ÐºÐ¾Ð½Ð´Ð¸ÑÐµÑÑÐºÐ¸Ñ Ð¸Ð·Ð´ÐµÐ»Ð¸Ð¹."
+          "desc_ru": "Премиальные, крупные половинки арахиса из отборных ядер Bold, идеально подходят для хрустящего арахисового масла и высококачественных кондитерских изделий."
         },
         {
           "name": "Blanched Splits - Bold 50/60",
           "price": "Price on request",
           "desc": "Consistent, medium-large peanut halves offering excellent yield and a rich flavor, perfect for standard food manufacturing, baking, and snacks.",
-          "desc_ru": "ÐÐ´Ð½Ð¾ÑÐ¾Ð´Ð½ÑÐµ Ð¿Ð¾Ð»Ð¾Ð²Ð¸Ð½ÐºÐ¸ Ð°ÑÐ°ÑÐ¸ÑÐ° ÑÑÐµÐ´Ð½ÐµÐ³Ð¾ Ð¸ ÐºÑÑÐ¿Ð½Ð¾Ð³Ð¾ ÑÐ°Ð·Ð¼ÐµÑÐ° Ñ Ð¾ÑÐ»Ð¸ÑÐ½ÑÐ¼ Ð²ÑÑÐ¾Ð´Ð¾Ð¼ Ð¸ Ð½Ð°ÑÑÑÐµÐ½Ð½ÑÐ¼ Ð²ÐºÑÑÐ¾Ð¼, Ð¸Ð´ÐµÐ°Ð»ÑÐ½Ð¾ Ð¿Ð¾Ð´ÑÐ¾Ð´ÑÑ Ð´Ð»Ñ ÑÑÐ°Ð½Ð´Ð°ÑÑÐ½Ð¾Ð³Ð¾ Ð¿Ð¸ÑÐµÐ²Ð¾Ð³Ð¾ Ð¿ÑÐ¾Ð¸Ð·Ð²Ð¾Ð´ÑÑÐ²Ð° Ð¸ Ð²ÑÐ¿ÐµÑÐºÐ¸."
+          "desc_ru": "Однородные половинки арахиса среднего и крупного размера с отличным выходом и насыщенным вкусом, идеально подходят для стандартного пищевого производства и выпечки."
         }
       ]
     },
     {
       "id": "dried-fruits",
       "name": "Dried Fruits",
-      "name_ru": "Ð¡ÑÑÐµÐ½ÑÐµ ÑÑÑÐºÑÑ",
+      "name_ru": "Сушеные фрукты",
       "desc": "Osmotically dehydrated fruits",
-      "desc_ru": "ÐÑÐ¼Ð¾ÑÐ¸ÑÐµÑÐºÐ¸ Ð¾Ð±ÐµÐ·Ð²Ð¾Ð¶ÐµÐ½Ð½ÑÐµ ÑÑÑÐºÑÑ",
+      "desc_ru": "Осмотически обезвоженные фрукты",
       "origin": "China",
-      "origin_ru": "ÐÐ¸ÑÐ°Ð¹",
+      "origin_ru": "Китай",
       "image": "goods/driedFruits.webp",
       "mainPrice": "2,90 USD/kg",
       "variants": [
@@ -325,48 +325,48 @@
           "name": "Osmotically Dehydrated Cherry",
           "price": "Price on request",
           "desc": "Size S Chinese osmotically dehydrated sour cherries with 45-55% sugar content. Small, uniform berries with balanced sweet-tart flavor, ideal for baking and confectionery.",
-          "desc_ru": "ÐÑÐ¼Ð¾ÑÐ¸ÑÐµÑÐºÐ¸ Ð¾Ð±ÐµÐ·Ð²Ð¾Ð¶ÐµÐ½Ð½Ð°Ñ ÐºÐ¸ÑÐ»Ð°Ñ Ð²Ð¸ÑÐ½Ñ Ð¸Ð· ÐÐ¸ÑÐ°Ñ ÑÐ°Ð·Ð¼ÐµÑÐ° S Ñ ÑÐ¾Ð´ÐµÑÐ¶Ð°Ð½Ð¸ÐµÐ¼ ÑÐ°ÑÐ°ÑÐ° 45-55%. ÐÐµÐ»ÐºÐ¸Ðµ, Ð¾Ð´Ð½Ð¾ÑÐ¾Ð´Ð½ÑÐµ ÑÐ³Ð¾Ð´Ñ ÑÐ¾ ÑÐ±Ð°Ð»Ð°Ð½ÑÐ¸ÑÐ¾Ð²Ð°Ð½Ð½ÑÐ¼ ÑÐ»Ð°Ð´ÐºÐ¾-ÐºÐ¸ÑÐ»ÑÐ¼ Ð²ÐºÑÑÐ¾Ð¼."
+          "desc_ru": "Осмотически обезвоженная кислая вишня из Китая размера S с содержанием сахара 45-55%. Мелкие, однородные ягоды со сбалансированным сладко-кислым вкусом."
         },
         {
           "name": "Osmotically Dehydrated Strawberry",
           "price": "Price on request",
           "desc": "Osmotically dehydrated strawberries from China, 45-55% sugar content. Chewy texture with intense berry flavor and natural aroma, perfect for desserts and snacks.",
-          "desc_ru": "ÐÑÐ¼Ð¾ÑÐ¸ÑÐµÑÐºÐ¸ Ð¾Ð±ÐµÐ·Ð²Ð¾Ð¶ÐµÐ½Ð½Ð°Ñ ÐºÐ»ÑÐ±Ð½Ð¸ÐºÐ° Ð¸Ð· ÐÐ¸ÑÐ°Ñ, ÑÐ¾Ð´ÐµÑÐ¶Ð°Ð½Ð¸Ðµ ÑÐ°ÑÐ°ÑÐ° 45-55%. ÐÐµÐ²Ð°ÑÐµÐ»ÑÐ½Ð°Ñ ÑÐµÐºÑÑÑÑÐ° Ñ Ð¸Ð½ÑÐµÐ½ÑÐ¸Ð²Ð½ÑÐ¼ ÑÐ³Ð¾Ð´Ð½ÑÐ¼ Ð²ÐºÑÑÐ¾Ð¼."
+          "desc_ru": "Осмотически обезвоженная клубника из Китая, содержание сахара 45-55%. Жевательная текстура с интенсивным ягодным вкусом."
         },
         {
           "name": "Osmotically Dehydrated Kumquat in Sugar Powder",
           "price": "Price on request",
           "desc": "Whole Chinese kumquats with 45-55% sugar content, coated in icing sugar. Characteristic sweet-tangy taste with soft texture, ready for direct consumption.",
-          "desc_ru": "Ð¦ÐµÐ»ÑÐµ ÐºÑÐ¼ÐºÐ²Ð°ÑÑ Ð¸Ð· ÐÐ¸ÑÐ°Ñ Ñ ÑÐ¾Ð´ÐµÑÐ¶Ð°Ð½Ð¸ÐµÐ¼ ÑÐ°ÑÐ°ÑÐ° 45-55%, Ð¿Ð¾ÐºÑÑÑÑÐµ ÑÐ°ÑÐ°ÑÐ½Ð¾Ð¹ Ð¿ÑÐ´ÑÐ¾Ð¹. Ð¥Ð°ÑÐ°ÐºÑÐµÑÐ½ÑÐ¹ ÑÐ»Ð°Ð´ÐºÐ¾-ÑÐµÑÐ¿ÐºÐ¸Ð¹ Ð²ÐºÑÑ Ñ Ð¼ÑÐ³ÐºÐ¾Ð¹ ÑÐµÐºÑÑÑÑÐ¾Ð¹."
+          "desc_ru": "Целые кумкваты из Китая с содержанием сахара 45-55%, покрытые сахарной пудрой. Характерный сладко-терпкий вкус с мягкой текстурой."
         },
         {
           "name": "Osmotically Dehydrated Kumquat in Sugar",
           "price": "Price on request",
           "desc": "Osmotically dehydrated kumquats from China, 45-55% sugar content, rolled in crystal sugar. Crispy sugar coating contrasts with soft interior, excellent for decoration.",
-          "desc_ru": "ÐÑÐ¼Ð¾ÑÐ¸ÑÐµÑÐºÐ¸ Ð¾Ð±ÐµÐ·Ð²Ð¾Ð¶ÐµÐ½Ð½ÑÐµ ÐºÑÐ¼ÐºÐ²Ð°ÑÑ Ð¸Ð· ÐÐ¸ÑÐ°Ñ, ÑÐ¾Ð´ÐµÑÐ¶Ð°Ð½Ð¸Ðµ ÑÐ°ÑÐ°ÑÐ° 45-55%, Ð¾Ð±Ð²Ð°Ð»ÑÐ½Ð½ÑÐµ Ð² ÐºÑÐ¸ÑÑÐ°Ð»Ð»Ð¸ÑÐµÑÐºÐ¾Ð¼ ÑÐ°ÑÐ°ÑÐµ. Ð¥ÑÑÑÑÑÑÐµÐµ ÑÐ°ÑÐ°ÑÐ½Ð¾Ðµ Ð¿Ð¾ÐºÑÑÑÐ¸Ðµ."
+          "desc_ru": "Осмотически обезвоженные кумкваты из Китая, содержание сахара 45-55%, обвалянные в кристаллическом сахаре. Хрустящее сахарное покрытие."
         },
         {
           "name": "Dried Apple Rings",
           "price": "Price on request",
           "desc": "Natural dried apple rings from China with no sugar added. Chewy texture with concentrated apple flavor, perfect for healthy snacks and clean-label products.",
-          "desc_ru": "ÐÐ°ÑÑÑÐ°Ð»ÑÐ½ÑÐµ ÑÑÑÐµÐ½ÑÐµ ÑÐ±Ð»Ð¾ÑÐ½ÑÐµ ÐºÐ¾Ð»ÑÑÐ° Ð¸Ð· ÐÐ¸ÑÐ°Ñ Ð±ÐµÐ· Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ñ ÑÐ°ÑÐ°ÑÐ°. ÐÐµÐ²Ð°ÑÐµÐ»ÑÐ½Ð°Ñ ÑÐµÐºÑÑÑÑÐ° Ñ ÐºÐ¾Ð½ÑÐµÐ½ÑÑÐ¸ÑÐ¾Ð²Ð°Ð½Ð½ÑÐ¼ ÑÐ±Ð»Ð¾ÑÐ½ÑÐ¼ Ð²ÐºÑÑÐ¾Ð¼."
+          "desc_ru": "Натуральные сушеные яблочные кольца из Китая без добавления сахара. Жевательная текстура с концентрированным яблочным вкусом."
         },
         {
           "name": "Dried Apple Cubes/Dices",
           "price": "Price on request",
           "desc": "Chinese dried apple cubes containing only natural fruit sugars. Uniform pieces with pure apple taste, ideal for baking, cereals and nutritional food applications.",
-          "desc_ru": "ÐÐ¸ÑÐ°Ð¹ÑÐºÐ¸Ðµ ÑÑÑÐµÐ½ÑÐµ ÐºÑÐ±Ð¸ÐºÐ¸ ÑÐ±Ð»Ð¾Ðº, ÑÐ¾Ð´ÐµÑÐ¶Ð°ÑÐ¸Ðµ ÑÐ¾Ð»ÑÐºÐ¾ Ð½Ð°ÑÑÑÐ°Ð»ÑÐ½ÑÐµ ÑÑÑÐºÑÐ¾Ð²ÑÐµ ÑÐ°ÑÐ°ÑÐ°. ÐÐ´Ð½Ð¾ÑÐ¾Ð´Ð½ÑÐµ ÐºÑÑÐ¾ÑÐºÐ¸ Ñ ÑÐ¸ÑÑÑÐ¼ ÑÐ±Ð»Ð¾ÑÐ½ÑÐ¼ Ð²ÐºÑÑÐ¾Ð¼."
+          "desc_ru": "Китайские сушеные кубики яблок, содержащие только натуральные фруктовые сахара. Однородные кусочки с чистым яблочным вкусом."
         }
       ]
     },
     {
       "id": "banana-chips",
       "name": "Banana Chips",
-      "name_ru": "ÐÐ°Ð½Ð°Ð½Ð¾Ð²ÑÐµ ÑÐ¸Ð¿ÑÑ",
+      "name_ru": "Банановые чипсы",
       "desc": "Whole, Halves, Quarters",
-      "desc_ru": "Ð¦ÐµÐ»ÑÐµ, Ð¿Ð¾Ð»Ð¾Ð²Ð¸Ð½ÐºÐ¸, ÑÐµÑÐ²ÐµÑÑÐ¸Ð½ÐºÐ¸",
+      "desc_ru": "Целые, половинки, четвертинки",
       "origin": "Philippines",
-      "origin_ru": "Ð¤Ð¸Ð»Ð¸Ð¿Ð¿Ð¸Ð½Ñ",
+      "origin_ru": "Филиппины",
       "image": "goods/test.jpg",
       "mainPrice": "2,80 USD/kg",
       "variants": [
@@ -374,13 +374,13 @@
           "name": "Banana Chips Whole, 6.8kg Carton",
           "price": "2,60 USD/kg",
           "desc": "Premium whole banana chips, vacuum-packed in a 6.8kg carton. Features golden color, crispy texture and natural banana flavor - ideal for snacks and food service.",
-          "desc_ru": "ÐÑÐµÐ¼Ð¸Ð°Ð»ÑÐ½ÑÐµ ÑÐµÐ»ÑÐµ Ð±Ð°Ð½Ð°Ð½Ð¾Ð²ÑÐµ ÑÐ¸Ð¿ÑÑ, Ð²Ð°ÐºÑÑÐ¼Ð½Ð¾ ÑÐ¿Ð°ÐºÐ¾Ð²Ð°Ð½Ð½ÑÐµ Ð² ÐºÐ°ÑÑÐ¾Ð½Ð½ÑÑ ÐºÐ¾ÑÐ¾Ð±ÐºÑ 6,8 ÐºÐ³. ÐÐ¾Ð»Ð¾ÑÐ¸ÑÑÑÐ¹ ÑÐ²ÐµÑ, ÑÑÑÑÑÑÑÐ°Ñ ÑÐµÐºÑÑÑÑÐ° Ð¸ Ð½Ð°ÑÑÑÐ°Ð»ÑÐ½ÑÐ¹ Ð±Ð°Ð½Ð°Ð½Ð¾Ð²ÑÐ¹ Ð²ÐºÑÑ."
+          "desc_ru": "Премиальные целые банановые чипсы, вакуумно упакованные в картонную коробку 6,8 кг. Золотистый цвет, хрустящая текстура и натуральный банановый вкус."
         },
         {
           "name": "Banana Chips Halves/Quarters",
           "price": "2,88 USD/kg",
           "desc": "Uniform banana chips in halves and quarters, packed in a 6.8kg carton. Perfect for confectionery, bakery and muesli applications with consistent size and crispy texture.",
-          "desc_ru": "ÐÐ´Ð½Ð¾ÑÐ¾Ð´Ð½ÑÐµ Ð±Ð°Ð½Ð°Ð½Ð¾Ð²ÑÐµ ÑÐ¸Ð¿ÑÑ Ð¿Ð¾Ð»Ð¾Ð²Ð¸Ð½ÐºÐ°Ð¼Ð¸ Ð¸ ÑÐµÑÐ²ÐµÑÑÐ¸Ð½ÐºÐ°Ð¼Ð¸, ÑÐ¿Ð°ÐºÐ¾Ð²Ð°Ð½Ð½ÑÐµ Ð² ÐºÐ°ÑÑÐ¾Ð½Ð½ÑÑ ÐºÐ¾ÑÐ¾Ð±ÐºÑ 6,8 ÐºÐ³. ÐÐ´ÐµÐ°Ð»ÑÐ½Ð¾ Ð¿Ð¾Ð´ÑÐ¾Ð´ÑÑ Ð´Ð»Ñ ÐºÐ¾Ð½Ð´Ð¸ÑÐµÑÑÐºÐ¸Ñ Ð¸Ð·Ð´ÐµÐ»Ð¸Ð¹, Ð²ÑÐ¿ÐµÑÐºÐ¸ Ð¸ Ð¼ÑÑÐ»Ð¸."
+          "desc_ru": "Однородные банановые чипсы половинками и четвертинками, упакованные в картонную коробку 6,8 кг. Идеально подходят для кондитерских изделий, выпечки и мюсли."
         }
       ]
     }
