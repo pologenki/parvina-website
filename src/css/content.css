@@ -4907,3 +4907,282 @@ textarea:-moz-ui-invalid {
   transform: scale(1.1);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
 }
+
+
+
+/* ── FLIP PORTFOLIO SLIDER ── */
+.flip-slider-wrap { width: 100%; max-width: 1100px; margin: 0 auto; }
+
+.flip-slider-track {
+  display: flex;
+  gap: 1.5rem;
+  overflow: hidden;
+  padding: 2rem 0.5rem;
+}
+
+.flip-card {
+  flex: 0 0 calc(33.333% - 1rem);
+  min-width: 0;
+  height: 420px;
+  perspective: 1200px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.flip-card:hover { transform: translateY(-6px); }
+.flip-card.flipped:hover { transform: none; }
+
+.flip-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+
+.flip-front, .flip-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.flip-front { background: #000; }
+
+.flip-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+  transition: opacity 0.4s, transform 0.6s;
+  pointer-events: none;
+}
+
+.flip-card:hover .flip-front img { opacity: 0.65; transform: scale(1.04); }
+
+.front-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 2rem 1.5rem 1.5rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.front-num {
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  color: #66b1f1;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.front-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: #fff;
+  line-height: 1.3;
+  margin-bottom: 0.4rem;
+}
+
+.front-hint {
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+}
+
+.flip-back {
+  transform: rotateY(180deg);
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2.5rem 2rem;
+  border: 1px solid rgba(102,177,241,0.25);
+}
+
+.back-decoration {
+  width: 32px;
+  height: 2px;
+  background: #66b1f1;
+  margin-bottom: 1.5rem;
+}
+
+.back-num {
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  color: #66b1f1;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.back-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #fff;
+  line-height: 1.35;
+  margin-bottom: 1.25rem;
+}
+
+.back-desc {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.75;
+  font-weight: 300;
+  flex: 1;
+}
+
+.back-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.btn-zoom {
+  flex: 1;
+  background: #66b1f1;
+  color: #fff;
+  border: none;
+  padding: 0.65rem 1rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-zoom:hover { background: #5590d1; }
+
+.btn-flip-back {
+  background: transparent;
+  color: rgba(255,255,255,0.35);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 0.65rem 0.9rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-flip-back:hover { color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.4); }
+
+.flip-slider-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+.flip-nav-btn {
+  width: 44px;
+  height: 44px;
+  border: 1px solid #e0e0e0;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  color: #333;
+  font-size: 1rem;
+}
+
+.flip-nav-btn:hover { background: #000; color: #fff; border-color: #000; }
+
+.flip-nav-dots { display: flex; gap: 0.5rem; align-items: center; }
+
+.flip-nav-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #b0b0b0;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.flip-nav-dot.active { background: #66b1f1; width: 20px; border-radius: 3px; }
+
+/* ZOOM */
+.zoom-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.zoom-overlay.active { opacity: 1; pointer-events: all; }
+
+.zoom-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  backdrop-filter: blur(10px);
+}
+
+.zoom-content {
+  position: relative;
+  z-index: 1;
+  max-width: 88vw;
+  max-height: 88vh;
+  transform: scale(0.85);
+  transition: transform 0.45s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.zoom-overlay.active .zoom-content { transform: scale(1); }
+
+.zoom-img {
+  display: block;
+  max-width: 100%;
+  max-height: 78vh;
+  object-fit: contain;
+  border-radius: 2px;
+  box-shadow: 0 48px 96px rgba(0,0,0,0.7);
+}
+
+.zoom-caption { margin-top: 1.25rem; text-align: center; }
+
+.zoom-caption-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  color: #fff;
+  font-weight: 300;
+  margin-bottom: 0.3rem;
+}
+
+.zoom-caption-desc { font-size: 0.72rem; color: rgba(255,255,255,0.4); letter-spacing: 0.05em; }
+
+.zoom-close {
+  position: absolute;
+  top: -2.75rem;
+  right: 0;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.55);
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.zoom-close:hover { background: rgba(255,255,255,0.08); color: #fff; }

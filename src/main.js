@@ -301,9 +301,10 @@ async function renderApp() {
   initHeaderMenu();
   initSectionScript();
 
+
   // Add small delay to ensure DOM is ready for Swiper
   await new Promise((resolve) => setTimeout(resolve, 50));
-
+initFlipSlider();
   initSwiper();
   initContactForm();
   initScrollToTop();
@@ -1242,3 +1243,103 @@ function addLogoHandlers() {
 
 // Make function available globally
 window.addLogoHandlers = addLogoHandlers;
+
+
+// ── FLIP PORTFOLIO SLIDER ──
+function initFlipSlider() {
+  const slides = [
+    { num: "01", title: "Gulfood Dubai 2023", title_ru: "Gulfood Дубай 2023", desc: "Meeting with a regular supplier of dates from Tunisia.", desc_ru: "Встреча с постоянным поставщиком фиников из Туниса.", img: "/img/img019.jpg" },
+    { num: "02", title: "Gulfood Dubai 2023", title_ru: "Gulfood Дубай 2023", desc: "Discovering reliable suppliers of nuts and dried fruits worldwide.", desc_ru: "Поиск надёжных поставщиков орехов и сухофруктов по всему миру.", img: "/img/img002.jpg" },
+    { num: "03", title: "Cashew Processing, Vietnam", title_ru: "Обработка кешью, Вьетнам", desc: "Cashew processing and packaging insight.", desc_ru: "Знакомство с производством и упаковкой кешью.", img: "/img/img003.jpg" },
+    { num: "04", title: "Gulfood Dubai 2025", title_ru: "Gulfood Дубай 2025", desc: "Indian stand. Discovering new suppliers.", desc_ru: "Индийский стенд. Знакомство с новыми поставщиками.", img: "/img/img017.jpg" },
+    { num: "05", title: "Meeting Russian Ambassador", title_ru: "Встреча с послом России", desc: "Strengthening trade relations.", desc_ru: "Укрепление торговых отношений.", img: "/img/img005.jpg" },
+    { num: "06", title: "Gulfood Dubai 2022", title_ru: "Gulfood Дубай 2022", desc: "Connecting with international nut suppliers.", desc_ru: "Установление связей с международными поставщиками орехов.", img: "/img/img007.jpg" },
+    { num: "07", title: "Gulfood Dubai 2025", title_ru: "Gulfood Дубай 2025", desc: "Scouting trusted nut suppliers for global markets.", desc_ru: "Поиск надёжных поставщиков орехов для мировых рынков.", img: "/img/img008.jpg" },
+    { num: "08", title: "Anuga Cologne 2025", title_ru: "Anuga Кёльн 2025", desc: "Securing supply chain connections.", desc_ru: "Налаживание связей в цепочке поставок.", img: "/img/img013.jpg" },
+    { num: "09", title: "Anuga Cologne 2025", title_ru: "Anuga Кёльн 2025", desc: "Exploring international markets for nuts and dried fruits.", desc_ru: "Изучение международных рынков орехов и сухофруктов.", img: "/img/img014.jpg" },
+    { num: "10", title: "Meeting cashew supplier and investors", title_ru: "Встреча с поставщиком кешью и инвесторами", desc: "Securing supply chain connections.", desc_ru: "Обеспечение связей в цепочке поставок.", img: "/img/img012.jpg" },
+    { num: "11", title: "Gulfood Dubai 2025", title_ru: "Gulfood Дубай 2025", desc: "Life is buzzing here — ideas are born and deals are made!", desc_ru: "Здесь кипит жизнь — рождаются идеи и заключаются сделки!", img: "/img/img016.jpg" },
+  ];
+
+  let current = 0;
+  const perPage = 3;
+  const total = Math.ceil(slides.length / perPage);
+
+  function getLang() { return localStorage.getItem('preferredLanguage') || 'en'; }
+
+  function renderSlider() {
+    const track = document.getElementById('portfolioTrack');
+    if (!track) return;
+    const lang = getLang();
+    const start = current * perPage;
+    const visible = slides.slice(start, start + perPage);
+
+    track.innerHTML = visible.map((s, i) => {
+      const gi = start + i;
+      const title = lang === 'ru' ? s.title_ru : s.title;
+      const desc = lang === 'ru' ? s.desc_ru : s.desc;
+      return `
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <img src="${s.img}" alt="${title}">
+              <div class="front-overlay">
+                <div class="front-num">${s.num}</div>
+                <div class="front-title">${title}</div>
+                <div class="front-hint">click to read →</div>
+              </div>
+            </div>
+            <div class="flip-back">
+              <div class="back-decoration"></div>
+              <div class="back-num">${s.num}</div>
+              <div class="back-title">${title}</div>
+              <div class="back-desc">${desc}</div>
+              <div class="back-actions">
+                <button class="btn-zoom" onclick="event.stopPropagation();openPortfolioZoom(${gi})">⊕ View Photo</button>
+                <button class="btn-flip-back" onclick="event.stopPropagation();this.closest('.flip-card').classList.remove('flipped')">← Back</button>
+              </div>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+
+    renderDots();
+  }
+
+  function renderDots() {
+    const dots = document.getElementById('portfolioDots');
+    if (!dots) return;
+    dots.innerHTML = Array.from({length: total}, (_, i) =>
+      `<div class="flip-nav-dot ${i===current?'active':''}" onclick="portfolioGoTo(${i})"></div>`
+    ).join('');
+  }
+
+  window.portfolioGoTo = function(i) { current = i; renderSlider(); };
+
+  const prevBtn = document.getElementById('portfolioPrev');
+  const nextBtn = document.getElementById('portfolioNext');
+  if (prevBtn) prevBtn.onclick = () => { current=(current-1+total)%total; renderSlider(); };
+  if (nextBtn) nextBtn.onclick = () => { current=(current+1)%total; renderSlider(); };
+
+  // Zoom
+  window.openPortfolioZoom = function(idx) {
+    const s = slides[idx];
+    const lang = getLang();
+    document.getElementById('zoomImg').src = s.img;
+    document.getElementById('zoomTitle').textContent = lang === 'ru' ? s.title_ru : s.title;
+    document.getElementById('zoomDesc').textContent = lang === 'ru' ? s.desc_ru : s.desc;
+    document.getElementById('zoomOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  };
+
+  document.getElementById('zoomBackdrop')?.addEventListener('click', closePortfolioZoom);
+  document.getElementById('zoomClose')?.addEventListener('click', closePortfolioZoom);
+  document.addEventListener('keydown', e => { if(e.key==='Escape') closePortfolioZoom(); });
+
+  function closePortfolioZoom() {
+    document.getElementById('zoomOverlay')?.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  renderSlider();
+}
