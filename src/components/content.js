@@ -3,7 +3,7 @@ import { personalRu } from "../content/content-ru.js";
 import { getCurrentLanguage, t } from "../utils/i18n.js";
 
 function getPersonalData() {
-  const lang = localStorage.getItem('preferredLanguage') || 'en';
+  const lang = localStorage.getItem("preferredLanguage") || "en";
   return lang === "ru" ? personalRu : personalEn;
 }
 
@@ -36,13 +36,14 @@ function getPriceText(price, lang) {
 
 function renderProductCards(products, lang) {
   console.log("renderProductCards lang:", lang);
-  return products.map((product, index) => {
-    const name = getProductText(product, "name", lang);
-    const desc = getProductText(product, "desc", lang);
-    const origin = getProductText(product, "origin", lang);
-    const originLabel = lang === "ru" ? "Происхождение" : "Origin";
+  return products
+    .map((product, index) => {
+      const name = getProductText(product, "name", lang);
+      const desc = getProductText(product, "desc", lang);
+      const origin = getProductText(product, "origin", lang);
+      const originLabel = lang === "ru" ? "Происхождение" : "Origin";
 
-    return `
+      return `
       <div class="pricing-card" data-modal="modal-${product.id}">
         <div class="product-image">
           <img src="/${product.image}" alt="${name}">
@@ -54,21 +55,24 @@ function renderProductCards(products, lang) {
         <a href="#" class="btn-more" data-i18n="products.learnMore">${t("products.learnMore")}</a>
       </div>
     `;
-  }).join("");
+    })
+    .join("");
 }
 
 function renderProductModals(products, lang) {
-  return products.map((product, index) => {
-    const name = getProductText(product, "name", lang);
-    const total = products.length;
-    const counter = `${index + 1}/${total}`;
+  return products
+    .map((product, index) => {
+      const name = getProductText(product, "name", lang);
+      const total = products.length;
+      const counter = `${index + 1}/${total}`;
 
-    const variants = product.variants.map(variant => {
-const variantName = getProductText(variant, "name", lang);
-const variantDesc = getProductText(variant, "desc", lang);
-const variantPrice = getPriceText(variant.price, lang);
+      const variants = product.variants
+        .map((variant) => {
+          const variantName = getProductText(variant, "name", lang);
+          const variantDesc = getProductText(variant, "desc", lang);
+          const variantPrice = getPriceText(variant.price, lang);
 
-      return `
+          return `
         <div class="product-type clickable-product" data-contact="true">
           <div class="product-type-header">
             <h4>${variantName}</h4>
@@ -79,9 +83,10 @@ const variantPrice = getPriceText(variant.price, lang);
           </div>
         </div>
       `;
-    }).join("");
+        })
+        .join("");
 
-    return `
+      return `
       <div class="product-modal" id="modal-${product.id}">
         <div class="modal-content">
           <span class="close-modal"></span>
@@ -101,12 +106,13 @@ const variantPrice = getPriceText(variant.price, lang);
         </div>
       </div>
     `;
-  }).join("");
+    })
+    .join("");
 }
 
 export function Content() {
   const personal = getPersonalData();
-  const lang = localStorage.getItem('preferredLanguage') || 'en';
+  const lang = localStorage.getItem("preferredLanguage") || "en";
   const products = productsData ? productsData.products : [];
 
   // Генерируем HTML для телефонов
@@ -317,163 +323,35 @@ ${renderProductModals(products, lang)}
     </div>
   </div>
 
-  <!-- Portfolio section -->
+
+<!-- Portfolio section -->
   <section id="portfolio" class="portfolio-section">
     <div class="portfolio-container">
       <h2 class="portfolio-title" data-i18n="portfolio.title">Successful Import Projects</h2>
-      
-      <div class="swiper portfolio-swiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <div class="portfolio-card">
-              <div class="card-image" data-image-src="/img/img016.jpg" data-image-alt="Premium nuts import">
-                <img src="/img/img016.jpg" alt="Premium nuts import" class="portfolio-image">
-                <div class="card-overlay"><div class="zoom-icon"><i class="fas fa-expand"></i></div></div>
-              </div>
-              <div class="portfolio-content">
-                <h3 data-i18n="portfolio.project1.title">Gulfood Dubai 2023</h3>
-                <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
-                <div class="project-stats"><div class="stat"><span class="stat-label" data-i18n="portfolio.detail1">Meeting with a regular supplier of dates from Tunisia</span></div></div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="portfolio-card">
-              <div class="card-image" data-image-src="/img/img002.jpg" data-image-alt="Premium nuts import">
-                <img src="/img/img002.jpg" alt="Premium nuts import" class="portfolio-image">
-                <div class="card-overlay"><div class="zoom-icon"><i class="fas fa-expand"></i></div></div>
-              </div>
-              <div class="portfolio-content">
-                <h3 data-i18n="portfolio.project2.title">Gulfood Dubai 2023</h3>
-                <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
-                <div class="project-stats"><div class="stat"><span class="stat-label" data-i18n="portfolio.detail2">Discovering reliable suppliers of nuts and dried fruits worldwide.</span></div></div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="portfolio-card">
-              <div class="card-image" data-image-src="/img/img003.jpg" data-image-alt="Premium nuts import">
-                <img src="/img/img003.jpg" alt="Premium nuts import" class="portfolio-image">
-                <div class="card-overlay"><div class="zoom-icon"><i class="fas fa-expand"></i></div></div>
-              </div>
-              <div class="portfolio-content">
-                <h3 data-i18n="portfolio.project3.title">Cashew processing and packaging insight, Vietnam</h3>
-                <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
-                <div class="project-stats"><div class="stat"><span class="stat-label" data-i18n="portfolio.detail3">Maintaining reliable partnerships.</span></div></div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="portfolio-card">
-              <div class="card-image" data-image-src="/img/img017.jpg" data-image-alt="Premium nuts import">
-                <img src="/img/img017.jpg" alt="Premium nuts import" class="portfolio-image">
-                <div class="card-overlay"><div class="zoom-icon"><i class="fas fa-expand"></i></div></div>
-              </div>
-              <div class="portfolio-content">
-                <h3 data-i18n="portfolio.project4.title">Gulfood Dubai 2025</h3>
-                <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
-                <div class="project-stats"><div class="stat"><span class="stat-label" data-i18n="portfolio.detail4">Indian stand</span></div></div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="portfolio-card">
-              <div class="card-image" data-image-src="/img/img005.jpg" data-image-alt="Premium nuts import">
-                <img src="/img/img005.jpg" alt="Premium nuts import" class="portfolio-image">
-                <div class="card-overlay"><div class="zoom-icon"><i class="fas fa-expand"></i></div></div>
-              </div>
-              <div class="portfolio-content">
-                <h3 data-i18n="portfolio.project5.title">Meeting with Russian Ambassador.</h3>
-                <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
-                <div class="project-stats"><div class="stat"><span class="stat-label" data-i18n="portfolio.detail5">Strengthening trade relations.</span></div></div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="portfolio-card">
-              <div class="card-image" data-image-src="/img/img007.jpg" data-image-alt="Premium nuts import">
-                <img src="/img/img007.jpg" alt="Premium nuts import" class="portfolio-image">
-                <div class="card-overlay"><div class="zoom-icon"><i class="fas fa-expand"></i></div></div>
-              </div>
-              <div class="portfolio-content">
-                <h3 data-i18n="portfolio.project6.title">Gulfood Dubai 2022</h3>
-                <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
-                <div class="project-stats"><div class="stat"><span class="stat-label" data-i18n="portfolio.detail6">Connecting with international nut suppliers for long-term partnerships.</span></div></div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="portfolio-card">
-              <div class="card-image" data-image-src="/img/img008.jpg" data-image-alt="Premium nuts import">
-                <img src="/img/img008.jpg" alt="Premium nuts import" class="portfolio-image">
-                <div class="card-overlay"><div class="zoom-icon"><i class="fas fa-expand"></i></div></div>
-              </div>
-              <div class="portfolio-content">
-                <h3 data-i18n="portfolio.project7.title">Gulfood Dubai 2025</h3>
-                <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
-                <div class="project-stats"><div class="stat"><span class="stat-label" data-i18n="portfolio.detail7">Scouting trusted nut suppliers for global markets.</span></div></div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="portfolio-card">
-              <div class="card-image" data-image-src="/img/img013.jpg" data-image-alt="Premium nuts import">
-                <img src="/img/img013.jpg" alt="Premium nuts import" class="portfolio-image">
-                <div class="card-overlay"><div class="zoom-icon"><i class="fas fa-expand"></i></div></div>
-              </div>
-              <div class="portfolio-content">
-                <h3 data-i18n="portfolio.project8.title">Anuga Cologne 2025</h3>
-                <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
-                <div class="project-stats"><div class="stat"><span class="stat-label" data-i18n="portfolio.detail9">Securing supply chain connections.</span></div></div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="portfolio-card">
-              <div class="card-image" data-image-src="/img/img014.jpg" data-image-alt="Premium nuts import">
-                <img src="/img/img014.jpg" alt="Premium nuts import" class="portfolio-image">
-                <div class="card-overlay"><div class="zoom-icon"><i class="fas fa-expand"></i></div></div>
-              </div>
-              <div class="portfolio-content">
-                <h3 data-i18n="portfolio.project9.title">Anuga Cologne 2025</h3>
-                <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
-                <div class="project-stats"><div class="stat"><span class="stat-label" data-i18n="portfolio.detail8">Exploring international markets for nuts and dried fruits.</span></div></div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="portfolio-card">
-              <div class="card-image" data-image-src="/img/img012.jpg" data-image-alt="Premium nuts import">
-                <img src="/img/img012.jpg" alt="Premium nuts import" class="portfolio-image">
-                <div class="card-overlay"><div class="zoom-icon"><i class="fas fa-expand"></i></div></div>
-              </div>
-              <div class="portfolio-content">
-                <h3 data-i18n="portfolio.project10.title">Meeting another cashew supplier and investors</h3>
-                <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
-                <div class="project-stats"><div class="stat"><span class="stat-label" data-i18n="portfolio.detail9">Securing supply chain connections.</span></div></div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="portfolio-card">
-              <div class="card-image" data-image-src="/img/img019.jpg" data-image-alt="Premium nuts import">
-                <img src="/img/img019.jpg" alt="Premium nuts import" class="portfolio-image">
-                <div class="card-overlay"><div class="zoom-icon"><i class="fas fa-expand"></i></div></div>
-              </div>
-              <div class="portfolio-content">
-                <h3 data-i18n="portfolio.project11.title">Gulfood Dubai 2025</h3>
-                <p data-i18n="portfolio.description1">Almonds, walnuts and cashews from USA, Turkey and Vietnam</p>
-                <div class="project-stats"><div class="stat"><span class="stat-label" data-i18n="portfolio.detail10">Life is buzzing here — ideas are born and deals are made!</span></div></div>
-              </div>
-            </div>
-          </div>
+
+      <div class="flip-slider-wrap">
+        <div class="flip-slider-track" id="portfolioTrack"></div>
+        <div class="flip-slider-nav">
+          <button class="flip-nav-btn" id="portfolioPrev">←</button>
+          <div class="flip-nav-dots" id="portfolioDots"></div>
+          <button class="flip-nav-btn" id="portfolioNext">→</button>
         </div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-pagination"></div>
       </div>
     </div>
   </section>
+
+  <!-- Zoom overlay -->
+  <div class="zoom-overlay" id="zoomOverlay">
+    <div class="zoom-backdrop" id="zoomBackdrop"></div>
+    <div class="zoom-content">
+      <button class="zoom-close" id="zoomClose">✕</button>
+      <img class="zoom-img" id="zoomImg" src="" alt="">
+      <div class="zoom-caption">
+        <div class="zoom-caption-title" id="zoomTitle"></div>
+        <div class="zoom-caption-desc" id="zoomDesc"></div>
+      </div>
+    </div>
+  </div>
 
   <!-- Gallery modal -->
   <div class="gallery-modal" id="galleryModal">
