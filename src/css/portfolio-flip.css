@@ -346,3 +346,11 @@
   background: rgba(255,255,255,0.1) !important;
   color: #fff !important;
 }
+
+.flip-slider-track .flip-back {
+  height: 100% !important;
+  max-height: 440px !important;
+  overflow: hidden !important;
+  top: 0 !important;
+  bottom: 0 !important;
+}
