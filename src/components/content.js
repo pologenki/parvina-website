@@ -325,13 +325,15 @@ ${renderProductModals(products, lang)}
 
 
 <!-- Portfolio section -->
-  <section id="portfolio" class="portfolio-section">
+<section id="portfolio" class="portfolio-section" style="background:#f8f9fa;">
     <div class="portfolio-container">
+      <div style="text-align:center;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:#66b1f1;margin-bottom:0.75rem;">Portfolio</div>
       <h2 class="portfolio-title" data-i18n="portfolio.title">Successful Import Projects</h2>
 
       <div class="flip-slider-wrap">
         <div class="flip-slider-track" id="portfolioTrack"></div>
         <div class="flip-slider-nav">
+        <p style="text-align:center;font-size:0.68rem;color:#b0b0b0;letter-spacing:0.12em;text-transform:uppercase;margin-top:1rem;padding-bottom:2rem;">Click card to flip · Click "View Photo" to zoom</p>
           <button class="flip-nav-btn" id="portfolioPrev">←</button>
           <div class="flip-nav-dots" id="portfolioDots"></div>
           <button class="flip-nav-btn" id="portfolioNext">→</button>

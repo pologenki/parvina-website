@@ -382,3 +382,8 @@
 .flip-slider-track .back-actions {
   margin-top: 1rem !important;
 }
+
+#portfolio.portfolio-section {
+  background: #f8f9fa !important;
+  padding: 4rem 0 !important;
+}
