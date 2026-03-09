@@ -24,9 +24,9 @@
 }
 
 .flip-slider-track .flip-card {
-  flex: 0 0 calc(33.333% - 16px) !important;
-  width: calc(33.333% - 16px) !important;
-  height: 440px !important;
+  flex: 0 0 100% !important;
+  width: 100% !important;
+  height: 580px !important;
   perspective: 1200px !important;
   cursor: pointer !important;
   transition: transform 0.3s ease !important;
