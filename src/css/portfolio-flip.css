@@ -16,6 +16,11 @@
   gap: 24px !important;
   padding: 2rem 0 !important;
   align-items: flex-start !important;
+  transition: opacity 0.4s ease !important;
+}
+
+.flip-slider-track.transitioning {
+  opacity: 0 !important;
 }
 
 .flip-slider-track .flip-card {

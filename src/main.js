@@ -1339,13 +1339,25 @@ function initFlipSlider() {
     document.body.style.overflow = '';
   }
 
-    // Autoplay
-  let autoPlay = setInterval(() => { current=(current+1)%total; renderSlider(); }, 4000);
+function goToSlide(n) {
+    const track = document.getElementById('portfolioTrack');
+    if (track) track.classList.add('transitioning');
+    setTimeout(() => {
+      current = n;
+      renderSlider();
+      if (track) track.classList.remove('transitioning');
+    }, 350);
+  }
+
+  if (prevBtn) prevBtn.onclick = () => goToSlide((current-1+total)%total);
+  if (nextBtn) nextBtn.onclick = () => goToSlide((current+1)%total);
+  window.portfolioGoTo = function(i) { goToSlide(i); };
+
+  let autoPlay = setInterval(() => goToSlide((current+1)%total), 4000);
   const wrap = document.querySelector('.flip-slider-wrap');
   if (wrap) {
     wrap.addEventListener('mouseenter', () => clearInterval(autoPlay));
-    wrap.addEventListener('mouseleave', () => { autoPlay = setInterval(() => { current=(current+1)%total; renderSlider(); }, 4000); });
+    wrap.addEventListener('mouseleave', () => { autoPlay = setInterval(() => goToSlide((current+1)%total), 4000); });
   }
-
   renderSlider();
 }
