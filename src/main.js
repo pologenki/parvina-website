@@ -1339,5 +1339,13 @@ function initFlipSlider() {
     document.body.style.overflow = '';
   }
 
+    // Autoplay
+  let autoPlay = setInterval(() => { current=(current+1)%total; renderSlider(); }, 4000);
+  const wrap = document.querySelector('.flip-slider-wrap');
+  if (wrap) {
+    wrap.addEventListener('mouseenter', () => clearInterval(autoPlay));
+    wrap.addEventListener('mouseleave', () => { autoPlay = setInterval(() => { current=(current+1)%total; renderSlider(); }, 4000); });
+  }
+
   renderSlider();
 }
