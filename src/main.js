@@ -391,7 +391,6 @@ function initSwiper() {
   }
 }
 
-// Global function for language change
 window.changeLanguage = async function (lang) {
   await loadTranslations(lang);
   await loadProducts();
@@ -419,22 +418,20 @@ window.changeLanguage = async function (lang) {
   if (languageDropdown) languageDropdown.classList.remove("active");
   document.body.classList.remove("menu-open");
 
-  // Re-initialize all components after language change and re-render
-  setTimeout(() => {
-    initHeaderMenu();
-    initSectionScript();
-    initSwiper(); // Reinitialize swiper after content update
-    initContactForm();
-    initScrollToTop();
-    initProductModals();
-    initServiceModals();
-    initPortfolioGallery();
-    initFooterModals();
-    initEmailLinks();
-    initLanguageSwitcher(); // Reinitialize language switcher after content update
-    addLogoHandlers();
-    setCurrentDate();
-  }, 50);
+  await new Promise((resolve) => setTimeout(resolve, 50));
+  initFlipSlider();
+  initSwiper();
+  initContactForm();
+  initScrollToTop();
+  initProductModals();
+  initServiceModals();
+  initPortfolioGallery();
+  initFooterModals();
+  initEmailLinks();
+  initLanguageSwitcher();
+  updateLanguageSelector();
+  addLogoHandlers();
+  setCurrentDate();
 };
 
 // Start the application
