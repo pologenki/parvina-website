@@ -12,17 +12,12 @@ import {
 import { initContactForm } from "./utils/emailService.js";
 import { Content, loadProducts } from "./components/content.js";
 // Import Swiper
-import Swiper from "swiper";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+// Swiper removed - using custom flip slider for portfolio
 
 // Import FontAwesome
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 // Global slider instance
-let portfolioSwiper = null;
 
 // Scroll management for modals
 let modalOpenCount = 0;
@@ -32,7 +27,8 @@ function preventBodyScroll() {
   modalOpenCount++;
   if (modalOpenCount === 1) {
     // Save current scroll position
-    savedScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+    savedScrollPosition =
+      window.pageYOffset || document.documentElement.scrollTop;
 
     // Completely block scrolling with position: fixed
     document.body.style.position = "fixed";
@@ -301,17 +297,13 @@ async function renderApp() {
   initHeaderMenu();
   initSectionScript();
 
-
   // Add small delay to ensure DOM is ready for Swiper
   await new Promise((resolve) => setTimeout(resolve, 50));
-window.initFlipSlider = initFlipSlider;
-initFlipSlider();
-  initSwiper();
+  initPortfolioFlipSlider();
   initContactForm();
   initScrollToTop();
   initProductModals();
   initServiceModals();
-  initPortfolioGallery();
   initFooterModals();
   initEmailLinks();
 
@@ -334,61 +326,273 @@ async function initApp() {
   await renderApp();
 }
 
-function initSwiper() {
-  // Destroy previous swiper instance if it exists
-  if (portfolioSwiper) {
-    portfolioSwiper.destroy();
-    portfolioSwiper = null;
+async function initPortfolioFlipSlider() {
+  const DEFAULT_SLIDES = [
+    {
+      num: "01",
+      title: "Gulfood Dubai 2023",
+      title_ru: "Gulfood Дубай 2023",
+      desc: "Meeting with a regular supplier of dates from Tunisia. Exploring new opportunities for long-term partnerships.",
+      desc_ru: "Встреча с постоянным поставщиком фиников из Туниса. Изучение новых возможностей для долгосрочного сотрудничества.",
+      img: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=900&q=85",
+    },
+    {
+      num: "02",
+      title: "Cashew Processing, Vietnam",
+      title_ru: "Обработка кешью, Вьетнам",
+      desc: "Insight into cashew processing and packaging. Ensuring quality standards are met at the source.",
+      desc_ru: "Знакомство с производством и упаковкой кешью. Контроль соответствия стандартам качества.",
+      img: "https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=900&q=85",
+    },
+    {
+      num: "03",
+      title: "Gulfood Dubai 2025",
+      title_ru: "Gulfood Дубай 2025",
+      desc: "Discovering reliable suppliers worldwide. Life is buzzing — ideas are born and deals are made.",
+      desc_ru: "Поиск надёжных поставщиков по всему миру. Здесь кипит жизнь — рождаются идеи и заключаются сделки.",
+      img: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=900&q=85",
+    },
+    {
+      num: "04",
+      title: "Anuga Cologne 2025",
+      title_ru: "Anuga Кёльн 2025",
+      desc: "Exploring international markets for nuts and dried fruits. Securing supply chain connections.",
+      desc_ru: "Изучение международных рынков орехов и сухофруктов. Налаживание связей в цепочке поставок.",
+      img: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=900&q=85",
+    },
+    {
+      num: "05",
+      title: "Meeting Russian Ambassador",
+      title_ru: "Встреча с послом России",
+      desc: "Strengthening trade relations between countries. Building bridges for international commerce.",
+      desc_ru: "Укрепление торговых отношений между странами. Создание мостов для международной торговли.",
+      img: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=900&q=85",
+    },
+  ];
+
+  // Загружаем слайды из portfolio.json, fallback на DEFAULT_SLIDES
+  async function loadSlides() {
+    try {
+      const r = await fetch('/data/portfolio.json?v=' + Date.now());
+      if (r.ok) {
+        const json = await r.json();
+        if (json.items && json.items.length > 0) {
+          // нумеруем автоматически
+          return json.items.map((item, i) => ({
+            ...item,
+            num: String(i + 1).padStart(2, '0')
+          }));
+        }
+      }
+    } catch(e) {}
+    return DEFAULT_SLIDES;
   }
 
-  const swiperElement = document.querySelector(".portfolio-swiper");
+  const slides = await loadSlides();
 
-  if (swiperElement) {
-    portfolioSwiper = new Swiper(".portfolio-swiper", {
-      modules: [Navigation, Pagination, Autoplay],
-      loop: true,
-      slidesPerView: 1,
-      spaceBetween: 30,
-      centeredSlides: true,
+  // Infinite carousel: always shows 3 cards, moves 1 at a time
+  // current = index of the LEFT-most visible card
+  const total = slides.length; // 5
+  const visible = 3; // always show 3
+  let current = 0;
+  let isAnimating = false;
 
-      autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
-      },
+  const track = document.getElementById("portfolioTrack");
+  const dotsEl = document.getElementById("portfolioDots");
+  const prevBtn = document.getElementById("portfolioPrev");
+  const nextBtn = document.getElementById("portfolioNext");
+  const zoomOverlay = document.getElementById("zoomOverlay");
+  const zoomImg = document.getElementById("zoomImg");
+  const zoomTitle = document.getElementById("zoomTitle");
+  const zoomDesc = document.getElementById("zoomDesc");
+  const zoomClose = document.getElementById("zoomClose");
+  const zoomBackdrop = document.getElementById("zoomBackdrop");
 
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-        dynamicBullets: true,
-      },
+  if (!track) return;
 
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
+  function getLang() {
+    return (
+      document.documentElement.lang ||
+      localStorage.getItem("selectedLanguage") ||
+      "en"
+    );
+  }
 
-      breakpoints: {
-        640: {
-          slidesPerView: 1,
-          spaceBetween: 20,
-        },
-        768: {
-          slidesPerView: 2,
-          spaceBetween: 25,
-        },
-        1024: {
-          slidesPerView: 3,
-          spaceBetween: 30,
-        },
-        1200: {
-          slidesPerView: 3,
-          spaceBetween: 40,
-        },
-      },
+  function openZoom(idx, e) {
+    if (e) e.stopPropagation();
+    const s = slides[idx % total];
+    const lang = getLang();
+    zoomImg.src = s.img;
+    zoomTitle.textContent = lang === "ru" ? s.title_ru : s.title;
+    zoomDesc.textContent = lang === "ru" ? s.desc_ru : s.desc;
+    zoomOverlay.classList.add("active");
+    preventBodyScroll();
+  }
+
+  function closeZoom() {
+    zoomOverlay.classList.remove("active");
+    allowBodyScroll();
+  }
+
+  function buildCard(idx) {
+    const s = slides[idx];
+    const lang = getLang();
+    const title = lang === "ru" ? s.title_ru : s.title;
+    const desc = lang === "ru" ? s.desc_ru : s.desc;
+    return `
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <img src="${s.img}" alt="${title}" loading="lazy">
+          <div class="front-overlay">
+            <div class="front-num">${s.num}</div>
+            <div class="front-title">${title}</div>
+            <div class="front-hint">hover to read →</div>
+          </div>
+        </div>
+        <div class="flip-back">
+          <div class="back-decoration"></div>
+          <div class="back-num">${s.num}</div>
+          <div class="back-title">${title}</div>
+          <div class="back-desc">${desc}</div>
+          <div class="back-actions">
+            <button class="btn-zoom" onclick="portfolioOpenZoom(${idx}, event)">⊕ View Photo</button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  const FADE_OUT = 200;
+  const FADE_IN  = 1000;
+
+  // ── сколько карточек показывать зависит от ширины экрана
+  function visibleCount() {
+    return window.innerWidth <= 600 ? 1 : window.innerWidth <= 900 ? 2 : 3;
+  }
+
+  function showCards() {
+    const n = slides.length;
+    const cnt = visibleCount();
+    const indices = [];
+    for (let i = 0; i < cnt; i++) indices.push(((current + i) % n + n) % n);
+
+    track.innerHTML = indices.map(i => buildCard(i)).join('');
+    renderDots();
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        track.querySelectorAll('.flip-card').forEach(c => c.classList.add('pfs-visible'));
+      });
+    });
+  }
+
+  function goTo(newCurrent) {
+    if (isAnimating) return;
+    isAnimating = true;
+    current = ((newCurrent % slides.length) + slides.length) % slides.length;
+
+    // плавно гасим старые карточки
+    const old = track.querySelectorAll('.flip-card');
+    old.forEach(c => {
+      c.style.transition = `opacity ${FADE_OUT}ms ease`;
+      c.style.opacity = '0';
     });
 
-    console.log("✅ Portfolio Swiper initialized successfully!");
+    setTimeout(() => {
+      showCards();
+      setTimeout(() => { isAnimating = false; }, 500);
+    }, FADE_OUT + 30);
   }
+
+  // ── Autoplay
+  let autoplayTimer = null;
+
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayTimer = setInterval(() => goTo(current + 1), 5000);
+  }
+
+  function stopAutoplay() {
+    if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; }
+  }
+
+  function renderDots() {
+    if (!dotsEl) return;
+    dotsEl.innerHTML = slides
+      .map((_, i) => `<div class="flip-nav-dot ${i === current ? "active" : ""}" onclick="portfolioGoTo(${i})"></div>`)
+      .join("");
+  }
+
+  // ── Tap/click handler for mobile flip & swipe-next
+  track.addEventListener('click', (e) => {
+    // btn-zoom has its own onclick — don't interfere
+    if (e.target.closest('.btn-zoom')) return;
+
+    const card = e.target.closest('.flip-card');
+    if (!card) return;
+
+    if (window.innerWidth <= 600) {
+      if (card.classList.contains('flipped')) {
+        card.classList.remove('flipped');
+        setTimeout(() => {
+          stopAutoplay();
+          goTo(current + 1);
+          startAutoplay();
+        }, 400);
+      } else {
+        track.querySelectorAll('.flip-card').forEach(c => c.classList.remove('flipped'));
+        card.classList.add('flipped');
+      }
+    }
+  });
+
+  // ── Swipe (touch)
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  track.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  track.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    // только горизонтальный свайп (> 40px и не вертикальный scroll)
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      stopAutoplay();
+      goTo(dx < 0 ? current + 1 : current - 1);
+      startAutoplay();
+    }
+  }, { passive: true });
+
+  // ── Globals
+  window.portfolioOpenZoom = openZoom;
+  window.portfolioGoTo = function (i) {
+    stopAutoplay(); goTo(i); startAutoplay();
+  };
+  window._pfsPrev = () => { stopAutoplay(); goTo(current - 1); startAutoplay(); };
+  window._pfsNext = () => { stopAutoplay(); goTo(current + 1); startAutoplay(); };
+
+  if (prevBtn) prevBtn.onclick = () => { stopAutoplay(); goTo(current - 1); startAutoplay(); };
+  if (nextBtn) nextBtn.onclick = () => { stopAutoplay(); goTo(current + 1); startAutoplay(); };
+  if (zoomClose) zoomClose.onclick = closeZoom;
+  if (zoomBackdrop) zoomBackdrop.onclick = closeZoom;
+
+  track.addEventListener("mouseenter", stopAutoplay);
+  track.addEventListener("mouseleave", startAutoplay);
+
+  // resize — перерендер без анимации
+  window.addEventListener('resize', () => { showCards(); });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeZoom();
+  });
+
+  showCards();
+  startAutoplay();
+  console.log("✅ Portfolio flip slider initialized!");
 }
 
 window.changeLanguage = async function (lang) {
@@ -419,13 +623,11 @@ window.changeLanguage = async function (lang) {
   document.body.classList.remove("menu-open");
 
   await new Promise((resolve) => setTimeout(resolve, 50));
-  initFlipSlider();
-  initSwiper();
+  initPortfolioFlipSlider();
   initContactForm();
   initScrollToTop();
   initProductModals();
   initServiceModals();
-  initPortfolioGallery();
   initFooterModals();
   initEmailLinks();
   initLanguageSwitcher();
@@ -809,7 +1011,7 @@ function initProductModals() {
 
         // Prevent ALL default touch behaviors inside modal
         // Only allow vertical scroll inside modal-body
-        const isTouchingModalBody = e.target.closest('.modal-body');
+        const isTouchingModalBody = e.target.closest(".modal-body");
 
         if (!isTouchingModalBody) {
           e.preventDefault();
@@ -861,10 +1063,10 @@ function initProductModals() {
   // Update counter when modal opens
   modals.forEach((modal) => {
     // Add swipe hint element if it doesn't exist
-    if (!modal.querySelector('.swipe-hint')) {
-      const swipeHint = document.createElement('div');
-      swipeHint.className = 'swipe-hint';
-      const modalContent = modal.querySelector('.modal-content');
+    if (!modal.querySelector(".swipe-hint")) {
+      const swipeHint = document.createElement("div");
+      swipeHint.className = "swipe-hint";
+      const modalContent = modal.querySelector(".modal-content");
       if (modalContent) {
         modalContent.appendChild(swipeHint);
       }
@@ -887,126 +1089,6 @@ function initProductModals() {
       attributes: true,
       attributeFilter: ["class"],
     });
-  });
-}
-
-// Gallery Modal Function
-function initPortfolioGallery() {
-  const galleryModal = document.getElementById("galleryModal");
-  const galleryImage = document.getElementById("galleryImage");
-  const imageTitle = document.getElementById("imageTitle");
-  const imageDescription = document.getElementById("imageDescription");
-  const currentImageSpan = document.getElementById("currentImage");
-  const totalImagesSpan = document.getElementById("totalImages");
-  const closeGalleryBtn = document.querySelector(".close-gallery-modal");
-  const prevBtn = document.querySelector(".gallery-prev");
-  const nextBtn = document.querySelector(".gallery-next");
-
-  const cardImages = document.querySelectorAll(".card-image");
-  let currentImageIndex = 0;
-  let images = [];
-
-  // Collect all images from cards
-  cardImages.forEach((card, index) => {
-    const imgSrc = card.getAttribute("data-image-src");
-    const imgAlt = card.getAttribute("data-image-alt");
-    const cardContent = card
-      .closest(".portfolio-card")
-      .querySelector(".portfolio-content");
-    const title = cardContent.querySelector("h3").textContent;
-    const description = cardContent.querySelector("p").textContent;
-
-    images.push({
-      src: imgSrc,
-      alt: imgAlt,
-      title: title,
-      description: description,
-      index: index,
-    });
-  });
-
-  // Update counter
-  if (totalImagesSpan) {
-    totalImagesSpan.textContent = images.length;
-  }
-
-  // Open gallery when clicking on image
-  cardImages.forEach((card, index) => {
-    card.addEventListener("click", (e) => {
-      if (!e.target.classList.contains("project-badge")) {
-        openGallery(index);
-      }
-    });
-  });
-
-  function openGallery(index) {
-    currentImageIndex = index;
-    updateGallery();
-    galleryModal.classList.add("active");
-    preventBodyScroll();
-  }
-
-  function closeGallery() {
-    galleryModal.classList.remove("active");
-    allowBodyScroll();
-  }
-
-  function updateGallery() {
-    const currentImage = images[currentImageIndex];
-
-    if (galleryImage) galleryImage.src = currentImage.src;
-    if (galleryImage) galleryImage.alt = currentImage.alt;
-    if (imageTitle) imageTitle.textContent = currentImage.title;
-    if (imageDescription)
-      imageDescription.textContent = currentImage.description;
-    if (currentImageSpan) currentImageSpan.textContent = currentImageIndex + 1;
-  }
-
-  function nextImage() {
-    currentImageIndex = (currentImageIndex + 1) % images.length;
-    updateGallery();
-  }
-
-  function prevImage() {
-    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-    updateGallery();
-  }
-
-  // Events
-  if (closeGalleryBtn) {
-    closeGalleryBtn.addEventListener("click", closeGallery);
-  }
-  if (prevBtn) {
-    prevBtn.addEventListener("click", prevImage);
-  }
-  if (nextBtn) {
-    nextBtn.addEventListener("click", nextImage);
-  }
-
-  // Close by clicking outside image
-  if (galleryModal) {
-    galleryModal.addEventListener("click", (e) => {
-      if (e.target === galleryModal) {
-        closeGallery();
-      }
-    });
-  }
-
-  // Keyboard navigation
-  document.addEventListener("keydown", (e) => {
-    if (!galleryModal || !galleryModal.classList.contains("active")) return;
-
-    switch (e.key) {
-      case "Escape":
-        closeGallery();
-        break;
-      case "ArrowLeft":
-        prevImage();
-        break;
-      case "ArrowRight":
-        nextImage();
-        break;
-    }
   });
 }
 
@@ -1241,123 +1323,3 @@ function addLogoHandlers() {
 
 // Make function available globally
 window.addLogoHandlers = addLogoHandlers;
-
-
-// ── FLIP PORTFOLIO SLIDER ──
-function initFlipSlider() {
-  const slides = [
-    { num: "01", title: "Gulfood Dubai 2023", title_ru: "Gulfood Дубай 2023", desc: "Meeting with a regular supplier of dates from Tunisia.", desc_ru: "Встреча с постоянным поставщиком фиников из Туниса.", img: "/img/img019.jpg" },
-    { num: "02", title: "Gulfood Dubai 2023", title_ru: "Gulfood Дубай 2023", desc: "Discovering reliable suppliers of nuts and dried fruits worldwide.", desc_ru: "Поиск надёжных поставщиков орехов и сухофруктов по всему миру.", img: "/img/img002.jpg" },
-    { num: "03", title: "Cashew Processing, Vietnam", title_ru: "Обработка кешью, Вьетнам", desc: "Cashew processing and packaging insight.", desc_ru: "Знакомство с производством и упаковкой кешью.", img: "/img/img003.jpg" },
-    { num: "04", title: "Gulfood Dubai 2025", title_ru: "Gulfood Дубай 2025", desc: "Indian stand. Discovering new suppliers.", desc_ru: "Индийский стенд. Знакомство с новыми поставщиками.", img: "/img/img017.jpg" },
-    { num: "05", title: "Meeting Russian Ambassador", title_ru: "Встреча с послом России", desc: "Strengthening trade relations.", desc_ru: "Укрепление торговых отношений.", img: "/img/img005.jpg" },
-    { num: "06", title: "Gulfood Dubai 2022", title_ru: "Gulfood Дубай 2022", desc: "Connecting with international nut suppliers.", desc_ru: "Установление связей с международными поставщиками орехов.", img: "/img/img007.jpg" },
-    { num: "07", title: "Gulfood Dubai 2025", title_ru: "Gulfood Дубай 2025", desc: "Scouting trusted nut suppliers for global markets.", desc_ru: "Поиск надёжных поставщиков орехов для мировых рынков.", img: "/img/img008.jpg" },
-    { num: "08", title: "Anuga Cologne 2025", title_ru: "Anuga Кёльн 2025", desc: "Securing supply chain connections.", desc_ru: "Налаживание связей в цепочке поставок.", img: "/img/img013.jpg" },
-    { num: "09", title: "Anuga Cologne 2025", title_ru: "Anuga Кёльн 2025", desc: "Exploring international markets for nuts and dried fruits.", desc_ru: "Изучение международных рынков орехов и сухофруктов.", img: "/img/img014.jpg" },
-    { num: "10", title: "Meeting cashew supplier and investors", title_ru: "Встреча с поставщиком кешью и инвесторами", desc: "Securing supply chain connections.", desc_ru: "Обеспечение связей в цепочке поставок.", img: "/img/img012.jpg" },
-    { num: "11", title: "Gulfood Dubai 2025", title_ru: "Gulfood Дубай 2025", desc: "Life is buzzing here — ideas are born and deals are made!", desc_ru: "Здесь кипит жизнь — рождаются идеи и заключаются сделки!", img: "/img/img016.jpg" },
-  ];
-
-  let current = 0;
-  const perPage = 3;
-  const total = Math.ceil(slides.length / perPage);
-
-  function getLang() { return localStorage.getItem('preferredLanguage') || 'en'; }
-
-  function renderSlider() {
-    const track = document.getElementById('portfolioTrack');
-    if (!track) return;
-    const lang = getLang();
-    const start = current * perPage;
-    const visible = slides.slice(start, start + perPage);
-
-    track.innerHTML = visible.map((s, i) => {
-      const gi = start + i;
-      const title = lang === 'ru' ? s.title_ru : s.title;
-      const desc = lang === 'ru' ? s.desc_ru : s.desc;
-      return `
-        <div class="flip-card" onclick="event.currentTarget.classList.toggle('flipped')">
-          <div class="flip-inner">
-            <div class="flip-front">
-              <img src="${s.img}" alt="${title}">
-              <div class="front-overlay">
-                <div class="front-num">${s.num}</div>
-                <div class="front-title">${title}</div>
-                <div class="front-hint">click to read →</div>
-              </div>
-            </div>
-            <div class="flip-back">
-              <div class="back-decoration"></div>
-              <div class="back-num">${s.num}</div>
-              <div class="back-title">${title}</div>
-              <div class="back-desc">${desc}</div>
-              <div class="back-actions">
-                <button class="btn-zoom" onclick="event.stopPropagation();openPortfolioZoom(${gi})">⊕ View Photo</button>
-                <button class="btn-flip-back" onclick="event.stopPropagation();this.closest('.flip-card').classList.remove('flipped')">← Back</button>
-              </div>
-            </div>
-          </div>
-        </div>`;
-    }).join('');
-
-    renderDots();
-  }
-
-  function renderDots() {
-    const dots = document.getElementById('portfolioDots');
-    if (!dots) return;
-    dots.innerHTML = Array.from({length: total}, (_, i) =>
-      `<div class="flip-nav-dot ${i===current?'active':''}" onclick="portfolioGoTo(${i})"></div>`
-    ).join('');
-  }
-
-  window.portfolioGoTo = function(i) { current = i; renderSlider(); };
-
-  const prevBtn = document.getElementById('portfolioPrev');
-  const nextBtn = document.getElementById('portfolioNext');
-  if (prevBtn) prevBtn.onclick = () => { current=(current-1+total)%total; renderSlider(); };
-  if (nextBtn) nextBtn.onclick = () => { current=(current+1)%total; renderSlider(); };
-
-  // Zoom
-  window.openPortfolioZoom = function(idx) {
-    const s = slides[idx];
-    const lang = getLang();
-    document.getElementById('zoomImg').src = s.img;
-    document.getElementById('zoomTitle').textContent = lang === 'ru' ? s.title_ru : s.title;
-    document.getElementById('zoomDesc').textContent = lang === 'ru' ? s.desc_ru : s.desc;
-    document.getElementById('zoomOverlay').classList.add('active');
-    document.body.style.overflow = 'hidden';
-  };
-
-  document.getElementById('zoomBackdrop')?.addEventListener('click', closePortfolioZoom);
-  document.getElementById('zoomClose')?.addEventListener('click', closePortfolioZoom);
-  document.addEventListener('keydown', e => { if(e.key==='Escape') closePortfolioZoom(); });
-
-  function closePortfolioZoom() {
-    document.getElementById('zoomOverlay')?.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-function goToSlide(n) {
-    const track = document.getElementById('portfolioTrack');
-    if (track) track.classList.add('transitioning');
-    setTimeout(() => {
-      current = n;
-      renderSlider();
-      if (track) track.classList.remove('transitioning');
-    }, 350);
-  }
-
-  if (prevBtn) prevBtn.onclick = () => goToSlide((current-1+total)%total);
-  if (nextBtn) nextBtn.onclick = () => goToSlide((current+1)%total);
-  window.portfolioGoTo = function(i) { goToSlide(i); };
-
-  let autoPlay = setInterval(() => goToSlide((current+1)%total), 4000);
-  const wrap = document.querySelector('.flip-slider-wrap');
-  if (wrap) {
-    wrap.addEventListener('mouseenter', () => clearInterval(autoPlay));
-    wrap.addEventListener('mouseleave', () => { autoPlay = setInterval(() => goToSlide((current+1)%total), 4000); });
-  }
-  renderSlider();
-}

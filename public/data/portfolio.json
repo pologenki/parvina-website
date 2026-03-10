@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "img": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=900&q=85",
+      "title": "Gulfood Dubai 2023",
+      "title_ru": "Gulfood Дубай 2023",
+      "desc": "Meeting with a regular supplier of dates from Tunisia. Exploring new opportunities for long-term partnerships.",
+      "desc_ru": "Встреча с постоянным поставщиком фиников из Туниса. Изучение новых возможностей для долгосрочного сотрудничества."
+    },
+    {
+      "img": "https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=900&q=85",
+      "title": "Cashew Processing, Vietnam",
+      "title_ru": "Обработка кешью, Вьетнам",
+      "desc": "Insight into cashew processing and packaging. Ensuring quality standards are met at the source.",
+      "desc_ru": "Знакомство с производством и упаковкой кешью. Контроль соответствия стандартам качества."
+    },
+    {
+      "img": "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=900&q=85",
+      "title": "Gulfood Dubai 2025",
+      "title_ru": "Gulfood Дубай 2025",
+      "desc": "Discovering reliable suppliers worldwide. Life is buzzing — ideas are born and deals are made.",
+      "desc_ru": "Поиск надёжных поставщиков по всему миру. Здесь кипит жизнь — рождаются идеи и заключаются сделки."
+    },
+    {
+      "img": "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=900&q=85",
+      "title": "Anuga Cologne 2025",
+      "title_ru": "Anuga Кёльн 2025",
+      "desc": "Exploring international markets for nuts and dried fruits. Securing supply chain connections.",
+      "desc_ru": "Изучение международных рынков орехов и сухофруктов. Налаживание связей в цепочке поставок."
+    },
+    {
+      "img": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=900&q=85",
+      "title": "Meeting Russian Ambassador",
+      "title_ru": "Встреча с послом России",
+      "desc": "Strengthening trade relations between countries. Building bridges for international commerce.",
+      "desc_ru": "Укрепление торговых отношений между странами. Создание мостов для международной торговли."
+    }
+  ],
+  "lastUpdated": ""
+}

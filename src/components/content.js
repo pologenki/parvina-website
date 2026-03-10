@@ -332,8 +332,8 @@ ${renderProductModals(products, lang)}
 
       <div class="flip-slider-wrap">
         <div class="flip-slider-track" id="portfolioTrack"></div>
+                <p style="text-align:center;font-size:0.68rem;color:#b0b0b0;letter-spacing:0.12em;text-transform:uppercase;margin-top:1rem;padding-bottom:2rem;">Click card to flip · Click "View Photo" to zoom</p>
         <div class="flip-slider-nav">
-        <p style="text-align:center;font-size:0.68rem;color:#b0b0b0;letter-spacing:0.12em;text-transform:uppercase;margin-top:1rem;padding-bottom:2rem;">Click card to flip · Click "View Photo" to zoom</p>
           <button class="flip-nav-btn" id="portfolioPrev">←</button>
           <div class="flip-nav-dots" id="portfolioDots"></div>
           <button class="flip-nav-btn" id="portfolioNext">→</button>
