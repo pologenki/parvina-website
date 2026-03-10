@@ -126,7 +126,7 @@ function updatePageTexts() {
   // Update page title
   const pageTitle = document.querySelector("title");
   if (pageTitle) {
-    pageTitle.textContent = t("about.title") + " - " + t("about.subtitle");
+    pageTitle.textContent = "Parvina - Import Manager & Trade Specialist";
   }
 }
 
