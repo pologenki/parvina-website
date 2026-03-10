@@ -646,6 +646,84 @@
     background: var(--white);
   }
 
+  /* ── UPLOAD BUTTON ── */
+  .pf-upload-area {
+    border: 1.5px dashed var(--border);
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    min-height: 80px;
+  }
+
+  .pf-upload-area:hover,
+  .pf-upload-area.dragover {
+    border-color: var(--dark);
+    background: var(--white);
+  }
+
+  .pf-upload-area input[type=file] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+  }
+
+  .pf-upload-icon {
+    font-size: 1.4rem;
+    opacity: 0.3;
+  }
+
+  .pf-upload-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    pointer-events: none;
+  }
+
+  .pf-upload-sub {
+    font-size: 0.62rem;
+    color: #bbb;
+    pointer-events: none;
+  }
+
+  .pf-upload-progress {
+    display: none;
+    width: 100%;
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 0.3rem;
+  }
+
+  .pf-upload-progress-fill {
+    height: 100%;
+    background: var(--dark);
+    width: 0%;
+    transition: width 0.3s;
+  }
+
+  .pf-upload-status {
+    font-size: 0.68rem;
+    color: var(--muted);
+    text-align: center;
+    min-height: 1rem;
+    margin-top: 0.2rem;
+  }
+
+  .pf-upload-status.ok { color: var(--success); }
+  .pf-upload-status.err { color: var(--danger); }
+
   .pf-section-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.5rem;
@@ -1040,16 +1118,33 @@ function buildPortfolioCard(item, i) {
 
     <div class="pf-body">
 
-      <!-- Image URL -->
-      <div class="card-field" style="margin-bottom:0.5rem;">
-        <label class="card-label">Image URL</label>
-        <div class="pf-url-row">
-          <div class="card-field">
-            <input class="card-input" value="${esc(item.img||'')}"
-              oninput="updPf(${i},'img',this.value)"
-              placeholder="https://images.unsplash.com/...">
-          </div>
-          <button class="btn-preview-img" onclick="previewPfImg(${i})">Preview</button>
+      <!-- Фото: upload или URL -->
+      <div class="card-field" style="margin-bottom:1rem;">
+        <label class="card-label">Photo</label>
+
+        <div class="pf-upload-area" id="pf-upload-area-${i}"
+          ondragover="event.preventDefault();this.classList.add('dragover')"
+          ondragleave="this.classList.remove('dragover')"
+          ondrop="handlePfDrop(event,${i})">
+          <input type="file" accept="image/*" onchange="uploadPfPhoto(this,${i})">
+          <div class="pf-upload-icon">📷</div>
+          <div class="pf-upload-label">Click or drag photo here</div>
+          <div class="pf-upload-sub">JPG, PNG, WEBP · uploads to /images/portfolio/</div>
+        </div>
+
+        <div class="pf-upload-progress" id="pf-progress-${i}">
+          <div class="pf-upload-progress-fill" id="pf-progress-fill-${i}"></div>
+        </div>
+        <div class="pf-upload-status" id="pf-status-${i}">
+          ${item.img ? `✓ ${item.img.split('/').pop()}` : ''}
+        </div>
+
+        <!-- URL вручную (fallback) -->
+        <div style="margin-top:0.5rem;display:flex;gap:0.4rem;align-items:center;">
+          <input class="card-input" style="font-size:0.78rem;" value="${esc(item.img||'')}"
+            id="pf-url-${i}"
+            oninput="updPf(${i},'img',this.value);previewPfImg(${i})"
+            placeholder="or paste URL directly...">
         </div>
       </div>
 
@@ -1088,17 +1183,121 @@ function buildPortfolioCard(item, i) {
 }
 
 function previewPfImg(i) {
-  const card = document.getElementById(`pf-card-${i}`);
-  const urlInput = card.querySelectorAll('.card-input')[0];
-  const wrap = document.getElementById(`pf-img-wrap-${i}`);
-  const url = urlInput.value.trim();
-  if (!url) { showToast('Enter image URL first', 'fail'); return; }
+  const url = (document.getElementById(`pf-url-${i}`)?.value || '').trim();
+  if (!url) return;
   updPf(i, 'img', url);
-  wrap.innerHTML = `
+  const wrap = document.getElementById(`pf-img-wrap-${i}`);
+  if (wrap) wrap.innerHTML = `
     <img src="${esc(url)}" onerror="this.style.opacity='0.15'"
       style="width:100%;height:100%;object-fit:cover;display:block;">
     <span class="pf-num">${String(i+1).padStart(2,'0')}</span>
     <button class="pf-delete-btn" onclick="deletePortfolioItem(${i})" title="Delete">✕</button>`;
+}
+
+function handlePfDrop(event, i) {
+  event.preventDefault();
+  document.getElementById(`pf-upload-area-${i}`).classList.remove('dragover');
+  const file = event.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) uploadPfPhoto({ files: [file] }, i);
+}
+
+async function uploadPfPhoto(input, i) {
+  const file = input.files[0];
+  if (!file) return;
+
+  const statusEl   = document.getElementById(`pf-status-${i}`);
+  const progressEl = document.getElementById(`pf-progress-${i}`);
+  const fillEl     = document.getElementById(`pf-progress-fill-${i}`);
+  const urlInput   = document.getElementById(`pf-url-${i}`);
+
+  // Генерируем безопасное имя файла
+  const ext      = file.name.split('.').pop().toLowerCase();
+  const safeName = file.name.replace(/[^a-z0-9._-]/gi, '_').replace(/\s+/g,'_');
+  const remotePath = `public/images/portfolio/${safeName}`;
+
+  statusEl.className = 'pf-upload-status';
+  statusEl.textContent = 'Uploading...';
+  progressEl.style.display = 'block';
+  fillEl.style.width = '30%';
+
+  try {
+    // Читаем файл как base64
+    const base64 = await new Promise((res, rej) => {
+      const reader = new FileReader();
+      reader.onload = () => res(reader.result.split(',')[1]);
+      reader.onerror = rej;
+      reader.readAsDataURL(file);
+    });
+
+    fillEl.style.width = '60%';
+
+    // Проверяем SHA если файл уже есть
+    let sha = '';
+    const checkR = await fetch(
+      `https://api.github.com/repos/${REPO}/contents/${remotePath}?ref=master`,
+      { headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' } }
+    );
+    if (checkR.ok) {
+      const checkJson = await checkR.json();
+      sha = checkJson.sha;
+    }
+
+    fillEl.style.width = '80%';
+
+    // Загружаем файл
+    const body = {
+      message: `Upload portfolio photo: ${safeName}`,
+      content: base64,
+      branch: 'master'
+    };
+    if (sha) body.sha = sha;
+
+    const r = await fetch(
+      `https://api.github.com/repos/${REPO}/contents/${remotePath}`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: `token ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      }
+    );
+
+    if (!r.ok) {
+      const err = await r.json();
+      throw new Error(err.message || 'Upload failed');
+    }
+
+    fillEl.style.width = '100%';
+
+    // Путь к файлу на сайте
+    const publicUrl = `/images/portfolio/${safeName}`;
+    updPf(i, 'img', publicUrl);
+    if (urlInput) urlInput.value = publicUrl;
+
+    // Обновляем превью в карточке
+    const wrap = document.getElementById(`pf-img-wrap-${i}`);
+    if (wrap) {
+      const rawUrl = `https://raw.githubusercontent.com/${REPO}/master/${remotePath}`;
+      wrap.innerHTML = `
+        <img src="${rawUrl}?v=${Date.now()}" onerror="this.style.opacity='0.2'"
+          style="width:100%;height:100%;object-fit:cover;display:block;">
+        <span class="pf-num">${String(i+1).padStart(2,'0')}</span>
+        <button class="pf-delete-btn" onclick="deletePortfolioItem(${i})" title="Delete">✕</button>`;
+    }
+
+    statusEl.className = 'pf-upload-status ok';
+    statusEl.textContent = `✓ Uploaded: ${safeName}`;
+    setTimeout(() => { progressEl.style.display = 'none'; }, 1000);
+
+  } catch(e) {
+    fillEl.style.width = '100%';
+    fillEl.style.background = 'var(--danger)';
+    statusEl.className = 'pf-upload-status err';
+    statusEl.textContent = '✕ ' + e.message;
+    setTimeout(() => { progressEl.style.display = 'none'; fillEl.style.background = 'var(--dark)'; }, 3000);
+  }
 }
 
 function updPf(i, field, value) {
