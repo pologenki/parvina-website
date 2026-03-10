@@ -4,7 +4,7 @@ export const personalEn = {
     title: "Hello! I'm Parvina",
     subtitle: "Import Manager & Trade Specialist",
     description: "Professional import manager specializing in nuts, dried fruits, spices, coffee and related products. I help businesses establish reliable supply chains from international markets to your warehouse.",
-    photo: '/myfoto.jpg',
+    photo: '/photo4.png',
   },
   contacts: {
     email: 'info@pologenki.eu',
@@ -15,6 +15,7 @@ export const personalEn = {
       whatsapp: 'https://wa.me/37258006670',
       wechat: 'https://web.wechat.com/',
       gmail: 'https://mail.google.com/mail/?view=cm&to=info@pologenki.eu'
+      
     }
   },
   footerBrand: 'Parvina'
