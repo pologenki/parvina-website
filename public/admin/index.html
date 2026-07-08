@@ -1,0 +1,2472 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pologenki вЂ” Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --dark: #1a1a1a;
+    --accent: #2c2c2c;
+    --gold: #b8960c;
+    --border: #e0e0e0;
+    --bg: #f8f7f4;
+    --white: #ffffff;
+    --text: #1a1a1a;
+    --muted: #888;
+    --success: #4a8c5c;
+    --danger: #c0392b;
+    --en: #2563eb;
+    --ru: #c0392b;
+    --cn: #b91c1c;
+  }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* в”Ђв”Ђ LOGIN в”Ђв”Ђ */
+  .login-wrap {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+  }
+
+  .login-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 3rem 3.5rem;
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+  }
+
+  .login-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--dark);
+    margin-bottom: 0.3rem;
+  }
+
+  .login-sub {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+  }
+
+  .form-label {
+    display: block;
+    text-align: left;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .form-input {
+    width: 100%;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    padding: 0.75rem 1rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text);
+    outline: none;
+    margin-bottom: 1.5rem;
+    transition: border-color 0.2s;
+  }
+
+  .form-input:focus { border-color: var(--dark); }
+
+  .btn-dark {
+    width: 100%;
+    background: var(--dark);
+    color: var(--white);
+    border: none;
+    padding: 0.85rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-dark:hover { background: #333; }
+
+  /* в”Ђв”Ђ HEADER в”Ђв”Ђ */
+  .site-header {
+    display: none;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 64px;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .site-header.visible { display: flex; }
+
+  .header-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--dark);
+  }
+
+  .header-center {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .header-actions { display: flex; gap: 0.75rem; align-items: center; }
+
+  .btn-publish {
+    background: var(--dark);
+    color: var(--white);
+    border: none;
+    padding: 0.55rem 1.4rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-publish:hover { background: #333; }
+  .btn-publish:disabled { background: #ccc; cursor: not-allowed; }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 0.55rem 1rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-outline:hover { border-color: var(--dark); color: var(--dark); }
+
+  /* в”Ђв”Ђ MAIN в”Ђв”Ђ */
+  .admin-main {
+    display: none;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 6rem;
+  }
+
+  .admin-main.visible { display: block; }
+
+  .page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  .page-meta {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 2.5rem;
+  }
+
+  /* в”Ђв”Ђ LANG BADGE в”Ђв”Ђ */
+  .lang-badge {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: 0.1rem 0.4rem;
+    border-radius: 2px;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+  }
+  .lang-badge.en { background: #dbeafe; color: var(--en); }
+  .lang-badge.ru { background: #fde8e8; color: var(--ru); }
+  .lang-badge.cn { background: #fee2e2; color: var(--cn); }
+
+  /* в”Ђв”Ђ GRID в”Ђв”Ђ */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .product-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+
+  .product-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+
+  .card-image-wrap {
+    height: 160px;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .card-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card-num {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    background: var(--white);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--border);
+  }
+
+  .card-body { padding: 1.25rem; }
+
+  .card-field { margin-bottom: 1rem; }
+  .card-field:last-child { margin-bottom: 0; }
+
+  .card-label {
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.35rem;
+  }
+
+  .card-input {
+    width: 100%;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    padding: 0.5rem 0.75rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.875rem;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .card-input:focus { border-color: var(--dark); background: var(--white); }
+  .card-input.price { color: var(--dark); font-weight: 500; }
+  .card-input.en:focus { border-color: var(--en); }
+  .card-input.ru:focus { border-color: var(--ru); }
+
+  /* two-column EN/RU fields */
+  .bilingual-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .bilingual-row .card-field { margin-bottom: 0; }
+
+  /* в”Ђв”Ђ VARIANTS в”Ђв”Ђ */
+  .variants-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.25rem;
+    border-top: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+
+  .variants-header:hover { background: var(--bg); }
+
+  .variants-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .variants-arrow {
+    font-size: 0.7rem;
+    color: var(--muted);
+    transition: transform 0.2s;
+  }
+
+  .variants-arrow.open { transform: rotate(180deg); }
+
+  .variants-body {
+    display: none;
+    padding: 0.75rem 1.25rem 1.25rem;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+  }
+
+  .variants-body.open { display: block; }
+
+  .variant-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+  }
+
+  .variant-item:last-child { margin-bottom: 0; }
+
+  .variant-mini-label {
+    display: block;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.3rem;
+  }
+
+  .variant-field { margin-bottom: 0.5rem; }
+  .variant-field:last-child { margin-bottom: 0; }
+
+  .variant-row-2col {
+    display: grid;
+    grid-template-columns: 1fr 148px;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .variant-desc-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .variant-input {
+    width: 100%;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    padding: 0.45rem 0.7rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .variant-input:focus { border-color: var(--dark); background: var(--white); }
+  .variant-input.price { color: var(--dark); font-weight: 500; }
+  .variant-input.en:focus { border-color: var(--en); }
+  .variant-input.ru:focus { border-color: var(--ru); }
+
+  textarea.variant-input {
+    resize: vertical;
+    height: 80px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .variant-delete-btn {
+    position: absolute;
+    top: 0.45rem;
+    right: 0.45rem;
+    background: transparent;
+    border: none;
+    color: var(--danger);
+    font-size: 0.75rem;
+    cursor: pointer;
+    opacity: 0.3;
+    padding: 0.1rem 0.35rem;
+    transition: opacity 0.2s;
+    line-height: 1;
+  }
+
+  .variant-delete-btn:hover { opacity: 1; }
+
+  .btn-add-variant {
+    width: 100%;
+    margin-top: 0.6rem;
+    background: transparent;
+    border: 1px dashed var(--border);
+    color: var(--muted);
+    padding: 0.5rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-add-variant:hover { border-color: var(--dark); color: var(--dark); }
+
+  /* в”Ђв”Ђ STATUS в”Ђв”Ђ */
+  .status-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    padding: 0.7rem 2rem;
+    display: none;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .status-bar.visible { display: flex; }
+
+  .status-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--success);
+    flex-shrink: 0;
+  }
+
+  .status-dot.busy { background: var(--gold); animation: blink 1s infinite; }
+  .status-dot.err { background: var(--danger); }
+
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+  .toast {
+    position: fixed;
+    top: 80px; right: 2rem;
+    background: var(--dark);
+    color: var(--white);
+    padding: 0.75rem 1.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: all 0.3s;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  .toast.show { opacity: 1; transform: translateY(0); }
+  .toast.ok { background: var(--success); }
+  .toast.fail { background: var(--danger); }
+
+  /* в”Ђв”Ђ TABS в”Ђв”Ђ */
+  .admin-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+
+  .admin-tab {
+    padding: 0.65rem 1.6rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    color: var(--muted);
+    transition: all 0.2s;
+    margin-bottom: -1px;
+  }
+
+  .admin-tab:hover { color: var(--dark); }
+  .admin-tab.active { color: var(--dark); border-bottom-color: var(--dark); }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* в”Ђв”Ђ PORTFOLIO GRID в”Ђв”Ђ */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .portfolio-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+    position: relative;
+  }
+
+  .portfolio-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+
+  .pf-image-wrap {
+    height: 180px;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pf-image-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .pf-image-placeholder {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 0.5rem;
+    color: var(--muted);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .pf-image-placeholder svg { opacity: 0.25; }
+
+  .pf-num {
+    position: absolute;
+    top: 0.75rem; left: 0.75rem;
+    background: var(--white);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--border);
+  }
+
+  .pf-drag-handle {
+    position: absolute;
+    top: 0.75rem; right: 0.75rem;
+    background: rgba(255,255,255,0.9);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: grab; font-size: 0.8rem;
+    transition: all 0.2s;
+  }
+
+  .pf-delete-btn {
+    position: absolute;
+    bottom: 0.75rem; right: 0.75rem;
+    background: rgba(255,255,255,0.95);
+    border: 1px solid #fde8e8;
+    color: var(--danger);
+    width: 28px; height: 28px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .portfolio-card:hover .pf-delete-btn { opacity: 1; }
+
+  .pf-body { padding: 1.25rem; }
+
+  .pf-url-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    align-items: flex-end;
+  }
+
+  .pf-url-row .card-field { flex: 1; margin: 0; }
+
+  .btn-preview-img {
+    flex-shrink: 0;
+    height: 36px;
+    padding: 0 0.8rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .btn-preview-img:hover { border-color: var(--dark); color: var(--dark); }
+
+  .pf-preview-thumb {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: none;
+  }
+
+  .btn-add-portfolio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 1.2rem;
+    background: transparent;
+    border: 1.5px dashed var(--border);
+    color: var(--muted);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 0.5rem;
+  }
+
+  .btn-add-portfolio:hover {
+    border-color: var(--dark);
+    color: var(--dark);
+    background: var(--white);
+  }
+
+  /* в”Ђв”Ђ UPLOAD BUTTON в”Ђв”Ђ */
+  .pf-upload-area {
+    border: 1.5px dashed var(--border);
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    min-height: 80px;
+  }
+
+  .pf-upload-area:hover,
+  .pf-upload-area.dragover {
+    border-color: var(--dark);
+    background: var(--white);
+  }
+
+  .pf-upload-area input[type=file] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+  }
+
+  .pf-upload-icon {
+    font-size: 1.4rem;
+    opacity: 0.3;
+  }
+
+  .pf-upload-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    pointer-events: none;
+  }
+
+  .pf-upload-sub {
+    font-size: 0.62rem;
+    color: #bbb;
+    pointer-events: none;
+  }
+
+  .pf-upload-progress {
+    display: none;
+    width: 100%;
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 0.3rem;
+  }
+
+  .pf-upload-progress-fill {
+    height: 100%;
+    background: var(--dark);
+    width: 0%;
+    transition: width 0.3s;
+  }
+
+  .pf-upload-status {
+    font-size: 0.68rem;
+    color: var(--muted);
+    text-align: center;
+    min-height: 1rem;
+    margin-top: 0.2rem;
+  }
+
+  .pf-upload-status.ok { color: var(--success); }
+  .pf-upload-status.err { color: var(--danger); }
+
+  .pf-section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+
+  .pf-section-meta {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    margin-bottom: 1.5rem;
+  }
+
+  /* в”Ђв”Ђ ADMIN UX REFRESH в”Ђв”Ђ */
+  body {
+    background:
+      linear-gradient(180deg, #ffffff 0, #f6f8fa 260px),
+      #f6f8fa;
+  }
+
+  .login-card,
+  .product-card,
+  .portfolio-card {
+    border-radius: 10px;
+  }
+
+  .site-header {
+    height: 72px;
+    padding: 0 2.25rem;
+    box-shadow: 0 10px 28px rgba(17, 24, 39, .06);
+  }
+
+  .header-logo {
+    font-size: 1.85rem;
+  }
+
+  .header-center {
+    padding: .45rem .75rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: #fbfcfd;
+  }
+
+  .btn-publish,
+  .btn-outline,
+  .btn-dark,
+  .btn-soft,
+  .btn-add-variant,
+  .btn-add-portfolio {
+    border-radius: 8px;
+    font-weight: 600;
+  }
+
+  .admin-action-row {
+    position: sticky;
+    top: 126px;
+    z-index: 70;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .65rem;
+    margin: 0 0 1rem;
+    padding: .75rem;
+    border: 1px solid #dbe3e8;
+    border-radius: 12px;
+    background: rgba(255,255,255,.94);
+    box-shadow: 0 12px 30px rgba(17,24,39,.06);
+    backdrop-filter: blur(12px);
+  }
+
+  .btn-soft {
+    min-height: 38px;
+    padding: 0 .95rem;
+    border: 1px solid #dbe3e8;
+    background: #fff;
+    color: var(--dark);
+    font-family: 'Jost', sans-serif;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all .2s;
+  }
+
+  .btn-soft:hover {
+    border-color: var(--dark);
+    background: var(--dark);
+    color: #fff;
+  }
+
+  .admin-filter-row {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) minmax(180px, 260px) minmax(160px, 190px);
+    gap: .75rem;
+    margin: 0 0 1rem;
+  }
+
+  .admin-filter-input,
+  .admin-filter-select {
+    width: 100%;
+    height: 42px;
+    border: 1px solid #dbe3e8;
+    border-radius: 10px;
+    background: #fff;
+    padding: 0 .9rem;
+    font-family: 'Jost', sans-serif;
+    font-size: .88rem;
+    color: var(--text);
+    outline: none;
+  }
+
+  .admin-filter-input:focus,
+  .admin-filter-select:focus {
+    border-color: var(--dark);
+    box-shadow: 0 0 0 3px rgba(17,24,39,.06);
+  }
+
+  .validation-panel,
+  .admin-log-panel,
+  .admin-stats-panel {
+    display: none;
+    margin: 0 0 1rem;
+    border: 1px solid #dbe3e8;
+    border-radius: 12px;
+    background: #fff;
+    padding: .85rem 1rem;
+    font-size: .86rem;
+    color: #334155;
+  }
+
+  .validation-panel.visible,
+  .admin-log-panel.visible,
+  .admin-stats-panel.visible {
+    display: block;
+  }
+
+  .admin-stats-panel.visible {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: .6rem;
+    border: 0;
+    background: transparent;
+    padding: 0;
+  }
+
+  .stat-tile {
+    border: 1px solid #dbe3e8;
+    border-radius: 12px;
+    background: #fff;
+    padding: .85rem;
+  }
+
+  .stat-tile b {
+    display: block;
+    font-size: 1.35rem;
+    line-height: 1;
+    margin-bottom: .35rem;
+  }
+
+  .stat-tile span {
+    font-size: .68rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #64748b;
+  }
+
+  .validation-panel.ok {
+    border-color: #bbf7d0;
+    background: #f0fdf4;
+  }
+
+  .validation-panel.fail {
+    border-color: #fecaca;
+    background: #fff7f7;
+  }
+
+  .validation-panel strong,
+  .admin-log-panel strong {
+    display: block;
+    margin-bottom: .45rem;
+    font-size: .68rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #475569;
+  }
+
+  .validation-panel ul,
+  .admin-log-panel ul {
+    margin-left: 1.1rem;
+  }
+
+  .publish-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    min-height: 30px;
+    padding: 0 .65rem;
+    border: 1px solid #dbe3e8;
+    border-radius: 999px;
+    background: #f8fafc;
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #334155;
+  }
+
+  .publish-toggle input {
+    accent-color: var(--dark);
+  }
+
+  .card-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .45rem;
+    margin-bottom: .85rem;
+  }
+
+  .btn-mini {
+    min-height: 30px;
+    padding: 0 .6rem;
+    border: 1px solid #dbe3e8;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--dark);
+    font-family: 'Jost', sans-serif;
+    font-size: .66rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .btn-mini:hover {
+    border-color: var(--dark);
+    background: var(--dark);
+    color: #fff;
+  }
+
+  .btn-mini.danger {
+    border-color: #fecaca;
+    color: #b91c1c;
+  }
+
+  .btn-mini.danger:hover {
+    border-color: #b91c1c;
+    background: #b91c1c;
+    color: #fff;
+  }
+
+  .price-history {
+    margin: -.25rem 0 .85rem;
+    padding: .55rem .7rem;
+    border: 1px solid #e5edf2;
+    border-radius: 8px;
+    background: #f8fafc;
+    font-size: .75rem;
+    color: #64748b;
+  }
+
+  .admin-main {
+    max-width: 1180px;
+    padding: 1.75rem 2rem 5.5rem;
+  }
+
+  .admin-tabs {
+    position: sticky;
+    top: 72px;
+    z-index: 80;
+    display: inline-flex;
+    gap: .35rem;
+    margin-bottom: 1.4rem;
+    padding: .35rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: rgba(255,255,255,.94);
+    box-shadow: 0 12px 30px rgba(17,24,39,.06);
+    backdrop-filter: blur(12px);
+  }
+
+  .admin-tab {
+    min-height: 38px;
+    padding: .55rem 1.15rem;
+    border: 0;
+    border-radius: 999px;
+    margin: 0;
+    letter-spacing: .08em;
+  }
+
+  .admin-tab.active {
+    background: var(--dark);
+    color: var(--white);
+    border-bottom-color: transparent;
+  }
+
+  .page-title,
+  .pf-section-title {
+    margin-top: .85rem;
+    font-size: 2.25rem;
+    line-height: 1;
+  }
+
+  .page-meta,
+  .pf-section-meta {
+    margin-bottom: 1.35rem;
+  }
+
+  .products-grid,
+  .portfolio-grid {
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    gap: 1rem;
+  }
+
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-card,
+  .portfolio-card {
+    display: grid;
+    grid-template-columns: 174px minmax(0, 1fr);
+    align-items: stretch;
+    overflow: hidden;
+    border-color: #dbe3e8;
+    background: #fff;
+    box-shadow: 0 10px 28px rgba(17,24,39,.05);
+  }
+
+  .portfolio-card {
+    grid-template-columns: minmax(240px, 28%) minmax(0, 1fr);
+  }
+
+  .product-card:hover,
+  .portfolio-card:hover {
+    box-shadow: 0 16px 36px rgba(17,24,39,.08);
+  }
+
+  .card-image-wrap,
+  .pf-image-wrap {
+    height: auto;
+    min-height: 100%;
+    border-right: 1px solid var(--border);
+  }
+
+  .card-image-wrap img,
+  .pf-image-wrap img {
+    object-fit: contain;
+    padding: .9rem;
+    background: #f8fafb;
+  }
+
+  .pf-image-wrap img {
+    object-fit: cover;
+    padding: 0;
+  }
+
+  .card-body,
+  .pf-body {
+    padding: 1rem;
+  }
+
+  .portfolio-card .bilingual-row {
+    grid-template-columns: 1fr;
+    gap: .8rem;
+  }
+
+  .portfolio-card textarea.card-input {
+    min-height: 126px !important;
+    font-size: .92rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .portfolio-card .card-input {
+    font-size: .9rem;
+  }
+
+  .card-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: .45rem;
+    margin-bottom: .85rem;
+  }
+
+  .btn-mini {
+    min-height: 30px;
+    padding: 0 .6rem;
+    border: 1px solid #dbe3e8;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--dark);
+    font-family: 'Jost', sans-serif;
+    font-size: .66rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .btn-mini:hover {
+    border-color: var(--dark);
+    background: var(--dark);
+    color: #fff;
+  }
+
+  .variants-header,
+  .variants-body {
+    grid-column: 1 / -1;
+  }
+
+  .variants-header {
+    padding: .7rem 1rem;
+    background: #fbfcfd;
+  }
+
+  .variants-body {
+    padding: 1rem;
+  }
+
+  .variant-item {
+    border-radius: 8px;
+    margin-bottom: .75rem;
+  }
+
+  .bilingual-row,
+  .variant-desc-row {
+    gap: .65rem;
+    margin-bottom: .75rem;
+  }
+
+  .card-field {
+    margin-bottom: .75rem;
+  }
+
+  .card-label,
+  .variant-mini-label {
+    letter-spacing: .1em;
+  }
+
+  .card-input,
+  .variant-input,
+  .form-input {
+    min-height: 38px;
+    border-color: #d9e2e7;
+    border-radius: 8px;
+    background: #fbfcfd;
+  }
+
+  textarea.card-input,
+  textarea.variant-input {
+    min-height: 82px;
+  }
+
+  .card-input.cn:focus,
+  .variant-input.cn:focus {
+    border-color: var(--cn);
+  }
+
+  .pf-upload-area {
+    min-height: 64px;
+    border-radius: 8px;
+  }
+
+  .pf-upload-icon {
+    display: none;
+  }
+
+  .pf-delete-btn,
+  .variant-delete-btn {
+    opacity: 1;
+    border-radius: 999px;
+  }
+
+  .status-bar {
+    left: 2rem;
+    right: auto;
+    bottom: 1rem;
+    width: auto;
+    min-width: 220px;
+    padding: .7rem .95rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    box-shadow: 0 12px 30px rgba(17,24,39,.12);
+  }
+
+  .toast {
+    top: auto;
+    right: 2rem;
+    bottom: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 16px 34px rgba(17,24,39,.18);
+  }
+
+  @media (max-width: 900px) {
+    .site-header {
+      height: auto;
+      min-height: 72px;
+      padding: .8rem 1rem;
+      gap: .75rem;
+      flex-wrap: wrap;
+    }
+
+    .header-center {
+      order: 3;
+      width: 100%;
+      text-align: center;
+    }
+
+    .admin-main {
+      padding: 1rem 1rem 5rem;
+    }
+
+    .admin-tabs {
+      top: 0;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-radius: 12px;
+    }
+
+    .products-grid,
+    .portfolio-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .product-card,
+    .portfolio-card {
+      grid-template-columns: 1fr;
+    }
+
+    .card-image-wrap,
+    .pf-image-wrap {
+      height: 170px;
+      border-right: 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .status-bar {
+      left: 1rem;
+      right: 1rem;
+      width: auto;
+      min-width: 0;
+    }
+
+    .toast {
+      left: 1rem;
+      right: 1rem;
+      text-align: center;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="loginWrap">
+  <div class="login-card">
+    <div class="login-logo">Pologenki</div>
+    <div class="login-sub">Панель управления</div>
+    <label class="form-label">GitHub Access Token</label>
+    <input class="form-input" type="password" id="tokenInput" placeholder="ghp_...">
+    <button class="btn-dark" onclick="doLogin()">Войти в админку</button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header" id="siteHeader">
+  <div class="header-logo">Pologenki</div>
+  <div class="header-center" id="headerMeta">Цены товаров</div>
+  <div class="header-actions">
+    <button class="btn-publish" id="publishBtn" onclick="publishChanges()">Опубликовать</button>
+    <button class="btn-outline" onclick="doLogout()">Выйти</button>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="admin-main" id="adminMain">
+
+  <!-- TABS -->
+  <div class="admin-tabs">
+    <button class="admin-tab active" onclick="switchTab('products')">Товары и цены</button>
+    <button class="admin-tab" onclick="switchTab('portfolio')">Портфолио</button>
+  </div>
+
+  <!-- TAB: PRODUCTS -->
+  <div class="tab-panel active" id="tab-products">
+    <div class="page-title">Товары и цены</div>
+    <div class="page-meta" id="pageMeta">Загрузка...</div>
+    <div class="admin-action-row">
+      <button class="btn-soft" onclick="addProduct()">+ Добавить товар</button>
+      <button class="btn-soft" onclick="autoTranslateAllProducts()">Заполнить CN из EN</button>
+      <button class="btn-soft" onclick="showValidationPanel('products')">Проверить</button>
+      <button class="btn-soft" onclick="previewSite('#products')">Открыть сайт</button>
+    </div>
+    <div class="admin-filter-row">
+      <input class="admin-filter-input" id="productSearch" oninput="renderGrid()" placeholder="Поиск: товар, страна, цена...">
+      <input class="admin-filter-input" id="productCategoryFilter" oninput="renderGrid()" placeholder="Фильтр по категории...">
+      <select class="admin-filter-select" id="productStatusFilter" onchange="renderGrid()">
+        <option value="all">Все статусы</option>
+        <option value="published">Опубликовано</option>
+        <option value="draft">Черновики</option>
+      </select>
+    </div>
+    <div class="validation-panel" id="productsValidation"></div>
+    <div class="admin-stats-panel" id="productsStats"></div>
+    <div class="admin-log-panel" id="productChangeLog"></div>
+    <div class="products-grid" id="productsGrid"></div>
+  </div>
+
+  <!-- TAB: PORTFOLIO -->
+  <div class="tab-panel" id="tab-portfolio">
+    <div class="pf-section-title">Портфолио</div>
+    <div class="pf-section-meta" id="pfMeta">Загрузка...</div>
+    <div class="admin-action-row">
+      <button class="btn-soft" onclick="addPortfolioItem()">+ Добавить проект</button>
+      <button class="btn-soft" onclick="autoTranslateAllPortfolio()">Заполнить CN из EN</button>
+      <button class="btn-soft" onclick="showValidationPanel('portfolio')">Проверить</button>
+      <button class="btn-soft" onclick="previewSite('#portfolio')">Открыть сайт</button>
+    </div>
+    <div class="admin-filter-row">
+      <input class="admin-filter-input" id="portfolioSearch" oninput="renderPortfolioGrid()" placeholder="Поиск: заголовок, описание, фото...">
+      <select class="admin-filter-select" id="portfolioStatusFilter" onchange="renderPortfolioGrid()">
+        <option value="all">Все статусы</option>
+        <option value="published">Опубликовано</option>
+        <option value="draft">Черновики</option>
+      </select>
+    </div>
+    <div class="validation-panel" id="portfolioValidation"></div>
+    <div class="admin-stats-panel" id="portfolioStats"></div>
+    <div class="admin-log-panel" id="portfolioChangeLog"></div>
+    <div class="portfolio-grid" id="portfolioGrid"></div>
+  </div>
+
+</main>
+
+<!-- STATUS -->
+<div class="status-bar" id="statusBar">
+  <div class="status-dot" id="statusDot"></div>
+  <span id="statusText">Ready</span>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const REPO = 'pologenki/parvina-website';
+const BRANCH = 'master';
+const PATH = 'public/data/products.json';
+const MAX_IMAGE_SIZE = 8 * 1024 * 1024;
+let token = '', data = null, sha = '';
+let originalData = null;
+
+function doLogin() {
+  const t = document.getElementById('tokenInput').value.trim();
+  if (!t) return;
+  token = t;
+  sessionStorage.setItem('pg_tok', t);
+  enterAdmin();
+}
+
+function doLogout() {
+  sessionStorage.removeItem('pg_tok');
+  token = ''; data = null; sha = '';
+  document.getElementById('loginWrap').style.display = 'flex';
+  document.getElementById('siteHeader').classList.remove('visible');
+  document.getElementById('adminMain').classList.remove('visible');
+  document.getElementById('statusBar').classList.remove('visible');
+}
+
+async function enterAdmin() {
+  document.getElementById('loginWrap').style.display = 'none';
+  document.getElementById('siteHeader').classList.add('visible');
+  document.getElementById('adminMain').classList.add('visible');
+  document.getElementById('statusBar').classList.add('visible');
+  await fetchProducts();
+}
+
+async function fetchProducts() {
+  setStatus('busy', 'Loading products...');
+  try {
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
+      headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    if (!r.ok) throw new Error('Auth failed вЂ” check your token');
+    const json = await r.json();
+    sha = json.sha;
+    const binary = atob(json.content.replace(/\n/g,''));
+const bytes = new Uint8Array(binary.length);
+for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+data = JSON.parse(new TextDecoder('utf-8').decode(bytes));
+    originalData = JSON.parse(JSON.stringify(data));
+    data.products = data.products || [];
+    normalizeChineseFields();
+    document.getElementById('pageMeta').textContent =
+      `${data.products.length} products В· Last updated: ${data.lastUpdated || 'вЂ”'}`;
+    document.getElementById('headerMeta').textContent =
+      `Last updated: ${data.lastUpdated || 'вЂ”'}`;
+    renderGrid();
+    setStatus('ok', 'Ready');
+  } catch(e) {
+    setStatus('err', e.message);
+    showToast(e.message, 'fail');
+  }
+}
+
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function repairMojibakeText(value) {
+  const text = String(value || '');
+  if (!text || /[\u4e00-\u9fff]/.test(text)) return text;
+  if (!/[ÃÂÐÑЃЊЌЏЉЋє§ЃђЌґ]/.test(text)) return text;
+
+  try {
+    const repaired = decodeURIComponent(escape(text));
+    if (/[\u4e00-\u9fff]/.test(repaired)) return repaired;
+  } catch (error) {}
+
+  return text;
+}
+
+function normalizeChineseFields() {
+  if (data?.products) {
+    data.products.forEach(product => {
+      ['name_cn', 'desc_cn', 'origin_cn'].forEach(field => {
+        product[field] = repairMojibakeText(product[field]);
+      });
+      (product.variants || []).forEach(variant => {
+        variant.desc_cn = repairMojibakeText(variant.desc_cn);
+      });
+    });
+  }
+
+  if (pfData?.items) {
+    pfData.items.forEach(item => {
+      ['title_cn', 'desc_cn'].forEach(field => {
+        item[field] = repairMojibakeText(item[field]);
+      });
+    });
+  }
+}
+
+function buildVariantHTML(i, j, v) {
+  return `
+    <div class="variant-item" id="variant-${i}-${j}">
+      <button class="variant-delete-btn" onclick="deleteVariant(${i},${j})" title="Delete variant">вњ•</button>
+      <div class="variant-field">
+        <span class="variant-mini-label">Название сорта</span>
+        <input class="variant-input" value="${esc(v.name)}"
+          oninput="updV(${i},${j},'name',this.value)" placeholder="e.g. WW320 - Whole White">
+      </div>
+      <div class="variant-row-2col">
+        <div>
+          <span class="variant-mini-label">Цена</span>
+          <input class="variant-input price" value="${esc(v.price)}"
+            oninput="updV(${i},${j},'price',this.value)" placeholder="0,00 USD/kg">
+        </div>
+      </div>
+      <div class="variant-desc-row">
+        <div>
+          <span class="variant-mini-label">Описание <span class="lang-badge en">EN</span></span>
+          <textarea class="variant-input en"
+            oninput="updV(${i},${j},'desc',this.value)" placeholder="Packing, port, quality notes...">${esc(v.desc)}</textarea>
+        </div>
+        <div>
+          <span class="variant-mini-label">Описание <span class="lang-badge ru">RU</span></span>
+          <textarea class="variant-input ru"
+            oninput="updV(${i},${j},'desc_ru',this.value)" placeholder="РЈРїР°РєРѕРІРєР°, РїРѕСЂС‚, РєР°С‡РµСЃС‚РІРѕ...">${esc(v.desc_ru)}</textarea>
+        </div>
+        <div>
+          <span class="variant-mini-label">Описание <span class="lang-badge cn">CN</span></span>
+          <textarea class="variant-input cn"
+            oninput="updV(${i},${j},'desc_cn',this.value)" placeholder="包装、港口、质量说明...">${esc(v.desc_cn)}</textarea>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderGrid() {
+  const grid = document.getElementById('productsGrid');
+  const search = (document.getElementById('productSearch')?.value || '').toLowerCase().trim();
+  const categoryFilter = (document.getElementById('productCategoryFilter')?.value || '').toLowerCase().trim();
+  const statusFilter = document.getElementById('productStatusFilter')?.value || 'all';
+  const entries = data.products
+    .map((p, i) => ({ p, i }))
+    .filter(({ p }) => {
+      const haystack = [
+        p.name, p.name_ru, p.name_cn, p.desc, p.desc_ru, p.desc_cn,
+        p.origin, p.origin_ru, p.origin_cn, p.mainPrice, p.category, p.image
+      ].join(' ').toLowerCase();
+      const matchesSearch = !search || haystack.includes(search);
+      const matchesCategory = !categoryFilter || String(p.category || '').toLowerCase().includes(categoryFilter);
+      const isPublished = p.published !== false;
+      const matchesStatus =
+        statusFilter === 'all' ||
+        (statusFilter === 'published' && isPublished) ||
+        (statusFilter === 'draft' && !isPublished);
+      return matchesSearch && matchesCategory && matchesStatus;
+    });
+
+  document.getElementById('pageMeta').textContent =
+    `${entries.length}/${data.products.length} products Р’В· Last updated: ${data.lastUpdated || 'РІР‚вЂќ'}`;
+  const publishedCount = data.products.filter(p => p.published !== false).length;
+  const missingCnCount = data.products.filter(p => p.published !== false && (!p.name_cn || !p.desc_cn || !p.origin_cn)).length;
+  renderStats('productsStats', [
+    { value: data.products.length, label: 'Всего товаров' },
+    { value: publishedCount, label: 'Опубликовано' },
+    { value: data.products.length - publishedCount, label: 'Черновики' },
+    { value: missingCnCount, label: 'Нужен CN текст' }
+  ]);
+  renderChangeLog('productChangeLog', data.changeLog);
+
+  grid.innerHTML = entries.map(({ p, i }) => `
+    <div class="product-card">
+      <div class="card-image-wrap">
+        <img src="https://raw.githubusercontent.com/${REPO}/master/public/${p.image}"
+          onerror="this.style.display='none'">
+        <span class="card-num">${String(i+1).padStart(2,'0')}</span>
+      </div>
+      <div class="card-body">
+        <div class="card-toolbar">
+          <label class="publish-toggle">
+            <input type="checkbox" ${p.published !== false ? 'checked' : ''}
+              onchange="upd(${i},'published',this.checked);renderGrid()">
+            ${p.published !== false ? 'Опубликовано' : 'Черновик'}
+          </label>
+          <button class="btn-mini" type="button" onclick="moveProduct(${i},-1)">Вверх</button>
+          <button class="btn-mini" type="button" onclick="moveProduct(${i},1)">Вниз</button>
+          <button class="btn-mini" type="button" onclick="duplicateProduct(${i})">Дубль</button>
+          <button class="btn-mini danger" type="button" onclick="deleteProduct(${i})">Удалить</button>
+          <button class="btn-mini" type="button" onclick="autoTranslateProduct(${i})">CN авто</button>
+          <button class="btn-mini" type="button" onclick="previewSite('#products')">Сайт</button>
+        </div>
+
+        <div class="bilingual-row">
+          <div class="card-field">
+            <label class="card-label">Название <span class="lang-badge en">EN</span></label>
+            <input class="card-input en" value="${esc(p.name)}"
+              oninput="upd(${i},'name',this.value)" placeholder="Product name">
+          </div>
+          <div class="card-field">
+            <label class="card-label">Название <span class="lang-badge ru">RU</span></label>
+            <input class="card-input ru" value="${esc(p.name_ru)}"
+              oninput="upd(${i},'name_ru',this.value)" placeholder="РќР°Р·РІР°РЅРёРµ С‚РѕРІР°СЂР°">
+          </div>
+          <div class="card-field">
+            <label class="card-label">Название <span class="lang-badge cn">CN</span></label>
+            <input class="card-input cn" value="${esc(p.name_cn)}"
+              oninput="upd(${i},'name_cn',this.value)" placeholder="产品名称">
+          </div>
+        </div>
+
+        <div class="card-field">
+          <label class="card-label">Главная цена</label>
+          <input class="card-input price" value="${esc(p.mainPrice)}"
+            oninput="upd(${i},'mainPrice',this.value)">
+        </div>
+
+        <div class="bilingual-row">
+          <div class="card-field">
+            <label class="card-label">Категория</label>
+            <input class="card-input" value="${esc(p.category || '')}"
+              oninput="upd(${i},'category',this.value)" placeholder="nuts / dried-fruits / spices">
+          </div>
+          <div class="card-field">
+            <label class="card-label">Путь к фото</label>
+            <input class="card-input" value="${esc(p.image || '')}"
+              oninput="upd(${i},'image',this.value)" placeholder="goods/product.webp">
+          </div>
+        </div>
+
+        ${(p.priceHistory && p.priceHistory.length) ? `
+          <div class="price-history">Последнее изменение цены: ${esc(p.priceHistory[0].from)} -> ${esc(p.priceHistory[0].to)} (${esc(p.priceHistory[0].date)})</div>
+        ` : ''}
+
+        <div class="bilingual-row">
+          <div class="card-field">
+            <label class="card-label">Страна <span class="lang-badge en">EN</span></label>
+            <input class="card-input en" value="${esc(p.origin)}"
+              oninput="upd(${i},'origin',this.value)" placeholder="e.g. Vietnam">
+          </div>
+          <div class="card-field">
+            <label class="card-label">Страна <span class="lang-badge ru">RU</span></label>
+            <input class="card-input ru" value="${esc(p.origin_ru)}"
+              oninput="upd(${i},'origin_ru',this.value)" placeholder="РЅР°РїСЂ. Р’СЊРµС‚РЅР°Рј">
+          </div>
+          <div class="card-field">
+            <label class="card-label">Страна <span class="lang-badge cn">CN</span></label>
+            <input class="card-input cn" value="${esc(p.origin_cn)}"
+              oninput="upd(${i},'origin_cn',this.value)" placeholder="例如：越南">
+          </div>
+        </div>
+
+        <div class="bilingual-row">
+          <div class="card-field">
+            <label class="card-label">Описание <span class="lang-badge en">EN</span></label>
+            <input class="card-input en" value="${esc(p.desc)}"
+              oninput="upd(${i},'desc',this.value)" placeholder="Short description">
+          </div>
+          <div class="card-field">
+            <label class="card-label">Описание <span class="lang-badge ru">RU</span></label>
+            <input class="card-input ru" value="${esc(p.desc_ru)}"
+              oninput="upd(${i},'desc_ru',this.value)" placeholder="РљСЂР°С‚РєРѕРµ РѕРїРёСЃР°РЅРёРµ">
+          </div>
+          <div class="card-field">
+            <label class="card-label">Описание <span class="lang-badge cn">CN</span></label>
+            <input class="card-input cn" value="${esc(p.desc_cn)}"
+              oninput="upd(${i},'desc_cn',this.value)" placeholder="简短描述">
+          </div>
+        </div>
+
+      </div>
+      <div class="variants-header" onclick="toggleV(this)">
+        <span class="variants-label" id="vlabel-${i}">${p.variants.length} сортов - нажми для редактирования</span>
+        <span class="variants-arrow">в–ј</span>
+      </div>
+      <div class="variants-body">
+        <div id="vlist-${i}">
+          ${p.variants.map((v,j) => buildVariantHTML(i,j,v)).join('')}
+        </div>
+        <button class="btn-add-variant" onclick="addVariant(${i})">+ Добавить сорт</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function addVariant(i) {
+  data.products[i].variants.push({ name: '', price: '', desc: '', desc_ru: '', desc_cn: '' });
+  const j = data.products[i].variants.length - 1;
+  document.getElementById(`vlist-${i}`).insertAdjacentHTML('beforeend', buildVariantHTML(i, j, { name:'', price:'', desc:'', desc_ru:'', desc_cn:'' }));
+  updateVLabel(i);
+  document.getElementById(`variant-${i}-${j}`).querySelector('.variant-input').focus();
+}
+
+function deleteVariant(i, j) {
+  if (data.products[i].variants.length <= 1) { showToast('At least one variant required', 'fail'); return; }
+  data.products[i].variants.splice(j, 1);
+  const list = document.getElementById(`vlist-${i}`);
+  list.innerHTML = data.products[i].variants.map((v, nj) => buildVariantHTML(i, nj, v)).join('');
+  updateVLabel(i);
+}
+
+function updateVLabel(i) {
+  const el = document.getElementById(`vlabel-${i}`);
+  if (el) el.textContent = `${data.products[i].variants.length} сортов - нажми для редактирования`;
+}
+
+function toggleV(header) {
+  header.querySelector('.variants-arrow').classList.toggle('open');
+  header.nextElementSibling.classList.toggle('open');
+}
+
+function upd(i, f, v) { data.products[i][f] = v; }
+function updV(i, j, f, v) { data.products[i].variants[j][f] = v; }
+
+async function translateToCn(text) {
+  const value = String(text || '').trim();
+  if (!value) return '';
+
+  const providers = [
+    async () => {
+      const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-CN&dt=t&q=${encodeURIComponent(value)}`;
+      const response = await fetch(url);
+      if (!response.ok) throw new Error('Google translate request failed');
+      const json = await response.json();
+      return json?.[0]?.map(part => part?.[0] || '').join('');
+    },
+    async () => {
+      const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(value)}&langpair=en|zh-CN`;
+      const response = await fetch(url);
+      if (!response.ok) throw new Error('MyMemory translate request failed');
+      const json = await response.json();
+      return json?.responseData?.translatedText;
+    }
+  ];
+
+  for (const provider of providers) {
+    try {
+      const translated = await provider();
+      if (translated && translated !== value) return translated;
+    } catch (error) {
+      console.warn('Auto translate provider failed:', error);
+    }
+  }
+
+  showToast('Auto translate failed. Please try again later.', 'fail');
+  return value;
+}
+
+async function autoTranslateProduct(i) {
+  const product = data.products[i];
+  if (!product) return;
+
+  setStatus('busy', `Auto translating ${product.name || 'product'}...`);
+  product.name_cn = await translateToCn(product.name);
+  product.desc_cn = await translateToCn(product.desc);
+  product.origin_cn = await translateToCn(product.origin);
+
+  for (const variant of product.variants || []) {
+    variant.desc_cn = await translateToCn(variant.desc);
+  }
+
+  renderGrid();
+  setStatus('ok', 'Chinese fields updated');
+  showToast('CN fields filled for product', 'ok');
+}
+
+async function autoTranslateAllProducts() {
+  if (!data?.products?.length) return;
+  for (let i = 0; i < data.products.length; i++) {
+    await autoTranslateProduct(i);
+  }
+  showToast('CN fields filled for all products', 'ok');
+}
+
+function addProduct() {
+  if (!data?.products) return;
+  const next = data.products.length + 1;
+  const product = {
+    id: `new-product-${Date.now()}`,
+    published: false,
+    category: '',
+    name: `New Product ${next}`,
+    name_ru: '',
+    name_cn: '',
+    desc: '',
+    desc_ru: '',
+    desc_cn: '',
+    origin: '',
+    origin_ru: '',
+    origin_cn: '',
+    image: 'goods/cashew.webp',
+    mainPrice: 'Price on request',
+    variants: [
+      { name: 'Default grade', price: 'Price on request', desc: '', desc_ru: '', desc_cn: '' }
+    ]
+  };
+
+  data.products.push(product);
+  renderGrid();
+  document.getElementById('pageMeta').textContent =
+    `${data.products.length} products В· Last updated: ${data.lastUpdated || 'вЂ”'}`;
+
+  setTimeout(() => {
+    const cards = document.querySelectorAll('.product-card');
+    const last = cards[cards.length - 1];
+    if (last) {
+      last.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      last.querySelector('.card-input')?.focus();
+    }
+  }, 50);
+}
+
+function duplicateProduct(i) {
+  const source = data.products[i];
+  if (!source) return;
+  const copy = JSON.parse(JSON.stringify(source));
+  copy.id = `${source.id || 'product'}-copy-${Date.now()}`;
+  copy.name = `${source.name || 'Product'} Copy`;
+  copy.published = false;
+  data.products.splice(i + 1, 0, copy);
+  renderGrid();
+  showToast('Product duplicated as draft', 'ok');
+}
+
+function deleteProduct(i) {
+  const product = data.products[i];
+  if (!product) return;
+  const name = product.name || product.name_ru || `Product #${i + 1}`;
+  if (!confirm(`Delete product "${name}"?`)) return;
+  data.products.splice(i, 1);
+  renderGrid();
+  showToast('Product deleted', 'ok');
+}
+
+function moveProduct(i, direction) {
+  const next = i + direction;
+  if (next < 0 || next >= data.products.length) return;
+  const [item] = data.products.splice(i, 1);
+  data.products.splice(next, 0, item);
+  renderGrid();
+}
+
+function isSafeImagePath(value) {
+  const path = String(value || '').trim();
+  if (!path) return false;
+  if (/javascript:/i.test(path)) return false;
+  if (path.includes('..')) return false;
+  return /^(https?:\/\/|\/?(goods|portfolio|images\/portfolio)\/)/i.test(path);
+}
+
+function safeFileName(fileName) {
+  const parts = String(fileName || 'portfolio-image.jpg').split('.');
+  const ext = (parts.pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '') || 'jpg';
+  const base = parts.join('.').replace(/[^a-z0-9._-]/gi, '_').replace(/_+/g, '_').replace(/^_+|_+$/g, '') || 'portfolio';
+  return `${Date.now()}_${base}.${ext}`;
+}
+
+function validateProductsData(payload) {
+  const errors = [];
+  if (!payload || !Array.isArray(payload.products)) {
+    return ['Products JSON must contain a products array'];
+  }
+
+  payload.products.forEach((product, i) => {
+    const label = product.name || product.name_ru || `Product #${i + 1}`;
+    if (product.published === false) {
+      if (!String(product.id || '').trim()) errors.push(`${label}: draft is missing id`);
+      return;
+    }
+    if (!String(product.id || '').trim()) errors.push(`${label}: missing id`);
+    if (!String(product.name || '').trim()) errors.push(`${label}: missing English name`);
+    if (!String(product.name_ru || '').trim()) errors.push(`${label}: missing Russian name`);
+    if (!isSafeImagePath(product.image)) errors.push(`${label}: invalid image path`);
+    if (!String(product.mainPrice || '').trim()) errors.push(`${label}: missing main price`);
+    if (!Array.isArray(product.variants) || product.variants.length === 0) {
+      errors.push(`${label}: add at least one variant`);
+      return;
+    }
+
+    product.variants.forEach((variant, j) => {
+      const variantLabel = `${label}, variant #${j + 1}`;
+      if (!String(variant.name || '').trim()) errors.push(`${variantLabel}: missing English name`);
+      if (!String(variant.price || '').trim()) errors.push(`${variantLabel}: missing price`);
+      if (!String(variant.desc || '').trim()) errors.push(`${variantLabel}: missing English description`);
+      if (!String(variant.desc_ru || '').trim()) errors.push(`${variantLabel}: missing Russian description`);
+    });
+  });
+
+  return errors;
+}
+
+function validatePortfolioData(payload) {
+  const errors = [];
+  if (!payload || !Array.isArray(payload.items)) {
+    return ['Portfolio JSON must contain an items array'];
+  }
+
+  payload.items.forEach((item, i) => {
+    const label = item.title || item.title_ru || `Portfolio item #${i + 1}`;
+    if (item.published === false) return;
+    if (!String(item.title || '').trim()) errors.push(`${label}: missing English title`);
+    if (!String(item.title_ru || '').trim()) errors.push(`${label}: missing Russian title`);
+    if (!isSafeImagePath(item.img)) errors.push(`${label}: invalid image URL`);
+  });
+
+  return errors;
+}
+
+function blockPublish(errors, area) {
+  const first = errors[0] || 'Validation failed';
+  setStatus('err', `${area}: ${first}`);
+  showToast(`${area}: ${first}`, 'fail');
+  renderValidationPanel(area === 'Products' ? 'productsValidation' : 'portfolioValidation', errors);
+  console.warn(`${area} validation errors`, errors);
+}
+
+function renderValidationPanel(id, errors) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const list = (errors || []).slice(0, 12).map(error => `<li>${esc(error)}</li>`).join('');
+  el.className = `validation-panel visible ${errors.length ? 'fail' : 'ok'}`;
+  el.innerHTML = errors.length
+    ? `<strong>Needs attention</strong><ul>${list}</ul>${errors.length > 12 ? `<p>And ${errors.length - 12} more issues...</p>` : ''}`
+    : '<strong>Validation passed</strong><p>No critical issues found.</p>';
+}
+
+function showValidationPanel(area) {
+  if (area === 'portfolio') {
+    const errors = validatePortfolioData(pfData);
+    renderValidationPanel('portfolioValidation', errors);
+    showToast(errors.length ? `${errors.length} portfolio issues found` : 'Portfolio looks good', errors.length ? 'fail' : 'ok');
+    return;
+  }
+  const errors = validateProductsData(data);
+  renderValidationPanel('productsValidation', errors);
+  showToast(errors.length ? `${errors.length} product issues found` : 'Products look good', errors.length ? 'fail' : 'ok');
+}
+
+function renderChangeLog(id, entries = []) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const recent = (entries || []).slice(0, 5);
+  if (!recent.length) {
+    el.className = 'admin-log-panel';
+    el.innerHTML = '';
+    return;
+  }
+  el.className = 'admin-log-panel visible';
+  el.innerHTML = `<strong>Recent changes</strong><ul>${recent.map(entry =>
+    `<li>${esc(entry.date || '')}: ${esc(entry.message || 'Updated')}</li>`
+  ).join('')}</ul>`;
+}
+
+function addChangeLog(target, message) {
+  target.changeLog = target.changeLog || [];
+  target.changeLog.unshift({
+    date: new Date().toISOString(),
+    message
+  });
+  target.changeLog = target.changeLog.slice(0, 50);
+}
+
+function updatePriceHistory() {
+  if (!originalData?.products || !data?.products) return;
+  const date = new Date().toISOString().split('T')[0];
+  data.products.forEach(product => {
+    const previous = originalData.products.find(item => item.id === product.id);
+    if (!previous || previous.mainPrice === product.mainPrice) return;
+    product.priceHistory = product.priceHistory || [];
+    product.priceHistory.unshift({
+      date,
+      from: previous.mainPrice || '',
+      to: product.mainPrice || ''
+    });
+    product.priceHistory = product.priceHistory.slice(0, 12);
+  });
+}
+
+function previewSite(hash = '') {
+  window.open('/' + hash, '_blank', 'noopener');
+}
+
+async function publishChanges() {
+  const errors = validateProductsData(data);
+  if (errors.length) {
+    blockPublish(errors, 'Products');
+    return;
+  }
+
+  const btn = document.getElementById('publishBtn');
+  btn.disabled = true;
+  setStatus('busy', 'Publishing...');
+  data.lastUpdated = new Date().toISOString().split('T')[0];
+  updatePriceHistory();
+  addChangeLog(data, `Products updated: ${data.products.length} items`);
+
+  try {
+    const jsonStr = JSON.stringify(data, null, 2);
+const bytes = new TextEncoder().encode(jsonStr);
+const binStr = Array.from(bytes).map(b => String.fromCharCode(b)).join('');
+const content = btoa(binStr);
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `token ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: `Update prices ${data.lastUpdated}`,
+        content,
+        sha,
+        branch: BRANCH
+      })
+    });
+    if (!r.ok) throw new Error('Publish failed');
+    const json = await r.json();
+    sha = json.content.sha;
+    document.getElementById('pageMeta').textContent =
+      `${data.products.length} products В· Last updated: ${data.lastUpdated}`;
+    document.getElementById('headerMeta').textContent =
+      `Last updated: ${data.lastUpdated}`;
+    originalData = JSON.parse(JSON.stringify(data));
+    renderGrid();
+    setStatus('ok', 'Published successfully');
+    showToast('вњ“ Published! Site updates in ~2 min.', 'ok');
+  } catch(e) {
+    setStatus('err', e.message);
+    showToast(e.message, 'fail');
+  }
+  btn.disabled = false;
+}
+
+function setStatus(type, text) {
+  const d = document.getElementById('statusDot');
+  d.className = 'status-dot' + (type==='busy'?' busy':type==='err'?' err':'');
+  document.getElementById('statusText').textContent = text;
+}
+
+function showToast(msg, type='') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (type ? ' '+type : '');
+  setTimeout(() => t.className = 'toast', 3500);
+}
+
+window.onload = () => {
+  const saved = sessionStorage.getItem('pg_tok');
+  if (saved) { token = saved; enterAdmin(); }
+};
+
+// в”Ђв”Ђ TABS
+function switchTab(name) {
+  document.querySelectorAll('.admin-tab').forEach((t,i) => {
+    t.classList.toggle('active', ['products','portfolio'][i] === name);
+  });
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+
+  document.getElementById('headerMeta').textContent =
+    name === 'portfolio' ? 'Portfolio Management' : `Last updated: ${data?.lastUpdated || 'вЂ”'}`;
+
+  if (name === 'portfolio' && pfData === null) fetchPortfolio();
+}
+
+// в”Ђв”Ђ PORTFOLIO DATA
+const PF_PATH = 'public/data/portfolio.json';
+let pfData = null, pfSha = '';
+let pfOriginalData = null;
+
+async function fetchPortfolio() {
+  setStatus('busy', 'Loading portfolio...');
+  try {
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${PF_PATH}`, {
+      headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    if (r.status === 404) {
+      // С„Р°Р№Р» РµС‰С‘ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚ вЂ” СЃРѕР·РґР°С‘Рј РїСѓСЃС‚СѓСЋ СЃС‚СЂСѓРєС‚СѓСЂСѓ
+      pfData = { items: [], lastUpdated: '' };
+      pfOriginalData = JSON.parse(JSON.stringify(pfData));
+      pfSha = '';
+      renderPortfolioGrid();
+      setStatus('ok', 'Ready (new portfolio file will be created on publish)');
+      return;
+    }
+    if (!r.ok) throw new Error('Failed to load portfolio.json');
+    const json = await r.json();
+    pfSha = json.sha;
+    const binary = atob(json.content.replace(/\n/g,''));
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+    pfData = JSON.parse(new TextDecoder('utf-8').decode(bytes));
+    if (!pfData.items) pfData.items = [];
+    normalizeChineseFields();
+    pfOriginalData = JSON.parse(JSON.stringify(pfData));
+    renderPortfolioGrid();
+    setStatus('ok', 'Ready');
+  } catch(e) {
+    setStatus('err', e.message);
+    showToast(e.message, 'fail');
+  }
+}
+
+function renderPortfolioGrid() {
+  const grid = document.getElementById('portfolioGrid');
+  const meta = document.getElementById('pfMeta');
+  const search = (document.getElementById('portfolioSearch')?.value || '').toLowerCase().trim();
+  const statusFilter = document.getElementById('portfolioStatusFilter')?.value || 'all';
+  const entries = pfData.items
+    .map((item, i) => ({ item, i }))
+    .filter(({ item }) => {
+      const haystack = [
+        item.title, item.title_ru, item.title_cn,
+        item.desc, item.desc_ru, item.desc_cn, item.img
+      ].join(' ').toLowerCase();
+      const isPublished = item.published !== false;
+      const matchesSearch = !search || haystack.includes(search);
+      const matchesStatus =
+        statusFilter === 'all' ||
+        (statusFilter === 'published' && isPublished) ||
+        (statusFilter === 'draft' && !isPublished);
+      return matchesSearch && matchesStatus;
+    });
+  meta.textContent = `${entries.length}/${pfData.items.length} items${pfData.lastUpdated ? ' - Last updated: ' + pfData.lastUpdated : ''}`;
+  const publishedCount = pfData.items.filter(item => item.published !== false).length;
+  const missingCnCount = pfData.items.filter(item => item.published !== false && (!item.title_cn || !item.desc_cn)).length;
+  renderStats('portfolioStats', [
+    { value: pfData.items.length, label: 'Всего проектов' },
+    { value: publishedCount, label: 'Опубликовано' },
+    { value: pfData.items.length - publishedCount, label: 'Черновики' },
+    { value: missingCnCount, label: 'Нужен CN текст' }
+  ]);
+  renderChangeLog('portfolioChangeLog', pfData.changeLog);
+  grid.innerHTML = entries.map(({ item, i }) => buildPortfolioCard(item, i)).join('');
+}
+
+function buildPortfolioCard(item, i) {
+  const hasImg = item.img && item.img.trim();
+  return `
+  <div class="portfolio-card" id="pf-card-${i}">
+    <div class="pf-image-wrap" id="pf-img-wrap-${i}">
+      ${hasImg
+        ? `<img src="${esc(item.img)}" onerror="this.style.opacity='0.2'" style="width:100%;height:100%;object-fit:cover;display:block;">`
+        : `<div class="pf-image-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            No image yet
+           </div>`
+      }
+      <span class="pf-num">${String(i+1).padStart(2,'0')}</span>
+      <button class="pf-delete-btn" onclick="deletePortfolioItem(${i})" title="Delete">вњ•</button>
+    </div>
+
+    <div class="pf-body">
+      <div class="card-toolbar">
+        <label class="publish-toggle">
+          <input type="checkbox" ${item.published !== false ? 'checked' : ''}
+            onchange="updPf(${i},'published',this.checked);renderPortfolioGrid()">
+          ${item.published !== false ? 'Опубликовано' : 'Черновик'}
+        </label>
+        <button class="btn-mini" type="button" onclick="movePortfolioItem(${i},-1)">Вверх</button>
+        <button class="btn-mini" type="button" onclick="movePortfolioItem(${i},1)">Вниз</button>
+        <button class="btn-mini" type="button" onclick="duplicatePortfolioItem(${i})">Дубль</button>
+        <button class="btn-mini" type="button" onclick="autoTranslatePortfolioItem(${i})">CN авто</button>
+        <button class="btn-mini" type="button" onclick="previewSite('#portfolio')">Сайт</button>
+      </div>
+
+      <!-- Р¤РѕС‚Рѕ: upload РёР»Рё URL -->
+      <div class="card-field" style="margin-bottom:1rem;">
+        <label class="card-label">Фото</label>
+
+        <div class="pf-upload-area" id="pf-upload-area-${i}"
+          ondragover="event.preventDefault();this.classList.add('dragover')"
+          ondragleave="this.classList.remove('dragover')"
+          ondrop="handlePfDrop(event,${i})">
+          <input type="file" accept="image/*" onchange="uploadPfPhoto(this,${i})">
+          <div class="pf-upload-icon">рџ“·</div>
+          <div class="pf-upload-label">Нажми или перетащи фото</div>
+          <div class="pf-upload-sub">JPG, PNG, WEBP - загрузка в /images/portfolio/</div>
+        </div>
+
+        <div class="pf-upload-progress" id="pf-progress-${i}">
+          <div class="pf-upload-progress-fill" id="pf-progress-fill-${i}"></div>
+        </div>
+        <div class="pf-upload-status" id="pf-status-${i}">
+          ${item.img ? `вњ“ ${item.img.split('/').pop()}` : ''}
+        </div>
+
+        <!-- URL РІСЂСѓС‡РЅСѓСЋ (fallback) -->
+        <div style="margin-top:0.5rem;display:flex;gap:0.4rem;align-items:center;">
+          <input class="card-input" value="${esc(item.img||'')}"
+            id="pf-url-${i}"
+            oninput="updPf(${i},'img',this.value);previewPfImg(${i})"
+            placeholder="или вставь ссылку вручную...">
+        </div>
+      </div>
+
+      <!-- Title EN / RU -->
+      <div class="bilingual-row">
+        <div class="card-field">
+          <label class="card-label">Заголовок <span class="lang-badge en">EN</span></label>
+          <input class="card-input en" value="${esc(item.title||'')}"
+            oninput="updPf(${i},'title',this.value)" placeholder="e.g. Gulfood Dubai 2025">
+        </div>
+        <div class="card-field">
+          <label class="card-label">Заголовок <span class="lang-badge ru">RU</span></label>
+          <input class="card-input ru" value="${esc(item.title_ru||'')}"
+            oninput="updPf(${i},'title_ru',this.value)" placeholder="РЅР°РїСЂ. Р“СѓР»СЊС„СѓРґ Р”СѓР±Р°Р№ 2025">
+        </div>
+        <div class="card-field">
+          <label class="card-label">Заголовок <span class="lang-badge cn">CN</span></label>
+          <input class="card-input cn" value="${esc(item.title_cn||'')}"
+            oninput="updPf(${i},'title_cn',this.value)" placeholder="例如：迪拜食品展 2025">
+        </div>
+      </div>
+
+      <!-- Description EN / RU -->
+      <div class="bilingual-row">
+        <div class="card-field">
+          <label class="card-label">Описание <span class="lang-badge en">EN</span></label>
+          <textarea class="card-input en portfolio-description"
+            oninput="updPf(${i},'desc',this.value)"
+            placeholder="Short description of the event...">${esc(item.desc||'')}</textarea>
+        </div>
+        <div class="card-field">
+          <label class="card-label">Описание <span class="lang-badge ru">RU</span></label>
+          <textarea class="card-input ru portfolio-description"
+            oninput="updPf(${i},'desc_ru',this.value)"
+            placeholder="РљСЂР°С‚РєРѕРµ РѕРїРёСЃР°РЅРёРµ СЃРѕР±С‹С‚РёСЏ...">${esc(item.desc_ru||'')}</textarea>
+        </div>
+        <div class="card-field">
+          <label class="card-label">Описание <span class="lang-badge cn">CN</span></label>
+          <textarea class="card-input cn portfolio-description"
+            oninput="updPf(${i},'desc_cn',this.value)"
+            placeholder="活动简短说明...">${esc(item.desc_cn||'')}</textarea>
+        </div>
+      </div>
+
+    </div>
+  </div>`;
+}
+
+function previewPfImg(i) {
+  const url = (document.getElementById(`pf-url-${i}`)?.value || '').trim();
+  if (!url) return;
+  updPf(i, 'img', url);
+  const wrap = document.getElementById(`pf-img-wrap-${i}`);
+  if (wrap) wrap.innerHTML = `
+    <img src="${esc(url)}" onerror="this.style.opacity='0.15'"
+      style="width:100%;height:100%;object-fit:cover;display:block;">
+    <span class="pf-num">${String(i+1).padStart(2,'0')}</span>
+    <button class="pf-delete-btn" onclick="deletePortfolioItem(${i})" title="Delete">вњ•</button>`;
+}
+
+function handlePfDrop(event, i) {
+  event.preventDefault();
+  document.getElementById(`pf-upload-area-${i}`).classList.remove('dragover');
+  const file = event.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) uploadPfPhoto({ files: [file] }, i);
+}
+
+async function uploadPfPhoto(input, i) {
+  const file = input.files[0];
+  if (!file) return;
+
+  if (!file.type.startsWith('image/')) {
+    showToast('Please choose an image file', 'fail');
+    return;
+  }
+
+  if (file.size > MAX_IMAGE_SIZE) {
+    showToast('Image is too large. Maximum size is 8 MB.', 'fail');
+    return;
+  }
+
+  const statusEl   = document.getElementById(`pf-status-${i}`);
+  const progressEl = document.getElementById(`pf-progress-${i}`);
+  const fillEl     = document.getElementById(`pf-progress-fill-${i}`);
+  const urlInput   = document.getElementById(`pf-url-${i}`);
+
+  // Р“РµРЅРµСЂРёСЂСѓРµРј Р±РµР·РѕРїР°СЃРЅРѕРµ СѓРЅРёРєР°Р»СЊРЅРѕРµ РёРјСЏ С„Р°Р№Р»Р°
+  const safeName = safeFileName(file.name);
+  const remotePath = `public/images/portfolio/${safeName}`;
+
+  statusEl.className = 'pf-upload-status';
+  statusEl.textContent = 'Uploading...';
+  progressEl.style.display = 'block';
+  fillEl.style.width = '30%';
+
+  try {
+    // Р§РёС‚Р°РµРј С„Р°Р№Р» РєР°Рє base64
+    const base64 = await new Promise((res, rej) => {
+      const reader = new FileReader();
+      reader.onload = () => res(reader.result.split(',')[1]);
+      reader.onerror = rej;
+      reader.readAsDataURL(file);
+    });
+
+    fillEl.style.width = '60%';
+
+    // РџСЂРѕРІРµСЂСЏРµРј SHA РµСЃР»Рё С„Р°Р№Р» СѓР¶Рµ РµСЃС‚СЊ
+    let sha = '';
+    const checkR = await fetch(
+      `https://api.github.com/repos/${REPO}/contents/${remotePath}?ref=${BRANCH}`,
+      { headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' } }
+    );
+    if (checkR.ok) {
+      const checkJson = await checkR.json();
+      sha = checkJson.sha;
+    }
+
+    fillEl.style.width = '80%';
+
+    // Р—Р°РіСЂСѓР¶Р°РµРј С„Р°Р№Р»
+    const body = {
+      message: `Upload portfolio photo: ${safeName}`,
+      content: base64,
+      branch: BRANCH
+    };
+    if (sha) body.sha = sha;
+
+    const r = await fetch(
+      `https://api.github.com/repos/${REPO}/contents/${remotePath}`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: `token ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      }
+    );
+
+    if (!r.ok) {
+      const err = await r.json();
+      throw new Error(err.message || 'Upload failed');
+    }
+
+    fillEl.style.width = '100%';
+
+    // РџСѓС‚СЊ Рє С„Р°Р№Р»Сѓ РЅР° СЃР°Р№С‚Рµ
+    const publicUrl = `/images/portfolio/${safeName}`;
+    updPf(i, 'img', publicUrl);
+    if (urlInput) urlInput.value = publicUrl;
+
+    // РћР±РЅРѕРІР»СЏРµРј РїСЂРµРІСЊСЋ РІ РєР°СЂС‚РѕС‡РєРµ
+    const wrap = document.getElementById(`pf-img-wrap-${i}`);
+    if (wrap) {
+      const rawUrl = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/${remotePath}`;
+      wrap.innerHTML = `
+        <img src="${rawUrl}?v=${Date.now()}" onerror="this.style.opacity='0.2'"
+          style="width:100%;height:100%;object-fit:cover;display:block;">
+        <span class="pf-num">${String(i+1).padStart(2,'0')}</span>
+        <button class="pf-delete-btn" onclick="deletePortfolioItem(${i})" title="Delete">вњ•</button>`;
+    }
+
+    statusEl.className = 'pf-upload-status ok';
+    statusEl.textContent = `вњ“ Uploaded: ${safeName}`;
+    setTimeout(() => { progressEl.style.display = 'none'; }, 1000);
+
+  } catch(e) {
+    fillEl.style.width = '100%';
+    fillEl.style.background = 'var(--danger)';
+    statusEl.className = 'pf-upload-status err';
+    statusEl.textContent = 'вњ• ' + e.message;
+    setTimeout(() => { progressEl.style.display = 'none'; fillEl.style.background = 'var(--dark)'; }, 3000);
+  }
+}
+
+function updPf(i, field, value) {
+  pfData.items[i][field] = value;
+}
+
+async function autoTranslatePortfolioItem(i) {
+  const item = pfData?.items?.[i];
+  if (!item) return;
+
+  setStatus('busy', `Auto translating portfolio item ${i + 1}...`);
+  item.title_cn = await translateToCn(item.title);
+  item.desc_cn = await translateToCn(item.desc);
+  renderPortfolioGrid();
+  setStatus('ok', 'Portfolio CN fields updated');
+  showToast('CN fields filled for portfolio item', 'ok');
+}
+
+async function autoTranslateAllPortfolio() {
+  if (!pfData?.items?.length) return;
+  for (let i = 0; i < pfData.items.length; i++) {
+    await autoTranslatePortfolioItem(i);
+  }
+  showToast('CN fields filled for portfolio', 'ok');
+}
+
+function addPortfolioItem() {
+  pfData.items.push({ published: false, img: '', title: '', title_ru: '', title_cn: '', desc: '', desc_ru: '', desc_cn: '' });
+  renderPortfolioGrid();
+  // scroll to new card
+  const cards = document.querySelectorAll('.portfolio-card');
+  if (cards.length) cards[cards.length-1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+  // focus first input of new card
+  setTimeout(() => {
+    const last = document.getElementById(`pf-card-${pfData.items.length-1}`);
+    if (last) last.querySelector('.card-input').focus();
+  }, 100);
+}
+
+function renderStats(id, stats) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.className = 'admin-stats-panel visible';
+  el.innerHTML = stats.map(stat => `
+    <div class="stat-tile">
+      <b>${esc(stat.value)}</b>
+      <span>${esc(stat.label)}</span>
+    </div>
+  `).join('');
+}
+
+function duplicatePortfolioItem(i) {
+  const source = pfData.items[i];
+  if (!source) return;
+  const copy = JSON.parse(JSON.stringify(source));
+  copy.published = false;
+  copy.title = `${source.title || 'Portfolio item'} Copy`;
+  pfData.items.splice(i + 1, 0, copy);
+  renderPortfolioGrid();
+  showToast('Portfolio item duplicated as draft', 'ok');
+}
+
+function movePortfolioItem(i, direction) {
+  const next = i + direction;
+  if (next < 0 || next >= pfData.items.length) return;
+  const [item] = pfData.items.splice(i, 1);
+  pfData.items.splice(next, 0, item);
+  renderPortfolioGrid();
+}
+
+function deletePortfolioItem(i) {
+  if (!confirm(`Delete item "${pfData.items[i].title || 'Untitled'}"?`)) return;
+  pfData.items.splice(i, 1);
+  renderPortfolioGrid();
+  showToast('Item deleted', '');
+}
+
+async function publishPortfolio() {
+  const errors = validatePortfolioData(pfData);
+  if (errors.length) {
+    blockPublish(errors, 'Portfolio');
+    return;
+  }
+
+  setStatus('busy', 'Publishing portfolio...');
+  pfData.lastUpdated = new Date().toISOString().split('T')[0];
+  addChangeLog(pfData, `Portfolio updated: ${pfData.items.length} items`);
+
+  const jsonStr = JSON.stringify(pfData, null, 2);
+  const bytes = new TextEncoder().encode(jsonStr);
+  const binStr = Array.from(bytes).map(b => String.fromCharCode(b)).join('');
+  const content = btoa(binStr);
+
+  const body = {
+    message: `Update portfolio ${pfData.lastUpdated}`,
+    content,
+    branch: BRANCH
+  };
+  if (pfSha) body.sha = pfSha;
+
+  try {
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${PF_PATH}`, {
+      method: 'PUT',
+      headers: { Authorization: `token ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    if (!r.ok) throw new Error('Portfolio publish failed');
+    const json = await r.json();
+    pfSha = json.content.sha;
+    document.getElementById('pfMeta').textContent =
+      `${pfData.items.length} items В· Last updated: ${pfData.lastUpdated}`;
+    pfOriginalData = JSON.parse(JSON.stringify(pfData));
+    renderPortfolioGrid();
+    setStatus('ok', 'Portfolio published');
+    showToast('вњ“ Portfolio published! Site updates in ~2 min.', 'ok');
+  } catch(e) {
+    setStatus('err', e.message);
+    showToast(e.message, 'fail');
+  }
+}
+
+// Override publishChanges to handle both tabs
+const _origPublish = publishChanges;
+window.publishChanges = async function() {
+  const activeTab = document.querySelector('.tab-panel.active')?.id;
+  if (activeTab === 'tab-portfolio') {
+    await publishPortfolio();
+  } else {
+    await _origPublish();
+  }
+};
+</script>
+</body>
+</html>

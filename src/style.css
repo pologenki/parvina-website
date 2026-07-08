@@ -1,0 +1,18 @@
+
+@import './css/content.css';
+@import './css/portfolio-flip.css';
+@import './css/final-polish.css';
+
+ body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+
+    .container{
+            max-width: 1170px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+    }

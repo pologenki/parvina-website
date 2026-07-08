@@ -1,0 +1,15 @@
+{
+  "name": "parvina",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "validate:data": "node scripts/validate-data.mjs",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^7.3.6"
+  }
+}

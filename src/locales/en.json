@@ -1,0 +1,170 @@
+{
+  "nav": {
+    "products": "Our Products",
+    "services": "Services",
+    "portfolio": "My Portfolio",
+    "contact": "Get In Touch"
+  },
+  "about": {
+    "getInTouch": "Get In Touch:",
+    "title": "Import coordination for reliable supply",
+    "subtitle": "Parvina Pologenki · Import Manager",
+    "description": "Supplier search, price checks, export documents and cargo delivery coordination for nuts, dried fruits, spices and coffee.",
+    "heroEyebrow": "Import desk",
+    "primaryCta": "Discuss a request",
+    "secondaryCta": "View products",
+    "productPanelLabel": "Product scope",
+    "productPanelTitle": "Nuts, dried fruits, spices and coffee",
+    "chipSourcing": "Supplier search",
+    "chipPricing": "Price check",
+    "chipDocuments": "Documents",
+    "chipDelivery": "Delivery coordination",
+    "workflowSupplier": "Supplier search",
+    "workflowPrice": "Price check",
+    "workflowDelivery": "Delivery control",
+    "tradeDesk": "Trade route",
+    "tradeDeskMeta": "EU / CIS / Asia"
+  },
+  "products": {
+    "title": "Our Products",
+    "lastUpdated": "Prices last updated:",
+    "learnMore": "Learn More",
+    "viewDetails": "View Grades",
+    "subtitle": "Current selection for import sourcing, supplier coordination and cargo delivery.",
+    "originVerified": "Origin verified",
+    "importSupportShort": "Import support available",
+    "requestQuote": "Request Quote",
+    "contactViaWhatsapp": "WhatsApp",
+    "contactViaTelegram": "Telegram",
+    "origin": "Origin",
+    "priceOnRequest": "Price on request",
+    "productSnapshot": "Product snapshot",
+    "availableVariants": "Available grades",
+    "copyDetails": "Copy details",
+    "copied": "Copied",
+    "serviceNoteTitle": "Import support",
+    "serviceNoteText": "We can assist with cargo delivery organization, supplier coordination and export documentation."
+  },
+  "services": {
+    "title": "Import Management Services",
+    "subtitle": "Practical support for sourcing, terms, documents, logistics and shipment control.",
+    "supplierSourcing": "Supplier Sourcing",
+    "supplierDescription": "Finding reliable suppliers worldwide with thorough due diligence and quality verification for nuts, dried fruits, and spices.",
+    "contractNegotiation": "Contract Negotiation",
+    "contractDescription": "Securing optimal terms and pricing through expert negotiation while protecting client interests in international deals.",
+    "logisticsManagement": "Logistics Management",
+    "logisticsDescription": "Coordinating seamless transportation with trusted partners and optimizing supply chain routes for cost efficiency.",
+    "tradeDocumentation": "Trade Documentation",
+    "documentationDescription": "Handling complete customs documentation and compliance to ensure smooth customs clearance and timely delivery.",
+    "shipmentMonitoring": "Shipment Monitoring",
+    "monitoringDescription": "Every shipment is tracked daily - from loading to final delivery. I monitor all logistics stages to ensure deadlines and product safety.",
+    "fullServiceImport": "Full-Service Import",
+    "importDescription": "End-to-end import solutions tailored to your business needs - from sourcing to final delivery at your warehouse.",
+    "readMore": "View Service",
+    "sourcingOutcome": "Reliable suppliers",
+    "negotiationOutcome": "Better terms",
+    "logisticsOutcome": "Controlled delivery",
+    "documentsOutcome": "Clean documents",
+    "monitoringOutcome": "Shipment visibility",
+    "fullOutcome": "End-to-end support",
+    "modalIncludesTitle": "What this includes",
+    "sourcingInclude1": "Search for reliable factories and exporters",
+    "sourcingInclude2": "Initial supplier screening and product matching",
+    "sourcingInclude3": "Sample, specification and price request coordination",
+    "negotiationInclude1": "Negotiation of price, packing and delivery terms",
+    "negotiationInclude2": "Clear confirmation of payment and shipment conditions",
+    "negotiationInclude3": "Protection of client interests before order confirmation",
+    "logisticsInclude1": "Coordination with forwarders and transport partners",
+    "logisticsInclude2": "Route, container and delivery option comparison",
+    "logisticsInclude3": "Support from loading point to destination planning",
+    "documentsInclude1": "Commercial invoices, packing lists and certificates",
+    "documentsInclude2": "Export document checks before shipment",
+    "documentsInclude3": "Communication with supplier on missing paperwork",
+    "monitoringInclude1": "Shipment status follow-up from loading to arrival",
+    "monitoringInclude2": "Updates on key logistics stages and deadlines",
+    "monitoringInclude3": "Quick reaction if delays or document issues appear",
+    "fullInclude1": "Sourcing, negotiation, documents and logistics in one flow",
+    "fullInclude2": "Single point of contact for import coordination",
+    "fullInclude3": "Practical support until the cargo is shipped or delivered",
+    "discussRequest": "Discuss Import Request"
+  },
+  "modals": {
+    "service1": {
+      "title": "Supplier Sourcing & Verification",
+      "description": "I conduct comprehensive market research to identify reputable suppliers of nuts, dried fruits, spices, and coffee from key producing regions."
+    },
+    "service2": {
+      "title": "Contract Negotiation & Terms",
+      "description": "Leveraging my expertise in international trade, I negotiate favorable terms covering pricing, payment conditions, delivery schedules, and quality specifications."
+    },
+    "service3": {
+      "title": "Logistics & Supply Chain Management",
+      "description": "I coordinate with trusted freight forwarders, customs brokers, and transportation providers to design optimal shipping routes."
+    },
+    "service4": {
+      "title": "International Trade Documentation",
+      "description": "I manage the complete documentation process including commercial invoices, packing lists, certificates of origin, phytosanitary certificates, and customs declarations."
+    },
+    "service5": {
+      "title": "Shipment Monitoring & Quality Assurance",
+      "description": "I provide continuous tracking and monitoring of shipments from loading to final delivery."
+    },
+    "service6": {
+      "title": "Comprehensive Import Solutions",
+      "description": "As your dedicated import manager, I provide end-to-end solutions tailored to your specific business needs."
+    }
+  },
+  "portfolio": {
+    "eyebrow": "Portfolio",
+    "title": "Successful Import Projects",
+    "subtitle": "Selected trade meetings, factory visits and supplier negotiations.",
+    "viewPhoto": "Open project",
+    "sliderHint": "Use arrows or swipe",
+    "cardHint": "Click to view"
+  },
+  "partners": {
+    "eyebrow": "Partner network",
+    "title": "Trusted supplier contacts",
+    "subtitle": "A compact place for verified partner logos and sourcing regions. Ready to grow when more partners are added.",
+    "partner1": "Vietnam suppliers",
+    "partner2": "China exporters",
+    "partner3": "India producers",
+    "moreSoon": "More partners soon"
+  },
+  "gallery": {
+    "projectTitle": "Project Title",
+    "projectDescription": "Project description"
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "subtitle": "Send an import request or contact me directly for sourcing, pricing and delivery coordination.",
+    "formEyebrow": "Import request",
+    "formHint": "Tell me the product, volume, origin or destination you need.",
+    "replyTime": "Usually replies within 1 business day",
+    "scope": "Products, suppliers, terms, documents and cargo delivery",
+    "preferredContact": "Preferred contact",
+    "fastestWay": "Fastest way to discuss a request",
+    "fastestWayText": "For urgent price checks and shipment questions, message me directly.",
+    "emailDirect": "Direct email",
+    "firstName": "First Name",
+    "firstNamePlaceholder": "Enter your first name",
+    "lastName": "Last Name",
+    "lastNamePlaceholder": "Enter your last name",
+    "email": "Email",
+    "emailPlaceholder": "Enter your email address",
+    "message": "How can we help you?",
+    "messagePlaceholder": "Enter your message",
+    "sendMessage": "Send Message"
+  },
+  "footer": {
+    "navigation": "Navigation",
+    "services": "Services",
+    "connect": "Connect",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "modal": {
+    "prev": "Previous",
+    "next": "Next"
+  }
+}

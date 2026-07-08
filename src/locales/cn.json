@@ -1,0 +1,170 @@
+{
+  "nav": {
+    "products": "产品",
+    "services": "服务",
+    "portfolio": "项目案例",
+    "contact": "联系我"
+  },
+  "about": {
+    "getInTouch": "联系方式：",
+    "title": "可靠供应的进口协调服务",
+    "subtitle": "Parvina Pologenki · 进口经理",
+    "description": "为坚果、果干、香料和咖啡业务提供供应商搜索、价格确认、出口文件和货运协调支持。",
+    "heroEyebrow": "进口协调",
+    "primaryCta": "讨论需求",
+    "secondaryCta": "查看产品",
+    "productPanelLabel": "产品范围",
+    "productPanelTitle": "坚果、果干、香料和咖啡",
+    "chipSourcing": "供应商搜索",
+    "chipPricing": "价格确认",
+    "chipDocuments": "出口文件",
+    "chipDelivery": "货运协调",
+    "workflowSupplier": "供应商搜索",
+    "workflowPrice": "价格确认",
+    "workflowDelivery": "交付跟进",
+    "tradeDesk": "贸易路线",
+    "tradeDeskMeta": "欧洲 / 独联体 / 亚洲"
+  },
+  "products": {
+    "title": "产品目录",
+    "lastUpdated": "价格更新时间：",
+    "learnMore": "了解更多",
+    "viewDetails": "查看规格",
+    "subtitle": "适用于进口采购、供应商协调和货运安排的当前产品选择。",
+    "originVerified": "产地已确认",
+    "importSupportShort": "可提供进口支持",
+    "requestQuote": "询价",
+    "contactViaWhatsapp": "WhatsApp",
+    "contactViaTelegram": "Telegram",
+    "origin": "产地",
+    "priceOnRequest": "价格面议",
+    "productSnapshot": "产品概览",
+    "availableVariants": "可选规格",
+    "copyDetails": "复制信息",
+    "copied": "已复制",
+    "serviceNoteTitle": "进口支持",
+    "serviceNoteText": "可协助货运组织、供应商协调和出口文件处理。"
+  },
+  "services": {
+    "title": "进口管理服务",
+    "subtitle": "为采购、条款、文件、物流和发货跟进提供实际支持。",
+    "supplierSourcing": "供应商搜索",
+    "supplierDescription": "在全球范围内寻找可靠供应商，并对坚果、果干和香料进行初步筛选与质量确认。",
+    "contractNegotiation": "合同与条款协调",
+    "contractDescription": "协助确认价格、包装、付款和交货条件，降低国际采购沟通风险。",
+    "logisticsManagement": "物流管理",
+    "logisticsDescription": "与货代和运输伙伴协调路线、运输方式和交付安排。",
+    "tradeDocumentation": "贸易文件",
+    "documentationDescription": "协助处理商业发票、装箱单、产地证和其他出口文件。",
+    "shipmentMonitoring": "发货跟进",
+    "monitoringDescription": "从装货到到港持续跟进发货状态，及时发现延误或文件问题。",
+    "fullServiceImport": "全流程进口支持",
+    "importDescription": "从供应商搜索到发货协调，为企业提供端到端进口支持。",
+    "readMore": "查看服务",
+    "sourcingOutcome": "可靠供应商",
+    "negotiationOutcome": "更清晰条款",
+    "logisticsOutcome": "可控交付",
+    "documentsOutcome": "文件清晰",
+    "monitoringOutcome": "发货可追踪",
+    "fullOutcome": "全流程支持",
+    "modalIncludesTitle": "包含内容",
+    "sourcingInclude1": "寻找可靠工厂和出口商",
+    "sourcingInclude2": "供应商初筛和产品匹配",
+    "sourcingInclude3": "样品、规格和价格请求协调",
+    "negotiationInclude1": "价格、包装和交货条件协调",
+    "negotiationInclude2": "付款和发货条件确认",
+    "negotiationInclude3": "下单前保护客户利益",
+    "logisticsInclude1": "与货代和运输伙伴沟通",
+    "logisticsInclude2": "比较路线、柜型和交付方案",
+    "logisticsInclude3": "从装货点到目的地的计划支持",
+    "documentsInclude1": "商业发票、装箱单和证书",
+    "documentsInclude2": "发货前出口文件检查",
+    "documentsInclude3": "与供应商沟通缺失文件",
+    "monitoringInclude1": "从装货到到达的发货跟进",
+    "monitoringInclude2": "关键物流节点更新",
+    "monitoringInclude3": "延误或文件问题时快速响应",
+    "fullInclude1": "采购、谈判、文件和物流统一协调",
+    "fullInclude2": "进口流程单一联系人",
+    "fullInclude3": "直到货物发出或交付的实际支持",
+    "discussRequest": "讨论进口需求"
+  },
+  "modals": {
+    "service1": {
+      "title": "供应商搜索与初步验证",
+      "description": "根据产品、产地和采购需求寻找可靠供应商，并进行初步沟通。"
+    },
+    "service2": {
+      "title": "合同条款与价格协调",
+      "description": "协助确认价格、付款条件、交货时间、包装和质量要求。"
+    },
+    "service3": {
+      "title": "物流与供应链协调",
+      "description": "与货代、报关伙伴和运输服务商沟通，规划合适的运输路线。"
+    },
+    "service4": {
+      "title": "国际贸易文件",
+      "description": "协助准备和检查商业发票、装箱单、产地证、植物检疫证等文件。"
+    },
+    "service5": {
+      "title": "发货跟进与质量关注",
+      "description": "从装货到最终交付持续跟进货物状态。"
+    },
+    "service6": {
+      "title": "综合进口解决方案",
+      "description": "根据企业需求提供从采购到发货协调的一站式进口支持。"
+    }
+  },
+  "portfolio": {
+    "eyebrow": "项目案例",
+    "title": "成功进口项目",
+    "subtitle": "贸易展会、工厂拜访和供应商谈判精选。",
+    "viewPhoto": "打开项目",
+    "sliderHint": "使用箭头或滑动",
+    "cardHint": "点击查看"
+  },
+  "partners": {
+    "eyebrow": "合作网络",
+    "title": "可靠供应商联系资源",
+    "subtitle": "用于展示已验证合作伙伴标志和采购地区的紧凑区域。未来可继续扩展。",
+    "partner1": "越南供应商",
+    "partner2": "中国出口商",
+    "partner3": "印度生产商",
+    "moreSoon": "更多合作伙伴即将加入"
+  },
+  "gallery": {
+    "projectTitle": "项目标题",
+    "projectDescription": "项目描述"
+  },
+  "contact": {
+    "title": "联系我",
+    "subtitle": "发送进口需求，或直接联系我咨询供应商、价格和交付协调。",
+    "formEyebrow": "进口需求",
+    "formHint": "请说明产品、数量、产地或目的地。",
+    "replyTime": "通常在 1 个工作日内回复",
+    "scope": "产品、供应商、条款、文件和货运交付",
+    "preferredContact": "推荐联系方式",
+    "fastestWay": "最快沟通方式",
+    "fastestWayText": "如需紧急询价或发货咨询，请直接发送消息。",
+    "emailDirect": "直接邮箱",
+    "firstName": "名",
+    "firstNamePlaceholder": "请输入您的名字",
+    "lastName": "姓",
+    "lastNamePlaceholder": "请输入您的姓氏",
+    "email": "邮箱",
+    "emailPlaceholder": "请输入邮箱地址",
+    "message": "您需要什么帮助？",
+    "messagePlaceholder": "请输入您的需求",
+    "sendMessage": "发送消息"
+  },
+  "footer": {
+    "navigation": "导航",
+    "services": "服务",
+    "connect": "联系",
+    "privacy": "隐私政策",
+    "terms": "服务条款"
+  },
+  "modal": {
+    "prev": "上一个",
+    "next": "下一个"
+  }
+}

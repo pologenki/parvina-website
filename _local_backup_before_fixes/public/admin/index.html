@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pologenki — Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --dark: #1a1a1a;
+    --accent: #2c2c2c;
+    --gold: #b8960c;
+    --border: #e0e0e0;
+    --bg: #f8f7f4;
+    --white: #ffffff;
+    --text: #1a1a1a;
+    --muted: #888;
+    --success: #4a8c5c;
+    --danger: #c0392b;
+    --en: #2563eb;
+    --ru: #c0392b;
+  }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── LOGIN ── */
+  .login-wrap {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+  }
+
+  .login-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 3rem 3.5rem;
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+  }
+
+  .login-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--dark);
+    margin-bottom: 0.3rem;
+  }
+
+  .login-sub {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+  }
+
+  .form-label {
+    display: block;
+    text-align: left;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .form-input {
+    width: 100%;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    padding: 0.75rem 1rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text);
+    outline: none;
+    margin-bottom: 1.5rem;
+    transition: border-color 0.2s;
+  }
+
+  .form-input:focus { border-color: var(--dark); }
+
+  .btn-dark {
+    width: 100%;
+    background: var(--dark);
+    color: var(--white);
+    border: none;
+    padding: 0.85rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-dark:hover { background: #333; }
+
+  /* ── HEADER ── */
+  .site-header {
+    display: none;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 64px;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .site-header.visible { display: flex; }
+
+  .header-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--dark);
+  }
+
+  .header-center {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .header-actions { display: flex; gap: 0.75rem; align-items: center; }
+
+  .btn-publish {
+    background: var(--dark);
+    color: var(--white);
+    border: none;
+    padding: 0.55rem 1.4rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-publish:hover { background: #333; }
+  .btn-publish:disabled { background: #ccc; cursor: not-allowed; }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 0.55rem 1rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-outline:hover { border-color: var(--dark); color: var(--dark); }
+
+  /* ── MAIN ── */
+  .admin-main {
+    display: none;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 6rem;
+  }
+
+  .admin-main.visible { display: block; }
+
+  .page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  .page-meta {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 2.5rem;
+  }
+
+  /* ── LANG BADGE ── */
+  .lang-badge {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: 0.1rem 0.4rem;
+    border-radius: 2px;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+  }
+  .lang-badge.en { background: #dbeafe; color: var(--en); }
+  .lang-badge.ru { background: #fde8e8; color: var(--ru); }
+
+  /* ── GRID ── */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .product-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+
+  .product-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+
+  .card-image-wrap {
+    height: 160px;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .card-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card-num {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    background: var(--white);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--border);
+  }
+
+  .card-body { padding: 1.25rem; }
+
+  .card-field { margin-bottom: 1rem; }
+  .card-field:last-child { margin-bottom: 0; }
+
+  .card-label {
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.35rem;
+  }
+
+  .card-input {
+    width: 100%;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    padding: 0.5rem 0.75rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.875rem;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .card-input:focus { border-color: var(--dark); background: var(--white); }
+  .card-input.price { color: var(--dark); font-weight: 500; }
+  .card-input.en:focus { border-color: var(--en); }
+  .card-input.ru:focus { border-color: var(--ru); }
+
+  /* two-column EN/RU fields */
+  .bilingual-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .bilingual-row .card-field { margin-bottom: 0; }
+
+  /* ── VARIANTS ── */
+  .variants-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.25rem;
+    border-top: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+
+  .variants-header:hover { background: var(--bg); }
+
+  .variants-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .variants-arrow {
+    font-size: 0.7rem;
+    color: var(--muted);
+    transition: transform 0.2s;
+  }
+
+  .variants-arrow.open { transform: rotate(180deg); }
+
+  .variants-body {
+    display: none;
+    padding: 0.75rem 1.25rem 1.25rem;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+  }
+
+  .variants-body.open { display: block; }
+
+  .variant-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+  }
+
+  .variant-item:last-child { margin-bottom: 0; }
+
+  .variant-mini-label {
+    display: block;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.3rem;
+  }
+
+  .variant-field { margin-bottom: 0.5rem; }
+  .variant-field:last-child { margin-bottom: 0; }
+
+  .variant-row-2col {
+    display: grid;
+    grid-template-columns: 1fr 148px;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .variant-desc-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .variant-input {
+    width: 100%;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    padding: 0.45rem 0.7rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .variant-input:focus { border-color: var(--dark); background: var(--white); }
+  .variant-input.price { color: var(--dark); font-weight: 500; }
+  .variant-input.en:focus { border-color: var(--en); }
+  .variant-input.ru:focus { border-color: var(--ru); }
+
+  textarea.variant-input {
+    resize: vertical;
+    height: 80px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .variant-delete-btn {
+    position: absolute;
+    top: 0.45rem;
+    right: 0.45rem;
+    background: transparent;
+    border: none;
+    color: var(--danger);
+    font-size: 0.75rem;
+    cursor: pointer;
+    opacity: 0.3;
+    padding: 0.1rem 0.35rem;
+    transition: opacity 0.2s;
+    line-height: 1;
+  }
+
+  .variant-delete-btn:hover { opacity: 1; }
+
+  .btn-add-variant {
+    width: 100%;
+    margin-top: 0.6rem;
+    background: transparent;
+    border: 1px dashed var(--border);
+    color: var(--muted);
+    padding: 0.5rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-add-variant:hover { border-color: var(--dark); color: var(--dark); }
+
+  /* ── STATUS ── */
+  .status-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    padding: 0.7rem 2rem;
+    display: none;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .status-bar.visible { display: flex; }
+
+  .status-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--success);
+    flex-shrink: 0;
+  }
+
+  .status-dot.busy { background: var(--gold); animation: blink 1s infinite; }
+  .status-dot.err { background: var(--danger); }
+
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+  .toast {
+    position: fixed;
+    top: 80px; right: 2rem;
+    background: var(--dark);
+    color: var(--white);
+    padding: 0.75rem 1.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: all 0.3s;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  .toast.show { opacity: 1; transform: translateY(0); }
+  .toast.ok { background: var(--success); }
+  .toast.fail { background: var(--danger); }
+
+  /* ── TABS ── */
+  .admin-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+
+  .admin-tab {
+    padding: 0.65rem 1.6rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    color: var(--muted);
+    transition: all 0.2s;
+    margin-bottom: -1px;
+  }
+
+  .admin-tab:hover { color: var(--dark); }
+  .admin-tab.active { color: var(--dark); border-bottom-color: var(--dark); }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── PORTFOLIO GRID ── */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .portfolio-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+    position: relative;
+  }
+
+  .portfolio-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+
+  .pf-image-wrap {
+    height: 180px;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pf-image-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .pf-image-placeholder {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 0.5rem;
+    color: var(--muted);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .pf-image-placeholder svg { opacity: 0.25; }
+
+  .pf-num {
+    position: absolute;
+    top: 0.75rem; left: 0.75rem;
+    background: var(--white);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--border);
+  }
+
+  .pf-drag-handle {
+    position: absolute;
+    top: 0.75rem; right: 0.75rem;
+    background: rgba(255,255,255,0.9);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: grab; font-size: 0.8rem;
+    transition: all 0.2s;
+  }
+
+  .pf-delete-btn {
+    position: absolute;
+    bottom: 0.75rem; right: 0.75rem;
+    background: rgba(255,255,255,0.95);
+    border: 1px solid #fde8e8;
+    color: var(--danger);
+    width: 28px; height: 28px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .portfolio-card:hover .pf-delete-btn { opacity: 1; }
+
+  .pf-body { padding: 1.25rem; }
+
+  .pf-url-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    align-items: flex-end;
+  }
+
+  .pf-url-row .card-field { flex: 1; margin: 0; }
+
+  .btn-preview-img {
+    flex-shrink: 0;
+    height: 36px;
+    padding: 0 0.8rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .btn-preview-img:hover { border-color: var(--dark); color: var(--dark); }
+
+  .pf-preview-thumb {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: none;
+  }
+
+  .btn-add-portfolio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 1.2rem;
+    background: transparent;
+    border: 1.5px dashed var(--border);
+    color: var(--muted);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 0.5rem;
+  }
+
+  .btn-add-portfolio:hover {
+    border-color: var(--dark);
+    color: var(--dark);
+    background: var(--white);
+  }
+
+  /* ── UPLOAD BUTTON ── */
+  .pf-upload-area {
+    border: 1.5px dashed var(--border);
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    min-height: 80px;
+  }
+
+  .pf-upload-area:hover,
+  .pf-upload-area.dragover {
+    border-color: var(--dark);
+    background: var(--white);
+  }
+
+  .pf-upload-area input[type=file] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+  }
+
+  .pf-upload-icon {
+    font-size: 1.4rem;
+    opacity: 0.3;
+  }
+
+  .pf-upload-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    pointer-events: none;
+  }
+
+  .pf-upload-sub {
+    font-size: 0.62rem;
+    color: #bbb;
+    pointer-events: none;
+  }
+
+  .pf-upload-progress {
+    display: none;
+    width: 100%;
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 0.3rem;
+  }
+
+  .pf-upload-progress-fill {
+    height: 100%;
+    background: var(--dark);
+    width: 0%;
+    transition: width 0.3s;
+  }
+
+  .pf-upload-status {
+    font-size: 0.68rem;
+    color: var(--muted);
+    text-align: center;
+    min-height: 1rem;
+    margin-top: 0.2rem;
+  }
+
+  .pf-upload-status.ok { color: var(--success); }
+  .pf-upload-status.err { color: var(--danger); }
+
+  .pf-section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+
+  .pf-section-meta {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    margin-bottom: 1.5rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="loginWrap">
+  <div class="login-card">
+    <div class="login-logo">Pologenki</div>
+    <div class="login-sub">Product Management</div>
+    <label class="form-label">GitHub Access Token</label>
+    <input class="form-input" type="password" id="tokenInput" placeholder="ghp_...">
+    <button class="btn-dark" onclick="doLogin()">Enter Dashboard</button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header" id="siteHeader">
+  <div class="header-logo">Pologenki</div>
+  <div class="header-center" id="headerMeta">Product Prices</div>
+  <div class="header-actions">
+    <button class="btn-publish" id="publishBtn" onclick="publishChanges()">Publish Changes</button>
+    <button class="btn-outline" onclick="doLogout()">Exit</button>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="admin-main" id="adminMain">
+
+  <!-- TABS -->
+  <div class="admin-tabs">
+    <button class="admin-tab active" onclick="switchTab('products')">Products & Prices</button>
+    <button class="admin-tab" onclick="switchTab('portfolio')">Portfolio</button>
+  </div>
+
+  <!-- TAB: PRODUCTS -->
+  <div class="tab-panel active" id="tab-products">
+    <div class="page-title">Products & Prices</div>
+    <div class="page-meta" id="pageMeta">Loading...</div>
+    <div class="products-grid" id="productsGrid"></div>
+  </div>
+
+  <!-- TAB: PORTFOLIO -->
+  <div class="tab-panel" id="tab-portfolio">
+    <div class="pf-section-title">Portfolio</div>
+    <div class="pf-section-meta" id="pfMeta">Loading...</div>
+    <div class="portfolio-grid" id="portfolioGrid"></div>
+    <button class="btn-add-portfolio" onclick="addPortfolioItem()">
+      <span style="font-size:1.1rem;line-height:1">+</span> Add Portfolio Item
+    </button>
+  </div>
+
+</main>
+
+<!-- STATUS -->
+<div class="status-bar" id="statusBar">
+  <div class="status-dot" id="statusDot"></div>
+  <span id="statusText">Ready</span>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const REPO = 'pologenki/parvina-website';
+const PATH = 'public/data/products.json';
+let token = '', data = null, sha = '';
+
+function doLogin() {
+  const t = document.getElementById('tokenInput').value.trim();
+  if (!t) return;
+  token = t;
+  sessionStorage.setItem('pg_tok', t);
+  enterAdmin();
+}
+
+function doLogout() {
+  sessionStorage.removeItem('pg_tok');
+  token = ''; data = null; sha = '';
+  document.getElementById('loginWrap').style.display = 'flex';
+  document.getElementById('siteHeader').classList.remove('visible');
+  document.getElementById('adminMain').classList.remove('visible');
+  document.getElementById('statusBar').classList.remove('visible');
+}
+
+async function enterAdmin() {
+  document.getElementById('loginWrap').style.display = 'none';
+  document.getElementById('siteHeader').classList.add('visible');
+  document.getElementById('adminMain').classList.add('visible');
+  document.getElementById('statusBar').classList.add('visible');
+  await fetchProducts();
+}
+
+async function fetchProducts() {
+  setStatus('busy', 'Loading products...');
+  try {
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
+      headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    if (!r.ok) throw new Error('Auth failed — check your token');
+    const json = await r.json();
+    sha = json.sha;
+    const binary = atob(json.content.replace(/\n/g,''));
+const bytes = new Uint8Array(binary.length);
+for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+data = JSON.parse(new TextDecoder('utf-8').decode(bytes));
+    document.getElementById('pageMeta').textContent =
+      `${data.products.length} products · Last updated: ${data.lastUpdated || '—'}`;
+    document.getElementById('headerMeta').textContent =
+      `Last updated: ${data.lastUpdated || '—'}`;
+    renderGrid();
+    setStatus('ok', 'Ready');
+  } catch(e) {
+    setStatus('err', e.message);
+    showToast(e.message, 'fail');
+  }
+}
+
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function buildVariantHTML(i, j, v) {
+  return `
+    <div class="variant-item" id="variant-${i}-${j}">
+      <button class="variant-delete-btn" onclick="deleteVariant(${i},${j})" title="Delete variant">✕</button>
+      <div class="variant-field">
+        <span class="variant-mini-label">Variant Name</span>
+        <input class="variant-input" value="${esc(v.name)}"
+          oninput="updV(${i},${j},'name',this.value)" placeholder="e.g. WW320 - Whole White">
+      </div>
+      <div class="variant-row-2col">
+        <div>
+          <span class="variant-mini-label">Price</span>
+          <input class="variant-input price" value="${esc(v.price)}"
+            oninput="updV(${i},${j},'price',this.value)" placeholder="0,00 USD/kg">
+        </div>
+      </div>
+      <div class="variant-desc-row">
+        <div>
+          <span class="variant-mini-label">Description <span class="lang-badge en">EN</span></span>
+          <textarea class="variant-input en"
+            oninput="updV(${i},${j},'desc',this.value)" placeholder="Packing, port, quality notes...">${esc(v.desc)}</textarea>
+        </div>
+        <div>
+          <span class="variant-mini-label">Description <span class="lang-badge ru">RU</span></span>
+          <textarea class="variant-input ru"
+            oninput="updV(${i},${j},'desc_ru',this.value)" placeholder="Упаковка, порт, качество...">${esc(v.desc_ru)}</textarea>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderGrid() {
+  const grid = document.getElementById('productsGrid');
+  grid.innerHTML = data.products.map((p, i) => `
+    <div class="product-card">
+      <div class="card-image-wrap">
+        <img src="https://raw.githubusercontent.com/${REPO}/master/public/${p.image}"
+          onerror="this.style.display='none'">
+        <span class="card-num">${String(i+1).padStart(2,'0')}</span>
+      </div>
+      <div class="card-body">
+
+        <div class="bilingual-row">
+          <div class="card-field">
+            <label class="card-label">Name <span class="lang-badge en">EN</span></label>
+            <input class="card-input en" value="${esc(p.name)}"
+              oninput="upd(${i},'name',this.value)" placeholder="Product name">
+          </div>
+          <div class="card-field">
+            <label class="card-label">Name <span class="lang-badge ru">RU</span></label>
+            <input class="card-input ru" value="${esc(p.name_ru)}"
+              oninput="upd(${i},'name_ru',this.value)" placeholder="Название товара">
+          </div>
+        </div>
+
+        <div class="card-field">
+          <label class="card-label">Main Price</label>
+          <input class="card-input price" value="${esc(p.mainPrice)}"
+            oninput="upd(${i},'mainPrice',this.value)">
+        </div>
+
+        <div class="bilingual-row">
+          <div class="card-field">
+            <label class="card-label">Origin <span class="lang-badge en">EN</span></label>
+            <input class="card-input en" value="${esc(p.origin)}"
+              oninput="upd(${i},'origin',this.value)" placeholder="e.g. Vietnam">
+          </div>
+          <div class="card-field">
+            <label class="card-label">Origin <span class="lang-badge ru">RU</span></label>
+            <input class="card-input ru" value="${esc(p.origin_ru)}"
+              oninput="upd(${i},'origin_ru',this.value)" placeholder="напр. Вьетнам">
+          </div>
+        </div>
+
+        <div class="bilingual-row">
+          <div class="card-field">
+            <label class="card-label">Description <span class="lang-badge en">EN</span></label>
+            <input class="card-input en" value="${esc(p.desc)}"
+              oninput="upd(${i},'desc',this.value)" placeholder="Short description">
+          </div>
+          <div class="card-field">
+            <label class="card-label">Description <span class="lang-badge ru">RU</span></label>
+            <input class="card-input ru" value="${esc(p.desc_ru)}"
+              oninput="upd(${i},'desc_ru',this.value)" placeholder="Краткое описание">
+          </div>
+        </div>
+
+      </div>
+      <div class="variants-header" onclick="toggleV(this)">
+        <span class="variants-label" id="vlabel-${i}">${p.variants.length} variants — click to edit</span>
+        <span class="variants-arrow">▼</span>
+      </div>
+      <div class="variants-body">
+        <div id="vlist-${i}">
+          ${p.variants.map((v,j) => buildVariantHTML(i,j,v)).join('')}
+        </div>
+        <button class="btn-add-variant" onclick="addVariant(${i})">+ Add variant</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function addVariant(i) {
+  data.products[i].variants.push({ name: '', price: '', desc: '', desc_ru: '' });
+  const j = data.products[i].variants.length - 1;
+  document.getElementById(`vlist-${i}`).insertAdjacentHTML('beforeend', buildVariantHTML(i, j, { name:'', price:'', desc:'', desc_ru:'' }));
+  updateVLabel(i);
+  document.getElementById(`variant-${i}-${j}`).querySelector('.variant-input').focus();
+}
+
+function deleteVariant(i, j) {
+  if (data.products[i].variants.length <= 1) { showToast('At least one variant required', 'fail'); return; }
+  data.products[i].variants.splice(j, 1);
+  const list = document.getElementById(`vlist-${i}`);
+  list.innerHTML = data.products[i].variants.map((v, nj) => buildVariantHTML(i, nj, v)).join('');
+  updateVLabel(i);
+}
+
+function updateVLabel(i) {
+  const el = document.getElementById(`vlabel-${i}`);
+  if (el) el.textContent = `${data.products[i].variants.length} variants — click to edit`;
+}
+
+function toggleV(header) {
+  header.querySelector('.variants-arrow').classList.toggle('open');
+  header.nextElementSibling.classList.toggle('open');
+}
+
+function upd(i, f, v) { data.products[i][f] = v; }
+function updV(i, j, f, v) { data.products[i].variants[j][f] = v; }
+
+async function publishChanges() {
+  const btn = document.getElementById('publishBtn');
+  btn.disabled = true;
+  setStatus('busy', 'Publishing...');
+  data.lastUpdated = new Date().toISOString().split('T')[0];
+
+  try {
+    const jsonStr = JSON.stringify(data, null, 2);
+const bytes = new TextEncoder().encode(jsonStr);
+const binStr = Array.from(bytes).map(b => String.fromCharCode(b)).join('');
+const content = btoa(binStr);
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `token ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: `Update prices ${data.lastUpdated}`,
+        content, sha
+      })
+    });
+    if (!r.ok) throw new Error('Publish failed');
+    const json = await r.json();
+    sha = json.content.sha;
+    document.getElementById('pageMeta').textContent =
+      `${data.products.length} products · Last updated: ${data.lastUpdated}`;
+    document.getElementById('headerMeta').textContent =
+      `Last updated: ${data.lastUpdated}`;
+    setStatus('ok', 'Published successfully');
+    showToast('✓ Published! Site updates in ~2 min.', 'ok');
+  } catch(e) {
+    setStatus('err', e.message);
+    showToast(e.message, 'fail');
+  }
+  btn.disabled = false;
+}
+
+function setStatus(type, text) {
+  const d = document.getElementById('statusDot');
+  d.className = 'status-dot' + (type==='busy'?' busy':type==='err'?' err':'');
+  document.getElementById('statusText').textContent = text;
+}
+
+function showToast(msg, type='') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (type ? ' '+type : '');
+  setTimeout(() => t.className = 'toast', 3500);
+}
+
+window.onload = () => {
+  const saved = sessionStorage.getItem('pg_tok');
+  if (saved) { token = saved; enterAdmin(); }
+};
+
+// ── TABS
+function switchTab(name) {
+  document.querySelectorAll('.admin-tab').forEach((t,i) => {
+    t.classList.toggle('active', ['products','portfolio'][i] === name);
+  });
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+
+  document.getElementById('headerMeta').textContent =
+    name === 'portfolio' ? 'Portfolio Management' : `Last updated: ${data?.lastUpdated || '—'}`;
+
+  if (name === 'portfolio' && pfData === null) fetchPortfolio();
+}
+
+// ── PORTFOLIO DATA
+const PF_PATH = 'public/data/portfolio.json';
+let pfData = null, pfSha = '';
+
+async function fetchPortfolio() {
+  setStatus('busy', 'Loading portfolio...');
+  try {
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${PF_PATH}`, {
+      headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    if (r.status === 404) {
+      // файл ещё не существует — создаём пустую структуру
+      pfData = { items: [], lastUpdated: '' };
+      pfSha = '';
+      renderPortfolioGrid();
+      setStatus('ok', 'Ready (new portfolio file will be created on publish)');
+      return;
+    }
+    if (!r.ok) throw new Error('Failed to load portfolio.json');
+    const json = await r.json();
+    pfSha = json.sha;
+    const binary = atob(json.content.replace(/\n/g,''));
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+    pfData = JSON.parse(new TextDecoder('utf-8').decode(bytes));
+    if (!pfData.items) pfData.items = [];
+    renderPortfolioGrid();
+    setStatus('ok', 'Ready');
+  } catch(e) {
+    setStatus('err', e.message);
+    showToast(e.message, 'fail');
+  }
+}
+
+function renderPortfolioGrid() {
+  const grid = document.getElementById('portfolioGrid');
+  const meta = document.getElementById('pfMeta');
+  meta.textContent = `${pfData.items.length} items${pfData.lastUpdated ? ' · Last updated: ' + pfData.lastUpdated : ''}`;
+  grid.innerHTML = pfData.items.map((item, i) => buildPortfolioCard(item, i)).join('');
+}
+
+function buildPortfolioCard(item, i) {
+  const hasImg = item.img && item.img.trim();
+  return `
+  <div class="portfolio-card" id="pf-card-${i}">
+    <div class="pf-image-wrap" id="pf-img-wrap-${i}">
+      ${hasImg
+        ? `<img src="${esc(item.img)}" onerror="this.style.opacity='0.2'" style="width:100%;height:100%;object-fit:cover;display:block;">`
+        : `<div class="pf-image-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            No image yet
+           </div>`
+      }
+      <span class="pf-num">${String(i+1).padStart(2,'0')}</span>
+      <button class="pf-delete-btn" onclick="deletePortfolioItem(${i})" title="Delete">✕</button>
+    </div>
+
+    <div class="pf-body">
+
+      <!-- Фото: upload или URL -->
+      <div class="card-field" style="margin-bottom:1rem;">
+        <label class="card-label">Photo</label>
+
+        <div class="pf-upload-area" id="pf-upload-area-${i}"
+          ondragover="event.preventDefault();this.classList.add('dragover')"
+          ondragleave="this.classList.remove('dragover')"
+          ondrop="handlePfDrop(event,${i})">
+          <input type="file" accept="image/*" onchange="uploadPfPhoto(this,${i})">
+          <div class="pf-upload-icon">📷</div>
+          <div class="pf-upload-label">Click or drag photo here</div>
+          <div class="pf-upload-sub">JPG, PNG, WEBP · uploads to /images/portfolio/</div>
+        </div>
+
+        <div class="pf-upload-progress" id="pf-progress-${i}">
+          <div class="pf-upload-progress-fill" id="pf-progress-fill-${i}"></div>
+        </div>
+        <div class="pf-upload-status" id="pf-status-${i}">
+          ${item.img ? `✓ ${item.img.split('/').pop()}` : ''}
+        </div>
+
+        <!-- URL вручную (fallback) -->
+        <div style="margin-top:0.5rem;display:flex;gap:0.4rem;align-items:center;">
+          <input class="card-input" style="font-size:0.78rem;" value="${esc(item.img||'')}"
+            id="pf-url-${i}"
+            oninput="updPf(${i},'img',this.value);previewPfImg(${i})"
+            placeholder="or paste URL directly...">
+        </div>
+      </div>
+
+      <!-- Title EN / RU -->
+      <div class="bilingual-row">
+        <div class="card-field">
+          <label class="card-label">Title <span class="lang-badge en">EN</span></label>
+          <input class="card-input en" value="${esc(item.title||'')}"
+            oninput="updPf(${i},'title',this.value)" placeholder="e.g. Gulfood Dubai 2025">
+        </div>
+        <div class="card-field">
+          <label class="card-label">Title <span class="lang-badge ru">RU</span></label>
+          <input class="card-input ru" value="${esc(item.title_ru||'')}"
+            oninput="updPf(${i},'title_ru',this.value)" placeholder="напр. Гульфуд Дубай 2025">
+        </div>
+      </div>
+
+      <!-- Description EN / RU -->
+      <div class="bilingual-row">
+        <div class="card-field">
+          <label class="card-label">Description <span class="lang-badge en">EN</span></label>
+          <textarea class="card-input en" style="height:72px;resize:vertical;font-size:0.82rem;line-height:1.5;"
+            oninput="updPf(${i},'desc',this.value)"
+            placeholder="Short description of the event...">${esc(item.desc||'')}</textarea>
+        </div>
+        <div class="card-field">
+          <label class="card-label">Description <span class="lang-badge ru">RU</span></label>
+          <textarea class="card-input ru" style="height:72px;resize:vertical;font-size:0.82rem;line-height:1.5;"
+            oninput="updPf(${i},'desc_ru',this.value)"
+            placeholder="Краткое описание события...">${esc(item.desc_ru||'')}</textarea>
+        </div>
+      </div>
+
+    </div>
+  </div>`;
+}
+
+function previewPfImg(i) {
+  const url = (document.getElementById(`pf-url-${i}`)?.value || '').trim();
+  if (!url) return;
+  updPf(i, 'img', url);
+  const wrap = document.getElementById(`pf-img-wrap-${i}`);
+  if (wrap) wrap.innerHTML = `
+    <img src="${esc(url)}" onerror="this.style.opacity='0.15'"
+      style="width:100%;height:100%;object-fit:cover;display:block;">
+    <span class="pf-num">${String(i+1).padStart(2,'0')}</span>
+    <button class="pf-delete-btn" onclick="deletePortfolioItem(${i})" title="Delete">✕</button>`;
+}
+
+function handlePfDrop(event, i) {
+  event.preventDefault();
+  document.getElementById(`pf-upload-area-${i}`).classList.remove('dragover');
+  const file = event.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) uploadPfPhoto({ files: [file] }, i);
+}
+
+async function uploadPfPhoto(input, i) {
+  const file = input.files[0];
+  if (!file) return;
+
+  const statusEl   = document.getElementById(`pf-status-${i}`);
+  const progressEl = document.getElementById(`pf-progress-${i}`);
+  const fillEl     = document.getElementById(`pf-progress-fill-${i}`);
+  const urlInput   = document.getElementById(`pf-url-${i}`);
+
+  // Генерируем безопасное имя файла
+  const ext      = file.name.split('.').pop().toLowerCase();
+  const safeName = file.name.replace(/[^a-z0-9._-]/gi, '_').replace(/\s+/g,'_');
+  const remotePath = `public/images/portfolio/${safeName}`;
+
+  statusEl.className = 'pf-upload-status';
+  statusEl.textContent = 'Uploading...';
+  progressEl.style.display = 'block';
+  fillEl.style.width = '30%';
+
+  try {
+    // Читаем файл как base64
+    const base64 = await new Promise((res, rej) => {
+      const reader = new FileReader();
+      reader.onload = () => res(reader.result.split(',')[1]);
+      reader.onerror = rej;
+      reader.readAsDataURL(file);
+    });
+
+    fillEl.style.width = '60%';
+
+    // Проверяем SHA если файл уже есть
+    let sha = '';
+    const checkR = await fetch(
+      `https://api.github.com/repos/${REPO}/contents/${remotePath}?ref=master`,
+      { headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' } }
+    );
+    if (checkR.ok) {
+      const checkJson = await checkR.json();
+      sha = checkJson.sha;
+    }
+
+    fillEl.style.width = '80%';
+
+    // Загружаем файл
+    const body = {
+      message: `Upload portfolio photo: ${safeName}`,
+      content: base64,
+      branch: 'master'
+    };
+    if (sha) body.sha = sha;
+
+    const r = await fetch(
+      `https://api.github.com/repos/${REPO}/contents/${remotePath}`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: `token ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      }
+    );
+
+    if (!r.ok) {
+      const err = await r.json();
+      throw new Error(err.message || 'Upload failed');
+    }
+
+    fillEl.style.width = '100%';
+
+    // Путь к файлу на сайте
+    const publicUrl = `/images/portfolio/${safeName}`;
+    updPf(i, 'img', publicUrl);
+    if (urlInput) urlInput.value = publicUrl;
+
+    // Обновляем превью в карточке
+    const wrap = document.getElementById(`pf-img-wrap-${i}`);
+    if (wrap) {
+      const rawUrl = `https://raw.githubusercontent.com/${REPO}/master/${remotePath}`;
+      wrap.innerHTML = `
+        <img src="${rawUrl}?v=${Date.now()}" onerror="this.style.opacity='0.2'"
+          style="width:100%;height:100%;object-fit:cover;display:block;">
+        <span class="pf-num">${String(i+1).padStart(2,'0')}</span>
+        <button class="pf-delete-btn" onclick="deletePortfolioItem(${i})" title="Delete">✕</button>`;
+    }
+
+    statusEl.className = 'pf-upload-status ok';
+    statusEl.textContent = `✓ Uploaded: ${safeName}`;
+    setTimeout(() => { progressEl.style.display = 'none'; }, 1000);
+
+  } catch(e) {
+    fillEl.style.width = '100%';
+    fillEl.style.background = 'var(--danger)';
+    statusEl.className = 'pf-upload-status err';
+    statusEl.textContent = '✕ ' + e.message;
+    setTimeout(() => { progressEl.style.display = 'none'; fillEl.style.background = 'var(--dark)'; }, 3000);
+  }
+}
+
+function updPf(i, field, value) {
+  pfData.items[i][field] = value;
+}
+
+function addPortfolioItem() {
+  pfData.items.push({ img: '', title: '', title_ru: '', desc: '', desc_ru: '' });
+  renderPortfolioGrid();
+  // scroll to new card
+  const cards = document.querySelectorAll('.portfolio-card');
+  if (cards.length) cards[cards.length-1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+  // focus first input of new card
+  setTimeout(() => {
+    const last = document.getElementById(`pf-card-${pfData.items.length-1}`);
+    if (last) last.querySelector('.card-input').focus();
+  }, 100);
+}
+
+function deletePortfolioItem(i) {
+  if (!confirm(`Delete item "${pfData.items[i].title || 'Untitled'}"?`)) return;
+  pfData.items.splice(i, 1);
+  renderPortfolioGrid();
+  showToast('Item deleted', '');
+}
+
+async function publishPortfolio() {
+  setStatus('busy', 'Publishing portfolio...');
+  pfData.lastUpdated = new Date().toISOString().split('T')[0];
+
+  const jsonStr = JSON.stringify(pfData, null, 2);
+  const bytes = new TextEncoder().encode(jsonStr);
+  const binStr = Array.from(bytes).map(b => String.fromCharCode(b)).join('');
+  const content = btoa(binStr);
+
+  const body = {
+    message: `Update portfolio ${pfData.lastUpdated}`,
+    content
+  };
+  if (pfSha) body.sha = pfSha;
+
+  try {
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${PF_PATH}`, {
+      method: 'PUT',
+      headers: { Authorization: `token ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    if (!r.ok) throw new Error('Portfolio publish failed');
+    const json = await r.json();
+    pfSha = json.content.sha;
+    document.getElementById('pfMeta').textContent =
+      `${pfData.items.length} items · Last updated: ${pfData.lastUpdated}`;
+    setStatus('ok', 'Portfolio published');
+    showToast('✓ Portfolio published! Site updates in ~2 min.', 'ok');
+  } catch(e) {
+    setStatus('err', e.message);
+    showToast(e.message, 'fail');
+  }
+}
+
+// Override publishChanges to handle both tabs
+const _origPublish = publishChanges;
+window.publishChanges = async function() {
+  const activeTab = document.querySelector('.tab-panel.active')?.id;
+  if (activeTab === 'tab-portfolio') {
+    await publishPortfolio();
+  } else {
+    await _origPublish();
+  }
+};
+</script>
+</body>
+</html>
