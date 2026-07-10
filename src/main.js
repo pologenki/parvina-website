@@ -225,8 +225,8 @@ function initLanguageSwitcher() {
 function showLanguageNotification(lang) {
   const messages = {
     en: "Language changed to English",
-    ru: "РЇР·С‹Рє РёР·РјРµРЅРµРЅ РЅР° СЂСѓСЃСЃРєРёР№",
-    cn: "иЇ­иЁЂе·Іж›ґж”№дёєдё­ж–‡",
+    ru: "Язык изменён на русский",
+    cn: "语言已切换为中文",
   };
 
   const notification = document.createElement("div");
@@ -1435,20 +1435,7 @@ function addLogoHandlers() {
       e.preventDefault();
       e.stopPropagation();
 
-      // Find the about-section block
-      const aboutSection = document.querySelector("#about");
-      if (aboutSection) {
-        aboutSection.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      } else {
-        // Final fallback to top of page
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
-      }
+      window.location.reload();
     });
   });
 }

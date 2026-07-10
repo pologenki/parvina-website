@@ -2,7 +2,7 @@
   "nav": {
     "products": "产品",
     "services": "服务",
-    "portfolio": "项目案例",
+    "portfolio": "项目",
     "contact": "联系我"
   },
   "about": {
@@ -116,8 +116,8 @@
   },
   "portfolio": {
     "eyebrow": "项目案例",
-    "title": "成功进口项目",
-    "subtitle": "贸易展会、工厂拜访和供应商谈判精选。",
+    "title": "项目",
+    "subtitle": "贸易会面、工厂拜访和供应商谈判。",
     "viewPhoto": "打开项目",
     "sliderHint": "使用箭头或滑动",
     "cardHint": "点击查看"

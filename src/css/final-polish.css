@@ -4,6 +4,47 @@ html {
   overflow-x:hidden;
 }
 
+/* Hero: keep the first screen calmer and less crowded */
+section.about-section .about-capabilities,
+section.about-section .about-workflow {
+  display: none !important;
+}
+
+section.about-section .about-description {
+  max-width: 560px !important;
+  margin-bottom: 22px !important;
+}
+
+section.about-section .about-actions {
+  margin-bottom: 20px !important;
+}
+
+section.about-section .contact-info {
+  margin-top: 0 !important;
+}
+
+section.about-section .contact-info h3 {
+  display: none !important;
+}
+
+section.about-section .contact-item {
+  min-height: 48px !important;
+}
+
+section.about-section .phone-numbers {
+  gap: 10px !important;
+}
+
+section.about-section .social-icons-wrapper {
+  margin-top: 18px !important;
+}
+
+@media (min-width: 769px) {
+  section.about-section .about-title {
+    max-width: 620px !important;
+  }
+}
+
 body {
   overflow-x:hidden;
   text-rendering:optimizeLegibility;

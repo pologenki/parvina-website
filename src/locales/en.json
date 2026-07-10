@@ -2,7 +2,7 @@
   "nav": {
     "products": "Our Products",
     "services": "Services",
-    "portfolio": "My Portfolio",
+    "portfolio": "Portfolio",
     "contact": "Get In Touch"
   },
   "about": {
@@ -116,8 +116,8 @@
   },
   "portfolio": {
     "eyebrow": "Portfolio",
-    "title": "Successful Import Projects",
-    "subtitle": "Selected trade meetings, factory visits and supplier negotiations.",
+    "title": "Portfolio",
+    "subtitle": "Trade meetings, factory visits and supplier negotiations.",
     "viewPhoto": "Open project",
     "sliderHint": "Use arrows or swipe",
     "cardHint": "Click to view"

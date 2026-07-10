@@ -1,4 +1,4 @@
-export function Header() {
+﻿export function Header() {
   return `
   <section class="et-hero-tabs">
     <div class="logo">
