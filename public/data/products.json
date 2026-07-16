@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-03",
+  "lastUpdated": "2026-07-16",
   "products": [
     {
       "id": "cashew",
@@ -16,28 +16,83 @@
           "name": "WW320 - Whole White",
           "price": "7,10 USD/kg",
           "desc": "Quality AFI standard. 20/22.68 kg PE vacuum bag/carton packing. FOB HCM",
-          "desc_ru": "Качество стандарта AFI. 20/22.68 кг PE вакуумный пакет/картонная упаковка. FOB HCM"
+          "desc_ru": "Качество стандарта AFI. 20/22.68 кг PE вакуумный пакет/картонная упаковка. FOB HCM",
+          "desc_cn": ""
         },
         {
           "name": "WW450 - Whole White",
           "price": "6,80 USD/kg",
           "desc": "Quality AFI standard. 20/22.68 kg PE vacuum bag/carton packing. FOB HCM.",
-          "desc_ru": "Качество стандарта AFI. 20/22.68 кг PE вакуумный пакет/картонная упаковка. FOB HCM."
+          "desc_ru": "Качество стандарта AFI. 20/22.68 кг PE вакуумный пакет/картонная упаковка. FOB HCM.",
+          "desc_cn": ""
         },
         {
           "name": "WS - White Split",
           "price": "6,00 USD/kg",
           "desc": "Quality AFI standard. 20/22.68 kg PE vacuum bag/carton packing. FOB HCM.",
-          "desc_ru": "Качество стандарта AFI. 20/22.68 кг PE вакуумный пакет/картонная упаковка. FOB HCM."
+          "desc_ru": "Качество стандарта AFI. 20/22.68 кг PE вакуумный пакет/картонная упаковка. FOB HCM.",
+          "desc_cn": ""
         },
         {
           "name": "Other grades",
           "name_ru": "Другие сорта",
           "price": "Price on request",
           "desc": "WW210, WW240, WW320, WW450, WS, LWP, LP, DW and etc.",
-          "desc_ru": "WW210, WW240, WW320, WW450, WS, LWP, LP, DW и др."
+          "desc_ru": "WW210, WW240, WW320, WW450, WS, LWP, LP, DW и др.",
+          "desc_cn": ""
         }
-      ]
+      ],
+      "name_cn": "",
+      "desc_cn": "",
+      "origin_cn": "",
+      "published": true
+    },
+    {
+      "id": "cashew-copy-1784198211760",
+      "name": "test tests",
+      "name_ru": "тестовые тесты",
+      "desc": "holohop holohopo",
+      "desc_ru": "голохоп голохопо",
+      "origin": "test",
+      "origin_ru": "тест",
+      "image": "goods/1784198243347_ParvinaFoto.png",
+      "mainPrice": "6,80 USD/kg",
+      "variants": [
+        {
+          "name": "WW320 - Whole White",
+          "price": "7,10 USD/kg",
+          "desc": "Quality AFI standard. 20/22.68 kg PE vacuum bag/carton packing. FOB HCM",
+          "desc_ru": "Качество стандарта AFI. 20/22,68 кг полиэтиленовый вакуумный мешок/картонная упаковка. ФОБ ХКМ",
+          "desc_cn": "质量 AFI 标准。 20/22.68公斤PE真空袋/纸箱包装。胡志明市离岸价"
+        },
+        {
+          "name": "WW450 - Whole White",
+          "price": "6,80 USD/kg",
+          "desc": "Quality AFI standard. 20/22.68 kg PE vacuum bag/carton packing. FOB HCM.",
+          "desc_ru": "Качество стандарта AFI. 20/22,68 кг полиэтиленовый вакуумный мешок/картонная упаковка. ФОБ HCM.",
+          "desc_cn": "质量 AFI 标准。 20/22.68公斤PE真空袋/纸箱包装。胡志明市离岸价。"
+        },
+        {
+          "name": "WS - White Split",
+          "price": "6,00 USD/kg",
+          "desc": "Quality AFI standard. 20/22.68 kg PE vacuum bag/carton packing. FOB HCM.",
+          "desc_ru": "Качество стандарта AFI. 20/22,68 кг полиэтиленовый вакуумный мешок/картонная упаковка. ФОБ HCM.",
+          "desc_cn": "质量 AFI 标准。 20/22.68公斤PE真空袋/纸箱包装。胡志明市离岸价。"
+        },
+        {
+          "name": "Other grades",
+          "name_ru": "Другие сорта",
+          "price": "Price on request",
+          "desc": "WW210, WW240, WW320, WW450, WS, LWP, LP, DW and etc.",
+          "desc_ru": "WW210, WW240, WW320, WW450, WS, LWP, LP, DW и т. д.",
+          "desc_cn": "WW210、WW240、WW320、WW450、WS、LWP、LP、DW等"
+        }
+      ],
+      "name_cn": "测试测试",
+      "desc_cn": "霍洛霍普 霍洛霍波",
+      "origin_cn": "测试",
+      "published": true,
+      "category": "test test test"
     },
     {
       "id": "walnuts",
@@ -54,27 +109,34 @@
           "name": "Xingfu - ELH",
           "price": "5,45 USD/kg",
           "desc": "Xingfu type Extra Light Halves 80%, 2025 crop. 10 kg packing. FOB Tianjin port.",
-          "desc_ru": "Тип Xingfu Экстра Светлые Половинки 80%, урожай 2025. Упаковка 10 кг. FOB порт Тяньцзинь."
+          "desc_ru": "Тип Xingfu Экстра Светлые Половинки 80%, урожай 2025. Упаковка 10 кг. FOB порт Тяньцзинь.",
+          "desc_cn": ""
         },
         {
           "name": "Yunnan - ELH",
           "price": "5,80 USD/kg",
           "desc": "Yunnan type Extra Light Halves 80%, 2025 crop. 10 kg packing. FOB Tianjin port.",
-          "desc_ru": "Тип Yunnan Экстра Светлые Половинки 80%, урожай 2025. Упаковка 10 кг. FOB порт Тяньцзинь."
+          "desc_ru": "Тип Yunnan Экстра Светлые Половинки 80%, урожай 2025. Упаковка 10 кг. FOB порт Тяньцзинь.",
+          "desc_cn": ""
         },
         {
           "name": "185 - ELH",
           "price": "5,80 USD/kg",
           "desc": "185 type Extra Light Halves 80%, 2025 crop. 10 kg packing. FOB Tianjin port.",
-          "desc_ru": "Тип 185 Экстра Светлые Половинки 80%, урожай 2025. Упаковка 10 кг. FOB порт Тяньцзинь."
+          "desc_ru": "Тип 185 Экстра Светлые Половинки 80%, урожай 2025. Упаковка 10 кг. FOB порт Тяньцзинь.",
+          "desc_cn": ""
         },
         {
           "name": "Xin2 - ELH",
           "price": "5,82 USD/kg",
           "desc": "Xin2 type Extra Light Halves 80%, 2025 crop. 10 kg packing. FOB Tianjin port.",
-          "desc_ru": "Тип Xin2 Экстра Светлые Половинки 80%, урожай 2025. Упаковка 10 кг. FOB порт Тяньцзинь."
+          "desc_ru": "Тип Xin2 Экстра Светлые Половинки 80%, урожай 2025. Упаковка 10 кг. FOB порт Тяньцзинь.",
+          "desc_cn": ""
         }
-      ]
+      ],
+      "name_cn": "",
+      "desc_cn": "",
+      "origin_cn": ""
     },
     {
       "id": "dates",
@@ -91,21 +153,27 @@
           "name": "Deglet Nour - 5 kg",
           "price": "1,90 USD/kg",
           "desc": "Tunisian Dates Deglet Nour packing in 5 kg carton. FOB Tunisian port.",
-          "desc_ru": "Тунисские финики Деглет Нур, упаковка 5 кг картон. FOB тунисский порт."
+          "desc_ru": "Тунисские финики Деглет Нур, упаковка 5 кг картон. FOB тунисский порт.",
+          "desc_cn": ""
         },
         {
           "name": "Deglet Nour - 200 gr",
           "price": "2,05 USD/kg",
           "desc": "Tunisian Dates Deglet Nour packing in 200 gr tray. FOB Tunisian port.",
-          "desc_ru": "Тунисские финики Деглет Нур, упаковка 200 гр лоток. FOB тунисский порт."
+          "desc_ru": "Тунисские финики Деглет Нур, упаковка 200 гр лоток. FOB тунисский порт.",
+          "desc_cn": ""
         },
         {
           "name": "Deglet Nour - without glucose",
           "price": "2,20 USD/kg",
           "desc": "Tunisian Dates Deglet Nour packing in 200 gr tray glucose FREE. FOB Tunisian port.",
-          "desc_ru": "Тунисские финики Деглет Нур, упаковка 200 гр лоток БЕЗ глюкозы. FOB тунисский порт."
+          "desc_ru": "Тунисские финики Деглет Нур, упаковка 200 гр лоток БЕЗ глюкозы. FOB тунисский порт.",
+          "desc_cn": ""
         }
-      ]
+      ],
+      "name_cn": "",
+      "desc_cn": "",
+      "origin_cn": ""
     },
     {
       "id": "papaya",
@@ -122,27 +190,34 @@
           "name": "Mixed Color - 8-10 mm",
           "price": "2,05 USD/kg",
           "desc": "Dried Papaya Dice mixed color (Green, Red, Yellow, Orange). Size 8-10 mm. FOB Shantou port.",
-          "desc_ru": "Сушеная папайя кубиками смешанного цвета (зеленый, красный, желтый, оранжевый). Размер 8-10 мм. FOB порт Шаньтоу."
+          "desc_ru": "Сушеная папайя кубиками смешанного цвета (зеленый, красный, желтый, оранжевый). Размер 8-10 мм. FOB порт Шаньтоу.",
+          "desc_cn": ""
         },
         {
           "name": "Natural Color - 8-10 mm",
           "price": "2,20 USD/kg",
           "desc": "Dried Papaya Dice Natural color. Size 8-10 mm. FOB Shantou port.",
-          "desc_ru": "Сушеная папайя кубиками натурального цвета. Размер 8-10 мм. FOB порт Шаньтоу."
+          "desc_ru": "Сушеная папайя кубиками натурального цвета. Размер 8-10 мм. FOB порт Шаньтоу.",
+          "desc_cn": ""
         },
         {
           "name": "Mixed Color - 3-5 mm",
           "price": "2,30 USD/kg",
           "desc": "Dried Papaya Dice mixed color (Green, Red, Yellow, Orange). Size 3-5 mm. FOB Shantou port.",
-          "desc_ru": "Сушеная папайя кубиками смешанного цвета (зеленый, красный, желтый, оранжевый). Размер 3-5 мм. FOB порт Шаньтоу."
+          "desc_ru": "Сушеная папайя кубиками смешанного цвета (зеленый, красный, желтый, оранжевый). Размер 3-5 мм. FOB порт Шаньтоу.",
+          "desc_cn": ""
         },
         {
           "name": "Natural Color - 3-5 mm",
           "price": "2,40 USD/kg",
           "desc": "Dried Papaya Dice Natural color. Size 3-5 mm. FOB Shantou port.",
-          "desc_ru": "Сушеная папайя кубиками натурального цвета. Размер 3-5 мм. FOB порт Шаньтоу."
+          "desc_ru": "Сушеная папайя кубиками натурального цвета. Размер 3-5 мм. FOB порт Шаньтоу.",
+          "desc_cn": ""
         }
-      ]
+      ],
+      "name_cn": "",
+      "desc_cn": "",
+      "origin_cn": ""
     },
     {
       "id": "mango",
@@ -159,27 +234,34 @@
           "name": "Dried Mango - 5 kg",
           "price": "4,50 USD/kg",
           "desc": "Delicious, soft-dried mango slices. Lightly sweetened and packaged in 5 kg bulk carton. FOB HCM.",
-          "desc_ru": "Вкусные, мягкие сушеные дольки манго. Легко подслащенные и упакованы в коробку 5 кг. FOB HCM."
+          "desc_ru": "Вкусные, мягкие сушеные дольки манго. Легко подслащенные и упакованы в коробку 5 кг. FOB HCM.",
+          "desc_cn": ""
         },
         {
           "name": "Dried Mango - 500 g",
           "price": "5,00 USD/kg",
           "desc": "Delicious soft-dried mango slices, lightly sweetened, in 500g branded bags. FOB HCM.",
-          "desc_ru": "Вкусные мягкие сушеные дольки манго, слегка подслащенные, в фирменных пакетах по 500 г. FOB HCM."
+          "desc_ru": "Вкусные мягкие сушеные дольки манго, слегка подслащенные, в фирменных пакетах по 500 г. FOB HCM.",
+          "desc_cn": ""
         },
         {
           "name": "Dried Mango - 5 kg. Sugar FREE",
           "price": "Price on request",
           "desc": "Delicious, soft-dried mango slices. No sugar added and packaged in 5 kg bulk carton. FOB HCM.",
-          "desc_ru": "Вкусные, мягкие сушеные дольки манго. Без добавления сахара и упакованы в коробку 5 кг. FOB HCM."
+          "desc_ru": "Вкусные, мягкие сушеные дольки манго. Без добавления сахара и упакованы в коробку 5 кг. FOB HCM.",
+          "desc_cn": ""
         },
         {
           "name": "Dried Mango - 500 g. Sugar FREE",
           "price": "Price on request",
           "desc": "Delicious soft-dried mango slices, no sugar added, in 500g branded bags. FOB HCM.",
-          "desc_ru": "Вкусные мягкие сушеные дольки манго, без добавления сахара, в фирменных пакетах по 500 г. FOB HCM."
+          "desc_ru": "Вкусные мягкие сушеные дольки манго, без добавления сахара, в фирменных пакетах по 500 г. FOB HCM.",
+          "desc_cn": ""
         }
-      ]
+      ],
+      "name_cn": "",
+      "desc_cn": "",
+      "origin_cn": ""
     },
     {
       "id": "walnuts-shell",
@@ -196,33 +278,41 @@
           "name": "33 (Sansan)",
           "price": "2,40 USD/kg",
           "desc": "Ideal Walnut (Sansan 33) features a thin, hand-crackable shell and a high yield of sweet, light-colored kernels.",
-          "desc_ru": "Идеальный грецкий орех (Сансан 33) имеет тонкую, раскалываемую вручную скорлупу и высокий выход сладких, светлых ядер."
+          "desc_ru": "Идеальный грецкий орех (Сансан 33) имеет тонкую, раскалываемую вручную скорлупу и высокий выход сладких, светлых ядер.",
+          "desc_cn": ""
         },
         {
           "name": "185",
           "price": "2,90 USD/kg",
           "desc": "Compared to the 33 variety, the 185 walnut has an even thinner, \"paper-shell\" that can be crushed between your fingers and an even higher kernel yield of up to 68%.",
-          "desc_ru": "По сравнению с сортом 33, грецкий орех 185 имеет еще более тонкую, «бумажную» скорлупу, которую можно раздавить пальцами, и еще более высокий выход ядра до 68%."
+          "desc_ru": "По сравнению с сортом 33, грецкий орех 185 имеет еще более тонкую, «бумажную» скорлупу, которую можно раздавить пальцами, и еще более высокий выход ядра до 68%.",
+          "desc_cn": ""
         },
         {
           "name": "Xin 2 (Xinjiang 2)",
           "price": "3,30 USD/kg",
           "desc": "The Xin 2 walnut features an extremely thin shell that can be cracked by hand, yielding up to 67% of a light-colored, sweet kernel with excellent flavor.",
-          "desc_ru": "Грецкий орех Xin 2 имеет чрезвычайно тонкую скорлупу, которую можно расколоть вручную, с выходом до 67% светлого, сладкого ядра с отличным вкусом."
+          "desc_ru": "Грецкий орех Xin 2 имеет чрезвычайно тонкую скорлупу, которую можно расколоть вручную, с выходом до 67% светлого, сладкого ядра с отличным вкусом.",
+          "desc_cn": ""
         },
         {
           "name": "Yunnan",
           "price": "2,80 USD/kg",
           "desc": "The Yunnan walnut features a moderately thin shell that typically requires tools to crack, yielding about 50-55% of a kernel known for its rich, robust flavor and deep golden color.",
-          "desc_ru": "Грецкий орех Юньнань имеет умеренно тонкую скорлупу, для раскалывания которой обычно требуются инструменты, с выходом ядра около 50-55%."
+          "desc_ru": "Грецкий орех Юньнань имеет умеренно тонкую скорлупу, для раскалывания которой обычно требуются инструменты, с выходом ядра около 50-55%.",
+          "desc_cn": ""
         },
         {
           "name": "Xinfu / Xinfeng",
           "price": "2,50 USD/kg",
           "desc": "Features a thick, hard shell requiring a cracker, with large light-colored sweet kernels and 50-55% kernel yield.",
-          "desc_ru": "Имеет толстую, твердую скорлупу, требующую щипцов, с крупными светлыми сладкими ядрами и выходом ядра 50-55%."
+          "desc_ru": "Имеет толстую, твердую скорлупу, требующую щипцов, с крупными светлыми сладкими ядрами и выходом ядра 50-55%.",
+          "desc_cn": ""
         }
-      ]
+      ],
+      "name_cn": "",
+      "desc_cn": "",
+      "origin_cn": ""
     },
     {
       "id": "peanuts",
@@ -239,27 +329,34 @@
           "name": "Bold - 40/50",
           "price": "2,20 USD/kg",
           "desc": "Indian Bold 40/50 raw peanuts are characterized by their large, uniform kernels, mild flavor, high nutritional value, and versatility for roasting, confectionery, or producing premium peanut butter.",
-          "desc_ru": "Сырой арахис Indian Bold 40/50 характеризуется крупными, однородными ядрами, мягким вкусом, высокой питательной ценностью и универсальностью для обжарки, кондитерских изделий или производства арахисового масла."
+          "desc_ru": "Сырой арахис Indian Bold 40/50 характеризуется крупными, однородными ядрами, мягким вкусом, высокой питательной ценностью и универсальностью для обжарки, кондитерских изделий или производства арахисового масла.",
+          "desc_cn": ""
         },
         {
           "name": "Bold - 50/60",
           "price": "2,10 USD/kg",
           "desc": "Indian raw peanuts of the Bold 50/60 variety are characterized by their large, uniform kernels, mild and sweet flavor, high yield, and versatility for roasting, confectionery, and peanut butter production.",
-          "desc_ru": "Сырой арахис Indian Bold 50/60 характеризуется крупными, однородными ядрами, мягким и сладким вкусом, высоким выходом и универсальностью для обжарки и кондитерских изделий."
+          "desc_ru": "Сырой арахис Indian Bold 50/60 характеризуется крупными, однородными ядрами, мягким и сладким вкусом, высоким выходом и универсальностью для обжарки и кондитерских изделий.",
+          "desc_cn": ""
         },
         {
           "name": "TJ - 40/50",
           "price": "2,80 USD/kg",
           "desc": "Indian TJ 40/50 raw peanuts are characterized by their large, uniform kernel size, high oleic content for better shelf life, mild flavor, and excellent suitability for roasting, confectionery, and premium peanut butter.",
-          "desc_ru": "Сырой арахис Indian TJ 40/50 характеризуется крупным, однородным размером ядер, высоким содержанием олеиновой кислоты для лучшего срока годности и мягким вкусом."
+          "desc_ru": "Сырой арахис Indian TJ 40/50 характеризуется крупным, однородным размером ядер, высоким содержанием олеиновой кислоты для лучшего срока годности и мягким вкусом.",
+          "desc_cn": ""
         },
         {
           "name": "TJ - 50/60",
           "price": "2,50 USD/kg",
           "desc": "Indian TJ 50/60 raw peanuts are characterized by their large, uniform kernels, high oleic acid content for superior shelf-life, a mild flavor profile, and excellent suitability for roasting, confectionery, and high-quality peanut butter.",
-          "desc_ru": "Сырой арахис Indian TJ 50/60 характеризуется крупными, однородными ядрами, высоким содержанием олеиновой кислоты для превосходного срока годности и мягким вкусовым профилем."
+          "desc_ru": "Сырой арахис Indian TJ 50/60 характеризуется крупными, однородными ядрами, высоким содержанием олеиновой кислоты для превосходного срока годности и мягким вкусовым профилем.",
+          "desc_cn": ""
         }
-      ]
+      ],
+      "name_cn": "",
+      "desc_cn": "",
+      "origin_cn": ""
     },
     {
       "id": "peanuts-blanched",
@@ -276,39 +373,48 @@
           "name": "Whole-Bold 40/50",
           "price": "Price on request",
           "desc": "Large, uniform kernels with mild, sweet flavor and clean nutty aroma. Ideal for premium snacks and confectionery.",
-          "desc_ru": "Крупные, однородные ядра с мягким, сладким вкусом и чистым ореховым ароматом. Идеально подходят для премиальных закусок и кондитерских изделий."
+          "desc_ru": "Крупные, однородные ядра с мягким, сладким вкусом и чистым ореховым ароматом. Идеально подходят для премиальных закусок и кондитерских изделий.",
+          "desc_cn": ""
         },
         {
           "name": "Whole-Bold 50/60",
           "price": "Price on request",
           "desc": "Medium-large, consistent kernels offering rich taste and roasted fragrance. Perfect for peanut butter and food processing.",
-          "desc_ru": "Ядра среднего и крупного размера с насыщенным вкусом и жареным ароматом. Идеально подходят для арахисового масла и пищевой промышленности."
+          "desc_ru": "Ядра среднего и крупного размера с насыщенным вкусом и жареным ароматом. Идеально подходят для арахисового масла и пищевой промышленности.",
+          "desc_cn": ""
         },
         {
           "name": "Whole-Java 40/50",
           "price": "Price on request",
           "desc": "Extra-large selected kernels with delicate flavor and subtle sweet notes. Excellent for chocolate coating and gourmet applications.",
-          "desc_ru": "Крупные отборные ядра с нежным вкусом и тонкими сладкими нотами. Отлично подходят для шоколадного покрытия и гурманских блюд."
+          "desc_ru": "Крупные отборные ядра с нежным вкусом и тонкими сладкими нотами. Отлично подходят для шоколадного покрытия и гурманских блюд.",
+          "desc_cn": ""
         },
         {
           "name": "Whole-Java 50/60",
           "price": "Price on request",
           "desc": "Premium uniform kernels delivering superior blanching quality and well-balanced nutty profile. Optimal for high-end food manufacturing.",
-          "desc_ru": "Премиальные однородные ядра с высоким качеством бланширования и сбалансированным ореховым профилем. Оптимальны для высококачественного пищевого производства."
+          "desc_ru": "Премиальные однородные ядра с высоким качеством бланширования и сбалансированным ореховым профилем. Оптимальны для высококачественного пищевого производства.",
+          "desc_cn": ""
         },
         {
           "name": "Blanched Splits - Bold 40/50",
           "price": "Price on request",
           "desc": "Premium, large peanut halves from selected Bold kernels, ideal for crunchy peanut butter and high-quality confectionery where a visible nut piece is desired.",
-          "desc_ru": "Премиальные, крупные половинки арахиса из отборных ядер Bold, идеально подходят для хрустящего арахисового масла и высококачественных кондитерских изделий."
+          "desc_ru": "Премиальные, крупные половинки арахиса из отборных ядер Bold, идеально подходят для хрустящего арахисового масла и высококачественных кондитерских изделий.",
+          "desc_cn": ""
         },
         {
           "name": "Blanched Splits - Bold 50/60",
           "price": "Price on request",
           "desc": "Consistent, medium-large peanut halves offering excellent yield and a rich flavor, perfect for standard food manufacturing, baking, and snacks.",
-          "desc_ru": "Однородные половинки арахиса среднего и крупного размера с отличным выходом и насыщенным вкусом, идеально подходят для стандартного пищевого производства и выпечки."
+          "desc_ru": "Однородные половинки арахиса среднего и крупного размера с отличным выходом и насыщенным вкусом, идеально подходят для стандартного пищевого производства и выпечки.",
+          "desc_cn": ""
         }
-      ]
+      ],
+      "name_cn": "",
+      "desc_cn": "",
+      "origin_cn": ""
     },
     {
       "id": "dried-fruits",
@@ -325,39 +431,48 @@
           "name": "Osmotically Dehydrated Cherry",
           "price": "Price on request",
           "desc": "Size S Chinese osmotically dehydrated sour cherries with 45-55% sugar content. Small, uniform berries with balanced sweet-tart flavor, ideal for baking and confectionery.",
-          "desc_ru": "Осмотически обезвоженная кислая вишня из Китая размера S с содержанием сахара 45-55%. Мелкие, однородные ягоды со сбалансированным сладко-кислым вкусом."
+          "desc_ru": "Осмотически обезвоженная кислая вишня из Китая размера S с содержанием сахара 45-55%. Мелкие, однородные ягоды со сбалансированным сладко-кислым вкусом.",
+          "desc_cn": ""
         },
         {
           "name": "Osmotically Dehydrated Strawberry",
           "price": "Price on request",
           "desc": "Osmotically dehydrated strawberries from China, 45-55% sugar content. Chewy texture with intense berry flavor and natural aroma, perfect for desserts and snacks.",
-          "desc_ru": "Осмотически обезвоженная клубника из Китая, содержание сахара 45-55%. Жевательная текстура с интенсивным ягодным вкусом."
+          "desc_ru": "Осмотически обезвоженная клубника из Китая, содержание сахара 45-55%. Жевательная текстура с интенсивным ягодным вкусом.",
+          "desc_cn": ""
         },
         {
           "name": "Osmotically Dehydrated Kumquat in Sugar Powder",
           "price": "Price on request",
           "desc": "Whole Chinese kumquats with 45-55% sugar content, coated in icing sugar. Characteristic sweet-tangy taste with soft texture, ready for direct consumption.",
-          "desc_ru": "Целые кумкваты из Китая с содержанием сахара 45-55%, покрытые сахарной пудрой. Характерный сладко-терпкий вкус с мягкой текстурой."
+          "desc_ru": "Целые кумкваты из Китая с содержанием сахара 45-55%, покрытые сахарной пудрой. Характерный сладко-терпкий вкус с мягкой текстурой.",
+          "desc_cn": ""
         },
         {
           "name": "Osmotically Dehydrated Kumquat in Sugar",
           "price": "Price on request",
           "desc": "Osmotically dehydrated kumquats from China, 45-55% sugar content, rolled in crystal sugar. Crispy sugar coating contrasts with soft interior, excellent for decoration.",
-          "desc_ru": "Осмотически обезвоженные кумкваты из Китая, содержание сахара 45-55%, обвалянные в кристаллическом сахаре. Хрустящее сахарное покрытие."
+          "desc_ru": "Осмотически обезвоженные кумкваты из Китая, содержание сахара 45-55%, обвалянные в кристаллическом сахаре. Хрустящее сахарное покрытие.",
+          "desc_cn": ""
         },
         {
           "name": "Dried Apple Rings",
           "price": "Price on request",
           "desc": "Natural dried apple rings from China with no sugar added. Chewy texture with concentrated apple flavor, perfect for healthy snacks and clean-label products.",
-          "desc_ru": "Натуральные сушеные яблочные кольца из Китая без добавления сахара. Жевательная текстура с концентрированным яблочным вкусом."
+          "desc_ru": "Натуральные сушеные яблочные кольца из Китая без добавления сахара. Жевательная текстура с концентрированным яблочным вкусом.",
+          "desc_cn": ""
         },
         {
           "name": "Dried Apple Cubes/Dices",
           "price": "Price on request",
           "desc": "Chinese dried apple cubes containing only natural fruit sugars. Uniform pieces with pure apple taste, ideal for baking, cereals and nutritional food applications.",
-          "desc_ru": "Китайские сушеные кубики яблок, содержащие только натуральные фруктовые сахара. Однородные кусочки с чистым яблочным вкусом."
+          "desc_ru": "Китайские сушеные кубики яблок, содержащие только натуральные фруктовые сахара. Однородные кусочки с чистым яблочным вкусом.",
+          "desc_cn": ""
         }
-      ]
+      ],
+      "name_cn": "",
+      "desc_cn": "",
+      "origin_cn": ""
     },
     {
       "id": "banana-chips",
@@ -374,15 +489,26 @@
           "name": "Banana Chips Whole, 6.8kg Carton",
           "price": "2,60 USD/kg",
           "desc": "Premium whole banana chips, vacuum-packed in a 6.8kg carton. Features golden color, crispy texture and natural banana flavor - ideal for snacks and food service.",
-          "desc_ru": "Премиальные целые банановые чипсы, вакуумно упакованные в картонную коробку 6,8 кг. Золотистый цвет, хрустящая текстура и натуральный банановый вкус."
+          "desc_ru": "Премиальные целые банановые чипсы, вакуумно упакованные в картонную коробку 6,8 кг. Золотистый цвет, хрустящая текстура и натуральный банановый вкус.",
+          "desc_cn": ""
         },
         {
           "name": "Banana Chips Halves/Quarters",
           "price": "2,88 USD/kg",
           "desc": "Uniform banana chips in halves and quarters, packed in a 6.8kg carton. Perfect for confectionery, bakery and muesli applications with consistent size and crispy texture.",
-          "desc_ru": "Однородные банановые чипсы половинками и четвертинками, упакованные в картонную коробку 6,8 кг. Идеально подходят для кондитерских изделий, выпечки и мюсли."
+          "desc_ru": "Однородные банановые чипсы половинками и четвертинками, упакованные в картонную коробку 6,8 кг. Идеально подходят для кондитерских изделий, выпечки и мюсли.",
+          "desc_cn": ""
         }
-      ]
+      ],
+      "name_cn": "",
+      "desc_cn": "",
+      "origin_cn": ""
+    }
+  ],
+  "changeLog": [
+    {
+      "date": "2026-07-16T10:41:38.313Z",
+      "message": "Products updated: 11 items"
     }
   ]
 }
