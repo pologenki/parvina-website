@@ -3369,9 +3369,6 @@ let pfOriginalData = null;
 async function fetchPortfolio() {
   setStatus('busy', 'Loading portfolio...');
   try {
-    setStatus('busy', 'Syncing portfolio images...');
-    await syncImagesToBuild(pfData.items.map(item => item.img), 'portfolio');
-
     const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${PF_PATH}`, {
       headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' }
     });
@@ -3405,6 +3402,9 @@ async function fetchPortfolio() {
 function renderPortfolioGrid() {
   const grid = document.getElementById('portfolioGrid');
   const meta = document.getElementById('pfMeta');
+  if (!pfData || !Array.isArray(pfData.items)) {
+    pfData = { items: [], lastUpdated: '' };
+  }
   const search = (document.getElementById('portfolioSearch')?.value || '').toLowerCase().trim();
   const statusFilter = document.getElementById('portfolioStatusFilter')?.value || 'all';
   const entries = pfData.items
@@ -3765,23 +3765,25 @@ async function publishPortfolio() {
     return;
   }
 
-  setStatus('busy', 'Publishing portfolio...');
-  pfData.lastUpdated = new Date().toISOString().split('T')[0];
-  addChangeLog(pfData, `Portfolio updated: ${pfData.items.length} items`);
-
-  const jsonStr = JSON.stringify(pfData, null, 2);
-  const bytes = new TextEncoder().encode(jsonStr);
-  const binStr = Array.from(bytes).map(b => String.fromCharCode(b)).join('');
-  const content = btoa(binStr);
-
-  const body = {
-    message: `Update portfolio ${pfData.lastUpdated}`,
-    content,
-    branch: BRANCH
-  };
-  if (pfSha) body.sha = pfSha;
-
   try {
+    setStatus('busy', 'Синхронизация фотографий портфолио...');
+    await syncImagesToBuild(pfData.items.map(item => item.img), 'portfolio');
+
+    setStatus('busy', 'Публикация портфолио...');
+    pfData.lastUpdated = new Date().toISOString().split('T')[0];
+    addChangeLog(pfData, `Portfolio updated: ${pfData.items.length} items`);
+
+    const jsonStr = JSON.stringify(pfData, null, 2);
+    const bytes = new TextEncoder().encode(jsonStr);
+    const binStr = Array.from(bytes).map(b => String.fromCharCode(b)).join('');
+    const content = btoa(binStr);
+    const body = {
+      message: `Update portfolio ${pfData.lastUpdated}`,
+      content,
+      branch: BRANCH
+    };
+    if (pfSha) body.sha = pfSha;
+
     const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${PF_PATH}`, {
       method: 'PUT',
       headers: { Authorization: `token ${token}`, 'Content-Type': 'application/json' },
