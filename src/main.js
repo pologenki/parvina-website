@@ -12,6 +12,19 @@ import {
 import { initContactForm } from "./utils/emailService.js";
 import { Content, loadProducts } from "./components/content.js";
 
+function trackEvent(eventName, params = {}) {
+  if (typeof window === "undefined" || typeof window.gtag !== "function") {
+    return;
+  }
+
+  window.gtag("event", eventName, {
+    page_language: getCurrentLanguage(),
+    ...params,
+  });
+}
+
+window.trackSiteEvent = trackEvent;
+
 // Scroll management for modals
 let modalOpenCount = 0;
 let savedScrollPosition = 0;
@@ -303,6 +316,7 @@ async function renderApp() {
   initServiceModals();
   initFooterModals();
   initEmailLinks();
+  initAnalyticsTracking();
 
   // Initialize language switcher
   initLanguageSwitcher();
@@ -481,6 +495,11 @@ async function initPortfolioFlipSlider() {
     if (e) e.stopPropagation();
     if (window.matchMedia("(max-width: 768px)").matches) return;
     stopAutoplay();
+    const slide = slides[idx];
+    trackEvent("open_portfolio_project", {
+      project_title: slide?.title || slide?.title_ru || slide?.title_cn || `Project ${idx + 1}`,
+      project_index: idx + 1,
+    });
     updateZoom(idx);
     zoomOverlay.classList.add("active");
     preventBodyScroll();
@@ -683,7 +702,12 @@ async function initPortfolioFlipSlider() {
 }
 
 window.changeLanguage = async function (lang) {
+  const previousLanguage = getCurrentLanguage();
   await loadTranslations(lang);
+  trackEvent("change_language", {
+    previous_language: previousLanguage,
+    selected_language: lang,
+  });
   await loadProducts();
   const appContainer = document.querySelector("#app");
   if (appContainer) {
@@ -744,6 +768,10 @@ function initServiceModals() {
       if (modal) {
         modal.classList.add("active");
         preventBodyScroll();
+        trackEvent("open_service_modal", {
+          service_id: modalId,
+          service_title: this.querySelector(".service-title")?.textContent?.trim() || "",
+        });
       }
     });
   });
@@ -771,6 +799,10 @@ function initServiceModals() {
     link.addEventListener("click", function (e) {
       e.preventDefault();
       const modal = this.closest(".service-modal");
+      trackEvent("click_request_quote", {
+        service_id: modal?.id || "",
+        source: "service_modal",
+      });
       if (modal) {
         modal.classList.remove("active");
         allowBodyScroll();
@@ -840,6 +872,87 @@ function setCurrentDate() {
   const dateElement = document.getElementById("current-date");
   if (dateElement) {
     dateElement.textContent = formatDate(getLastTuesday());
+  }
+}
+
+function initAnalyticsTracking() {
+  const sectionMap = [
+    ["about", "view_about"],
+    ["products", "view_products"],
+    ["services", "view_services"],
+    ["portfolio", "view_portfolio"],
+    ["contact", "view_contact"],
+  ];
+
+  const seenSections = new Set();
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const sectionId = entry.target.id;
+          if (seenSections.has(sectionId)) return;
+          seenSections.add(sectionId);
+          const eventName =
+            sectionMap.find(([id]) => id === sectionId)?.[1] || "view_section";
+          trackEvent(eventName, { section_id: sectionId });
+        });
+      },
+      { threshold: 0.45 },
+    );
+
+    sectionMap.forEach(([sectionId]) => {
+      const section = document.getElementById(sectionId);
+      if (section) observer.observe(section);
+    });
+  }
+
+  if (!window.__pologenkiAnalyticsClickBound) {
+    window.__pologenkiAnalyticsClickBound = true;
+    document.addEventListener("click", (event) => {
+      const link = event.target.closest("a, button, .email-link");
+      if (!link) return;
+
+      const href = link.getAttribute("href") || "";
+      const label = (link.textContent || link.title || link.getAttribute("aria-label") || "")
+        .trim()
+        .slice(0, 80);
+
+      if (href.includes("wa.me") || link.classList.contains("whatsapp")) {
+        trackEvent("click_whatsapp", { link_text: label, link_url: href });
+        return;
+      }
+
+      if (href.includes("t.me") || link.classList.contains("telegram")) {
+        trackEvent("click_telegram", { link_text: label, link_url: href });
+        return;
+      }
+
+      if (href.includes("mail.google.com") || href.startsWith("mailto:") || link.classList.contains("email-link")) {
+        trackEvent("click_email", { link_text: label, link_url: href || "email_copy" });
+        return;
+      }
+
+      if (href.startsWith("tel:")) {
+        trackEvent("click_phone", { link_text: label, link_url: href });
+        return;
+      }
+
+      if (href === "#contact" || link.dataset.modalContact !== undefined || link.dataset.serviceContact !== undefined) {
+        trackEvent("click_request_quote", { link_text: label });
+      }
+    });
+
+    document.addEventListener(
+      "submit",
+      (event) => {
+        if (event.target?.id === "contact-form") {
+          trackEvent("submit_contact_form", { form_id: "contact-form" });
+        }
+      },
+      true,
+    );
   }
 }
 
@@ -945,6 +1058,10 @@ function initProductModals() {
       if (newModal) {
         newModal.classList.add("active");
         preventBodyScroll();
+        trackEvent("open_product_modal", {
+          product_id: newModal.id.replace(/^modal-/, ""),
+          open_source: `modal_${direction}`,
+        });
       }
     }, 350);
   }
@@ -971,6 +1088,10 @@ function initProductModals() {
         if (modal) {
           modal.classList.add("active");
           preventBodyScroll();
+          trackEvent("open_product_modal", {
+            product_id: modalId.replace(/^modal-/, ""),
+            open_source: "button",
+          });
         }
         return;
       }
@@ -982,6 +1103,10 @@ function initProductModals() {
         if (modal) {
           modal.classList.add("active");
           preventBodyScroll();
+          trackEvent("open_product_modal", {
+            product_id: modalId.replace(/^modal-/, ""),
+            open_source: "card",
+          });
         }
       }
     });
@@ -995,6 +1120,9 @@ function initProductModals() {
         e.preventDefault();
         e.stopPropagation();
         const contactSection = document.getElementById("contact");
+        trackEvent("click_product_contact", {
+          product_info: this.getAttribute("data-product-info") || "",
+        });
         if (contactSection) {
           contactSection.scrollIntoView({
             behavior: "smooth",
@@ -1038,6 +1166,10 @@ function initProductModals() {
   clickableProducts.forEach((product) => {
     product.addEventListener("click", function (e) {
       const modal = this.closest(".product-modal");
+      trackEvent("click_request_quote", {
+        product_id: modal?.id?.replace(/^modal-/, "") || "",
+        source: "product_modal",
+      });
       if (modal) {
         closeModal(modal);
       }
@@ -1080,6 +1212,7 @@ function initProductModals() {
       e.stopPropagation();
       const text = this.getAttribute("data-copy-product") || "";
       const originalText = this.textContent;
+      trackEvent("copy_product_details", { product_info: text });
 
       try {
         if (navigator.clipboard?.writeText) {

@@ -797,6 +797,9 @@
   }
 
   .btn-soft {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     min-height: 38px;
     padding: 0 .95rem;
     border: 1px solid #dbe3e8;
@@ -807,6 +810,7 @@
     font-weight: 700;
     letter-spacing: .1em;
     text-transform: uppercase;
+    text-decoration: none;
     cursor: pointer;
     transition: all .2s;
   }
@@ -861,6 +865,58 @@
   .admin-log-panel.visible,
   .admin-stats-panel.visible {
     display: block;
+  }
+
+  .admin-action-main,
+  .admin-more-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .65rem;
+    align-items: center;
+  }
+
+  .admin-more {
+    position: relative;
+  }
+
+  .admin-more summary {
+    list-style: none;
+  }
+
+  .admin-more summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .admin-more-actions {
+    margin-top: .65rem;
+    padding-top: .65rem;
+    border-top: 1px solid #e5edf2;
+  }
+
+  .admin-guide {
+    margin: 0 0 1rem;
+    border: 1px solid #dbe3e8;
+    border-radius: 12px;
+    background: #fff;
+    overflow: hidden;
+  }
+
+  .admin-guide summary {
+    cursor: pointer;
+    padding: .85rem 1rem;
+    font-size: .78rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #111;
+  }
+
+  .admin-guide ol {
+    margin: 0;
+    padding: 0 1.25rem 1rem 2.1rem;
+    color: #334155;
+    font-size: .9rem;
+    line-height: 1.55;
   }
 
   .admin-stats-panel.visible {
@@ -947,6 +1003,9 @@
   }
 
   .btn-mini {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     min-height: 30px;
     padding: 0 .6rem;
     border: 1px solid #dbe3e8;
@@ -958,6 +1017,7 @@
     font-weight: 700;
     letter-spacing: .08em;
     text-transform: uppercase;
+    text-decoration: none;
     cursor: pointer;
   }
 
@@ -978,6 +1038,29 @@
     color: #fff;
   }
 
+  .translation-field {
+    display: none;
+  }
+
+  .show-translations .translation-field {
+    display: block;
+  }
+
+  .translation-note {
+    display: none;
+    margin: -.25rem 0 .75rem;
+    padding: .65rem .75rem;
+    border: 1px solid #dbe3e8;
+    border-radius: 8px;
+    background: #f8fafc;
+    color: #52616a;
+    font-size: .78rem;
+  }
+
+  .show-translations .translation-note {
+    display: block;
+  }
+
   .price-history {
     margin: -.25rem 0 .85rem;
     padding: .55rem .7rem;
@@ -986,6 +1069,51 @@
     background: #f8fafc;
     font-size: .75rem;
     color: #64748b;
+  }
+
+  .admin-card-preview {
+    display: grid;
+    grid-template-columns: 78px minmax(0, 1fr);
+    gap: .75rem;
+    align-items: center;
+    margin: .25rem 0 .9rem;
+    padding: .75rem;
+    border: 1px solid #dbe3e8;
+    border-radius: 10px;
+    background: #fbfcfd;
+  }
+
+  .admin-card-preview img {
+    width: 78px;
+    height: 78px;
+    object-fit: contain;
+    border: 1px solid #e5edf2;
+    border-radius: 8px;
+    background: #fff;
+    padding: .35rem;
+  }
+
+  .admin-card-preview strong {
+    display: block;
+    margin-bottom: .25rem;
+    font-size: .98rem;
+  }
+
+  .admin-card-preview span {
+    display: block;
+    color: #64748b;
+    font-size: .78rem;
+    line-height: 1.35;
+  }
+
+  .admin-card-preview b {
+    display: inline-block;
+    margin-top: .4rem;
+    padding: .2rem .45rem;
+    border-radius: 6px;
+    background: #111;
+    color: #fff;
+    font-size: .78rem;
   }
 
   .admin-main {
@@ -1114,6 +1242,9 @@
   }
 
   .btn-mini {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     min-height: 30px;
     padding: 0 .6rem;
     border: 1px solid #dbe3e8;
@@ -1125,6 +1256,7 @@
     font-weight: 700;
     letter-spacing: .08em;
     text-transform: uppercase;
+    text-decoration: none;
     cursor: pointer;
   }
 
@@ -1318,11 +1450,33 @@
     <div class="page-title">Товары и цены</div>
     <div class="page-meta" id="pageMeta">Загрузка...</div>
     <div class="admin-action-row">
-      <button class="btn-soft" onclick="addProduct()">+ Добавить товар</button>
-      <button class="btn-soft" onclick="autoTranslateAllProducts()">Заполнить CN из EN</button>
-      <button class="btn-soft" onclick="showValidationPanel('products')">Проверить</button>
-      <button class="btn-soft" onclick="previewSite('#products')">Открыть сайт</button>
+      <div class="admin-action-main">
+        <button class="btn-soft" onclick="addProduct()">+ Добавить товар</button>
+        <button class="btn-soft" onclick="showValidationPanel('products')">Проверить</button>
+        <details class="admin-more">
+          <summary class="btn-soft">Дополнительно</summary>
+          <div class="admin-more-actions">
+            <button class="btn-soft" onclick="autoTranslateAllProducts()">Перевести все RU/CN</button>
+            <a class="btn-soft" href="/#products" target="_blank" rel="noopener noreferrer">Открыть сайт</a>
+            <button class="btn-soft" onclick="openAnalytics()">Google Analytics</button>
+            <button class="btn-soft" onclick="repairAllLocalizedText()">Исправить кодировку</button>
+            <button class="btn-soft" onclick="saveLocalDraft()">Сохранить черновик</button>
+            <button class="btn-soft" onclick="loadLocalDraft()">Загрузить черновик</button>
+            <button class="btn-soft" onclick="restoreDeleted()">Вернуть удалённое</button>
+          </div>
+        </details>
+      </div>
     </div>
+    <details class="admin-guide">
+      <summary>Как проверить новую карточку перед публикацией</summary>
+      <ol>
+        <li>Создай или дублируй товар. Новая карточка сразу будет в статусе «Черновик» и не появится на сайте.</li>
+        <li>Заполни английские поля, фото, цену и сорта. Для перевода нажми «RU/CN авто» внутри карточки.</li>
+        <li>Посмотри мини-превью внутри карточки: название, описание, страна, цена и фото.</li>
+        <li>Нажми «Проверить» сверху. Если ошибок нет, включи галочку «Опубликовано» на карточке.</li>
+        <li>Нажми «Опубликовать» в правом верхнем углу. Только после этого изменения уйдут на сайт.</li>
+      </ol>
+    </details>
     <div class="admin-filter-row">
       <input class="admin-filter-input" id="productSearch" oninput="renderGrid()" placeholder="Поиск: товар, страна, цена...">
       <input class="admin-filter-input" id="productCategoryFilter" oninput="renderGrid()" placeholder="Фильтр по категории...">
@@ -1343,11 +1497,33 @@
     <div class="pf-section-title">Портфолио</div>
     <div class="pf-section-meta" id="pfMeta">Загрузка...</div>
     <div class="admin-action-row">
-      <button class="btn-soft" onclick="addPortfolioItem()">+ Добавить проект</button>
-      <button class="btn-soft" onclick="autoTranslateAllPortfolio()">Заполнить CN из EN</button>
-      <button class="btn-soft" onclick="showValidationPanel('portfolio')">Проверить</button>
-      <button class="btn-soft" onclick="previewSite('#portfolio')">Открыть сайт</button>
+      <div class="admin-action-main">
+        <button class="btn-soft" onclick="addPortfolioItem()">+ Добавить проект</button>
+        <button class="btn-soft" onclick="showValidationPanel('portfolio')">Проверить</button>
+        <details class="admin-more">
+          <summary class="btn-soft">Дополнительно</summary>
+          <div class="admin-more-actions">
+            <button class="btn-soft" onclick="autoTranslateAllPortfolio()">Перевести все RU/CN</button>
+            <a class="btn-soft" href="/#portfolio" target="_blank" rel="noopener noreferrer">Открыть сайт</a>
+            <button class="btn-soft" onclick="openAnalytics()">Google Analytics</button>
+            <button class="btn-soft" onclick="repairAllLocalizedText()">Исправить кодировку</button>
+            <button class="btn-soft" onclick="saveLocalDraft()">Сохранить черновик</button>
+            <button class="btn-soft" onclick="loadLocalDraft()">Загрузить черновик</button>
+            <button class="btn-soft" onclick="restoreDeleted()">Вернуть удалённое</button>
+          </div>
+        </details>
+      </div>
     </div>
+    <details class="admin-guide">
+      <summary>Как проверить проект перед публикацией</summary>
+      <ol>
+        <li>Добавь или дублируй проект. Он будет «Черновик» и не появится на сайте.</li>
+        <li>Заполни английский заголовок, описание и фото. Для перевода нажми «RU/CN авто» внутри карточки.</li>
+        <li>Проверь фото и текст прямо в карточке админки.</li>
+        <li>Нажми «Проверить» сверху. Если всё хорошо, включи «Опубликовано».</li>
+        <li>Нажми «Опубликовать» в правом верхнем углу.</li>
+      </ol>
+    </details>
     <div class="admin-filter-row">
       <input class="admin-filter-input" id="portfolioSearch" oninput="renderPortfolioGrid()" placeholder="Поиск: заголовок, описание, фото...">
       <select class="admin-filter-select" id="portfolioStatusFilter" onchange="renderPortfolioGrid()">
@@ -1377,8 +1553,10 @@ const REPO = 'pologenki/parvina-website';
 const BRANCH = 'master';
 const PATH = 'public/data/products.json';
 const MAX_IMAGE_SIZE = 8 * 1024 * 1024;
+const ANALYTICS_URL = 'https://analytics.google.com/analytics/web/#/a370639609p507773161/realtime/overview?params=_u..nav%3Dmaui';
 let token = '', data = null, sha = '';
 let originalData = null;
+let deletedStack = [];
 
 function doLogin() {
   const t = document.getElementById('tokenInput').value.trim();
@@ -1402,6 +1580,7 @@ async function enterAdmin() {
   document.getElementById('siteHeader').classList.add('visible');
   document.getElementById('adminMain').classList.add('visible');
   document.getElementById('statusBar').classList.add('visible');
+  loadDeletedStack();
   await fetchProducts();
 }
 
@@ -1420,7 +1599,7 @@ for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
 data = JSON.parse(new TextDecoder('utf-8').decode(bytes));
     originalData = JSON.parse(JSON.stringify(data));
     data.products = data.products || [];
-    normalizeChineseFields();
+    normalizeLocalizedFields();
     document.getElementById('pageMeta').textContent =
       `${data.products.length} products В· Last updated: ${data.lastUpdated || 'вЂ”'}`;
     document.getElementById('headerMeta').textContent =
@@ -1437,38 +1616,128 @@ function esc(s) {
   return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-function repairMojibakeText(value) {
-  const text = String(value || '');
-  if (!text || /[\u4e00-\u9fff]/.test(text)) return text;
-  if (!/[ÃÂÐÑЃЊЌЏЉЋє§ЃђЌґ]/.test(text)) return text;
-
-  try {
-    const repaired = decodeURIComponent(escape(text));
-    if (/[\u4e00-\u9fff]/.test(repaired)) return repaired;
-  } catch (error) {}
-
-  return text;
+function mojibakeScore(text) {
+  return (String(text || '').match(/[ÃÂÐÑРСЃЊЌЏЉЋє§ЃђЌґ�]/g) || []).length;
 }
 
-function normalizeChineseFields() {
+function looksLikeLanguage(text, targetLang) {
+  const value = String(text || '');
+  if (targetLang === 'cn') return /[\u4e00-\u9fff]/.test(value);
+  if (targetLang === 'ru') return /[А-Яа-яЁё]/.test(value);
+  return Boolean(value.trim());
+}
+
+function decodeUtf8Bytes(bytes) {
+  try {
+    return new TextDecoder('utf-8', { fatal: false }).decode(new Uint8Array(bytes));
+  } catch (error) {
+    return '';
+  }
+}
+
+function decodeLatin1Mojibake(text) {
+  const bytes = [];
+  for (const char of String(text || '')) {
+    const code = char.charCodeAt(0);
+    if (code > 255) return '';
+    bytes.push(code);
+  }
+  return decodeUtf8Bytes(bytes);
+}
+
+function decodeCp1251Mojibake(text) {
+  const cp1251 =
+    '\u0402\u0403\u201A\u0453\u201E\u2026\u2020\u2021\u20AC\u2030\u0409\u2039\u040A\u040C\u040B\u040F' +
+    '\u0452\u2018\u2019\u201C\u201D\u2022\u2013\u2014\u2122\u0459\u203A\u045A\u045C\u045B\u045F' +
+    '\u00A0\u040E\u045E\u0408\u00A4\u0490\u00A6\u00A7\u0401\u00A9\u0404\u00AB\u00AC\u00AD\u00AE\u0407' +
+    '\u00B0\u00B1\u0406\u0456\u0491\u00B5\u00B6\u00B7\u0451\u2116\u0454\u00BB\u0458\u0405\u0455\u0457' +
+    '\u0410\u0411\u0412\u0413\u0414\u0415\u0416\u0417\u0418\u0419\u041A\u041B\u041C\u041D\u041E\u041F' +
+    '\u0420\u0421\u0422\u0423\u0424\u0425\u0426\u0427\u0428\u0429\u042A\u042B\u042C\u042D\u042E\u042F' +
+    '\u0430\u0431\u0432\u0433\u0434\u0435\u0436\u0437\u0438\u0439\u043A\u043B\u043C\u043D\u043E\u043F' +
+    '\u0440\u0441\u0442\u0443\u0444\u0445\u0446\u0447\u0448\u0449\u044A\u044B\u044C\u044D\u044E\u044F';
+  const bytes = [];
+  for (const char of String(text || '')) {
+    const code = char.charCodeAt(0);
+    if (code < 128) {
+      bytes.push(code);
+      continue;
+    }
+    const index = cp1251.indexOf(char);
+    if (index === -1) return '';
+    bytes.push(index + 128);
+  }
+  return decodeUtf8Bytes(bytes);
+}
+
+function repairMojibakeText(value, targetLang = '') {
+  const text = String(value || '');
+  if (!text) return text;
+
+  const originalScore = mojibakeScore(text);
+  if (looksLikeLanguage(text, targetLang) && originalScore === 0) return text;
+  if (originalScore === 0 && !/[РСÐÑÃÂ�]/.test(text)) return text;
+
+  const candidates = [text];
+
+  try {
+    candidates.push(decodeURIComponent(escape(text)));
+  } catch (error) {}
+
+  candidates.push(decodeLatin1Mojibake(text));
+  candidates.push(decodeCp1251Mojibake(text));
+
+  const cleanCandidates = candidates
+    .filter(Boolean)
+    .map(candidate => candidate.trim())
+    .filter((candidate, index, array) => array.indexOf(candidate) === index);
+
+  const languageMatch = cleanCandidates.find(candidate =>
+    candidate !== text &&
+    looksLikeLanguage(candidate, targetLang) &&
+    mojibakeScore(candidate) < originalScore
+  );
+  if (languageMatch) return languageMatch;
+
+  const lowerScore = cleanCandidates.find(candidate =>
+    candidate !== text &&
+    mojibakeScore(candidate) < originalScore
+  );
+  return lowerScore || text;
+}
+
+function normalizeLocalizedFields() {
   if (data?.products) {
     data.products.forEach(product => {
+      ['name_ru', 'desc_ru', 'origin_ru'].forEach(field => {
+        product[field] = repairMojibakeText(product[field], 'ru');
+      });
       ['name_cn', 'desc_cn', 'origin_cn'].forEach(field => {
-        product[field] = repairMojibakeText(product[field]);
+        product[field] = repairMojibakeText(product[field], 'cn');
       });
       (product.variants || []).forEach(variant => {
-        variant.desc_cn = repairMojibakeText(variant.desc_cn);
+        variant.desc_ru = repairMojibakeText(variant.desc_ru, 'ru');
+        variant.desc_cn = repairMojibakeText(variant.desc_cn, 'cn');
       });
     });
   }
 
   if (pfData?.items) {
     pfData.items.forEach(item => {
+      ['title_ru', 'desc_ru'].forEach(field => {
+        item[field] = repairMojibakeText(item[field], 'ru');
+      });
       ['title_cn', 'desc_cn'].forEach(field => {
-        item[field] = repairMojibakeText(item[field]);
+        item[field] = repairMojibakeText(item[field], 'cn');
       });
     });
   }
+}
+
+function repairAllLocalizedText() {
+  normalizeLocalizedFields();
+  renderGrid();
+  if (pfData?.items) renderPortfolioGrid();
+  showToast('Кодировка RU/CN полей исправлена', 'ok');
 }
 
 function buildVariantHTML(i, j, v) {
@@ -1491,14 +1760,14 @@ function buildVariantHTML(i, j, v) {
         <div>
           <span class="variant-mini-label">Описание <span class="lang-badge en">EN</span></span>
           <textarea class="variant-input en"
-            oninput="updV(${i},${j},'desc',this.value)" placeholder="Packing, port, quality notes...">${esc(v.desc)}</textarea>
+            oninput="updV(${i},${j},'desc',this.value)" onblur="autoTranslateVariantField(${i},${j},'desc')" placeholder="Packing, port, quality notes...">${esc(v.desc)}</textarea>
         </div>
-        <div>
+        <div class="translation-field">
           <span class="variant-mini-label">Описание <span class="lang-badge ru">RU</span></span>
           <textarea class="variant-input ru"
-            oninput="updV(${i},${j},'desc_ru',this.value)" placeholder="РЈРїР°РєРѕРІРєР°, РїРѕСЂС‚, РєР°С‡РµСЃС‚РІРѕ...">${esc(v.desc_ru)}</textarea>
+            oninput="updV(${i},${j},'desc_ru',this.value)" placeholder="Упаковка, порт, качество...">${esc(v.desc_ru)}</textarea>
         </div>
-        <div>
+        <div class="translation-field">
           <span class="variant-mini-label">Описание <span class="lang-badge cn">CN</span></span>
           <textarea class="variant-input cn"
             oninput="updV(${i},${j},'desc_cn',this.value)" placeholder="包装、港口、质量说明...">${esc(v.desc_cn)}</textarea>
@@ -1543,7 +1812,7 @@ function renderGrid() {
   renderChangeLog('productChangeLog', data.changeLog);
 
   grid.innerHTML = entries.map(({ p, i }) => `
-    <div class="product-card">
+  <div class="product-card" id="product-card-${i}">
       <div class="card-image-wrap">
         <img src="https://raw.githubusercontent.com/${REPO}/master/public/${p.image}"
           onerror="this.style.display='none'">
@@ -1556,26 +1825,35 @@ function renderGrid() {
               onchange="upd(${i},'published',this.checked);renderGrid()">
             ${p.published !== false ? 'Опубликовано' : 'Черновик'}
           </label>
-          <button class="btn-mini" type="button" onclick="moveProduct(${i},-1)">Вверх</button>
-          <button class="btn-mini" type="button" onclick="moveProduct(${i},1)">Вниз</button>
           <button class="btn-mini" type="button" onclick="duplicateProduct(${i})">Дубль</button>
           <button class="btn-mini danger" type="button" onclick="deleteProduct(${i})">Удалить</button>
-          <button class="btn-mini" type="button" onclick="autoTranslateProduct(${i})">CN авто</button>
-          <button class="btn-mini" type="button" onclick="previewSite('#products')">Сайт</button>
+          <button class="btn-mini" type="button" onclick="toggleTranslations(this)">Переводы</button>
+          <button class="btn-mini" type="button" onclick="autoTranslateProduct(${i})">RU/CN авто</button>
+        </div>
+        <div class="translation-note">Заполняй английские поля. Русский и китайский будут подставляться автоматически; здесь можно проверить или поправить перевод вручную.</div>
+
+        <div class="admin-card-preview">
+          <img src="https://raw.githubusercontent.com/${REPO}/${BRANCH}/public/${esc(p.image || '')}" onerror="this.style.opacity='0.18'">
+          <div>
+            <strong>${esc(p.name || 'New product')}</strong>
+            <span>${esc(p.desc || 'Short product description')}</span>
+            <span>${esc(p.origin || '')}</span>
+            <b>${esc(p.mainPrice || 'Price on request')}</b>
+          </div>
         </div>
 
         <div class="bilingual-row">
           <div class="card-field">
             <label class="card-label">Название <span class="lang-badge en">EN</span></label>
             <input class="card-input en" value="${esc(p.name)}"
-              oninput="upd(${i},'name',this.value)" placeholder="Product name">
+              oninput="upd(${i},'name',this.value)" onblur="autoTranslateProductField(${i},'name')" placeholder="Product name">
           </div>
-          <div class="card-field">
+          <div class="card-field translation-field">
             <label class="card-label">Название <span class="lang-badge ru">RU</span></label>
             <input class="card-input ru" value="${esc(p.name_ru)}"
-              oninput="upd(${i},'name_ru',this.value)" placeholder="РќР°Р·РІР°РЅРёРµ С‚РѕРІР°СЂР°">
+              oninput="upd(${i},'name_ru',this.value)" placeholder="Название товара">
           </div>
-          <div class="card-field">
+          <div class="card-field translation-field">
             <label class="card-label">Название <span class="lang-badge cn">CN</span></label>
             <input class="card-input cn" value="${esc(p.name_cn)}"
               oninput="upd(${i},'name_cn',this.value)" placeholder="产品名称">
@@ -1601,6 +1879,25 @@ function renderGrid() {
           </div>
         </div>
 
+        <div class="card-field">
+          <label class="card-label">Загрузить фото товара</label>
+          <div class="pf-upload-area" id="product-upload-area-${i}"
+            ondragover="event.preventDefault();this.classList.add('dragover')"
+            ondragleave="this.classList.remove('dragover')"
+            ondrop="handleProductPhotoDrop(event,${i})">
+            <input type="file" accept="image/*" onchange="uploadProductPhoto(this,${i})">
+            <div class="pf-upload-icon">📷</div>
+            <div class="pf-upload-label">Нажми или перетащи фото товара</div>
+            <div class="pf-upload-sub">JPG, PNG, WEBP - загрузка в /goods/</div>
+          </div>
+          <div class="pf-upload-progress" id="product-progress-${i}">
+            <div class="pf-upload-progress-fill" id="product-progress-fill-${i}"></div>
+          </div>
+          <div class="pf-upload-status" id="product-status-${i}">
+            ${p.image ? `✓ ${p.image.split('/').pop()}` : ''}
+          </div>
+        </div>
+
         ${(p.priceHistory && p.priceHistory.length) ? `
           <div class="price-history">Последнее изменение цены: ${esc(p.priceHistory[0].from)} -> ${esc(p.priceHistory[0].to)} (${esc(p.priceHistory[0].date)})</div>
         ` : ''}
@@ -1609,14 +1906,14 @@ function renderGrid() {
           <div class="card-field">
             <label class="card-label">Страна <span class="lang-badge en">EN</span></label>
             <input class="card-input en" value="${esc(p.origin)}"
-              oninput="upd(${i},'origin',this.value)" placeholder="e.g. Vietnam">
+              oninput="upd(${i},'origin',this.value)" onblur="autoTranslateProductField(${i},'origin')" placeholder="e.g. Vietnam">
           </div>
-          <div class="card-field">
+          <div class="card-field translation-field">
             <label class="card-label">Страна <span class="lang-badge ru">RU</span></label>
             <input class="card-input ru" value="${esc(p.origin_ru)}"
-              oninput="upd(${i},'origin_ru',this.value)" placeholder="РЅР°РїСЂ. Р’СЊРµС‚РЅР°Рј">
+              oninput="upd(${i},'origin_ru',this.value)" placeholder="например: Вьетнам">
           </div>
-          <div class="card-field">
+          <div class="card-field translation-field">
             <label class="card-label">Страна <span class="lang-badge cn">CN</span></label>
             <input class="card-input cn" value="${esc(p.origin_cn)}"
               oninput="upd(${i},'origin_cn',this.value)" placeholder="例如：越南">
@@ -1627,14 +1924,14 @@ function renderGrid() {
           <div class="card-field">
             <label class="card-label">Описание <span class="lang-badge en">EN</span></label>
             <input class="card-input en" value="${esc(p.desc)}"
-              oninput="upd(${i},'desc',this.value)" placeholder="Short description">
+              oninput="upd(${i},'desc',this.value)" onblur="autoTranslateProductField(${i},'desc')" placeholder="Short description">
           </div>
-          <div class="card-field">
+          <div class="card-field translation-field">
             <label class="card-label">Описание <span class="lang-badge ru">RU</span></label>
             <input class="card-input ru" value="${esc(p.desc_ru)}"
-              oninput="upd(${i},'desc_ru',this.value)" placeholder="РљСЂР°С‚РєРѕРµ РѕРїРёСЃР°РЅРёРµ">
+              oninput="upd(${i},'desc_ru',this.value)" placeholder="Краткое описание">
           </div>
-          <div class="card-field">
+          <div class="card-field translation-field">
             <label class="card-label">Описание <span class="lang-badge cn">CN</span></label>
             <input class="card-input cn" value="${esc(p.desc_cn)}"
               oninput="upd(${i},'desc_cn',this.value)" placeholder="简短描述">
@@ -1685,20 +1982,28 @@ function toggleV(header) {
 function upd(i, f, v) { data.products[i][f] = v; }
 function updV(i, j, f, v) { data.products[i].variants[j][f] = v; }
 
-async function translateToCn(text) {
+function toggleTranslations(button) {
+  const card = button.closest('.product-card, .portfolio-card');
+  if (!card) return;
+  card.classList.toggle('show-translations');
+  button.textContent = card.classList.contains('show-translations') ? 'Скрыть переводы' : 'Переводы';
+}
+
+async function translateText(text, targetLang) {
   const value = String(text || '').trim();
   if (!value) return '';
+  const target = targetLang === 'ru' ? 'ru' : 'zh-CN';
 
   const providers = [
     async () => {
-      const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-CN&dt=t&q=${encodeURIComponent(value)}`;
+      const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${target}&dt=t&q=${encodeURIComponent(value)}`;
       const response = await fetch(url);
       if (!response.ok) throw new Error('Google translate request failed');
       const json = await response.json();
       return json?.[0]?.map(part => part?.[0] || '').join('');
     },
     async () => {
-      const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(value)}&langpair=en|zh-CN`;
+      const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(value)}&langpair=en|${target}`;
       const response = await fetch(url);
       if (!response.ok) throw new Error('MyMemory translate request failed');
       const json = await response.json();
@@ -1709,32 +2014,86 @@ async function translateToCn(text) {
   for (const provider of providers) {
     try {
       const translated = await provider();
-      if (translated && translated !== value) return translated;
+      if (translated && translated !== value) return repairMojibakeText(translated, targetLang);
     } catch (error) {
       console.warn('Auto translate provider failed:', error);
     }
   }
 
-  showToast('Auto translate failed. Please try again later.', 'fail');
+  showToast('Автоперевод не сработал. Попробуй позже.', 'fail');
   return value;
+}
+
+function translateToRu(text) {
+  return translateText(text, 'ru');
+}
+
+function translateToCn(text) {
+  return translateText(text, 'cn');
+}
+
+async function translatePairFromEnglish(text) {
+  const [ru, cn] = await Promise.all([translateToRu(text), translateToCn(text)]);
+  return { ru, cn };
 }
 
 async function autoTranslateProduct(i) {
   const product = data.products[i];
   if (!product) return;
 
-  setStatus('busy', `Auto translating ${product.name || 'product'}...`);
-  product.name_cn = await translateToCn(product.name);
-  product.desc_cn = await translateToCn(product.desc);
-  product.origin_cn = await translateToCn(product.origin);
+  setStatus('busy', `Перевожу ${product.name || 'товар'}...`);
+  if (product.name) {
+    const translated = await translatePairFromEnglish(product.name);
+    product.name_ru = translated.ru;
+    product.name_cn = translated.cn;
+  }
+  if (product.desc) {
+    const translated = await translatePairFromEnglish(product.desc);
+    product.desc_ru = translated.ru;
+    product.desc_cn = translated.cn;
+  }
+  if (product.origin) {
+    const translated = await translatePairFromEnglish(product.origin);
+    product.origin_ru = translated.ru;
+    product.origin_cn = translated.cn;
+  }
 
   for (const variant of product.variants || []) {
-    variant.desc_cn = await translateToCn(variant.desc);
+    if (!variant.desc) continue;
+    const translated = await translatePairFromEnglish(variant.desc);
+    variant.desc_ru = translated.ru;
+    variant.desc_cn = translated.cn;
   }
 
   renderGrid();
-  setStatus('ok', 'Chinese fields updated');
-  showToast('CN fields filled for product', 'ok');
+  setStatus('ok', 'Переводы обновлены');
+  showToast('RU/CN поля заполнены', 'ok');
+}
+
+async function autoTranslateProductField(i, field) {
+  const product = data.products[i];
+  const value = String(product?.[field] || '').trim();
+  if (!product || !value) return;
+
+  setStatus('busy', 'Перевожу поле...');
+  const translated = await translatePairFromEnglish(value);
+  product[`${field}_ru`] = translated.ru;
+  product[`${field}_cn`] = translated.cn;
+  renderGrid();
+  setStatus('ok', 'Поле переведено');
+}
+
+async function autoTranslateVariantField(i, j, field) {
+  const variant = data.products?.[i]?.variants?.[j];
+  const value = String(variant?.[field] || '').trim();
+  if (!variant || !value) return;
+
+  setStatus('busy', 'Перевожу сорт...');
+  const translated = await translatePairFromEnglish(value);
+  variant[`${field}_ru`] = translated.ru;
+  variant[`${field}_cn`] = translated.cn;
+  renderGrid();
+  setStatus('ok', 'Сорт переведён');
 }
 
 async function autoTranslateAllProducts() {
@@ -1742,7 +2101,7 @@ async function autoTranslateAllProducts() {
   for (let i = 0; i < data.products.length; i++) {
     await autoTranslateProduct(i);
   }
-  showToast('CN fields filled for all products', 'ok');
+  showToast('RU/CN поля заполнены для всех товаров', 'ok');
 }
 
 function addProduct() {
@@ -1800,9 +2159,10 @@ function deleteProduct(i) {
   if (!product) return;
   const name = product.name || product.name_ru || `Product #${i + 1}`;
   if (!confirm(`Delete product "${name}"?`)) return;
-  data.products.splice(i, 1);
+  const [deleted] = data.products.splice(i, 1);
+  rememberDeleted('product', deleted, i);
   renderGrid();
-  showToast('Product deleted', 'ok');
+  showToast('Товар удалён. Можно вернуть кнопкой "Вернуть удалённое".', 'ok');
 }
 
 function moveProduct(i, direction) {
@@ -1811,6 +2171,97 @@ function moveProduct(i, direction) {
   const [item] = data.products.splice(i, 1);
   data.products.splice(next, 0, item);
   renderGrid();
+}
+
+function handleProductPhotoDrop(event, i) {
+  event.preventDefault();
+  document.getElementById(`product-upload-area-${i}`)?.classList.remove('dragover');
+  const file = event.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) uploadProductPhoto({ files: [file] }, i);
+}
+
+async function uploadProductPhoto(input, i) {
+  const file = input.files[0];
+  if (!file) return;
+
+  if (!file.type.startsWith('image/')) {
+    showToast('Выбери файл изображения', 'fail');
+    return;
+  }
+
+  if (file.size > MAX_IMAGE_SIZE) {
+    showToast('Фото слишком большое. Максимум 8 MB.', 'fail');
+    return;
+  }
+
+  const statusEl = document.getElementById(`product-status-${i}`);
+  const progressEl = document.getElementById(`product-progress-${i}`);
+  const fillEl = document.getElementById(`product-progress-fill-${i}`);
+  const safeName = safeFileName(file.name);
+  const remotePath = `public/goods/${safeName}`;
+
+  statusEl.className = 'pf-upload-status';
+  statusEl.textContent = 'Загрузка...';
+  progressEl.style.display = 'block';
+  fillEl.style.width = '30%';
+
+  try {
+    const base64 = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(',')[1]);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+
+    fillEl.style.width = '60%';
+
+    let existingSha = '';
+    const checkResponse = await fetch(
+      `https://api.github.com/repos/${REPO}/contents/${remotePath}?ref=${BRANCH}`,
+      { headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' } }
+    );
+    if (checkResponse.ok) {
+      const checkJson = await checkResponse.json();
+      existingSha = checkJson.sha;
+    }
+
+    fillEl.style.width = '80%';
+
+    const body = {
+      message: `Upload product photo: ${safeName}`,
+      content: base64,
+      branch: BRANCH
+    };
+    if (existingSha) body.sha = existingSha;
+
+    const response = await fetch(`https://api.github.com/repos/${REPO}/contents/${remotePath}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `token ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Upload failed');
+    }
+
+    fillEl.style.width = '100%';
+    data.products[i].image = `goods/${safeName}`;
+    renderGrid();
+    showToast('Фото товара загружено', 'ok');
+  } catch (error) {
+    fillEl.style.width = '100%';
+    fillEl.style.background = 'var(--danger)';
+    statusEl.className = 'pf-upload-status err';
+    statusEl.textContent = '✕ ' + error.message;
+    setTimeout(() => {
+      progressEl.style.display = 'none';
+      fillEl.style.background = 'var(--dark)';
+    }, 3000);
+  }
 }
 
 function isSafeImagePath(value) {
@@ -1949,8 +2400,99 @@ function updatePriceHistory() {
   });
 }
 
-function previewSite(hash = '') {
-  window.open('/' + hash, '_blank', 'noopener');
+function openAnalytics() {
+  window.open(ANALYTICS_URL, '_blank', 'noopener');
+}
+
+function saveLocalDraft() {
+  const draft = {
+    savedAt: new Date().toISOString(),
+    data,
+    pfData
+  };
+  localStorage.setItem('pologenkiAdminDraft', JSON.stringify(draft));
+  showToast('Черновик сохранён в браузере', 'ok');
+}
+
+function loadLocalDraft() {
+  const raw = localStorage.getItem('pologenkiAdminDraft');
+  if (!raw) {
+    showToast('Локальный черновик не найден', 'fail');
+    return;
+  }
+
+  try {
+    const draft = JSON.parse(raw);
+    if (draft.data) {
+      data = draft.data;
+      renderGrid();
+    }
+    if (draft.pfData) {
+      pfData = draft.pfData;
+      renderPortfolioGrid();
+    }
+    showToast(`Черновик загружен: ${new Date(draft.savedAt).toLocaleString()}`, 'ok');
+  } catch (error) {
+    showToast('Не удалось загрузить черновик', 'fail');
+  }
+}
+
+function rememberDeleted(type, item, index) {
+  deletedStack.push({
+    type,
+    item: JSON.parse(JSON.stringify(item)),
+    index,
+    deletedAt: new Date().toISOString()
+  });
+  deletedStack = deletedStack.slice(-20);
+  localStorage.setItem('pologenkiDeletedStack', JSON.stringify(deletedStack));
+}
+
+function loadDeletedStack() {
+  try {
+    deletedStack = JSON.parse(localStorage.getItem('pologenkiDeletedStack') || '[]');
+  } catch (error) {
+    deletedStack = [];
+  }
+}
+
+function restoreDeleted() {
+  if (!deletedStack.length) {
+    showToast('Удалённых элементов для восстановления нет', 'fail');
+    return;
+  }
+
+  const record = deletedStack.pop();
+  localStorage.setItem('pologenkiDeletedStack', JSON.stringify(deletedStack));
+
+  if (record.type === 'product') {
+    if (!data?.products) {
+      showToast('Сначала загрузи товары', 'fail');
+      deletedStack.push(record);
+      localStorage.setItem('pologenkiDeletedStack', JSON.stringify(deletedStack));
+      return;
+    }
+    const index = Math.min(record.index, data.products.length);
+    data.products.splice(index, 0, record.item);
+    renderGrid();
+    switchTab('products');
+    showToast('Товар восстановлен', 'ok');
+    return;
+  }
+
+  if (record.type === 'portfolio') {
+    if (!pfData?.items) {
+      showToast('Сначала открой вкладку портфолио', 'fail');
+      deletedStack.push(record);
+      localStorage.setItem('pologenkiDeletedStack', JSON.stringify(deletedStack));
+      return;
+    }
+    const index = Math.min(record.index, pfData.items.length);
+    pfData.items.splice(index, 0, record.item);
+    renderPortfolioGrid();
+    switchTab('portfolio');
+    showToast('Проект восстановлен', 'ok');
+  }
 }
 
 async function publishChanges() {
@@ -2063,7 +2605,7 @@ async function fetchPortfolio() {
     for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
     pfData = JSON.parse(new TextDecoder('utf-8').decode(bytes));
     if (!pfData.items) pfData.items = [];
-    normalizeChineseFields();
+    normalizeLocalizedFields();
     pfOriginalData = JSON.parse(JSON.stringify(pfData));
     renderPortfolioGrid();
     setStatus('ok', 'Ready');
@@ -2129,12 +2671,11 @@ function buildPortfolioCard(item, i) {
             onchange="updPf(${i},'published',this.checked);renderPortfolioGrid()">
           ${item.published !== false ? 'Опубликовано' : 'Черновик'}
         </label>
-        <button class="btn-mini" type="button" onclick="movePortfolioItem(${i},-1)">Вверх</button>
-        <button class="btn-mini" type="button" onclick="movePortfolioItem(${i},1)">Вниз</button>
         <button class="btn-mini" type="button" onclick="duplicatePortfolioItem(${i})">Дубль</button>
-        <button class="btn-mini" type="button" onclick="autoTranslatePortfolioItem(${i})">CN авто</button>
-        <button class="btn-mini" type="button" onclick="previewSite('#portfolio')">Сайт</button>
+        <button class="btn-mini" type="button" onclick="toggleTranslations(this)">Переводы</button>
+        <button class="btn-mini" type="button" onclick="autoTranslatePortfolioItem(${i})">RU/CN авто</button>
       </div>
+      <div class="translation-note">Заполняй английский заголовок и описание. Русский и китайский будут подставляться автоматически.</div>
 
       <!-- Р¤РѕС‚Рѕ: upload РёР»Рё URL -->
       <div class="card-field" style="margin-bottom:1rem;">
@@ -2171,14 +2712,14 @@ function buildPortfolioCard(item, i) {
         <div class="card-field">
           <label class="card-label">Заголовок <span class="lang-badge en">EN</span></label>
           <input class="card-input en" value="${esc(item.title||'')}"
-            oninput="updPf(${i},'title',this.value)" placeholder="e.g. Gulfood Dubai 2025">
+            oninput="updPf(${i},'title',this.value)" onblur="autoTranslatePortfolioField(${i},'title')" placeholder="e.g. Gulfood Dubai 2025">
         </div>
-        <div class="card-field">
+        <div class="card-field translation-field">
           <label class="card-label">Заголовок <span class="lang-badge ru">RU</span></label>
           <input class="card-input ru" value="${esc(item.title_ru||'')}"
-            oninput="updPf(${i},'title_ru',this.value)" placeholder="РЅР°РїСЂ. Р“СѓР»СЊС„СѓРґ Р”СѓР±Р°Р№ 2025">
+            oninput="updPf(${i},'title_ru',this.value)" placeholder="например: Gulfood Dubai 2025">
         </div>
-        <div class="card-field">
+        <div class="card-field translation-field">
           <label class="card-label">Заголовок <span class="lang-badge cn">CN</span></label>
           <input class="card-input cn" value="${esc(item.title_cn||'')}"
             oninput="updPf(${i},'title_cn',this.value)" placeholder="例如：迪拜食品展 2025">
@@ -2190,16 +2731,16 @@ function buildPortfolioCard(item, i) {
         <div class="card-field">
           <label class="card-label">Описание <span class="lang-badge en">EN</span></label>
           <textarea class="card-input en portfolio-description"
-            oninput="updPf(${i},'desc',this.value)"
+            oninput="updPf(${i},'desc',this.value)" onblur="autoTranslatePortfolioField(${i},'desc')"
             placeholder="Short description of the event...">${esc(item.desc||'')}</textarea>
         </div>
-        <div class="card-field">
+        <div class="card-field translation-field">
           <label class="card-label">Описание <span class="lang-badge ru">RU</span></label>
           <textarea class="card-input ru portfolio-description"
             oninput="updPf(${i},'desc_ru',this.value)"
-            placeholder="РљСЂР°С‚РєРѕРµ РѕРїРёСЃР°РЅРёРµ СЃРѕР±С‹С‚РёСЏ...">${esc(item.desc_ru||'')}</textarea>
+            placeholder="Краткое описание события...">${esc(item.desc_ru||'')}</textarea>
         </div>
-        <div class="card-field">
+        <div class="card-field translation-field">
           <label class="card-label">Описание <span class="lang-badge cn">CN</span></label>
           <textarea class="card-input cn portfolio-description"
             oninput="updPf(${i},'desc_cn',this.value)"
@@ -2346,12 +2887,33 @@ async function autoTranslatePortfolioItem(i) {
   const item = pfData?.items?.[i];
   if (!item) return;
 
-  setStatus('busy', `Auto translating portfolio item ${i + 1}...`);
-  item.title_cn = await translateToCn(item.title);
-  item.desc_cn = await translateToCn(item.desc);
+  setStatus('busy', `Перевожу проект ${i + 1}...`);
+  if (item.title) {
+    const translated = await translatePairFromEnglish(item.title);
+    item.title_ru = translated.ru;
+    item.title_cn = translated.cn;
+  }
+  if (item.desc) {
+    const translated = await translatePairFromEnglish(item.desc);
+    item.desc_ru = translated.ru;
+    item.desc_cn = translated.cn;
+  }
   renderPortfolioGrid();
-  setStatus('ok', 'Portfolio CN fields updated');
-  showToast('CN fields filled for portfolio item', 'ok');
+  setStatus('ok', 'Проект переведён');
+  showToast('RU/CN поля проекта заполнены', 'ok');
+}
+
+async function autoTranslatePortfolioField(i, field) {
+  const item = pfData?.items?.[i];
+  const value = String(item?.[field] || '').trim();
+  if (!item || !value) return;
+
+  setStatus('busy', 'Перевожу поле портфолио...');
+  const translated = await translatePairFromEnglish(value);
+  item[`${field}_ru`] = translated.ru;
+  item[`${field}_cn`] = translated.cn;
+  renderPortfolioGrid();
+  setStatus('ok', 'Поле портфолио переведено');
 }
 
 async function autoTranslateAllPortfolio() {
@@ -2359,7 +2921,7 @@ async function autoTranslateAllPortfolio() {
   for (let i = 0; i < pfData.items.length; i++) {
     await autoTranslatePortfolioItem(i);
   }
-  showToast('CN fields filled for portfolio', 'ok');
+  showToast('RU/CN поля заполнены для портфолио', 'ok');
 }
 
 function addPortfolioItem() {
@@ -2408,9 +2970,10 @@ function movePortfolioItem(i, direction) {
 
 function deletePortfolioItem(i) {
   if (!confirm(`Delete item "${pfData.items[i].title || 'Untitled'}"?`)) return;
-  pfData.items.splice(i, 1);
+  const [deleted] = pfData.items.splice(i, 1);
+  rememberDeleted('portfolio', deleted, i);
   renderPortfolioGrid();
-  showToast('Item deleted', '');
+  showToast('Проект удалён. Можно вернуть кнопкой "Вернуть удалённое".', 'ok');
 }
 
 async function publishPortfolio() {
