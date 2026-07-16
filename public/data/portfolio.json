@@ -107,20 +107,14 @@
       "desc_ru": "На Gulfood Dubai 2026 встреча с командой Gongli International General Trading — крупного поставщика орехов и сухофруктов, обсуждение новых возможностей для сотрудничества.",
       "title_cn": "与 Gongli International General Trading 会面 — Gulfood Dubai 2026",
       "desc_cn": "与 Gongli International General Trading 团队会面，探索坚果和干果供应合作机会。"
-    },
-    {
-      "published": true,
-      "img": "/images/portfolio/1784211714191_2.jpg",
-      "title": "Test test test ",
-      "title_ru": "Тест-тест-тест",
-      "title_cn": "测试测试测试",
-      "desc": "impressive if you want to be",
-      "desc_ru": "впечатляюще, если хочешь быть",
-      "desc_cn": "如果你想令人印象深刻"
     }
   ],
   "lastUpdated": "2026-07-16",
   "changeLog": [
+    {
+      "date": "2026-07-16T17:56:53.058Z",
+      "message": "Portfolio updated: 12 items"
+    },
     {
       "date": "2026-07-16T17:55:10.825Z",
       "message": "Portfolio updated: 13 items"
