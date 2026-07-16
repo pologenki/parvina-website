@@ -109,18 +109,22 @@
       "desc_cn": "与 Gongli International General Trading 团队会面，探索坚果和干果供应合作机会。"
     },
     {
-      "published": false,
+      "published": true,
       "img": "/images/portfolio/1784211714191_2.jpg",
       "title": "Test test test ",
       "title_ru": "Тест-тест-тест",
       "title_cn": "测试测试测试",
       "desc": "impressive if you want to be",
-      "desc_ru": "",
-      "desc_cn": ""
+      "desc_ru": "впечатляюще, если хочешь быть",
+      "desc_cn": "如果你想令人印象深刻"
     }
   ],
   "lastUpdated": "2026-07-16",
   "changeLog": [
+    {
+      "date": "2026-07-16T17:55:10.825Z",
+      "message": "Portfolio updated: 13 items"
+    },
     {
       "date": "2026-07-16T17:21:18.453Z",
       "message": "Portfolio updated: 13 items"
