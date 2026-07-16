@@ -2229,7 +2229,9 @@
 const REPO = 'pologenki/parvina-website';
 const BRANCH = 'master';
 const PATH = 'public/data/products.json';
-const MAX_IMAGE_SIZE = 8 * 1024 * 1024;
+const MAX_SOURCE_IMAGE_SIZE = 24 * 1024 * 1024;
+const PRODUCT_IMAGE_PROFILE = { maxWidth: 1400, maxHeight: 1400, targetBytes: 650 * 1024 };
+const PORTFOLIO_IMAGE_PROFILE = { maxWidth: 1920, maxHeight: 1920, targetBytes: 1200 * 1024 };
 const ANALYTICS_URL = 'https://analytics.google.com/analytics/web/#/a370639609p507773161/realtime/overview?params=_u..nav%3Dmaui';
 let token = '', data = null, sha = '';
 let originalData = null;
@@ -2945,40 +2947,34 @@ async function uploadProductPhoto(input, i) {
     return;
   }
 
-  if (file.size > MAX_IMAGE_SIZE) {
-    showToast('Фото слишком большое. Максимум 8 MB.', 'fail');
+  if (file.size > MAX_SOURCE_IMAGE_SIZE) {
+    showToast('Фото слишком большое. Максимальный исходный размер — 24 MB.', 'fail');
     return;
   }
 
   const statusEl = document.getElementById(`product-status-${i}`);
   const progressEl = document.getElementById(`product-progress-${i}`);
   const fillEl = document.getElementById(`product-progress-fill-${i}`);
-  const safeName = safeFileName(file.name);
-  const sourcePath = `public/goods/${safeName}`;
-
   statusEl.className = 'pf-upload-status';
-  statusEl.textContent = 'Загрузка...';
+  statusEl.textContent = 'Оптимизация фото...';
   progressEl.style.display = 'block';
-  fillEl.style.width = '30%';
+  fillEl.style.width = '20%';
 
   try {
-    const base64 = await new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result.split(',')[1]);
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
+    const optimized = await optimizeImageForUpload(file, PRODUCT_IMAGE_PROFILE);
+    const safeName = safeFileName(optimized.fileName);
+    const sourcePath = `public/goods/${safeName}`;
+    const base64 = await blobToBase64(optimized.blob);
 
     fillEl.style.width = '60%';
-
-    fillEl.style.width = '80%';
+    statusEl.textContent = 'Загрузка в GitHub...';
 
     await putGitHubFile(sourcePath, base64, `Upload product photo: ${safeName}`);
 
     fillEl.style.width = '100%';
     data.products[i].image = `goods/${safeName}`;
     renderGrid();
-    showToast('Фото товара загружено', 'ok');
+    showToast(buildOptimizationMessage('Фото товара загружено', optimized), 'ok');
   } catch (error) {
     fillEl.style.width = '100%';
     fillEl.style.background = 'var(--danger)';
@@ -3004,6 +3000,90 @@ function safeFileName(fileName) {
   const ext = (parts.pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '') || 'jpg';
   const base = parts.join('.').replace(/[^a-z0-9._-]/gi, '_').replace(/_+/g, '_').replace(/^_+|_+$/g, '') || 'portfolio';
   return `${Date.now()}_${base}.${ext}`;
+}
+
+function formatFileSize(bytes) {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+function blobToBase64(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result).split(',')[1]);
+    reader.onerror = () => reject(new Error('Не удалось прочитать изображение'));
+    reader.readAsDataURL(blob);
+  });
+}
+
+function canvasToBlob(canvas, type, quality) {
+  return new Promise((resolve, reject) => {
+    canvas.toBlob(
+      blob => blob ? resolve(blob) : reject(new Error('Не удалось сжать изображение')),
+      type,
+      quality
+    );
+  });
+}
+
+async function optimizeImageForUpload(file, profile) {
+  const originalSize = file.size;
+  const passthrough = /image\/(svg\+xml|gif)/i.test(file.type);
+  if (passthrough) {
+    return { blob: file, fileName: file.name, originalSize, finalSize: file.size, optimized: false };
+  }
+
+  let bitmap;
+  try {
+    bitmap = await createImageBitmap(file, { imageOrientation: 'from-image' });
+  } catch (error) {
+    throw new Error('Формат изображения не поддерживается браузером');
+  }
+
+  const scale = Math.min(1, profile.maxWidth / bitmap.width, profile.maxHeight / bitmap.height);
+  const width = Math.max(1, Math.round(bitmap.width * scale));
+  const height = Math.max(1, Math.round(bitmap.height * scale));
+
+  if (scale === 1 && file.size <= profile.targetBytes) {
+    bitmap.close?.();
+    return { blob: file, fileName: file.name, originalSize, finalSize: file.size, optimized: false };
+  }
+
+  const canvas = document.createElement('canvas');
+  canvas.width = width;
+  canvas.height = height;
+  const context = canvas.getContext('2d', { alpha: true });
+  context.imageSmoothingEnabled = true;
+  context.imageSmoothingQuality = 'high';
+  context.drawImage(bitmap, 0, 0, width, height);
+  bitmap.close?.();
+
+  let compressed = null;
+  for (const quality of [0.84, 0.76, 0.68, 0.6]) {
+    compressed = await canvasToBlob(canvas, 'image/webp', quality);
+    if (compressed.size <= profile.targetBytes) break;
+  }
+
+  if (scale === 1 && compressed.size >= file.size) {
+    return { blob: file, fileName: file.name, originalSize, finalSize: file.size, optimized: false };
+  }
+
+  const baseName = file.name.replace(/\.[^.]+$/, '') || 'image';
+  return {
+    blob: compressed,
+    fileName: `${baseName}.webp`,
+    originalSize,
+    finalSize: compressed.size,
+    optimized: true,
+    width,
+    height
+  };
+}
+
+function buildOptimizationMessage(prefix, result) {
+  if (!result.optimized) return `${prefix}: ${formatFileSize(result.finalSize)}`;
+  return `${prefix}: ${formatFileSize(result.originalSize)} → ${formatFileSize(result.finalSize)}`;
 }
 
 function validateProductsData(payload) {
@@ -3583,8 +3663,8 @@ async function uploadPfPhoto(input, i) {
     return;
   }
 
-  if (file.size > MAX_IMAGE_SIZE) {
-    showToast('Image is too large. Maximum size is 8 MB.', 'fail');
+  if (file.size > MAX_SOURCE_IMAGE_SIZE) {
+    showToast('Фото слишком большое. Максимальный исходный размер — 24 MB.', 'fail');
     return;
   }
 
@@ -3593,39 +3673,29 @@ async function uploadPfPhoto(input, i) {
   const fillEl     = document.getElementById(`pf-progress-fill-${i}`);
   const urlInput   = document.getElementById(`pf-url-${i}`);
 
-  // Р“РµРЅРµСЂРёСЂСѓРµРј Р±РµР·РѕРїР°СЃРЅРѕРµ СѓРЅРёРєР°Р»СЊРЅРѕРµ РёРјСЏ С„Р°Р№Р»Р°
-  const safeName = safeFileName(file.name);
-  const sourcePath = `public/images/portfolio/${safeName}`;
-
   statusEl.className = 'pf-upload-status';
-  statusEl.textContent = 'Uploading...';
+  statusEl.textContent = 'Оптимизация фото...';
   progressEl.style.display = 'block';
-  fillEl.style.width = '30%';
+  fillEl.style.width = '20%';
 
   try {
-    // Р§РёС‚Р°РµРј С„Р°Р№Р» РєР°Рє base64
-    const base64 = await new Promise((res, rej) => {
-      const reader = new FileReader();
-      reader.onload = () => res(reader.result.split(',')[1]);
-      reader.onerror = rej;
-      reader.readAsDataURL(file);
-    });
+    const optimized = await optimizeImageForUpload(file, PORTFOLIO_IMAGE_PROFILE);
+    const safeName = safeFileName(optimized.fileName);
+    const sourcePath = `public/images/portfolio/${safeName}`;
+    const base64 = await blobToBase64(optimized.blob);
 
     fillEl.style.width = '60%';
-
-    fillEl.style.width = '80%';
+    statusEl.textContent = 'Загрузка в GitHub...';
 
     // GitHub Pages builds dist from public, so one source upload is enough.
     await putGitHubFile(sourcePath, base64, `Upload portfolio photo: ${safeName}`);
 
     fillEl.style.width = '100%';
 
-    // РџСѓС‚СЊ Рє С„Р°Р№Р»Сѓ РЅР° СЃР°Р№С‚Рµ
     const publicUrl = `/images/portfolio/${safeName}`;
     updPf(i, 'img', publicUrl);
     if (urlInput) urlInput.value = publicUrl;
 
-    // РћР±РЅРѕРІР»СЏРµРј РїСЂРµРІСЊСЋ РІ РєР°СЂС‚РѕС‡РєРµ
     const wrap = document.getElementById(`pf-img-wrap-${i}`);
     if (wrap) {
       const rawUrl = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/${sourcePath}`;
@@ -3637,7 +3707,8 @@ async function uploadPfPhoto(input, i) {
     }
 
     statusEl.className = 'pf-upload-status ok';
-    statusEl.textContent = `Uploaded: ${safeName}`;
+    statusEl.textContent = buildOptimizationMessage('Фото загружено', optimized);
+    showToast(statusEl.textContent, 'ok');
     setTimeout(() => { progressEl.style.display = 'none'; }, 1000);
 
   } catch(e) {
