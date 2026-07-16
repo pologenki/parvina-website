@@ -2325,36 +2325,15 @@ async function putGitHubFile(remotePath, base64, message) {
   return response.json();
 }
 
-async function getGitHubFileBase64(remotePath) {
+async function getGitHubFileSha(remotePath) {
   const response = await fetch(
-    `https://api.github.com/repos/${REPO}/contents/${remotePath}?ref=${BRANCH}`,
+    `https://api.github.com/repos/${REPO}/contents/${remotePath}?ref=${BRANCH}&_=${Date.now()}`,
     { headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' } }
   );
-  if (!response.ok) throw new Error(`Image not found: ${remotePath}`);
+  if (response.status === 404) return '';
+  if (!response.ok) throw new Error(`Не удалось проверить актуальную версию ${remotePath}`);
   const json = await response.json();
-  return String(json.content || '').replace(/\s/g, '');
-}
-
-function buildMirrorPath(imagePath) {
-  const normalized = String(imagePath || '').trim().replace(/^\/+/, '');
-  if (!normalized || /^(https?:)?\/\//i.test(normalized) || normalized.includes('..')) return null;
-  if (!/^(goods|images\/portfolio)\//i.test(normalized)) return null;
-  return {
-    source: `public/${normalized}`,
-    build: `dist/${normalized}`,
-    name: normalized.split('/').pop()
-  };
-}
-
-async function syncImagesToBuild(imagePaths, label) {
-  const mirrors = [...new Set(imagePaths)]
-    .map(buildMirrorPath)
-    .filter(Boolean);
-
-  for (const mirror of mirrors) {
-    const base64 = await getGitHubFileBase64(mirror.source);
-    await putGitHubFile(mirror.build, base64, `Sync ${label} image to build: ${mirror.name}`);
-  }
+  return json.sha || '';
 }
 
 function mojibakeScore(text) {
@@ -2965,7 +2944,6 @@ async function uploadProductPhoto(input, i) {
   const fillEl = document.getElementById(`product-progress-fill-${i}`);
   const safeName = safeFileName(file.name);
   const sourcePath = `public/goods/${safeName}`;
-  const buildPath = `dist/goods/${safeName}`;
 
   statusEl.className = 'pf-upload-status';
   statusEl.textContent = 'Загрузка...';
@@ -2985,7 +2963,6 @@ async function uploadProductPhoto(input, i) {
     fillEl.style.width = '80%';
 
     await putGitHubFile(sourcePath, base64, `Upload product photo: ${safeName}`);
-    await putGitHubFile(buildPath, base64, `Upload product photo to build: ${safeName}`);
 
     fillEl.style.width = '100%';
     data.products[i].image = `goods/${safeName}`;
@@ -3291,8 +3268,8 @@ async function publishChanges() {
   addChangeLog(data, `Products updated: ${data.products.length} items`);
 
   try {
-    setStatus('busy', 'Syncing product images...');
-    await syncImagesToBuild(data.products.map(product => product.image), 'product');
+    setStatus('busy', 'Проверка актуальной версии...');
+    sha = await getGitHubFileSha(PATH);
 
     const jsonStr = JSON.stringify(data, null, 2);
 const bytes = new TextEncoder().encode(jsonStr);
@@ -3311,7 +3288,10 @@ const content = btoa(binStr);
         branch: BRANCH
       })
     });
-    if (!r.ok) throw new Error('Publish failed');
+    if (!r.ok) {
+      const error = await r.json().catch(() => ({}));
+      throw new Error(error.message || 'Не удалось опубликовать товары');
+    }
     const json = await r.json();
     sha = json.content.sha;
     document.getElementById('pageMeta').textContent =
@@ -3605,7 +3585,6 @@ async function uploadPfPhoto(input, i) {
   // Р“РµРЅРµСЂРёСЂСѓРµРј Р±РµР·РѕРїР°СЃРЅРѕРµ СѓРЅРёРєР°Р»СЊРЅРѕРµ РёРјСЏ С„Р°Р№Р»Р°
   const safeName = safeFileName(file.name);
   const sourcePath = `public/images/portfolio/${safeName}`;
-  const buildPath = `dist/images/portfolio/${safeName}`;
 
   statusEl.className = 'pf-upload-status';
   statusEl.textContent = 'Uploading...';
@@ -3625,9 +3604,8 @@ async function uploadPfPhoto(input, i) {
 
     fillEl.style.width = '80%';
 
-    // Upload to both source assets and the built site assets.
+    // GitHub Pages builds dist from public, so one source upload is enough.
     await putGitHubFile(sourcePath, base64, `Upload portfolio photo: ${safeName}`);
-    await putGitHubFile(buildPath, base64, `Upload portfolio photo to build: ${safeName}`);
 
     fillEl.style.width = '100%';
 
@@ -3766,8 +3744,8 @@ async function publishPortfolio() {
   }
 
   try {
-    setStatus('busy', 'Синхронизация фотографий портфолио...');
-    await syncImagesToBuild(pfData.items.map(item => item.img), 'portfolio');
+    setStatus('busy', 'Проверка актуальной версии...');
+    pfSha = await getGitHubFileSha(PF_PATH);
 
     setStatus('busy', 'Публикация портфолио...');
     pfData.lastUpdated = new Date().toISOString().split('T')[0];
@@ -3789,7 +3767,10 @@ async function publishPortfolio() {
       headers: { Authorization: `token ${token}`, 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
     });
-    if (!r.ok) throw new Error('Portfolio publish failed');
+    if (!r.ok) {
+      const error = await r.json().catch(() => ({}));
+      throw new Error(error.message || 'Не удалось опубликовать портфолио');
+    }
     const json = await r.json();
     pfSha = json.content.sha;
     document.getElementById('pfMeta').textContent =
