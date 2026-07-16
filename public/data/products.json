@@ -48,53 +48,6 @@
       "published": true
     },
     {
-      "id": "cashew-copy-1784198211760",
-      "name": "test tests",
-      "name_ru": "тестовые тесты",
-      "desc": "holohop holohopo",
-      "desc_ru": "голохоп голохопо",
-      "origin": "test",
-      "origin_ru": "тест",
-      "image": "goods/1784198243347_ParvinaFoto.png",
-      "mainPrice": "6,80 USD/kg",
-      "variants": [
-        {
-          "name": "WW320 - Whole White",
-          "price": "7,10 USD/kg",
-          "desc": "Quality AFI standard. 20/22.68 kg PE vacuum bag/carton packing. FOB HCM",
-          "desc_ru": "Качество стандарта AFI. 20/22,68 кг полиэтиленовый вакуумный мешок/картонная упаковка. ФОБ ХКМ",
-          "desc_cn": "质量 AFI 标准。 20/22.68公斤PE真空袋/纸箱包装。胡志明市离岸价"
-        },
-        {
-          "name": "WW450 - Whole White",
-          "price": "6,80 USD/kg",
-          "desc": "Quality AFI standard. 20/22.68 kg PE vacuum bag/carton packing. FOB HCM.",
-          "desc_ru": "Качество стандарта AFI. 20/22,68 кг полиэтиленовый вакуумный мешок/картонная упаковка. ФОБ HCM.",
-          "desc_cn": "质量 AFI 标准。 20/22.68公斤PE真空袋/纸箱包装。胡志明市离岸价。"
-        },
-        {
-          "name": "WS - White Split",
-          "price": "6,00 USD/kg",
-          "desc": "Quality AFI standard. 20/22.68 kg PE vacuum bag/carton packing. FOB HCM.",
-          "desc_ru": "Качество стандарта AFI. 20/22,68 кг полиэтиленовый вакуумный мешок/картонная упаковка. ФОБ HCM.",
-          "desc_cn": "质量 AFI 标准。 20/22.68公斤PE真空袋/纸箱包装。胡志明市离岸价。"
-        },
-        {
-          "name": "Other grades",
-          "name_ru": "Другие сорта",
-          "price": "Price on request",
-          "desc": "WW210, WW240, WW320, WW450, WS, LWP, LP, DW and etc.",
-          "desc_ru": "WW210, WW240, WW320, WW450, WS, LWP, LP, DW и т. д.",
-          "desc_cn": "WW210、WW240、WW320、WW450、WS、LWP、LP、DW等"
-        }
-      ],
-      "name_cn": "测试测试",
-      "desc_cn": "霍洛霍普 霍洛霍波",
-      "origin_cn": "测试",
-      "published": true,
-      "category": "test test test"
-    },
-    {
       "id": "walnuts",
       "name": "Walnut Kernels",
       "name_ru": "Ядра грецкого ореха",
@@ -506,6 +459,10 @@
     }
   ],
   "changeLog": [
+    {
+      "date": "2026-07-16T11:00:49.312Z",
+      "message": "Products updated: 10 items"
+    },
     {
       "date": "2026-07-16T10:54:19.754Z",
       "message": "Products updated: 11 items"
