@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Generated SEO product pages (created during every build)
+public/products/
+public/ru/products/
+public/zh-cn/products/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -8,6 +8,7 @@ import {
   t,
   loadTranslations,
   getCurrentLanguage,
+  getLanguageFromPath,
 } from "./utils/i18n.js";
 import { initContactForm } from "./utils/emailService.js";
 import { Content, loadProducts } from "./components/content.js";
@@ -203,8 +204,16 @@ function initLanguageSwitcher() {
         e.stopPropagation();
 
         const lang = option.getAttribute("data-lang");
-        document.documentElement.lang = lang;
         localStorage.setItem("langChosen", "1");
+        localStorage.setItem("preferredLanguage", lang);
+
+        const languagePaths = { en: "/", ru: "/ru/", cn: "/zh-cn/" };
+        const targetPath = languagePaths[lang] || "/";
+        if (window.location.pathname !== targetPath) {
+          window.location.assign(`${targetPath}${window.location.hash || ""}`);
+          return;
+        }
+
         await window.changeLanguage(lang);
 
         // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ dropdown
@@ -331,10 +340,8 @@ async function renderApp() {
 
 // Application initialization
 async function initApp() {
-  // First visit ever в†’ force English. After user picks a language в†’ remember it.
-  if (!localStorage.getItem("langChosen")) {
-    localStorage.setItem("preferredLanguage", "en");
-  }
+  const pathLanguage = getLanguageFromPath();
+  localStorage.setItem("preferredLanguage", pathLanguage);
   await initLanguage();
   await loadProducts();
   await renderApp();
@@ -472,7 +479,7 @@ async function initPortfolioFlipSlider() {
               : slide.title;
         return `
           <button class="zoom-thumb" type="button" data-zoom-index="${i}" aria-label="${title}">
-            <img src="${slide.img}" alt="">
+            <img src="${slide.img}" alt="${title}" loading="lazy" decoding="async">
             <span>${slide.num}</span>
           </button>`;
       })
@@ -526,7 +533,7 @@ async function initPortfolioFlipSlider() {
     const viewPhoto = t("portfolio.viewPhoto");
     return `
     <div class="flip-card portfolio-project-card" data-portfolio-index="${realIdx}">
-      <img src="${s.img}" alt="${title}" loading="lazy">
+      <img src="${s.img}" alt="${title}" loading="lazy" decoding="async">
       <div class="front-overlay">
         <div class="front-num">${s.num}</div>
         <div class="front-title">${title}</div>

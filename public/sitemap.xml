@@ -1,39 +1,321 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://www.pologenki.eu/</loc>
-    <lastmod>2026-07-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
+    <loc>https://pologenki.eu/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/" />
+    <image:image><image:loc>https://pologenki.eu/goods/cashew.webp</image:loc><image:title>Cashew Nuts</image:title></image:image>
+    <image:image><image:loc>https://pologenki.eu/goods/walnut.jpg</image:loc><image:title>Walnut Kernels</image:title></image:image>
+    <image:image><image:loc>https://pologenki.eu/goods/dates.png</image:loc><image:title>Dried Dates</image:title></image:image>
+    <image:image><image:loc>https://pologenki.eu/goods/candied.jpg</image:loc><image:title>Dried Papaya Dice</image:title></image:image>
+    <image:image><image:loc>https://pologenki.eu/goods/mango.jpg</image:loc><image:title>Dried Mango</image:title></image:image>
+    <image:image><image:loc>https://pologenki.eu/goods/walnut in shell.webp</image:loc><image:title>Walnuts in shell</image:title></image:image>
+    <image:image><image:loc>https://pologenki.eu/goods/redpeanuts.png</image:loc><image:title>Raw Peanuts</image:title></image:image>
+    <image:image><image:loc>https://pologenki.eu/goods/peanutSplit.jpg</image:loc><image:title>Blanched Peanuts</image:title></image:image>
+    <image:image><image:loc>https://pologenki.eu/goods/driedFruits.webp</image:loc><image:title>Dried Fruits</image:title></image:image>
+    <image:image><image:loc>https://pologenki.eu/goods/test.jpg</image:loc><image:title>Banana Chips</image:title></image:image>
+    <image:image><image:loc>https://pologenki.eu/images/portfolio/img002.jpg</image:loc><image:title>Meeting at the US Agriculture Stand — Gulfood Dubai 2023</image:title></image:image>
+    <image:image><image:loc>https://pologenki.eu/images/portfolio/img003.jpg</image:loc><image:title>Cashew Processing, Vietnam</image:title></image:image>
+    <image:image><image:loc>https://pologenki.eu/images/portfolio/img007.jpg</image:loc><image:title>Meeting with Golden Sun Supplier — Gulfood Dubai 2025</image:title></image:image>
+    <image:image><image:loc>https://pologenki.eu/images/portfolio/img013.jpg</image:loc><image:title>Anuga Cologne 2025</image:title></image:image>
+    <image:image><image:loc>https://pologenki.eu/images/portfolio/img014.jpg</image:loc><image:title>Negotiations with Baschi International — Anuga 2025</image:title></image:image>
+    <image:image><image:loc>https://pologenki.eu/images/portfolio/img008.jpg</image:loc><image:title>At Gulfood Dubai 2024</image:title></image:image>
+    <image:image><image:loc>https://pologenki.eu/images/portfolio/img011.jpg</image:loc><image:title>Factory Visit — Cashew Production in Côte d&#39;Ivoire, Africa</image:title></image:image>
+    <image:image><image:loc>https://pologenki.eu/images/portfolio/img012.jpg</image:loc><image:title>Quality Control at Cashew Factory — Côte d&#39;Ivoire, Africa</image:title></image:image>
+    <image:image><image:loc>https://pologenki.eu/images/portfolio/photo_2026-01-29_11-40-39.jpg</image:loc><image:title>At Gulfood Dubai 2026</image:title></image:image>
+    <image:image><image:loc>https://pologenki.eu/images/portfolio/photo_2026-01-26_15-51-28.jpg</image:loc><image:title>Meeting with Tunisian Supplier — Gulfood Dubai 2026</image:title></image:image>
+    <image:image><image:loc>https://pologenki.eu/images/portfolio/photo_2026-01-26_15-51-29.jpg</image:loc><image:title>Meeting with FIT Dates Supplier — Gulfood Dubai 2026</image:title></image:image>
+    <image:image><image:loc>https://pologenki.eu/images/portfolio/photo_2026-01-26_11-39-43.jpg</image:loc><image:title>Meeting with Gongli International General Trading — Gulfood Dubai 2026</image:title></image:image>
   </url>
   <url>
-    <loc>https://www.pologenki.eu/#products</loc>
-    <lastmod>2026-07-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://pologenki.eu/ru/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/" />
+
   </url>
   <url>
-    <loc>https://www.pologenki.eu/#services</loc>
-    <lastmod>2026-07-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://pologenki.eu/zh-cn/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/" />
+
   </url>
   <url>
-    <loc>https://www.pologenki.eu/#portfolio</loc>
-    <lastmod>2026-07-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://pologenki.eu/products/cashew/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/cashew/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/cashew/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/cashew/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/cashew/" />
+    <image:image><image:loc>https://pologenki.eu/goods/cashew.webp</image:loc><image:title>Cashew Nuts</image:title></image:image>
   </url>
   <url>
-    <loc>https://www.pologenki.eu/#partners</loc>
-    <lastmod>2026-07-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <loc>https://pologenki.eu/ru/products/cashew/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/cashew/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/cashew/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/cashew/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/cashew/" />
+    <image:image><image:loc>https://pologenki.eu/goods/cashew.webp</image:loc><image:title>Кешью</image:title></image:image>
   </url>
   <url>
-    <loc>https://www.pologenki.eu/#contact</loc>
-    <lastmod>2026-07-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://pologenki.eu/zh-cn/products/cashew/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/cashew/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/cashew/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/cashew/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/cashew/" />
+    <image:image><image:loc>https://pologenki.eu/goods/cashew.webp</image:loc><image:title>腰果</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/products/walnuts/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/walnuts/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/walnuts/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/walnuts/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/walnuts/" />
+    <image:image><image:loc>https://pologenki.eu/goods/walnut.jpg</image:loc><image:title>Walnut Kernels</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/ru/products/walnuts/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/walnuts/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/walnuts/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/walnuts/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/walnuts/" />
+    <image:image><image:loc>https://pologenki.eu/goods/walnut.jpg</image:loc><image:title>Ядра грецкого ореха</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/zh-cn/products/walnuts/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/walnuts/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/walnuts/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/walnuts/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/walnuts/" />
+    <image:image><image:loc>https://pologenki.eu/goods/walnut.jpg</image:loc><image:title>核桃仁</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/products/dates/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/dates/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/dates/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/dates/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/dates/" />
+    <image:image><image:loc>https://pologenki.eu/goods/dates.png</image:loc><image:title>Dried Dates</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/ru/products/dates/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/dates/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/dates/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/dates/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/dates/" />
+    <image:image><image:loc>https://pologenki.eu/goods/dates.png</image:loc><image:title>Сушеные финики</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/zh-cn/products/dates/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/dates/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/dates/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/dates/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/dates/" />
+    <image:image><image:loc>https://pologenki.eu/goods/dates.png</image:loc><image:title>椰枣干</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/products/papaya/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/papaya/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/papaya/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/papaya/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/papaya/" />
+    <image:image><image:loc>https://pologenki.eu/goods/candied.jpg</image:loc><image:title>Dried Papaya Dice</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/ru/products/papaya/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/papaya/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/papaya/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/papaya/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/papaya/" />
+    <image:image><image:loc>https://pologenki.eu/goods/candied.jpg</image:loc><image:title>Сушеная папайя кубиками</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/zh-cn/products/papaya/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/papaya/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/papaya/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/papaya/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/papaya/" />
+    <image:image><image:loc>https://pologenki.eu/goods/candied.jpg</image:loc><image:title>木瓜干丁</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/products/mango/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/mango/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/mango/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/mango/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/mango/" />
+    <image:image><image:loc>https://pologenki.eu/goods/mango.jpg</image:loc><image:title>Dried Mango</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/ru/products/mango/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/mango/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/mango/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/mango/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/mango/" />
+    <image:image><image:loc>https://pologenki.eu/goods/mango.jpg</image:loc><image:title>Сушеный манго</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/zh-cn/products/mango/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/mango/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/mango/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/mango/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/mango/" />
+    <image:image><image:loc>https://pologenki.eu/goods/mango.jpg</image:loc><image:title>芒果干</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/products/walnuts-shell/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/walnuts-shell/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/walnuts-shell/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/walnuts-shell/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/walnuts-shell/" />
+    <image:image><image:loc>https://pologenki.eu/goods/walnut in shell.webp</image:loc><image:title>Walnuts in shell</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/ru/products/walnuts-shell/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/walnuts-shell/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/walnuts-shell/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/walnuts-shell/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/walnuts-shell/" />
+    <image:image><image:loc>https://pologenki.eu/goods/walnut in shell.webp</image:loc><image:title>Грецкие орехи в скорлупе</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/zh-cn/products/walnuts-shell/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/walnuts-shell/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/walnuts-shell/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/walnuts-shell/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/walnuts-shell/" />
+    <image:image><image:loc>https://pologenki.eu/goods/walnut in shell.webp</image:loc><image:title>带壳核桃</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/products/peanuts/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/peanuts/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/peanuts/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/peanuts/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/peanuts/" />
+    <image:image><image:loc>https://pologenki.eu/goods/redpeanuts.png</image:loc><image:title>Raw Peanuts</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/ru/products/peanuts/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/peanuts/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/peanuts/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/peanuts/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/peanuts/" />
+    <image:image><image:loc>https://pologenki.eu/goods/redpeanuts.png</image:loc><image:title>Сырой арахис</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/zh-cn/products/peanuts/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/peanuts/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/peanuts/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/peanuts/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/peanuts/" />
+    <image:image><image:loc>https://pologenki.eu/goods/redpeanuts.png</image:loc><image:title>生花生</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/products/peanuts-blanched/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/peanuts-blanched/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/peanuts-blanched/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/peanuts-blanched/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/peanuts-blanched/" />
+    <image:image><image:loc>https://pologenki.eu/goods/peanutSplit.jpg</image:loc><image:title>Blanched Peanuts</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/ru/products/peanuts-blanched/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/peanuts-blanched/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/peanuts-blanched/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/peanuts-blanched/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/peanuts-blanched/" />
+    <image:image><image:loc>https://pologenki.eu/goods/peanutSplit.jpg</image:loc><image:title>Бланшированный арахис</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/zh-cn/products/peanuts-blanched/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/peanuts-blanched/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/peanuts-blanched/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/peanuts-blanched/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/peanuts-blanched/" />
+    <image:image><image:loc>https://pologenki.eu/goods/peanutSplit.jpg</image:loc><image:title>脱皮花生</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/products/dried-fruits/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/dried-fruits/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/dried-fruits/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/dried-fruits/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/dried-fruits/" />
+    <image:image><image:loc>https://pologenki.eu/goods/driedFruits.webp</image:loc><image:title>Dried Fruits</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/ru/products/dried-fruits/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/dried-fruits/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/dried-fruits/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/dried-fruits/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/dried-fruits/" />
+    <image:image><image:loc>https://pologenki.eu/goods/driedFruits.webp</image:loc><image:title>Сушеные фрукты</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/zh-cn/products/dried-fruits/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/dried-fruits/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/dried-fruits/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/dried-fruits/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/dried-fruits/" />
+    <image:image><image:loc>https://pologenki.eu/goods/driedFruits.webp</image:loc><image:title>混合果干</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/products/banana-chips/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/banana-chips/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/banana-chips/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/banana-chips/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/banana-chips/" />
+    <image:image><image:loc>https://pologenki.eu/goods/test.jpg</image:loc><image:title>Banana Chips</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/ru/products/banana-chips/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/banana-chips/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/banana-chips/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/banana-chips/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/banana-chips/" />
+    <image:image><image:loc>https://pologenki.eu/goods/test.jpg</image:loc><image:title>Банановые чипсы</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://pologenki.eu/zh-cn/products/banana-chips/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/banana-chips/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/banana-chips/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/banana-chips/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/banana-chips/" />
+    <image:image><image:loc>https://pologenki.eu/goods/test.jpg</image:loc><image:title>香蕉片</image:title></image:image>
   </url>
 </urlset>

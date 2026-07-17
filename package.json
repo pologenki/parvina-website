@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "validate:data": "node scripts/validate-data.mjs",
-    "build": "vite build",
+    "generate:seo": "node scripts/generate-seo-pages.mjs",
+    "validate:seo": "node scripts/validate-seo.mjs",
+    "build": "npm run generate:seo && npm run validate:seo && vite build --config src/vite.config.js",
     "preview": "vite preview"
   },
   "devDependencies": {

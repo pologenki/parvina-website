@@ -66,6 +66,12 @@ function withMessage(link, message) {
   return `${link}${separator}${param}=${encodeURIComponent(message)}`;
 }
 
+function getProductPageUrl(product, lang) {
+  const languagePrefix = lang === "ru" ? "/ru" : lang === "cn" ? "/zh-cn" : "";
+  const productSlug = encodeURIComponent(product.id || "product");
+  return `${languagePrefix}/products/${productSlug}/`;
+}
+
 function renderProductCards(products, lang) {
   return products
     .map((product, index) => {
@@ -73,17 +79,18 @@ function renderProductCards(products, lang) {
       const desc = getProductText(product, "desc", lang);
       const origin = getProductText(product, "origin", lang);
       const originLabel = t("products.origin");
+      const productPageUrl = getProductPageUrl(product, lang);
 
       return `
       <div class="pricing-card" data-modal="modal-${product.id}">
         <div class="product-image">
-          <img src="/${product.image}" alt="${name}">
+          <img src="/${product.image}" alt="${name}" loading="lazy" decoding="async">
         </div>
         <h3>${name}</h3>
         <p class="product-desc">${desc}</p>
         <p class="product-origin">${originLabel}: ${origin}</p>
         <p class="price">${getPriceText(product.mainPrice, lang)}</p>
-        <a href="#" class="btn-more" data-i18n="products.viewDetails">${t("products.viewDetails")}</a>
+        <a href="${productPageUrl}" class="btn-more" data-i18n="products.viewDetails">${t("products.viewDetails")}</a>
       </div>
     `;
     })
@@ -144,7 +151,7 @@ function renderProductModals(products, lang, personal) {
           <div class="modal-header">
             <div class="modal-product-hero">
               <div class="modal-product-image">
-                <img src="/${product.image}" alt="${name}">
+                <img src="/${product.image}" alt="${name}" loading="lazy" decoding="async">
               </div>
               <div class="modal-product-summary">
                 <span class="modal-product-label" data-i18n="products.productSnapshot">${t("products.productSnapshot")}</span>
@@ -298,7 +305,7 @@ export function Content() {
         
         <div class="about-image">
           <div class="about-visual-card">
-            <img src="${personal.about.photo}" alt="${personal.about.photoAlt || personal.about.title}" class="profile-photo" id="aboutPhoto">
+            <img src="${personal.about.photo}" alt="${personal.about.photoAlt || personal.about.title}" class="profile-photo" id="aboutPhoto" width="1148" height="1371" fetchpriority="high" decoding="async">
           </div>
         </div>
       </div>

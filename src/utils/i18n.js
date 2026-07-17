@@ -3,7 +3,15 @@ let translations = {};
 const translationsCache = {};
 const supportedLanguages = ["en", "ru", "cn"];
 
+export function getLanguageFromPath(pathname = window.location.pathname) {
+  const normalized = `/${String(pathname || "").replace(/^\/+|\/+$/g, "").toLowerCase()}/`;
+  if (normalized === "/ru/" || normalized.startsWith("/ru/")) return "ru";
+  if (normalized === "/zh-cn/" || normalized.startsWith("/zh-cn/")) return "cn";
+  return "en";
+}
+
 export async function initLanguage() {
+  const pathLanguage = getLanguageFromPath();
   const savedLanguage = localStorage.getItem("preferredLanguage");
   const browserLanguage = navigator.language.startsWith("zh")
     ? "cn"
@@ -11,7 +19,9 @@ export async function initLanguage() {
 
   let lang = "en";
 
-  if (savedLanguage && supportedLanguages.includes(savedLanguage)) {
+  if (pathLanguage && supportedLanguages.includes(pathLanguage)) {
+    lang = pathLanguage;
+  } else if (savedLanguage && supportedLanguages.includes(savedLanguage)) {
     lang = savedLanguage;
   } else if (supportedLanguages.includes(browserLanguage)) {
     lang = browserLanguage;
@@ -34,7 +44,7 @@ export async function loadTranslations(lang) {
     currentLanguage = targetLang;
 
     localStorage.setItem("preferredLanguage", targetLang);
-    document.documentElement.lang = targetLang;
+    document.documentElement.lang = targetLang === "cn" ? "zh-CN" : targetLang;
 
     return true;
   } catch (error) {
