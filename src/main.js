@@ -337,6 +337,10 @@ async function renderApp() {
 
   // Set current date
   setCurrentDate();
+
+  requestAnimationFrame(() => {
+    document.documentElement.classList.remove("app-loading");
+  });
 }
 
 // Application initialization
@@ -757,7 +761,10 @@ window.changeLanguage = async function (lang) {
 };
 
 // Start the application
-initApp();
+initApp().catch((error) => {
+  console.error("Application initialization failed", error);
+  document.documentElement.classList.remove("app-loading");
+});
 
 // Services Modal Function
 function initServiceModals() {

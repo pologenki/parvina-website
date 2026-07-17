@@ -9,7 +9,7 @@ const errors = [];
 
 for (const page of pages) {
   const html = await readFile(page.path, 'utf8');
-  if (!html.includes(`<html lang="${page.lang}">`)) errors.push(`${page.path}: incorrect html lang`);
+  if (!new RegExp(`<html[^>]*lang="${page.lang}"`).test(html)) errors.push(`${page.path}: incorrect html lang`);
   if (!/<title>[^<]{20,}[^<]*<\/title>/.test(html)) errors.push(`${page.path}: missing descriptive title`);
   const description = html.match(/<meta name="description" content="([^"]+)"/)?.[1] || '';
   const minimumDescriptionLength = page.lang === 'zh-CN' ? 35 : 80;
@@ -83,7 +83,8 @@ for (const image of [
   'public/optimized/ParvinaFoto-768.webp',
   'public/optimized/ParvinaFoto-1148.webp',
   'public/optimized/Logo2-160.webp',
-  'public/optimized/Logo2-compact-160.webp'
+  'public/optimized/Logo2-compact-160.webp',
+  'public/optimized/Logo2-sharp-320.png'
 ]) {
   try {
     const imageStat = await stat(image);

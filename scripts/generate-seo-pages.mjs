@@ -170,7 +170,7 @@ function renderProductPage(product, localeKey) {
   </style>
 </head>
 <body>
-  <header><a href="${locale.prefix || '/'}"><img src="/optimized/Logo2-160.webp" alt="Pologenki" width="160" height="160" /></a><nav class="languages" aria-label="Language"><a href="${productUrl(product, 'en')}" lang="en">EN</a><a href="${productUrl(product, 'ru')}" lang="ru">RU</a><a href="${productUrl(product, 'cn')}" lang="zh-CN">中文</a></nav></header>
+  <header><a href="${locale.prefix || '/'}"><img src="/optimized/Logo2-sharp-320.png" alt="Pologenki" width="320" height="320" /></a><nav class="languages" aria-label="Language"><a href="${productUrl(product, 'en')}" lang="en">EN</a><a href="${productUrl(product, 'ru')}" lang="ru">RU</a><a href="${productUrl(product, 'cn')}" lang="zh-CN">中文</a></nav></header>
   <main class="page">
     <div class="hero">
       <div class="photo"><img src="${optimizedImagePath(product.image, 480)}" srcset="${optimizedImagePath(product.image, 240)} 240w, ${optimizedImagePath(product.image, 480)} 480w" sizes="(max-width:760px) calc(100vw - 84px), 372px" alt="${esc(name)}" width="480" height="480" fetchpriority="high" /></div>

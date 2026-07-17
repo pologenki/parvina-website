@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" class="app-loading">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -58,8 +58,10 @@
     </script>
 
     <style>
+      html.app-loading #app{visibility:hidden}html.app-loading body{background:#f8fafb}
       .seo-fallback{max-width:1180px;margin:0 auto;padding:72px 28px;font:16px/1.6 Arial,sans-serif;color:#17212b;background:#f8fafb}.seo-fallback__hero{display:grid;grid-template-columns:1.1fr .9fr;gap:52px;align-items:center}.seo-fallback h1{max-width:700px;margin:8px 0 18px;font:600 50px/1.05 Georgia,serif}.seo-fallback h2{margin:44px 0 12px;font:600 30px/1.15 Georgia,serif}.seo-fallback img{width:100%;height:auto;border-radius:8px}.seo-fallback nav,.seo-fallback__links{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}.seo-fallback a{color:#111}.seo-fallback__button{padding:11px 18px;border:1px solid #111;text-decoration:none}.seo-fallback__eyebrow{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}@media(max-width:700px){.seo-fallback{padding:40px 20px}.seo-fallback__hero{grid-template-columns:1fr}.seo-fallback h1{font-size:36px}}
     </style>
+    <noscript><style>html.app-loading #app{visibility:visible}</style></noscript>
 
     <script async src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>window.addEventListener("load",function(){try{if(typeof emailjs!=="undefined")emailjs.init("W3bvjuiX0qzwtRVBw")}catch(e){}});</script>

@@ -41,12 +41,22 @@ async function createCompactLogo(width) {
     .toFile(output);
 }
 
+async function createSharpLogo() {
+  const output = join(outputDir, 'Logo2-sharp-320.png');
+  await mkdir(dirname(output), { recursive: true });
+  await sharp(join(publicDir, 'Logo2.png'))
+    .resize({ width: 320, height: 320, fit: 'inside' })
+    .png({ compressionLevel: 9, adaptiveFiltering: true })
+    .toFile(output);
+}
+
 await rm(outputDir, { recursive: true, force: true });
 
 const jobs = [
   ...[480, 768, 1148].map(width => createVariant('ParvinaFoto.png', width, 84)),
   ...[160, 320].map(width => createVariant('Logo2.png', width, 88)),
   ...[160, 320].map(width => createCompactLogo(width)),
+  createSharpLogo(),
   ...products.flatMap(product => [240, 480].map(width => createVariant(product.image, width, 82))),
   ...portfolio
     .filter(item => item.published !== false && item.img)
@@ -54,4 +64,4 @@ const jobs = [
 ];
 
 await Promise.all(jobs);
-console.log(`Generated ${jobs.length} responsive WebP images.`);
+console.log(`Generated ${jobs.length} optimized responsive images.`);
