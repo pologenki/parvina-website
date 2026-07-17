@@ -2,7 +2,7 @@
   return `
   <section class="et-hero-tabs">
     <div class="logo">
-      <img src="/Logo2.png" alt="Pologenki" width="1024" height="1024">
+      <img src="/optimized/Logo2-160.webp" srcset="/optimized/Logo2-160.webp 160w, /optimized/Logo2-320.webp 320w" sizes="132px" alt="Pologenki" width="160" height="160">
     </div>
 
     <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation">
@@ -38,7 +38,7 @@
       <a class="et-hero-tab" href="#contact" data-section="contact" data-i18n="nav.contact">Get In Touch</a>
 
       <button class="et-hero-tab logo-tab" type="button" aria-label="Back to top">
-        <img src="/Logo2.png" alt="Pologenki" class="header-logo" width="1024" height="1024">
+        <img src="/optimized/Logo2-160.webp" srcset="/optimized/Logo2-160.webp 160w, /optimized/Logo2-320.webp 320w" sizes="132px" alt="Pologenki" class="header-logo" width="160" height="160">
       </button>
     </div>
   </section>

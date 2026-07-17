@@ -6,12 +6,14 @@
   "scripts": {
     "dev": "vite",
     "validate:data": "node scripts/validate-data.mjs",
-    "generate:seo": "node scripts/generate-seo-pages.mjs",
+    "optimize:images": "node scripts/optimize-images.mjs",
+    "generate:seo": "node scripts/generate-seo-pages.mjs && node scripts/generate-service-pages.mjs",
     "validate:seo": "node scripts/validate-seo.mjs",
-    "build": "npm run generate:seo && npm run validate:seo && vite build --config src/vite.config.js",
+    "build": "npm run optimize:images && npm run generate:seo && npm run validate:seo && vite build --config src/vite.config.js",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "sharp": "^0.35.3",
     "vite": "^7.3.6"
   }
 }

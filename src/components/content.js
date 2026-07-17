@@ -2,12 +2,27 @@ import { personalEn } from "../content/content-en.js";
 import { personalRu } from "../content/content-ru.js";
 import { personalCn } from "../content/content-cn.js";
 import { getCurrentLanguage, t } from "../utils/i18n.js";
+import { responsiveImagePath, responsiveImageSrcset } from "../utils/responsiveImage.js";
 
 function getPersonalData() {
   const lang = localStorage.getItem("preferredLanguage") || "en";
   if (lang === "ru") return personalRu;
   if (lang === "cn") return personalCn;
   return personalEn;
+}
+
+const serviceSlugs = [
+  "supplier-sourcing",
+  "contract-negotiation",
+  "logistics-coordination",
+  "trade-documentation",
+  "shipment-monitoring",
+  "full-service-import",
+];
+
+function getServicePageUrl(index, lang) {
+  const prefix = lang === "ru" ? "/ru" : lang === "cn" ? "/zh-cn" : "";
+  return `${prefix}/services/${serviceSlugs[index]}/`;
 }
 
 // Load products from products.json and render
@@ -84,7 +99,7 @@ function renderProductCards(products, lang) {
       return `
       <div class="pricing-card" data-modal="modal-${product.id}">
         <div class="product-image">
-          <img src="/${product.image}" alt="${name}" loading="lazy" decoding="async">
+          <img src="${responsiveImagePath(product.image, 480)}" srcset="${responsiveImageSrcset(product.image, [240, 480])}" sizes="(max-width: 640px) 42vw, 190px" alt="${name}" width="480" height="480" loading="lazy" decoding="async">
         </div>
         <h3>${name}</h3>
         <p class="product-desc">${desc}</p>
@@ -151,7 +166,7 @@ function renderProductModals(products, lang, personal) {
           <div class="modal-header">
             <div class="modal-product-hero">
               <div class="modal-product-image">
-                <img src="/${product.image}" alt="${name}" loading="lazy" decoding="async">
+                <img src="${responsiveImagePath(product.image, 480)}" srcset="${responsiveImageSrcset(product.image, [240, 480])}" sizes="(max-width: 768px) 72vw, 300px" alt="${name}" width="480" height="480" loading="lazy" decoding="async">
               </div>
               <div class="modal-product-summary">
                 <span class="modal-product-label" data-i18n="products.productSnapshot">${t("products.productSnapshot")}</span>
@@ -305,7 +320,7 @@ export function Content() {
         
         <div class="about-image">
           <div class="about-visual-card">
-            <img src="${personal.about.photo}" alt="${personal.about.photoAlt || personal.about.title}" class="profile-photo" id="aboutPhoto" width="1148" height="1371" fetchpriority="high" decoding="async">
+            <img src="${responsiveImagePath(personal.about.photo, 768)}" srcset="${responsiveImageSrcset(personal.about.photo, [480, 768, 1148])}" sizes="(max-width: 768px) calc(100vw - 40px), 480px" alt="${personal.about.photoAlt || personal.about.title}" class="profile-photo" id="aboutPhoto" width="1148" height="1371" fetchpriority="high" decoding="async">
           </div>
         </div>
       </div>
@@ -347,10 +362,10 @@ ${renderProductModals(products, lang, personal)}
           <h3 class="service-name" data-i18n="services.supplierSourcing">Supplier Sourcing</h3>
           <span class="service-outcome" data-i18n="services.sourcingOutcome">${t("services.sourcingOutcome")}</span>
           <p class="service-description" data-i18n="services.supplierDescription">Finding reliable suppliers worldwide with thorough due diligence and quality verification for nuts, dried fruits, and spices.</p>
-          <div class="read-more-btn">
+          <a class="read-more-btn service-page-link" href="${getServicePageUrl(0, lang)}">
             <span data-i18n="services.readMore">Read More</span>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="currentColor"/></svg>
-          </div>
+          </a>
         </div>
         
         <div class="service-card" data-service-modal="modal2">
@@ -359,10 +374,10 @@ ${renderProductModals(products, lang, personal)}
           <h3 class="service-name" data-i18n="services.contractNegotiation">Contract Negotiation</h3>
           <span class="service-outcome" data-i18n="services.negotiationOutcome">${t("services.negotiationOutcome")}</span>
           <p class="service-description" data-i18n="services.contractDescription">Securing optimal terms and pricing through expert negotiation while protecting client interests in international deals.</p>
-          <div class="read-more-btn">
+          <a class="read-more-btn service-page-link" href="${getServicePageUrl(1, lang)}">
             <span data-i18n="services.readMore">Read More</span>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="currentColor"/></svg>
-          </div>
+          </a>
         </div>
         
         <div class="service-card" data-service-modal="modal3">
@@ -371,10 +386,10 @@ ${renderProductModals(products, lang, personal)}
           <h3 class="service-name" data-i18n="services.logisticsManagement">Logistics Management</h3>
           <span class="service-outcome" data-i18n="services.logisticsOutcome">${t("services.logisticsOutcome")}</span>
           <p class="service-description" data-i18n="services.logisticsDescription">Coordinating seamless transportation with trusted partners and optimizing supply chain routes for cost efficiency.</p>
-          <div class="read-more-btn">
+          <a class="read-more-btn service-page-link" href="${getServicePageUrl(2, lang)}">
             <span data-i18n="services.readMore">Read More</span>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="currentColor"/></svg>
-          </div>
+          </a>
         </div>
         
         <div class="service-card" data-service-modal="modal4">
@@ -383,10 +398,10 @@ ${renderProductModals(products, lang, personal)}
           <h3 class="service-name" data-i18n="services.tradeDocumentation">Trade Documentation</h3>
           <span class="service-outcome" data-i18n="services.documentsOutcome">${t("services.documentsOutcome")}</span>
           <p class="service-description" data-i18n="services.documentationDescription">Handling complete customs documentation and compliance to ensure smooth customs clearance and timely delivery.</p>
-          <div class="read-more-btn">
+          <a class="read-more-btn service-page-link" href="${getServicePageUrl(3, lang)}">
             <span data-i18n="services.readMore">Read More</span>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="currentColor"/></svg>
-          </div>
+          </a>
         </div>
         
         <div class="service-card" data-service-modal="modal5">
@@ -395,10 +410,10 @@ ${renderProductModals(products, lang, personal)}
           <h3 class="service-name" data-i18n="services.shipmentMonitoring">Shipment Monitoring</h3>
           <span class="service-outcome" data-i18n="services.monitoringOutcome">${t("services.monitoringOutcome")}</span>
           <p class="service-description" data-i18n="services.monitoringDescription">Every shipment is tracked daily — from loading to final delivery. I monitor all logistics stages to ensure deadlines and product safety.</p>
-          <div class="read-more-btn">
+          <a class="read-more-btn service-page-link" href="${getServicePageUrl(4, lang)}">
             <span data-i18n="services.readMore">Read More</span>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="currentColor"/></svg>
-          </div>
+          </a>
         </div>
         
         <div class="service-card" data-service-modal="modal6">
@@ -407,10 +422,10 @@ ${renderProductModals(products, lang, personal)}
           <h3 class="service-name" data-i18n="services.fullServiceImport">Full-Service Import</h3>
           <span class="service-outcome" data-i18n="services.fullOutcome">${t("services.fullOutcome")}</span>
           <p class="service-description" data-i18n="services.importDescription">End-to-end import solutions tailored to your business needs - from sourcing to final delivery at your warehouse.</p>
-          <div class="read-more-btn">
+          <a class="read-more-btn service-page-link" href="${getServicePageUrl(5, lang)}">
             <span data-i18n="services.readMore">Read More</span>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="currentColor"/></svg>
-          </div>
+          </a>
         </div>
       </div>
     </div>

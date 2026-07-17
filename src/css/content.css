@@ -122,6 +122,10 @@ body {
   gap:12px;
 }
 
+.service-page-link {
+  text-decoration: none;
+}
+
 .language-option:last-child {
   border-bottom:none;
 }

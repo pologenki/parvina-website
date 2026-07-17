@@ -14,6 +14,11 @@ const locales = {
     prefix: '', lang: 'en', locale: 'en_US',
     catalogue: 'Product catalogue', origin: 'Origin', grades: 'Available grades and packing',
     request: 'Request current price and delivery terms', back: 'Back to all products',
+    coordinationTitle: 'Import coordination available',
+    coordinationText: 'Support can include supplier communication, specification checks, packing confirmation, export documents and cargo delivery coordination.',
+    requestDetailsTitle: 'Include in your request',
+    requestDetails: ['Required grade or specification', 'Approximate order volume', 'Destination and preferred delivery timing'],
+    servicesLink: 'View import management services',
     description: name => `${name} for wholesale import. Review available grades, origin, packing information and current indicative price.`,
     pageTitle: name => `${name} Wholesale Import | Grades & Price | Pologenki`
   },
@@ -21,6 +26,11 @@ const locales = {
     prefix: '/ru', lang: 'ru', locale: 'ru_RU',
     catalogue: 'Каталог товаров', origin: 'Происхождение', grades: 'Доступные сорта и упаковка',
     request: 'Запросить актуальную цену и условия доставки', back: 'Вернуться ко всем товарам',
+    coordinationTitle: 'Доступно сопровождение импорта',
+    coordinationText: 'Помощь может включать связь с поставщиком, проверку спецификации, подтверждение упаковки, экспортные документы и координацию доставки груза.',
+    requestDetailsTitle: 'Укажите в запросе',
+    requestDetails: ['Необходимый сорт или спецификацию', 'Примерный объем заказа', 'Пункт назначения и желаемые сроки'],
+    servicesLink: 'Посмотреть услуги по управлению импортом',
     description: name => `${name} для оптового импорта. Доступные сорта, происхождение, упаковка и актуальная ориентировочная цена.`,
     pageTitle: name => `${name} оптом | Сорта и цена | Pologenki`
   },
@@ -28,6 +38,11 @@ const locales = {
     prefix: '/zh-cn', lang: 'zh-CN', locale: 'zh_CN',
     catalogue: '产品目录', origin: '产地', grades: '可供等级与包装',
     request: '咨询当前价格与交货条件', back: '返回全部产品',
+    coordinationTitle: '可提供进口协调支持',
+    coordinationText: '支持范围可包括供应商沟通、规格确认、包装核对、出口文件和货运协调。',
+    requestDetailsTitle: '询价时请提供',
+    requestDetails: ['所需等级或规格', '预计订购数量', '目的地和期望交货时间'],
+    servicesLink: '查看进口管理服务',
     description: name => `${name}批量进口信息，包括产品等级、产地、包装和当前参考价格。`,
     pageTitle: name => `${name}批量进口、等级与价格 | Pologenki`
   }
@@ -67,6 +82,13 @@ function productUrl(product, locale) {
   return `${baseUrl}${locales[locale].prefix}/products/${encodeURIComponent(product.id)}/`;
 }
 
+function optimizedImagePath(source, width) {
+  const normalized = String(source || '').replace(/^\/+/, '');
+  const extensionIndex = normalized.lastIndexOf('.');
+  const base = extensionIndex >= 0 ? normalized.slice(0, extensionIndex) : normalized;
+  return `/optimized/${base}-${width}.webp`;
+}
+
 function alternateLinks(product) {
   return [
     `<link rel="alternate" hreflang="en" href="${productUrl(product, 'en')}" />`,
@@ -102,7 +124,7 @@ function renderProductPage(product, localeKey) {
     '@graph': [
       {
         '@type': 'Product', '@id': `${canonical}#product`, name, description: locale.description(name),
-        image: [image], category: 'Nuts, dried fruits and food ingredients',
+        image: [`${baseUrl}${optimizedImagePath(product.image, 480)}`, image], category: 'Nuts, dried fruits and food ingredients',
         countryOfOrigin: origin ? { '@type': 'Country', name: origin } : undefined,
         offers: offerSchema(product, canonical)
       },
@@ -144,17 +166,18 @@ function renderProductPage(product, localeKey) {
   <meta property="og:locale" content="${locale.locale}" />
   <script type="application/ld+json">${JSON.stringify(schema)}</script>
   <style>
-    *{box-sizing:border-box}body{margin:0;background:#f6f8fa;color:#17212b;font:16px/1.55 Arial,sans-serif}header{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 max(24px,calc((100% - 1120px)/2));background:#fff;border-top:4px solid #222;border-bottom:1px solid #dfe5e9}header img{width:132px;height:58px;object-fit:contain}header a{color:#17212b;text-decoration:none}.page{max-width:1120px;margin:0 auto;padding:54px 24px 72px}.hero{display:grid;grid-template-columns:420px 1fr;gap:54px;align-items:center}.photo{aspect-ratio:1;background:#fff;border:1px solid #dbe3e8;padding:24px}.photo img{width:100%;height:100%;object-fit:contain}.eyebrow{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#607080}h1{margin:8px 0 10px;font:600 46px/1.05 Georgia,serif}h2{margin:54px 0 18px;font:600 30px/1.2 Georgia,serif}.meta{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}.meta span,.price{padding:8px 12px;border:1px solid #dbe3e8;background:#fff}.price{display:inline-block;font-size:20px;font-weight:700}.cta{display:inline-block;margin-top:20px;padding:13px 20px;background:#111;color:#fff;text-decoration:none}.grades{display:grid;gap:10px}.grade{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;padding:20px;background:#fff;border:1px solid #dbe3e8}.grade h3{margin:0 0 6px;font-size:17px}.grade p{margin:0;color:#53616e}.grade strong{white-space:nowrap;padding:6px 10px;background:#eef7ff;border:1px solid #b8ddfb}.languages{display:flex;gap:14px}.languages a{text-decoration:underline}@media(max-width:760px){header{padding:0 18px}.page{padding:32px 18px 56px}.hero{grid-template-columns:1fr;gap:28px}.photo{max-width:420px}h1{font-size:36px}.grade{grid-template-columns:1fr}.grade strong{justify-self:start}}
+    *{box-sizing:border-box}body{margin:0;background:#f6f8fa;color:#17212b;font:16px/1.55 Arial,sans-serif}header{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 max(24px,calc((100% - 1120px)/2));background:#fff;border-top:4px solid #222;border-bottom:1px solid #dfe5e9}header img{width:132px;height:58px;object-fit:contain}header a{color:#17212b;text-decoration:none}.page{max-width:1120px;margin:0 auto;padding:54px 24px 72px}.hero{display:grid;grid-template-columns:420px 1fr;gap:54px;align-items:center}.photo{aspect-ratio:1;background:#fff;border:1px solid #dbe3e8;padding:24px}.photo img{width:100%;height:100%;object-fit:contain}.eyebrow{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#607080}h1{margin:8px 0 10px;font:600 46px/1.05 Georgia,serif}h2{margin:54px 0 18px;font:600 30px/1.2 Georgia,serif}.meta{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}.meta span,.price{padding:8px 12px;border:1px solid #dbe3e8;background:#fff}.price{display:inline-block;font-size:20px;font-weight:700}.cta{display:inline-block;margin-top:20px;padding:13px 20px;background:#111;color:#fff;text-decoration:none}.grades{display:grid;gap:10px}.grade{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;padding:20px;background:#fff;border:1px solid #dbe3e8}.grade h3{margin:0 0 6px;font-size:17px}.grade p{margin:0;color:#53616e}.grade strong{white-space:nowrap;padding:6px 10px;background:#eef7ff;border:1px solid #b8ddfb}.support-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}.support-panel{padding:24px;background:#fff;border:1px solid #dbe3e8}.support-panel h2{margin:0 0 12px;font:600 24px/1.2 Georgia,serif}.support-panel ul{margin:0;padding-left:20px}.support-link{display:inline-block;margin-top:14px}.languages{display:flex;gap:14px}.languages a{text-decoration:underline}@media(max-width:760px){header{padding:0 18px}.page{padding:32px 18px 56px}.hero{grid-template-columns:1fr;gap:28px}.photo{max-width:420px}h1{font-size:36px}.grade{grid-template-columns:1fr}.grade strong{justify-self:start}.support-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-  <header><a href="${locale.prefix || '/'}"><img src="/Logo2.png" alt="Pologenki" width="1024" height="1024" /></a><nav class="languages" aria-label="Language"><a href="${productUrl(product, 'en')}" lang="en">EN</a><a href="${productUrl(product, 'ru')}" lang="ru">RU</a><a href="${productUrl(product, 'cn')}" lang="zh-CN">中文</a></nav></header>
+  <header><a href="${locale.prefix || '/'}"><img src="/optimized/Logo2-160.webp" alt="Pologenki" width="160" height="160" /></a><nav class="languages" aria-label="Language"><a href="${productUrl(product, 'en')}" lang="en">EN</a><a href="${productUrl(product, 'ru')}" lang="ru">RU</a><a href="${productUrl(product, 'cn')}" lang="zh-CN">中文</a></nav></header>
   <main class="page">
     <div class="hero">
-      <div class="photo"><img src="/${esc(String(product.image || '').replace(/^\/+/, ''))}" alt="${esc(name)}" width="640" height="640" fetchpriority="high" /></div>
+      <div class="photo"><img src="${optimizedImagePath(product.image, 480)}" srcset="${optimizedImagePath(product.image, 240)} 240w, ${optimizedImagePath(product.image, 480)} 480w" sizes="(max-width:760px) calc(100vw - 84px), 372px" alt="${esc(name)}" width="480" height="480" fetchpriority="high" /></div>
       <div><p class="eyebrow">${locale.catalogue}</p><h1>${esc(name)}</h1><p>${esc(description)}</p><div class="meta"><span>${locale.origin}: ${esc(origin)}</span></div><div class="price">${esc(product.mainPrice || '')}</div><br><a class="cta" href="mailto:info@pologenki.eu?subject=${encodeURIComponent(name)}">${locale.request}</a></div>
     </div>
     <section><h2>${locale.grades}</h2><div class="grades">${variants}</div></section>
+    <div class="support-grid"><section class="support-panel"><h2>${locale.coordinationTitle}</h2><p>${locale.coordinationText}</p><a class="support-link" href="${locale.prefix || ''}/services/full-service-import/">${locale.servicesLink}</a></section><section class="support-panel"><h2>${locale.requestDetailsTitle}</h2><ul>${locale.requestDetails.map(item => `<li>${item}</li>`).join('')}</ul></section></div>
     <p><a href="${locale.prefix || '/'}#products">← ${locale.back}</a></p>
   </main>
 </body>

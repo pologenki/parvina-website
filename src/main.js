@@ -12,6 +12,7 @@ import {
 } from "./utils/i18n.js";
 import { initContactForm } from "./utils/emailService.js";
 import { Content, loadProducts } from "./components/content.js";
+import { responsiveImagePath, responsiveImageSrcset } from "./utils/responsiveImage.js";
 
 function trackEvent(eventName, params = {}) {
   if (typeof window === "undefined" || typeof window.gtag !== "function") {
@@ -479,7 +480,7 @@ async function initPortfolioFlipSlider() {
               : slide.title;
         return `
           <button class="zoom-thumb" type="button" data-zoom-index="${i}" aria-label="${title}">
-            <img src="${slide.img}" alt="${title}" loading="lazy" decoding="async">
+            <img src="${responsiveImagePath(slide.img, 480)}" srcset="${responsiveImageSrcset(slide.img, [480, 960])}" sizes="110px" alt="${title}" width="480" height="480" loading="lazy" decoding="async">
             <span>${slide.num}</span>
           </button>`;
       })
@@ -533,7 +534,7 @@ async function initPortfolioFlipSlider() {
     const viewPhoto = t("portfolio.viewPhoto");
     return `
     <div class="flip-card portfolio-project-card" data-portfolio-index="${realIdx}">
-      <img src="${s.img}" alt="${title}" loading="lazy" decoding="async">
+      <img src="${responsiveImagePath(s.img, 960)}" srcset="${responsiveImageSrcset(s.img, [480, 960])}" sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 900px) 46vw, 360px" alt="${title}" width="960" height="720" loading="lazy" decoding="async">
       <div class="front-overlay">
         <div class="front-num">${s.num}</div>
         <div class="front-title">${title}</div>
@@ -770,6 +771,7 @@ function initServiceModals() {
   // Open modal window when clicking on service card
   serviceCards.forEach((card) => {
     card.addEventListener("click", function (e) {
+      if (e.target.closest(".service-page-link")) return;
       const modalId = this.getAttribute("data-service-modal");
       const modal = document.getElementById(modalId);
       if (modal) {

@@ -16,6 +16,10 @@ dist-ssr
 public/products/
 public/ru/products/
 public/zh-cn/products/
+public/services/
+public/ru/services/
+public/zh-cn/services/
+public/optimized/
 
 # Editor directories and files
 .vscode/*

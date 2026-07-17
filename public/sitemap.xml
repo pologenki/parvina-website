@@ -318,4 +318,148 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/banana-chips/" />
     <image:image><image:loc>https://pologenki.eu/goods/test.jpg</image:loc><image:title>香蕉片</image:title></image:image>
   </url>
+  <url>
+    <loc>https://pologenki.eu/services/supplier-sourcing/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/supplier-sourcing/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/supplier-sourcing/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/supplier-sourcing/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/services/supplier-sourcing/" />
+  </url>
+  <url>
+    <loc>https://pologenki.eu/ru/services/supplier-sourcing/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/supplier-sourcing/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/supplier-sourcing/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/supplier-sourcing/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/services/supplier-sourcing/" />
+  </url>
+  <url>
+    <loc>https://pologenki.eu/zh-cn/services/supplier-sourcing/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/supplier-sourcing/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/supplier-sourcing/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/supplier-sourcing/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/services/supplier-sourcing/" />
+  </url>
+  <url>
+    <loc>https://pologenki.eu/services/contract-negotiation/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/contract-negotiation/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/contract-negotiation/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/contract-negotiation/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/services/contract-negotiation/" />
+  </url>
+  <url>
+    <loc>https://pologenki.eu/ru/services/contract-negotiation/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/contract-negotiation/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/contract-negotiation/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/contract-negotiation/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/services/contract-negotiation/" />
+  </url>
+  <url>
+    <loc>https://pologenki.eu/zh-cn/services/contract-negotiation/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/contract-negotiation/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/contract-negotiation/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/contract-negotiation/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/services/contract-negotiation/" />
+  </url>
+  <url>
+    <loc>https://pologenki.eu/services/logistics-coordination/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/logistics-coordination/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/logistics-coordination/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/logistics-coordination/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/services/logistics-coordination/" />
+  </url>
+  <url>
+    <loc>https://pologenki.eu/ru/services/logistics-coordination/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/logistics-coordination/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/logistics-coordination/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/logistics-coordination/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/services/logistics-coordination/" />
+  </url>
+  <url>
+    <loc>https://pologenki.eu/zh-cn/services/logistics-coordination/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/logistics-coordination/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/logistics-coordination/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/logistics-coordination/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/services/logistics-coordination/" />
+  </url>
+  <url>
+    <loc>https://pologenki.eu/services/trade-documentation/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/trade-documentation/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/trade-documentation/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/trade-documentation/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/services/trade-documentation/" />
+  </url>
+  <url>
+    <loc>https://pologenki.eu/ru/services/trade-documentation/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/trade-documentation/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/trade-documentation/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/trade-documentation/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/services/trade-documentation/" />
+  </url>
+  <url>
+    <loc>https://pologenki.eu/zh-cn/services/trade-documentation/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/trade-documentation/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/trade-documentation/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/trade-documentation/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/services/trade-documentation/" />
+  </url>
+  <url>
+    <loc>https://pologenki.eu/services/shipment-monitoring/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/shipment-monitoring/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/shipment-monitoring/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/shipment-monitoring/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/services/shipment-monitoring/" />
+  </url>
+  <url>
+    <loc>https://pologenki.eu/ru/services/shipment-monitoring/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/shipment-monitoring/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/shipment-monitoring/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/shipment-monitoring/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/services/shipment-monitoring/" />
+  </url>
+  <url>
+    <loc>https://pologenki.eu/zh-cn/services/shipment-monitoring/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/shipment-monitoring/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/shipment-monitoring/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/shipment-monitoring/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/services/shipment-monitoring/" />
+  </url>
+  <url>
+    <loc>https://pologenki.eu/services/full-service-import/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/full-service-import/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/full-service-import/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/full-service-import/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/services/full-service-import/" />
+  </url>
+  <url>
+    <loc>https://pologenki.eu/ru/services/full-service-import/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/full-service-import/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/full-service-import/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/full-service-import/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/services/full-service-import/" />
+  </url>
+  <url>
+    <loc>https://pologenki.eu/zh-cn/services/full-service-import/</loc>
+    <lastmod>2026-07-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/full-service-import/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/full-service-import/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/full-service-import/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/services/full-service-import/" />
+  </url>
 </urlset>
