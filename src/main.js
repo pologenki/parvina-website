@@ -14,6 +14,31 @@ import { initContactForm } from "./utils/emailService.js";
 import { Content, loadProducts } from "./components/content.js";
 import { responsiveImagePath, responsiveImageSrcset } from "./utils/responsiveImage.js";
 
+const LOGO_SCROLL_RESET_KEY = "pologenkiForceScrollTop";
+
+function applyLogoScrollReset() {
+  if (sessionStorage.getItem(LOGO_SCROLL_RESET_KEY) !== "1") return;
+
+  if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+  }
+
+  const resetPosition = () => window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  resetPosition();
+  document.addEventListener("DOMContentLoaded", resetPosition, { once: true });
+  window.addEventListener("pageshow", resetPosition, { once: true });
+  window.addEventListener("load", () => {
+    resetPosition();
+    requestAnimationFrame(resetPosition);
+    setTimeout(() => {
+      resetPosition();
+      sessionStorage.removeItem(LOGO_SCROLL_RESET_KEY);
+    }, 100);
+  }, { once: true });
+}
+
+applyLogoScrollReset();
+
 function trackEvent(eventName, params = {}) {
   if (typeof window === "undefined" || typeof window.gtag !== "function") {
     return;
@@ -1584,6 +1609,7 @@ function addLogoHandlers() {
       e.preventDefault();
       e.stopPropagation();
 
+      sessionStorage.setItem(LOGO_SCROLL_RESET_KEY, "1");
       window.location.reload();
     });
   });
