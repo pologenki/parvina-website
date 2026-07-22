@@ -144,32 +144,32 @@
       "origin": "China",
       "origin_ru": "Китай",
       "image": "goods/candied.jpg",
-      "mainPrice": "2,05 USD/kg",
+      "mainPrice": "2,25 USD/kg",
       "variants": [
         {
           "name": "Mixed Color - 8-10 mm",
-          "price": "2,05 USD/kg",
+          "price": "2,25 USD/kg",
           "desc": "Dried Papaya Dice mixed color (Green, Red, Yellow, Orange). Size 8-10 mm. FOB Shantou port.",
           "desc_ru": "Сушеная папайя кубиками смешанного цвета (зеленый, красный, желтый, оранжевый). Размер 8-10 мм. FOB порт Шаньтоу.",
           "desc_cn": ""
         },
         {
           "name": "Natural Color - 8-10 mm",
-          "price": "2,20 USD/kg",
+          "price": "2,30 USD/kg",
           "desc": "Dried Papaya Dice Natural color. Size 8-10 mm. FOB Shantou port.",
           "desc_ru": "Сушеная папайя кубиками натурального цвета. Размер 8-10 мм. FOB порт Шаньтоу.",
           "desc_cn": ""
         },
         {
           "name": "Mixed Color - 3-5 mm",
-          "price": "2,30 USD/kg",
+          "price": "2,40 USD/kg",
           "desc": "Dried Papaya Dice mixed color (Green, Red, Yellow, Orange). Size 3-5 mm. FOB Shantou port.",
           "desc_ru": "Сушеная папайя кубиками смешанного цвета (зеленый, красный, желтый, оранжевый). Размер 3-5 мм. FOB порт Шаньтоу.",
           "desc_cn": ""
         },
         {
           "name": "Natural Color - 3-5 mm",
-          "price": "2,40 USD/kg",
+          "price": "2,45 USD/kg",
           "desc": "Dried Papaya Dice Natural color. Size 3-5 mm. FOB Shantou port.",
           "desc_ru": "Сушеная папайя кубиками натурального цвета. Размер 3-5 мм. FOB порт Шаньтоу.",
           "desc_cn": ""
@@ -177,7 +177,14 @@
       ],
       "name_cn": "",
       "desc_cn": "",
-      "origin_cn": ""
+      "origin_cn": "",
+      "priceHistory": [
+        {
+          "date": "2026-07-22",
+          "from": "2,05 USD/kg",
+          "to": "2,25 USD/kg"
+        }
+      ]
     },
     {
       "id": "mango",
@@ -466,6 +473,10 @@
     }
   ],
   "changeLog": [
+    {
+      "date": "2026-07-22T10:06:46.738Z",
+      "message": "Products updated: 10 items"
+    },
     {
       "date": "2026-07-22T08:05:39.469Z",
       "message": "Products updated: 10 items"
