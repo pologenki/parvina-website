@@ -9247,6 +9247,37 @@ section.about-section .social-icon {
     top:12px;
     left:12px;
   }
+
+  .about-text .social-icons-wrapper {
+    width:100%;
+    margin-top:18px!important;
+  }
+
+  .about-text .social-icons {
+    width:100%;
+    display:flex!important;
+    flex-wrap:nowrap!important;
+    justify-content:center!important;
+    gap:10px!important;
+  }
+
+  .about-text .social-icon {
+    width:42px!important;
+    height:42px!important;
+    flex:0 0 42px;
+  }
+}
+
+@media (max-width: 360px) {
+  .about-text .social-icons {
+    gap:8px!important;
+  }
+
+  .about-text .social-icon {
+    width:40px!important;
+    height:40px!important;
+    flex-basis:40px;
+  }
 }
 
 /* Contact columns balance and calmer hover */

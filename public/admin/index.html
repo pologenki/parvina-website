@@ -2090,6 +2090,426 @@
       margin-top: .25rem;
     }
   }
+
+  /* Mobile admin workspace */
+  @media (max-width: 760px) {
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    .login-wrap {
+      padding: 1rem;
+    }
+
+    .login-card {
+      max-width: 380px;
+      padding: 2rem 1.25rem;
+      border-radius: 14px;
+    }
+
+    .site-header.visible {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      min-height: 0;
+      padding: .65rem .85rem;
+      gap: .55rem .75rem;
+    }
+
+    .header-logo {
+      width: min-content;
+      height: auto;
+    }
+
+    .header-logo img {
+      width: 116px;
+      max-height: 46px;
+    }
+
+    .header-actions {
+      justify-self: end;
+      gap: .4rem;
+    }
+
+    .btn-publish,
+    .btn-outline {
+      min-height: 36px;
+      padding: 0 .7rem;
+      font-size: .64rem;
+      letter-spacing: .07em;
+      border-radius: 8px;
+    }
+
+    .header-center {
+      grid-column: 1 / -1;
+      order: initial;
+      width: 100%;
+      padding: .35rem .6rem;
+      font-size: .62rem;
+      text-align: center;
+    }
+
+    .admin-main {
+      width: 100%;
+      max-width: none;
+      padding: .8rem .65rem 5.5rem;
+    }
+
+    .admin-tabs {
+      position: static;
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: .25rem;
+      gap: .25rem;
+    }
+
+    .admin-tab {
+      min-width: 0;
+      min-height: 38px;
+      padding: .45rem .35rem;
+      font-size: .64rem;
+      letter-spacing: .05em;
+      white-space: normal;
+    }
+
+    .page-title,
+    .pf-section-title {
+      margin-top: .35rem;
+      font-size: 1.75rem;
+    }
+
+    .page-meta,
+    .pf-section-meta {
+      margin-bottom: .8rem;
+      font-size: .68rem;
+      line-height: 1.4;
+    }
+
+    .admin-action-row {
+      position: static;
+      margin-bottom: .75rem;
+      padding: .5rem;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(17,24,39,.05);
+    }
+
+    .admin-action-main {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .45rem;
+    }
+
+    .admin-action-main > .btn-soft,
+    .admin-more,
+    .admin-more > summary {
+      width: 100%;
+    }
+
+    .admin-more {
+      grid-column: 1 / -1;
+    }
+
+    .admin-more-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .4rem;
+    }
+
+    .btn-soft {
+      width: 100%;
+      min-width: 0;
+      min-height: 38px;
+      padding: .4rem .55rem;
+      font-size: .62rem;
+      letter-spacing: .055em;
+      line-height: 1.25;
+      text-align: center;
+      white-space: normal;
+    }
+
+    .admin-guide {
+      margin-bottom: .75rem;
+      border-radius: 10px;
+    }
+
+    .admin-guide summary {
+      padding: .7rem .75rem;
+      font-size: .68rem;
+      letter-spacing: .07em;
+      line-height: 1.35;
+    }
+
+    .admin-guide ol {
+      padding: 0 .9rem .85rem 1.85rem;
+      font-size: .8rem;
+    }
+
+    .admin-filter-row {
+      grid-template-columns: 1fr;
+      gap: .45rem;
+      margin-bottom: .75rem;
+    }
+
+    .admin-filter-input,
+    .admin-filter-select {
+      height: 40px;
+      min-width: 0;
+      font-size: .82rem;
+    }
+
+    .admin-stats-panel.visible {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .45rem;
+    }
+
+    .stat-tile {
+      min-width: 0;
+      padding: .65rem;
+      border-radius: 10px;
+    }
+
+    .stat-tile b {
+      font-size: 1.05rem;
+    }
+
+    .stat-tile span {
+      font-size: .59rem;
+      letter-spacing: .08em;
+    }
+
+    .stat-tile small {
+      font-size: .65rem;
+    }
+
+    .validation-panel,
+    .admin-log-panel,
+    .admin-stats-panel {
+      margin-bottom: .75rem;
+      border-radius: 10px;
+    }
+
+    .admin-log-item {
+      grid-template-columns: 58px minmax(0, 1fr);
+      gap: .45rem;
+    }
+
+    .products-grid,
+    .portfolio-grid {
+      width: 100%;
+      gap: .65rem;
+    }
+
+    .product-list-card,
+    .portfolio-card {
+      width: 100%;
+      min-width: 0;
+      border-radius: 10px;
+    }
+
+    .product-list-summary {
+      grid-template-columns: 28px 42px minmax(0, 1fr) auto;
+      gap: .45rem;
+      min-height: 66px;
+      padding: .55rem;
+    }
+
+    .product-row-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      font-size: .64rem;
+    }
+
+    .product-row-img {
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+    }
+
+    .product-row-main strong {
+      font-size: .84rem;
+    }
+
+    .product-row-main small {
+      font-size: .68rem;
+    }
+
+    .product-row-price {
+      grid-column: 4;
+      grid-row: 1;
+      align-self: center;
+      justify-self: end;
+      margin: 0;
+      padding: .22rem .4rem;
+      font-size: .67rem;
+    }
+
+    .product-row-meta,
+    .product-row-status {
+      display: none;
+    }
+
+    .product-list-card .card-body,
+    .pf-body {
+      min-width: 0;
+      padding: .7rem;
+    }
+
+    .card-toolbar {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .4rem;
+    }
+
+    .card-toolbar .publish-toggle {
+      grid-column: 1 / -1;
+    }
+
+    .publish-toggle,
+    .btn-mini {
+      width: 100%;
+      min-width: 0;
+      min-height: 34px;
+      padding: .3rem .45rem;
+      justify-content: center;
+      font-size: .59rem;
+      line-height: 1.2;
+      white-space: normal;
+      text-align: center;
+    }
+
+    .translation-note {
+      padding: .55rem;
+      font-size: .7rem;
+      line-height: 1.4;
+    }
+
+    .product-list-card .bilingual-row,
+    .portfolio-card .bilingual-row,
+    .show-translations .bilingual-row {
+      grid-template-columns: 1fr;
+      gap: .45rem;
+    }
+
+    .card-field,
+    .card-input,
+    .variant-input,
+    .form-input {
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .card-input,
+    .variant-input,
+    .form-input {
+      min-height: 38px;
+      padding: .5rem .65rem;
+      font-size: .82rem;
+    }
+
+    textarea.card-input,
+    .portfolio-card textarea.card-input {
+      min-height: 100px!important;
+      font-size: .82rem!important;
+      line-height: 1.45!important;
+    }
+
+    .variants-header {
+      padding: .55rem .65rem;
+    }
+
+    .variants-body {
+      max-height: none;
+      padding: .45rem;
+    }
+
+    .variant-summary {
+      grid-template-columns: 28px minmax(0, 1fr) 26px;
+      gap: .45rem;
+      padding: .5rem;
+    }
+
+    .variant-summary-index {
+      grid-column: 1;
+      grid-row: 1 / span 2;
+    }
+
+    .variant-summary-title {
+      grid-column: 2;
+      grid-row: 1;
+      font-size: .78rem;
+    }
+
+    .variant-summary-price {
+      grid-column: 2;
+      grid-row: 2;
+      min-width: 0;
+      justify-self: start;
+      font-size: .68rem;
+    }
+
+    .variant-summary-action {
+      grid-column: 3;
+      grid-row: 1 / span 2;
+      align-self: center;
+    }
+
+    .variant-editor {
+      padding: .55rem;
+    }
+
+    .portfolio-card {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .pf-image-wrap {
+      width: 100%;
+      height: 210px;
+      min-height: 210px;
+      border-right: 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pf-delete-btn,
+    .variant-delete-btn {
+      min-width: 34px;
+      min-height: 34px;
+    }
+
+    .status-bar,
+    .toast {
+      left: .65rem;
+      right: .65rem;
+      max-width: calc(100% - 1.3rem);
+    }
+  }
+
+  @media (max-width: 380px) {
+    .product-list-summary {
+      grid-template-columns: 26px 38px minmax(0, 1fr);
+    }
+
+    .product-row-price {
+      grid-column: 3;
+      grid-row: 2;
+      justify-self: start;
+      margin-top: .2rem;
+    }
+
+    .admin-more-actions,
+    .card-toolbar {
+      grid-template-columns: 1fr;
+    }
+
+    .card-toolbar .publish-toggle {
+      grid-column: auto;
+    }
+  }
 </style>
 </head>
 <body>
