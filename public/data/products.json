@@ -1,51 +1,58 @@
 {
-  "lastUpdated": "2026-07-16",
+  "lastUpdated": "2026-07-22",
   "products": [
     {
       "id": "cashew",
       "name": "Cashew Nuts",
-      "name_ru": "Кешью",
+      "name_ru": "Орехи кешью",
       "desc": "AFI standard",
-      "desc_ru": "Стандарт AFI",
+      "desc_ru": "стандарт АФИ",
       "origin": "Vietnam",
       "origin_ru": "Вьетнам",
       "image": "goods/cashew.webp",
-      "mainPrice": "6,80 USD/kg",
+      "mainPrice": "5.75 USD/kg",
       "variants": [
         {
           "name": "WW320 - Whole White",
-          "price": "7,10 USD/kg",
+          "price": "7,40 USD/kg",
           "desc": "Quality AFI standard. 20/22.68 kg PE vacuum bag/carton packing. FOB HCM",
-          "desc_ru": "Качество стандарта AFI. 20/22.68 кг PE вакуумный пакет/картонная упаковка. FOB HCM",
-          "desc_cn": ""
+          "desc_ru": "Качество стандарта AFI. 20/22,68 кг полиэтиленовый вакуумный мешок/картонная упаковка. ФОБ ХКМ",
+          "desc_cn": "质量 AFI 标准。 20/22.68公斤PE真空袋/纸箱包装。胡志明市离岸价格"
         },
         {
           "name": "WW450 - Whole White",
-          "price": "6,80 USD/kg",
+          "price": "7.1 USD/kg",
           "desc": "Quality AFI standard. 20/22.68 kg PE vacuum bag/carton packing. FOB HCM.",
-          "desc_ru": "Качество стандарта AFI. 20/22.68 кг PE вакуумный пакет/картонная упаковка. FOB HCM.",
-          "desc_cn": ""
+          "desc_ru": "Качество стандарта AFI. 20/22,68 кг полиэтиленовый вакуумный мешок/картонная упаковка. ФОБ HCM.",
+          "desc_cn": "质量 AFI 标准。 20/22.68公斤PE真空袋/纸箱包装。胡志明市离岸价。"
         },
         {
           "name": "WS - White Split",
-          "price": "6,00 USD/kg",
+          "price": "5.75 USD/kg",
           "desc": "Quality AFI standard. 20/22.68 kg PE vacuum bag/carton packing. FOB HCM.",
-          "desc_ru": "Качество стандарта AFI. 20/22.68 кг PE вакуумный пакет/картонная упаковка. FOB HCM.",
-          "desc_cn": ""
+          "desc_ru": "Качество стандарта AFI. 20/22,68 кг полиэтиленовый вакуумный мешок/картонная упаковка. ФОБ HCM.",
+          "desc_cn": "质量 AFI 标准。 20/22.68公斤PE真空袋/纸箱包装。胡志明市离岸价。"
         },
         {
           "name": "Other grades",
           "name_ru": "Другие сорта",
           "price": "Price on request",
           "desc": "WW210, WW240, WW320, WW450, WS, LWP, LP, DW and etc.",
-          "desc_ru": "WW210, WW240, WW320, WW450, WS, LWP, LP, DW и др.",
-          "desc_cn": ""
+          "desc_ru": "WW210, WW240, WW320, WW450, WS, LWP, LP, DW и т. д.",
+          "desc_cn": "WW210、WW240、WW320、WW450、WS、LWP、LP、DW等"
         }
       ],
-      "name_cn": "",
-      "desc_cn": "",
-      "origin_cn": "",
-      "published": true
+      "name_cn": "腰果",
+      "desc_cn": "AFI标准",
+      "origin_cn": "越南",
+      "published": true,
+      "priceHistory": [
+        {
+          "date": "2026-07-22",
+          "from": "6,80 USD/kg",
+          "to": "5.75 USD/kg"
+        }
+      ]
     },
     {
       "id": "walnuts",
@@ -459,6 +466,10 @@
     }
   ],
   "changeLog": [
+    {
+      "date": "2026-07-22T08:05:39.469Z",
+      "message": "Products updated: 10 items"
+    },
     {
       "date": "2026-07-16T11:00:49.312Z",
       "message": "Products updated: 10 items"
