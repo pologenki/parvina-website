@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://pologenki.eu/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/" />
@@ -32,7 +32,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/ru/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/" />
@@ -41,7 +41,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/zh-cn/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/" />
@@ -50,7 +50,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/products/cashew/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/cashew/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/cashew/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/cashew/" />
@@ -59,16 +59,16 @@
   </url>
   <url>
     <loc>https://pologenki.eu/ru/products/cashew/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/cashew/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/cashew/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/cashew/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://pologenki.eu/products/cashew/" />
-    <image:image><image:loc>https://pologenki.eu/goods/cashew.webp</image:loc><image:title>Кешью</image:title></image:image>
+    <image:image><image:loc>https://pologenki.eu/goods/cashew.webp</image:loc><image:title>Орехи кешью</image:title></image:image>
   </url>
   <url>
     <loc>https://pologenki.eu/zh-cn/products/cashew/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/cashew/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/cashew/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/cashew/" />
@@ -77,7 +77,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/products/walnuts/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/walnuts/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/walnuts/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/walnuts/" />
@@ -86,7 +86,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/ru/products/walnuts/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/walnuts/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/walnuts/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/walnuts/" />
@@ -95,7 +95,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/zh-cn/products/walnuts/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/walnuts/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/walnuts/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/walnuts/" />
@@ -104,7 +104,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/products/dates/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/dates/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/dates/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/dates/" />
@@ -113,7 +113,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/ru/products/dates/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/dates/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/dates/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/dates/" />
@@ -122,7 +122,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/zh-cn/products/dates/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/dates/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/dates/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/dates/" />
@@ -131,7 +131,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/products/papaya/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/papaya/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/papaya/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/papaya/" />
@@ -140,7 +140,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/ru/products/papaya/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/papaya/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/papaya/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/papaya/" />
@@ -149,7 +149,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/zh-cn/products/papaya/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/papaya/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/papaya/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/papaya/" />
@@ -158,7 +158,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/products/mango/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/mango/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/mango/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/mango/" />
@@ -167,7 +167,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/ru/products/mango/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/mango/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/mango/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/mango/" />
@@ -176,7 +176,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/zh-cn/products/mango/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/mango/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/mango/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/mango/" />
@@ -185,7 +185,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/products/walnuts-shell/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/walnuts-shell/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/walnuts-shell/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/walnuts-shell/" />
@@ -194,7 +194,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/ru/products/walnuts-shell/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/walnuts-shell/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/walnuts-shell/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/walnuts-shell/" />
@@ -203,7 +203,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/zh-cn/products/walnuts-shell/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/walnuts-shell/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/walnuts-shell/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/walnuts-shell/" />
@@ -212,7 +212,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/products/peanuts/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/peanuts/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/peanuts/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/peanuts/" />
@@ -221,7 +221,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/ru/products/peanuts/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/peanuts/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/peanuts/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/peanuts/" />
@@ -230,7 +230,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/zh-cn/products/peanuts/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/peanuts/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/peanuts/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/peanuts/" />
@@ -239,7 +239,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/products/peanuts-blanched/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/peanuts-blanched/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/peanuts-blanched/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/peanuts-blanched/" />
@@ -248,7 +248,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/ru/products/peanuts-blanched/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/peanuts-blanched/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/peanuts-blanched/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/peanuts-blanched/" />
@@ -257,7 +257,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/zh-cn/products/peanuts-blanched/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/peanuts-blanched/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/peanuts-blanched/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/peanuts-blanched/" />
@@ -266,7 +266,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/products/dried-fruits/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/dried-fruits/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/dried-fruits/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/dried-fruits/" />
@@ -275,7 +275,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/ru/products/dried-fruits/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/dried-fruits/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/dried-fruits/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/dried-fruits/" />
@@ -284,7 +284,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/zh-cn/products/dried-fruits/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/dried-fruits/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/dried-fruits/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/dried-fruits/" />
@@ -293,7 +293,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/products/banana-chips/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/banana-chips/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/banana-chips/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/banana-chips/" />
@@ -302,7 +302,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/ru/products/banana-chips/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/banana-chips/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/banana-chips/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/banana-chips/" />
@@ -311,7 +311,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/zh-cn/products/banana-chips/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/products/banana-chips/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/products/banana-chips/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/products/banana-chips/" />
@@ -320,7 +320,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/services/supplier-sourcing/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/supplier-sourcing/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/supplier-sourcing/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/supplier-sourcing/" />
@@ -328,7 +328,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/ru/services/supplier-sourcing/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/supplier-sourcing/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/supplier-sourcing/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/supplier-sourcing/" />
@@ -336,7 +336,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/zh-cn/services/supplier-sourcing/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/supplier-sourcing/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/supplier-sourcing/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/supplier-sourcing/" />
@@ -344,7 +344,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/services/contract-negotiation/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/contract-negotiation/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/contract-negotiation/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/contract-negotiation/" />
@@ -352,7 +352,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/ru/services/contract-negotiation/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/contract-negotiation/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/contract-negotiation/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/contract-negotiation/" />
@@ -360,7 +360,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/zh-cn/services/contract-negotiation/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/contract-negotiation/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/contract-negotiation/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/contract-negotiation/" />
@@ -368,7 +368,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/services/logistics-coordination/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/logistics-coordination/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/logistics-coordination/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/logistics-coordination/" />
@@ -376,7 +376,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/ru/services/logistics-coordination/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/logistics-coordination/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/logistics-coordination/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/logistics-coordination/" />
@@ -384,7 +384,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/zh-cn/services/logistics-coordination/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/logistics-coordination/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/logistics-coordination/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/logistics-coordination/" />
@@ -392,7 +392,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/services/trade-documentation/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/trade-documentation/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/trade-documentation/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/trade-documentation/" />
@@ -400,7 +400,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/ru/services/trade-documentation/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/trade-documentation/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/trade-documentation/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/trade-documentation/" />
@@ -408,7 +408,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/zh-cn/services/trade-documentation/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/trade-documentation/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/trade-documentation/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/trade-documentation/" />
@@ -416,7 +416,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/services/shipment-monitoring/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/shipment-monitoring/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/shipment-monitoring/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/shipment-monitoring/" />
@@ -424,7 +424,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/ru/services/shipment-monitoring/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/shipment-monitoring/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/shipment-monitoring/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/shipment-monitoring/" />
@@ -432,7 +432,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/zh-cn/services/shipment-monitoring/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/shipment-monitoring/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/shipment-monitoring/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/shipment-monitoring/" />
@@ -440,7 +440,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/services/full-service-import/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/full-service-import/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/full-service-import/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/full-service-import/" />
@@ -448,7 +448,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/ru/services/full-service-import/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/full-service-import/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/full-service-import/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/full-service-import/" />
@@ -456,7 +456,7 @@
   </url>
   <url>
     <loc>https://pologenki.eu/zh-cn/services/full-service-import/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://pologenki.eu/services/full-service-import/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://pologenki.eu/ru/services/full-service-import/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://pologenki.eu/zh-cn/services/full-service-import/" />
