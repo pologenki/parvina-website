@@ -4,7 +4,7 @@ export const personalEn = {
     title: "Import coordination for reliable supply",
     subtitle: "Parvina Pologenki · Import Manager",
     description: "Supplier search, price checks, export documents and cargo delivery coordination for nuts, dried fruits, spices and coffee.",
-    photo: '/ParvinaFoto.png',
+    photo: '/ParvinaFoto.webp',
     photoAlt: 'Parvina - Import Manager & Trade Specialist',
   },
   contacts: {

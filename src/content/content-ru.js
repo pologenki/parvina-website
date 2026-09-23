@@ -5,7 +5,7 @@ export const personalRu = {
     subtitle: "Парвина Пологенки · импорт-менеджер",
     description:
       "Поиск поставщиков, проверка цен, экспортные документы и координация доставки для орехов, сухофруктов, специй и кофе.",
-    photo: "/ParvinaFoto.png",
+    photo: "/ParvinaFoto.webp",
     photoAlt: "Парвина Пологенки - импорт-менеджер",
   },
   contacts: {

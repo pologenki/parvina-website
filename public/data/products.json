@@ -62,7 +62,7 @@
       "desc_ru": "Экстра светлые половинки",
       "origin": "China",
       "origin_ru": "Китай",
-      "image": "goods/walnut.jpg",
+      "image": "goods/walnut.webp",
       "mainPrice": "5,45 USD/kg",
       "variants": [
         {
@@ -106,7 +106,7 @@
       "desc_ru": "Финики Деглет Нур",
       "origin": "Tunisia",
       "origin_ru": "Тунис",
-      "image": "goods/dates.png",
+      "image": "goods/dates.webp",
       "mainPrice": "1,90 USD/kg",
       "variants": [
         {
@@ -143,7 +143,7 @@
       "desc_ru": "Смешанный/Натуральный 8-10 мм",
       "origin": "China",
       "origin_ru": "Китай",
-      "image": "goods/candied.jpg",
+      "image": "goods/candied.webp",
       "mainPrice": "2,25 USD/kg",
       "variants": [
         {
@@ -194,7 +194,7 @@
       "desc_ru": "С сахаром, без сахара",
       "origin": "Vietnam, China",
       "origin_ru": "Вьетнам, Китай",
-      "image": "goods/mango.jpg",
+      "image": "goods/mango.webp",
       "mainPrice": "4,50 USD/kg",
       "variants": [
         {
@@ -289,7 +289,7 @@
       "desc_ru": "Размеры 40/50, 50/60",
       "origin": "India",
       "origin_ru": "Индия",
-      "image": "goods/redpeanuts.png",
+      "image": "goods/redpeanuts.webp",
       "mainPrice": "1,20 USD/kg",
       "variants": [
         {
@@ -333,7 +333,7 @@
       "desc_ru": "Целый, половинки",
       "origin": "India",
       "origin_ru": "Индия",
-      "image": "goods/peanutSplit.jpg",
+      "image": "goods/peanutSplit.webp",
       "mainPrice": "Price on request",
       "variants": [
         {
@@ -449,7 +449,7 @@
       "desc_ru": "Целые, половинки, четвертинки",
       "origin": "Philippines",
       "origin_ru": "Филиппины",
-      "image": "goods/test.jpg",
+      "image": "goods/test.webp",
       "mainPrice": "2,80 USD/kg",
       "variants": [
         {
