@@ -156,7 +156,7 @@ function renderProductPage(product, localeKey) {
   <meta name="description" content="${esc(locale.description(name))}" />
   <link rel="canonical" href="${canonical}" />
   ${alternateLinks(product)}
-  <link rel="icon" type="image/webp" href="/logo.webp" />
+  <link rel="icon" type="image/jpeg" href="/logo.jpeg" />
   <meta property="og:type" content="product" />
   <meta property="og:title" content="${esc(locale.pageTitle(name))}" />
   <meta property="og:description" content="${esc(locale.description(name))}" />
@@ -170,7 +170,7 @@ function renderProductPage(product, localeKey) {
   </style>
 </head>
 <body>
-  <header><a href="${locale.prefix || '/'}"><img src="/optimized/Logo2-320.webp" alt="Pologenki" width="320" height="320" /></a><nav class="languages" aria-label="Language"><a href="${productUrl(product, 'en')}" lang="en">EN</a><a href="${productUrl(product, 'ru')}" lang="ru">RU</a><a href="${productUrl(product, 'cn')}" lang="zh-CN">中文</a></nav></header>
+  <header><a href="${locale.prefix || '/'}"><img src="/optimized/Logo2-sharp-320.png" alt="Pologenki" width="320" height="320" /></a><nav class="languages" aria-label="Language"><a href="${productUrl(product, 'en')}" lang="en">EN</a><a href="${productUrl(product, 'ru')}" lang="ru">RU</a><a href="${productUrl(product, 'cn')}" lang="zh-CN">中文</a></nav></header>
   <main class="page">
     <div class="hero">
       <div class="photo"><img src="${optimizedImagePath(product.image, 480)}" srcset="${optimizedImagePath(product.image, 240)} 240w, ${optimizedImagePath(product.image, 480)} 480w" sizes="(max-width:760px) calc(100vw - 84px), 372px" alt="${esc(name)}" width="480" height="480" fetchpriority="high" /></div>

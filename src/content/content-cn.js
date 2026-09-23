@@ -5,7 +5,7 @@ export const personalCn = {
     subtitle: "Parvina Pologenki · 进口经理",
     description:
       "为坚果、果干、香料和咖啡业务提供供应商搜索、价格确认、出口文件和货运协调支持。",
-    photo: "/ParvinaFoto.webp",
+    photo: "/ParvinaFoto.png",
     photoAlt: "Parvina Pologenki - 进口经理",
   },
   contacts: {

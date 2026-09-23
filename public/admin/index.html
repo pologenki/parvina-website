@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="googlebot" content="noindex, nofollow">
 <title>Pologenki Admin</title>
-<link rel="icon" type="image/webp" href="/logo.webp">
+<link rel="icon" type="image/jpeg" href="/logo.jpeg">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
@@ -3593,18 +3593,10 @@
   .private-price-metrics span { display: block; margin-bottom: .42rem; color: #71808d; font-size: .59rem; font-weight: 800; text-transform: uppercase; }
   .private-price-metrics strong { display: block; overflow: hidden; color: #2A2A2A; font-size: 1.05rem; text-overflow: ellipsis; white-space: nowrap; }
   .private-price-metrics article:last-child { border-color: #b8ddfb; background: #eef7ff; }
-  .private-history-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-top: .85rem; padding-top: .75rem; border-top: 1px solid #e2eaf0; }
-  .private-history-heading strong { font-size: .72rem; }
-  .private-history-heading span { color: #71808d; font-size: .61rem; }
-  .private-price-history { display: flex; gap: .45rem; overflow-x: auto; margin-top: .45rem; padding-bottom: .15rem; }
-  .private-price-history-item { flex: 0 0 auto; display: grid; gap: .3rem; min-width: 220px; padding: .65rem .7rem; border: 1px solid #e1e9ef; border-radius: 6px; background: #fff; }
+  .private-price-history { display: flex; gap: .45rem; overflow-x: auto; margin-top: .7rem; padding-bottom: .15rem; }
+  .private-price-history-item { flex: 0 0 auto; display: grid; gap: .12rem; min-width: 145px; padding: .55rem .65rem; border: 1px solid #e1e9ef; border-radius: 6px; background: #fff; }
   .private-price-history-item time { color: #82909d; font-size: .58rem; }
-  .private-price-history-item strong { font-size: .72rem; }
-  .private-history-values { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: .35rem; }
-  .private-history-values span { display: grid; gap: .08rem; min-width: 0; color: #2A2A2A; font-size: .68rem; font-weight: 750; }
-  .private-history-values span small { color: #82909d; font-size: .52rem; font-weight: 700; text-transform: uppercase; }
-  .private-history-values i { color: #85C1F4; font-style: normal; font-weight: 900; }
-  .private-history-markup { justify-self: start; padding: .18rem .38rem; border-radius: 999px; background: #eef7ff; color: #315e80; font-size: .58rem; font-weight: 850; }
+  .private-price-history-item strong { font-size: .7rem; }
   @keyframes priceWorkspaceIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -3634,7 +3626,6 @@
     .price-chart-legend { gap: .4rem; }
     .private-price-metrics { grid-template-columns: repeat(2,minmax(0,1fr)); }
     .private-price-head-actions { width: 100%; justify-content: flex-start; }
-    .private-history-heading { align-items: flex-start; flex-direction: column; gap: .2rem; }
     .price-overview-row { grid-template-columns: minmax(145px,1fr) auto; }
     .price-overview-row > span:nth-child(3),
     .price-overview-row > span:nth-child(4) { display: none; }
@@ -4357,8 +4348,8 @@
     transform: none;
     filter: none;
     background: #FFFFFF;
-    -webkit-mask: url('/logo-transparent.webp') center / 158px auto no-repeat;
-    mask: url('/logo-transparent.webp') center / 158px auto no-repeat;
+    -webkit-mask: url('/logo-transparent.png') center / 158px auto no-repeat;
+    mask: url('/logo-transparent.png') center / 158px auto no-repeat;
     clip-path: polygon(-12% 0,-3% 0,-13% 100%,-22% 100%);
     animation: adminLogoShine 5.6s 1.45s ease-in-out infinite;
   }
@@ -4469,7 +4460,7 @@
 <!-- LOGIN -->
 <div class="login-wrap" id="loginWrap">
   <div class="login-card">
-    <div class="login-logo"><img src="/logo-transparent.webp" alt="Pologenki"></div>
+    <div class="login-logo"><img src="/logo-transparent.png" alt="Pologenki"></div>
     <div class="login-sub">Панель управления</div>
     <label class="form-label">GitHub Access Token</label>
     <input class="form-input" type="password" id="tokenInput" placeholder="ghp_...">
@@ -4480,12 +4471,12 @@
 <!-- HEADER -->
 <header class="site-header" id="siteHeader">
   <div class="header-logo" role="button" tabindex="0" aria-label="Открыть обзор и повторить анимацию логотипа" onclick="replayAdminLogo();switchTab('dashboard')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();replayAdminLogo();switchTab('dashboard')}">
-    <img class="logo-final" src="/logo-transparent.webp" alt="Pologenki">
+    <img class="logo-final" src="/logo-transparent.png" alt="Pologenki">
     <span class="logo-pieces" aria-hidden="true">
-      <img class="logo-piece logo-piece-1" src="/logo-transparent.webp" alt="">
-      <img class="logo-piece logo-piece-2" src="/logo-transparent.webp" alt="">
-      <img class="logo-piece logo-piece-3" src="/logo-transparent.webp" alt="">
-      <img class="logo-piece logo-piece-4" src="/logo-transparent.webp" alt="">
+      <img class="logo-piece logo-piece-1" src="/logo-transparent.png" alt="">
+      <img class="logo-piece logo-piece-2" src="/logo-transparent.png" alt="">
+      <img class="logo-piece logo-piece-3" src="/logo-transparent.png" alt="">
+      <img class="logo-piece logo-piece-4" src="/logo-transparent.png" alt="">
     </span>
   </div>
   <div class="header-workspace">
@@ -4692,7 +4683,7 @@
         <div class="analytics-panel-head">
           <div><span>Динамика</span><h2 id="priceChartTitle">Цена товара</h2></div>
           <div class="price-chart-head-meta">
-            <div class="price-chart-legend"><span><i></i>С наценкой</span><span><i></i>Без наценки</span></div>
+            <div class="price-chart-legend"><span><i></i>Продажа</span><span><i></i>Закупка</span></div>
             <div class="price-current" id="priceCurrentValue">-</div>
           </div>
         </div>
@@ -4728,10 +4719,6 @@
         <article><span>Закупка</span><strong id="privateCostValue">-</strong></article>
         <article><span>Прибыль с кг</span><strong id="privateProfitValue">-</strong></article>
         <article><span>Наценка</span><strong id="privateMarkupValue">-</strong></article>
-      </div>
-      <div class="private-history-heading">
-        <strong>История расчётов</strong>
-        <span>Цена без наценки → цена с наценкой → процент</span>
       </div>
       <div class="private-price-history" id="privatePriceHistory"></div>
     </section>
@@ -5189,8 +5176,7 @@ function buildVariantHTML(i, j, v) {
           <div>
             <span class="variant-mini-label">Цена на сайте</span>
             <input class="variant-input price" value="${esc(v.price)}"
-              oninput="updV(${i},${j},'price',this.value);updateVariantSummary(${i},${j});updateInlinePrivateMargin(${i},${j})"
-              onblur="recordPrivatePriceSnapshot(${i},${j})" placeholder="0,00 USD/kg">
+              oninput="updV(${i},${j},'price',this.value);updateVariantSummary(${i},${j});updateInlinePrivateMargin(${i},${j})" placeholder="0,00 USD/kg">
           </div>
           <div class="private-inline-field">
             <span class="variant-mini-label">Закупка <em>приватно</em></span>
@@ -5305,8 +5291,7 @@ function renderGrid() {
           <div class="card-field">
             <label class="card-label">Цена на сайте</label>
             <input class="card-input price" value="${esc(p.mainPrice)}"
-              oninput="upd(${i},'mainPrice',this.value);updateInlinePrivateMargin(${i},null)"
-              onblur="recordPrivatePriceSnapshot(${i},null)">
+              oninput="upd(${i},'mainPrice',this.value);updateInlinePrivateMargin(${i},null)">
           </div>
           <div class="card-field private-inline-field">
             <label class="card-label">Закупочная цена <em>приватно</em></label>
@@ -5335,10 +5320,10 @@ function renderGrid() {
             ondragover="event.preventDefault();this.classList.add('dragover')"
             ondragleave="this.classList.remove('dragover')"
             ondrop="handleProductPhotoDrop(event,${i})">
-            <input type="file" accept="image/jpeg,image/png,image/webp" onchange="uploadProductPhoto(this,${i})">
+            <input type="file" accept="image/*" onchange="uploadProductPhoto(this,${i})">
             <div class="pf-upload-icon">📷</div>
             <div class="pf-upload-label">Нажми или перетащи фото товара</div>
-            <div class="pf-upload-sub">JPG, PNG или WEBP — будет сохранено как WebP в /goods/</div>
+            <div class="pf-upload-sub">JPG, PNG, WEBP - загрузка в /goods/</div>
           </div>
           <div class="pf-upload-progress" id="product-progress-${i}">
             <div class="pf-upload-progress-fill" id="product-progress-fill-${i}"></div>
@@ -5726,10 +5711,10 @@ function isSafeImagePath(value) {
 }
 
 function safeFileName(fileName) {
-  const parts = String(fileName || 'portfolio-image.webp').split('.');
-  parts.pop();
+  const parts = String(fileName || 'portfolio-image.jpg').split('.');
+  const ext = (parts.pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '') || 'jpg';
   const base = parts.join('.').replace(/[^a-z0-9._-]/gi, '_').replace(/_+/g, '_').replace(/^_+|_+$/g, '') || 'portfolio';
-  return `${Date.now()}_${base}.webp`;
+  return `${Date.now()}_${base}.${ext}`;
 }
 
 function formatFileSize(bytes) {
@@ -5759,6 +5744,10 @@ function canvasToBlob(canvas, type, quality) {
 
 async function optimizeImageForUpload(file, profile) {
   const originalSize = file.size;
+  const passthrough = /image\/(svg\+xml|gif)/i.test(file.type);
+  if (passthrough) {
+    return { blob: file, fileName: file.name, originalSize, finalSize: file.size, optimized: false };
+  }
 
   let bitmap;
   try {
@@ -5770,6 +5759,11 @@ async function optimizeImageForUpload(file, profile) {
   const scale = Math.min(1, profile.maxWidth / bitmap.width, profile.maxHeight / bitmap.height);
   const width = Math.max(1, Math.round(bitmap.width * scale));
   const height = Math.max(1, Math.round(bitmap.height * scale));
+
+  if (scale === 1 && file.size <= profile.targetBytes) {
+    bitmap.close?.();
+    return { blob: file, fileName: file.name, originalSize, finalSize: file.size, optimized: false };
+  }
 
   const canvas = document.createElement('canvas');
   canvas.width = width;
@@ -5784,6 +5778,10 @@ async function optimizeImageForUpload(file, profile) {
   for (const quality of [0.84, 0.76, 0.68, 0.6]) {
     compressed = await canvasToBlob(canvas, 'image/webp', quality);
     if (compressed.size <= profile.targetBytes) break;
+  }
+
+  if (scale === 1 && compressed.size >= file.size) {
+    return { blob: file, fileName: file.name, originalSize, finalSize: file.size, optimized: false };
   }
 
   const baseName = file.name.replace(/\.[^.]+$/, '') || 'image';
@@ -6532,11 +6530,9 @@ function renderPriceDashboard() {
   }).join('');
 
   const privateEntry = privatePriceLedger.entries[selected.key];
-  const snapshotSaleSeries = buildPrivateSnapshotSeries(privateEntry, 'sale');
-  const snapshotCostSeries = buildPrivateSnapshotSeries(privateEntry, 'cost');
   drawPriceHistoryChart(
-    snapshotSaleSeries.length ? snapshotSaleSeries : buildPriceSeries(selected.item, selected.price),
-    snapshotCostSeries.length ? snapshotCostSeries : buildPrivatePriceSeries(privateEntry)
+    buildPriceSeries(selected.item, selected.price),
+    buildPrivatePriceSeries(privateEntry)
   );
   renderPrivatePricePanel(selected);
 }
@@ -6629,33 +6625,7 @@ function savePrivateCostInline(productIndex, variantIndex, input) {
   }
   input.value = normalized;
   updateInlinePrivateMargin(productIndex, variantIndex);
-  recordPrivatePriceSnapshot(productIndex, variantIndex);
   showToast('Закупочная цена сохранена приватно', 'ok');
-}
-
-function recordPrivatePriceSnapshot(productIndex, variantIndex = null) {
-  const product = data?.products?.[productIndex];
-  const variant = variantIndex === null ? null : product?.variants?.[variantIndex];
-  const saleRaw = variant ? variant.price : product?.mainPrice;
-  const key = getPrivatePriceKey(productIndex, variantIndex);
-  const record = privatePriceLedger.entries[key];
-  const sale = parsePriceValue(saleRaw);
-  const cost = parsePriceValue(record?.current);
-  if (!record || sale === null || cost === null || cost <= 0) return;
-  const markup = ((sale - cost) / cost) * 100;
-  record.snapshots = Array.isArray(record.snapshots) ? record.snapshots : [];
-  const latest = record.snapshots[0];
-  if (latest && parsePriceValue(latest.sale) === sale && parsePriceValue(latest.cost) === cost) return;
-  record.snapshots.unshift({
-    date: new Date().toISOString(),
-    sale: formatPriceNumber(sale),
-    cost: formatPriceNumber(cost),
-    markup: Number(markup.toFixed(2))
-  });
-  record.snapshots = record.snapshots.slice(0, 48);
-  privatePriceLedger.entries[key] = record;
-  persistPrivatePriceLedger();
-  if (document.getElementById('tab-prices')?.classList.contains('active')) renderPriceDashboard();
 }
 
 function updateInlinePrivateMargin(productIndex, variantIndex = null) {
@@ -6685,16 +6655,6 @@ function buildPrivatePriceSeries(entry) {
   return points;
 }
 
-function buildPrivateSnapshotSeries(entry, field) {
-  const snapshots = Array.isArray(entry?.snapshots) ? [...entry.snapshots].reverse() : [];
-  return snapshots
-    .map(snapshot => ({
-      date: snapshot.date ? new Date(snapshot.date).toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit' }) : '',
-      value: parsePriceValue(snapshot[field])
-    }))
-    .filter(point => point.value !== null);
-}
-
 function renderPrivatePricePanel(selected) {
   const record = privatePriceLedger.entries[selected.key] || null;
   const sale = parsePriceValue(selected.price);
@@ -6706,19 +6666,10 @@ function renderPrivatePricePanel(selected) {
   setDashboardText('privateProfitValue', profit !== null ? formatPriceNumber(profit) : '-');
   setDashboardText('privateMarkupValue', markup !== null ? `${markup.toFixed(1)}%` : '-');
   const history = document.getElementById('privatePriceHistory');
-  const snapshots = Array.isArray(record?.snapshots) ? record.snapshots : [];
-  history.innerHTML = snapshots.length
-    ? snapshots.map(item => `
-      <div class="private-price-history-item">
-        <time>${esc(item.date ? new Date(item.date).toLocaleString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '-')}</time>
-        <div class="private-history-values">
-          <span><small>Без наценки</small>${esc(item.cost || '-')}</span>
-          <i>→</i>
-          <span><small>С наценкой</small>${esc(item.sale || '-')}</span>
-        </div>
-        <b class="private-history-markup">Наценка ${Number(item.markup || 0).toFixed(1)}%</b>
-      </div>`).join('')
-    : '<p class="dashboard-empty">Измените цену продажи или закупки, и связанная история появится здесь.</p>';
+  const items = Array.isArray(record?.history) ? record.history : [];
+  history.innerHTML = items.length
+    ? items.map(item => `<div class="private-price-history-item"><time>${esc(item.date || '-')}</time><strong>${esc(item.from || 'не указана')} → ${esc(item.to || '-')}</strong></div>`).join('')
+    : '<p class="dashboard-empty">История закупочной цены пока пуста.</p>';
 }
 
 function removePrivateCost() {
@@ -7221,10 +7172,10 @@ function buildPortfolioCard(item, i) {
           ondragover="event.preventDefault();this.classList.add('dragover')"
           ondragleave="this.classList.remove('dragover')"
           ondrop="handlePfDrop(event,${i})">
-          <input type="file" accept="image/jpeg,image/png,image/webp" onchange="uploadPfPhoto(this,${i})">
+          <input type="file" accept="image/*" onchange="uploadPfPhoto(this,${i})">
           <div class="pf-upload-icon">PHOTO</div>
           <div class="pf-upload-label">Заменить фото</div>
-          <div class="pf-upload-sub">JPG, PNG или WEBP — будет сохранено как WebP</div>
+          <div class="pf-upload-sub">JPG, PNG, WEBP</div>
         </div>
         <div class="pf-upload-progress" id="pf-progress-${i}">
           <div class="pf-upload-progress-fill" id="pf-progress-fill-${i}"></div>
@@ -7254,7 +7205,7 @@ function buildPortfolioCard(item, i) {
         <input class="card-input" value="${esc(item.img||'')}" id="pf-url-${i}"
           onfocus="rememberPortfolioPhoto(${i})"
           onchange="updPf(${i},'img',this.value);previewPfImg(${i});renderPortfolioGrid()"
-          placeholder="/images/portfolio/photo.webp">
+          placeholder="/images/portfolio/photo.jpg">
       </div>
 
       <!-- Title EN / RU -->

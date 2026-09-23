@@ -69,7 +69,7 @@ function getFallbackProducts() {
         description: "Extra Light Halves",
         origin: "China",
         price: "5,45 USD/kg",
-        image: "/goods/walnut.webp",
+        image: "/goods/walnut.jpg",
         modalId: "modal-walnuts",
         varieties: [
           {
@@ -85,7 +85,7 @@ function getFallbackProducts() {
         description: "Deglet Nour Dates",
         origin: "Tunisia",
         price: "1,85 USD/kg",
-        image: "/goods/dates.webp",
+        image: "/goods/dates.png",
         modalId: "modal-dates",
         varieties: [
           {
@@ -101,7 +101,7 @@ function getFallbackProducts() {
         description: "Mixed/Natural 8-10 mm",
         origin: "China",
         price: "2,10 USD/kg",
-        image: "/goods/candied.webp",
+        image: "/goods/candied.jpg",
         modalId: "modal-papaya",
         varieties: [
           {
@@ -117,7 +117,7 @@ function getFallbackProducts() {
         description: "Sugar added, sugar FREE",
         origin: "Vietnam, China",
         price: "4,50 USD/kg",
-        image: "/goods/mango.webp",
+        image: "/goods/mango.jpg",
         modalId: "modal-mango",
         varieties: [
           {
@@ -149,7 +149,7 @@ function getFallbackProducts() {
         description: "Sizes 40/50, 50/60",
         origin: "India",
         price: "1,20 USD/kg",
-        image: "/goods/redpeanuts.webp",
+        image: "/goods/redpeanuts.png",
         modalId: "modal-peanuts",
         varieties: [
           {
@@ -165,7 +165,7 @@ function getFallbackProducts() {
         description: "Whole, Splits",
         origin: "India",
         price: "1,4 USD/kg",
-        image: "/goods/peanutSplit.webp",
+        image: "/goods/peanutSplit.jpg",
         modalId: "modal-peanuts-blanched",
         varieties: [
           {
@@ -197,7 +197,7 @@ function getFallbackProducts() {
         description: "Whole, Halves, Quarters",
         origin: "Philippines",
         price: "2,80 USD/kg",
-        image: "/goods/test.webp",
+        image: "/goods/test.jpg",
         modalId: "modal-banana-chips",
         varieties: [
           {
@@ -257,7 +257,7 @@ export function renderProducts(productsData) {
     const productCard = `
       <div class="pricing-card" data-modal="${product.modalId}">
         <div class="product-image">
-          <img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.src='/goods/default.webp'">
+          <img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.src='/goods/default.jpg'">
         </div>
         <h3>${product.name}</h3>
         <p class="product-desc">${product.description}</p>

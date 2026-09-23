@@ -84,7 +84,7 @@ for (const image of [
   'public/optimized/ParvinaFoto-1148.webp',
   'public/optimized/Logo2-160.webp',
   'public/optimized/Logo2-compact-160.webp',
-  'public/optimized/Logo2-320.webp'
+  'public/optimized/Logo2-sharp-320.png'
 ]) {
   try {
     const imageStat = await stat(image);

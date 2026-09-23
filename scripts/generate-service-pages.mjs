@@ -107,7 +107,7 @@ function renderServicePage(service, localeKey) {
   <meta name="description" content="${esc(metaDescription)}" />
   <link rel="canonical" href="${canonical}" />
   ${alternateLinks(service)}
-  <link rel="icon" type="image/webp" href="/logo.webp" />
+  <link rel="icon" type="image/jpeg" href="/logo.jpeg" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="${esc(copy.pageTitle(title))}" />
   <meta property="og:description" content="${esc(metaDescription)}" />
