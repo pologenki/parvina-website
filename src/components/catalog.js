@@ -2,7 +2,7 @@ import { responsiveImagePath, responsiveImageSrcset } from "../utils/responsiveI
 
 const copy = {
   ru: {
-    title: "Каталог", subtitle: "Продукты для<br>оптового импорта", nuts: "Орехи", dried: "Сухофрукты", snacks: "Фруктовые снеки", all: "Все товары",
+    title: "Каталог", subtitle: "Продукты для<br>оптового импорта", pricesUpdated: "Цены обновлены", nuts: "Орехи", dried: "Сухофрукты", snacks: "Фруктовые снеки", all: "Все товары",
     view: "Смотреть товары", open: "Открыть каталог", featured: "Товары из каталога", origin: "Происхождение", price: "Цена в каталоге", specifications: "Сорта и спецификации",
     request: "Запросить условия поставки", message: "Здравствуйте! Меня интересует", onRequest: "По запросу", close: "Закрыть каталог", back: "Назад к категории", previous: "Предыдущие товары", next: "Следующие товары", pause: "Остановить прокрутку", play: "Включить прокрутку", empty: "В этой категории пока нет товаров.",
     names: { cashew: "Кешью", "walnuts-shell": "Орехи в скорлупе", "peanuts-blanched": "Арахис бланшированный", papaya: "Папайя" },
@@ -10,13 +10,13 @@ const copy = {
     count(n) { const a = n % 10, b = n % 100; return `${n} ${a === 1 && b !== 11 ? "товар" : a >= 2 && a <= 4 && (b < 12 || b > 14) ? "товара" : "товаров"}`; },
   },
   en: {
-    title: "Catalogue", subtitle: "Products for<br>wholesale import", nuts: "Nuts", dried: "Dried fruits", snacks: "Fruit snacks", all: "All products",
+    title: "Catalogue", subtitle: "Products for<br>wholesale import", pricesUpdated: "Prices updated", nuts: "Nuts", dried: "Dried fruits", snacks: "Fruit snacks", all: "All products",
     view: "View products", open: "Open catalogue", featured: "From the catalogue", origin: "Origin", price: "Catalogue price", specifications: "Grades and specifications",
     request: "Request delivery terms", message: "Hello! I am interested in", onRequest: "On request", close: "Close catalogue", back: "Back to category", previous: "Previous products", next: "Next products", pause: "Pause carousel", play: "Play carousel", empty: "No products in this category yet.", names: {}, count: n => `${n} ${n === 1 ? "product" : "products"}`,
     search: "Search products", searchPlaceholder: "Find a product…", searchResults: "Search results", searchClear: "Clear search", searchNone: "No products found", searchTry: "Try another name, grade or country.",
   },
   cn: {
-    title: "产品目录", subtitle: "批量进口<br>产品精选", nuts: "坚果", dried: "干果", snacks: "水果零食", all: "全部产品",
+    title: "产品目录", subtitle: "批量进口<br>产品精选", pricesUpdated: "价格更新", nuts: "坚果", dried: "干果", snacks: "水果零食", all: "全部产品",
     view: "查看产品", open: "打开目录", featured: "目录精选", origin: "产地", price: "目录价格", specifications: "等级与规格",
     request: "咨询交货条件", message: "您好！我对以下产品感兴趣：", onRequest: "价格面议", close: "关闭目录", back: "返回分类", previous: "上一组产品", next: "下一组产品", pause: "暂停轮播", play: "播放轮播", empty: "此分类暂无产品。", names: {}, count: n => `${n} 款产品`,
     search: "搜索产品", searchPlaceholder: "查找产品…", searchResults: "搜索结果", searchClear: "清除搜索", searchNone: "未找到产品", searchTry: "请尝试其他名称、等级或国家。",
@@ -51,6 +51,18 @@ function price(value, lang) {
   return lang === "ru" ? formatted.replace(/(\d)\.(\d)/g, "$1,$2") : formatted;
 }
 
+function priceUpdateNote(value, lang) {
+  const iso = String(value || "");
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(iso)) return "";
+  const date = new Date(`${iso}T00:00:00Z`);
+  if (!Number.isFinite(date.getTime()) || date.toISOString().slice(0, 10) !== iso) return "";
+  const locale = { ru: "ru-RU", en: "en-GB", cn: "zh-CN" }[lang];
+  const formatted = new Intl.DateTimeFormat(locale, {
+    day: "2-digit", month: lang === "en" ? "short" : "2-digit", year: "numeric", timeZone: "UTC",
+  }).format(date);
+  return `<p class="catalog-updated"><i class="fa-regular fa-clock" aria-hidden="true"></i><span>${copy[lang].pricesUpdated}: <time datetime="${iso}">${esc(formatted)}</time></span></p>`;
+}
+
 function corners() {
   return '<span class="catalog-corners" aria-hidden="true"><span></span><span></span><span></span><span></span></span>';
 }
@@ -80,7 +92,7 @@ function card(product, lang, featured = false, order = 0) {
   </a>`;
 }
 
-export function renderCatalog(products, lang) {
+export function renderCatalog(products, lang, lastUpdated) {
   lang = copy[lang] ? lang : "en";
   const c = copy[lang];
   const tiles = groups.map((group, index) => {
@@ -111,6 +123,7 @@ export function renderCatalog(products, lang) {
             <div class="catalog-search-empty" hidden><strong>${c.searchNone}</strong><p>${c.searchTry}</p></div>
           </div><span id="catalog-search-status" class="catalog-search-sr-only" role="status" aria-live="polite" aria-atomic="true"></span>
         </form><p>${c.subtitle}</p></div>
+      ${priceUpdateNote(lastUpdated, lang)}
       <div class="catalog-categories">${tiles}</div>
       <div class="catalog-featured-heading"><h3>${c.featured}</h3><div class="catalog-carousel-controls">
         <button type="button" data-catalog-prev aria-label="${c.previous}"><i class="fa-solid fa-arrow-left-long" aria-hidden="true"></i></button>

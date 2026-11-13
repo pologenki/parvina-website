@@ -44,6 +44,10 @@
   text-align: right;
 }
 
+.catalog-updated { display: flex; align-items: center; gap: 8px; margin: 0 0 14px; color: #555; font-size: 12px; line-height: 1.5; }
+.catalog-updated > i { flex: 0 0 auto; color: #8a6b49; font-size: 13px; }
+.catalog-updated time { color: #222; font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
 .catalog-search { position: relative; z-index: 10; min-width: 0; width: 100%; margin: 0; }
 .catalog-search-field { display: flex; align-items: center; gap: 12px; height: 54px; padding: 4px 4px 4px 18px; border: 1px solid #2223; background: #f4f4f4; transition: border-color .2s, background .2s, box-shadow .2s; }
 .catalog-search-field:focus-within { border-color: #222; background: #fafafa; box-shadow: 0 0 0 3px #dec8ae66; }

@@ -210,7 +210,7 @@ export function Content() {
 
   return `
   ${NutScene(lang)}
-  ${renderCatalog(products, lang)}
+  ${renderCatalog(products, lang, productsData?.lastUpdated)}
 
     
   ${renderImportServices(lang)}
