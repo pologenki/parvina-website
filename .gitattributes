@@ -1,0 +1,2 @@
+# Keep the bytes of the integrity-hashed local stylesheet stable on Windows and Linux.
+public/vendor/fontawesome/css/site-icons-v1.css text eol=lf
