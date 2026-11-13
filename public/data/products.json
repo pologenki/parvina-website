@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-22",
+  "lastUpdated": "2026-11-13",
   "products": [
     {
       "id": "cashew",
@@ -290,7 +290,7 @@
       "origin": "India",
       "origin_ru": "Индия",
       "image": "goods/redpeanuts.png",
-      "mainPrice": "1,20 USD/kg",
+      "mainPrice": "2,00 USD/kg",
       "variants": [
         {
           "name": "Bold - 40/50",
@@ -323,7 +323,14 @@
       ],
       "name_cn": "",
       "desc_cn": "",
-      "origin_cn": ""
+      "origin_cn": "",
+      "priceHistory": [
+        {
+          "date": "2026-11-13",
+          "from": "1,20 USD/kg",
+          "to": "2,00 USD/kg"
+        }
+      ]
     },
     {
       "id": "peanuts-blanched",
@@ -450,29 +457,54 @@
       "origin": "Philippines",
       "origin_ru": "Филиппины",
       "image": "goods/test.jpg",
-      "mainPrice": "2,80 USD/kg",
+      "mainPrice": "3,60 USD/kg",
       "variants": [
         {
           "name": "Banana Chips Whole, 6.8kg Carton",
-          "price": "2,60 USD/kg",
+          "price": "3,50 USD/kg",
           "desc": "Premium whole banana chips, vacuum-packed in a 6.8kg carton. Features golden color, crispy texture and natural banana flavor - ideal for snacks and food service.",
           "desc_ru": "Премиальные целые банановые чипсы, вакуумно упакованные в картонную коробку 6,8 кг. Золотистый цвет, хрустящая текстура и натуральный банановый вкус.",
-          "desc_cn": ""
+          "desc_cn": "",
+          "priceHistory": [
+            {
+              "date": "2026-11-13",
+              "from": "2,60 USD/kg",
+              "to": "3,50 USD/kg"
+            }
+          ]
         },
         {
           "name": "Banana Chips Halves/Quarters",
-          "price": "2,88 USD/kg",
+          "price": "3,30 USD/kg",
           "desc": "Uniform banana chips in halves and quarters, packed in a 6.8kg carton. Perfect for confectionery, bakery and muesli applications with consistent size and crispy texture.",
           "desc_ru": "Однородные банановые чипсы половинками и четвертинками, упакованные в картонную коробку 6,8 кг. Идеально подходят для кондитерских изделий, выпечки и мюсли.",
-          "desc_cn": ""
+          "desc_cn": "",
+          "priceHistory": [
+            {
+              "date": "2026-11-13",
+              "from": "2,88 USD/kg",
+              "to": "3,30 USD/kg"
+            }
+          ]
         }
       ],
       "name_cn": "",
       "desc_cn": "",
-      "origin_cn": ""
+      "origin_cn": "",
+      "priceHistory": [
+        {
+          "date": "2026-11-13",
+          "from": "2,80 USD/kg",
+          "to": "3,60 USD/kg"
+        }
+      ]
     }
   ],
   "changeLog": [
+    {
+      "date": "2026-11-13T20:12:23.451Z",
+      "message": "Products updated: 10 items"
+    },
     {
       "date": "2026-07-22T10:06:46.738Z",
       "message": "Products updated: 10 items"
