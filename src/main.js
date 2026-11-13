@@ -1,7 +1,7 @@
 ﻿import "./style.css";
 import { Header } from "./components/header.js";
-import { Footer } from "./components/footer.js";
-import { initHeaderMenu } from "./components/headerScript.js";
+import { Footer, initFooter } from "./components/footer.js";
+import { initHeaderMenu } from "./components/header-menu.js";
 import { initSectionScript } from "./components/sectionScript.js";
 import {
   initLanguage,
@@ -11,8 +11,12 @@ import {
   getLanguageFromPath,
 } from "./utils/i18n.js";
 import { initContactForm } from "./utils/emailService.js";
-import { Content, loadProducts } from "./components/content.js";
-import { responsiveImagePath, responsiveImageSrcset } from "./utils/responsiveImage.js";
+import { Content, loadProducts, getProducts } from "./components/content.js";
+import { initCatalog } from "./components/catalog.js";
+import { initNutScene } from "./components/nut-scene.js";
+import { initImportServices } from "./components/import-services.js";
+import { initGallery } from "./components/gallery.js";
+import { initContactModal } from "./components/contact.js";
 
 const LOGO_SCROLL_RESET_KEY = "pologenkiForceScrollTop";
 
@@ -162,114 +166,35 @@ function updatePageTexts() {
 
 // Language selector update function
 function updateLanguageSelector() {
-  const languageCurrent = document.querySelector(".language-current");
-  const languageCode = languageCurrent?.querySelector(".language-code");
-  const currentLang = getCurrentLanguage();
-
-  if (languageCode) {
-    const languageLabels = {
-      en: "EN",
-      ru: "RU",
-      cn: "CN",
-    };
-
-    languageCode.textContent =
-      languageLabels[currentLang] || currentLang.toUpperCase();
-  }
+  const current = getCurrentLanguage();
+  document.querySelectorAll('.pv-language-option').forEach(option => {
+    if (option.dataset.lang === current) option.setAttribute('aria-current', 'page');
+    else option.removeAttribute('aria-current');
+  });
 }
 
-// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+let disposeLanguageSwitcher = () => {};
 function initLanguageSwitcher() {
-  const languageCurrent = document.querySelector(".language-current");
-  const languageDropdown = document.querySelector(".language-dropdown");
-  const languageOptions = document.querySelectorAll(".language-option");
-
-  if (languageCurrent && languageDropdown) {
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ dropdown пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
-    languageCurrent.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-
-      // Toggle the dropdown
-      languageDropdown.classList.toggle("active");
-    });
-
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ dropdown пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
-    languageCurrent.addEventListener("mouseenter", (e) => {
-      if (window.innerWidth > 768) {
-        // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-        languageDropdown.classList.add("active");
-      }
-    });
-
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ dropdown пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
-    languageCurrent.addEventListener("mouseleave", (e) => {
-      if (window.innerWidth > 768) {
-        // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
-        setTimeout(() => {
-          if (!languageDropdown.matches(":hover")) {
-            languageDropdown.classList.remove("active");
-          }
-        }, 100);
-      }
-    });
-
-    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ dropdown (пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
-    languageDropdown.addEventListener("mouseleave", (e) => {
-      if (window.innerWidth > 768) {
-        // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-        languageDropdown.classList.remove("active");
-      }
-    });
-
-    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
-    languageOptions.forEach((option) => {
-      option.addEventListener("click", async (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-
-        const lang = option.getAttribute("data-lang");
-        localStorage.setItem("langChosen", "1");
-        localStorage.setItem("preferredLanguage", lang);
-
-        const languagePaths = { en: "/", ru: "/ru/", cn: "/zh-cn/" };
-        const targetPath = languagePaths[lang] || "/";
-        if (window.location.pathname !== targetPath) {
-          window.location.assign(`${targetPath}${window.location.hash || ""}`);
-          return;
-        }
-
+  disposeLanguageSwitcher();
+  const controller = new AbortController();
+  document.querySelectorAll('.pv-language-option').forEach(option => {
+    option.addEventListener('click', async event => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      const lang = option.dataset.lang;
+      localStorage.setItem('langChosen', '1');
+      localStorage.setItem('preferredLanguage', lang);
+      const path = { en: '/', ru: '/ru/', cn: '/zh-cn/' }[lang] || '/';
+      if (location.pathname !== path) {
+        location.assign(path + location.search + location.hash);
+      } else if (getCurrentLanguage() !== lang) {
         await window.changeLanguage(lang);
-
-        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ dropdown
-        languageDropdown.classList.remove("active");
-
-        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-        showLanguageNotification(lang);
-      });
-    });
-
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ dropdown пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
-    document.addEventListener("click", (e) => {
-      if (
-        !languageCurrent.contains(e.target) &&
-        !languageDropdown.contains(e.target)
-      ) {
-        languageDropdown.classList.remove("active");
       }
-    });
-
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ Escape
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        languageDropdown.classList.remove("active");
-      }
-    });
-  }
+    }, { signal: controller.signal });
+  });
+  disposeLanguageSwitcher = () => controller.abort();
 }
 
-// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 function showLanguageNotification(lang) {
   const messages = {
     en: "Language changed to English",
@@ -344,10 +269,12 @@ async function renderApp() {
 
   // Add small delay to ensure DOM is ready for Swiper
   await new Promise((resolve) => setTimeout(resolve, 50));
-  initPortfolioFlipSlider();
+  initGallery(getCurrentLanguage());
+  initContactModal({ lockPage: preventBodyScroll, unlockPage: allowBodyScroll });
   initContactForm();
   initScrollToTop();
-  initProductModals();
+  initCatalog(getProducts(), getCurrentLanguage());
+  initNutScene(getCurrentLanguage());
   initServiceModals();
   initFooterModals();
   initEmailLinks();
@@ -375,367 +302,6 @@ async function initApp() {
   await initLanguage();
   await loadProducts();
   await renderApp();
-}
-
-async function initPortfolioFlipSlider() {
-  const DEFAULT_SLIDES = [
-    {
-      num: "01",
-      title: "Gulfood Dubai 2023",
-      title_ru: "Gulfood Р”СѓР±Р°Р№ 2023",
-      desc: "Meeting with a regular supplier of dates from Tunisia. Exploring new opportunities for long-term partnerships.",
-      desc_ru: "Р’СЃС‚СЂРµС‡Р° СЃ РїРѕСЃС‚РѕСЏРЅРЅС‹Рј РїРѕСЃС‚Р°РІС‰РёРєРѕРј С„РёРЅРёРєРѕРІ РёР· РўСѓРЅРёСЃР°. РР·СѓС‡РµРЅРёРµ РЅРѕРІС‹С… РІРѕР·РјРѕР¶РЅРѕСЃС‚РµР№ РґР»СЏ РґРѕР»РіРѕСЃСЂРѕС‡РЅРѕРіРѕ СЃРѕС‚СЂСѓРґРЅРёС‡РµСЃС‚РІР°.",
-      img: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=900&q=85",
-    },
-    {
-      num: "02",
-      title: "Cashew Processing, Vietnam",
-      title_ru: "РћР±СЂР°Р±РѕС‚РєР° РєРµС€СЊСЋ, Р’СЊРµС‚РЅР°Рј",
-      desc: "Insight into cashew processing and packaging. Ensuring quality standards are met at the source.",
-      desc_ru: "Р—РЅР°РєРѕРјСЃС‚РІРѕ СЃ РїСЂРѕРёР·РІРѕРґСЃС‚РІРѕРј Рё СѓРїР°РєРѕРІРєРѕР№ РєРµС€СЊСЋ. РљРѕРЅС‚СЂРѕР»СЊ СЃРѕРѕС‚РІРµС‚СЃС‚РІРёСЏ СЃС‚Р°РЅРґР°СЂС‚Р°Рј РєР°С‡РµСЃС‚РІР°.",
-      img: "https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=900&q=85",
-    },
-    {
-      num: "03",
-      title: "Gulfood Dubai 2025",
-      title_ru: "Gulfood Р”СѓР±Р°Р№ 2025",
-      desc: "Discovering reliable suppliers worldwide. Life is buzzing - ideas are born and deals are made.",
-      desc_ru: "РџРѕРёСЃРє РЅР°РґРµР¶РЅС‹С… РїРѕСЃС‚Р°РІС‰РёРєРѕРІ РїРѕ РІСЃРµРјСѓ РјРёСЂСѓ. Р—РґРµСЃСЊ РєРёРїРёС‚ Р¶РёР·РЅСЊ - СЂРѕР¶РґР°СЋС‚СЃСЏ РёРґРµРё Рё Р·Р°РєР»СЋС‡Р°СЋС‚СЃСЏ СЃРґРµР»РєРё.",
-      img: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=900&q=85",
-    },
-    {
-      num: "04",
-      title: "Anuga Cologne 2025",
-      title_ru: "Anuga РљРµР»СЊРЅ 2025",
-      desc: "Exploring international markets for nuts and dried fruits. Securing supply chain connections.",
-      desc_ru: "РР·СѓС‡РµРЅРёРµ РјРµР¶РґСѓРЅР°СЂРѕРґРЅС‹С… СЂС‹РЅРєРѕРІ РѕСЂРµС…РѕРІ Рё СЃСѓС…РѕС„СЂСѓРєС‚РѕРІ. РќР°Р»Р°Р¶РёРІР°РЅРёРµ СЃРІСЏР·РµР№ РІ С†РµРїРѕС‡РєРµ РїРѕСЃС‚Р°РІРѕРє.",
-      img: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=900&q=85",
-    },
-    {
-      num: "05",
-      title: "Meeting Russian Ambassador",
-      title_ru: "Р’СЃС‚СЂРµС‡Р° СЃ РїРѕСЃР»РѕРј Р РѕСЃСЃРёРё",
-      desc: "Strengthening trade relations between countries. Building bridges for international commerce.",
-      desc_ru: "РЈРєСЂРµРїР»РµРЅРёРµ С‚РѕСЂРіРѕРІС‹С… РѕС‚РЅРѕС€РµРЅРёР№ РјРµР¶РґСѓ СЃС‚СЂР°РЅР°РјРё. РЎРѕР·РґР°РЅРёРµ РјРѕСЃС‚РѕРІ РґР»СЏ РјРµР¶РґСѓРЅР°СЂРѕРґРЅРѕР№ С‚РѕСЂРіРѕРІР»Рё.",
-      img: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=900&q=85",
-    },
-  ];
-
-  // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ portfolio.json, fallback пїЅпїЅ DEFAULT_SLIDES
-  async function loadSlides() {
-    try {
-      const r = await fetch('/data/portfolio.json?v=' + Date.now());
-      if (r.ok) {
-        const json = await r.json();
-        const publishedItems = (json.items || []).filter((item) => item.published !== false);
-        if (publishedItems.length > 0) {
-          return publishedItems.map((item, i) => ({
-            ...item,
-            num: String(i + 1).padStart(2, '0')
-          }));
-        }
-      }
-    } catch(e) {}
-    return DEFAULT_SLIDES;
-  }
-
-  const slides = await loadSlides();
-
-  // Infinite carousel: always shows 3 cards, moves 1 at a time
-  // current = index of the LEFT-most visible card
-  const total = slides.length; // 5
-  const visible = 3; // always show 3
-  let current = 0;
-  let isAnimating = false;
-
-  const track = document.getElementById("portfolioTrack");
-  const dotsEl = document.getElementById("portfolioDots");
-  const prevBtn = document.getElementById("portfolioPrev");
-  const nextBtn = document.getElementById("portfolioNext");
-  const zoomOverlay = document.getElementById("zoomOverlay");
-  const zoomImg = document.getElementById("zoomImg");
-  const zoomTitle = document.getElementById("zoomTitle");
-  const zoomDesc = document.getElementById("zoomDesc");
-  const zoomThumbs = document.getElementById("zoomThumbs");
-  const zoomClose = document.getElementById("zoomClose");
-  const zoomBackdrop = document.getElementById("zoomBackdrop");
-  const zoomPrev = document.getElementById("zoomPrev");
-  const zoomNext = document.getElementById("zoomNext");
-  const counterEl = document.getElementById("portfolioCounter");
-
-  if (!track) return;
-
-  slides.forEach((slide) => {
-    const img = new Image();
-    img.src = slide.img;
-  });
-
-  let zoomCurrentIdx = 0;
-
-  function getLang() {
-    return (
-      document.documentElement.lang ||
-      localStorage.getItem("preferredLanguage") ||
-      "en"
-    );
-  }
-
-  function updateZoom(idx) {
-    zoomCurrentIdx = ((idx % total) + total) % total;
-    const s = slides[zoomCurrentIdx];
-    const lang = getLang();
-    zoomImg.src = s.img;
-    zoomImg.alt =
-      lang === "cn" && s.title_cn ? s.title_cn : lang === "ru" ? s.title_ru : s.title;
-    zoomTitle.textContent =
-      lang === "cn" && s.title_cn ? s.title_cn : lang === "ru" ? s.title_ru : s.title;
-    if (zoomDesc) {
-      zoomDesc.textContent =
-        lang === "cn" && s.desc_cn ? s.desc_cn : lang === "ru" ? s.desc_ru : s.desc;
-    }
-    updateZoomThumbs();
-  }
-
-  function renderZoomThumbs() {
-    if (!zoomThumbs) return;
-    const lang = getLang();
-    zoomThumbs.innerHTML = slides
-      .map((slide, i) => {
-        const title =
-          lang === "cn" && slide.title_cn
-            ? slide.title_cn
-            : lang === "ru"
-              ? slide.title_ru
-              : slide.title;
-        return `
-          <button class="zoom-thumb" type="button" data-zoom-index="${i}" aria-label="${title}">
-            <img src="${responsiveImagePath(slide.img, 480)}" srcset="${responsiveImageSrcset(slide.img, [480, 960])}" sizes="110px" alt="${title}" width="480" height="480" loading="lazy" decoding="async">
-            <span>${slide.num}</span>
-          </button>`;
-      })
-      .join("");
-    zoomThumbs.addEventListener("click", (e) => {
-      const button = e.target.closest(".zoom-thumb");
-      if (!button) return;
-      shiftZoom(Number(button.dataset.zoomIndex) - zoomCurrentIdx);
-    });
-  }
-
-  function updateZoomThumbs() {
-    if (!zoomThumbs) return;
-    zoomThumbs.querySelectorAll(".zoom-thumb").forEach((button, i) => {
-      button.classList.toggle("active", i === zoomCurrentIdx);
-    });
-  }
-
-  function openZoom(idx, e) {
-    if (e) e.stopPropagation();
-    if (window.matchMedia("(max-width: 768px)").matches) return;
-    stopAutoplay();
-    const slide = slides[idx];
-    trackEvent("open_portfolio_project", {
-      project_title: slide?.title || slide?.title_ru || slide?.title_cn || `Project ${idx + 1}`,
-      project_index: idx + 1,
-    });
-    updateZoom(idx);
-    zoomOverlay.classList.add("active");
-    preventBodyScroll();
-  }
-
-  function closeZoom() {
-    zoomOverlay.classList.remove("active");
-    allowBodyScroll();
-    startAutoplay();
-  }
-
-  function shiftZoom(direction) {
-    updateZoom(zoomCurrentIdx + direction);
-  }
-
-  function buildCard(idx) {
-    const realIdx = ((idx % total) + total) % total;
-    const s = slides[realIdx];
-    const lang = getLang();
-    const title =
-      lang === "cn" && s.title_cn ? s.title_cn : lang === "ru" ? s.title_ru : s.title;
-    const desc =
-      lang === "cn" && s.desc_cn ? s.desc_cn : lang === "ru" ? s.desc_ru : s.desc;
-    const viewPhoto = t("portfolio.viewPhoto");
-    return `
-    <div class="flip-card portfolio-project-card" data-portfolio-index="${realIdx}">
-      <img src="${responsiveImagePath(s.img, 960)}" srcset="${responsiveImageSrcset(s.img, [480, 960])}" sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 900px) 46vw, 360px" alt="${title}" width="960" height="720" loading="lazy" decoding="async">
-      <div class="front-overlay">
-        <div class="front-num">${s.num}</div>
-        <div class="front-title">${title}</div>
-        <div class="front-desc">${desc}</div>
-        <button class="portfolio-card-cta" onclick="portfolioOpenZoom(${realIdx}, event)">${viewPhoto}</button>
-      </div>
-    </div>`;
-  }
-
-  // в”Ђв”Ђ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
-  function visibleCount() {
-    return window.innerWidth <= 600 ? 1 : window.innerWidth <= 900 ? 2 : 3;
-  }
-
-  function renderTrack() {
-    const cnt = visibleCount();
-    const indices = [];
-    for (let i = 0; i < total + cnt; i++) indices.push(i);
-    track.innerHTML = indices.map(i => buildCard(i)).join('');
-    updateSliderPosition(false);
-    updateSliderMeta();
-  }
-
-  function updateSliderMeta() {
-    renderDots();
-    if (counterEl) counterEl.textContent = `${(current % total) + 1} / ${slides.length}`;
-  }
-
-  function sliderStep() {
-    const card = track.querySelector(".portfolio-project-card");
-    if (!card) return 0;
-    const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || "0");
-    return card.getBoundingClientRect().width + gap;
-  }
-
-  function updateSliderPosition(animate = true) {
-    const distance = current * sliderStep();
-    track.style.setProperty(
-      "transition",
-      animate ? "transform 760ms cubic-bezier(0.22, 1, 0.36, 1)" : "none",
-      "important",
-    );
-    track.style.setProperty("transform", `translate3d(${-distance}px, 0, 0)`, "important");
-    track.querySelectorAll('.flip-card').forEach(c => c.classList.add('pfs-visible'));
-  }
-
-  function goTo(newCurrent) {
-    if (isAnimating) return;
-    if (newCurrent < 0) {
-      current = total - 1;
-      updateSliderMeta();
-      updateSliderPosition(false);
-      return;
-    }
-    isAnimating = true;
-    current = newCurrent;
-    updateSliderMeta();
-    updateSliderPosition(true);
-    setTimeout(() => {
-      if (current >= total) {
-        current = 0;
-        updateSliderMeta();
-        updateSliderPosition(false);
-      }
-      isAnimating = false;
-    }, 790);
-  }
-
-  let autoplayTimer = null;
-
-  function startAutoplay() {
-    stopAutoplay();
-    autoplayTimer = setInterval(() => goTo(current + 1), 7000);
-  }
-
-  function stopAutoplay() {
-    if (autoplayTimer) {
-      clearInterval(autoplayTimer);
-      autoplayTimer = null;
-    }
-  }
-
-  function renderDots() {
-    if (!dotsEl) return;
-    dotsEl.innerHTML = slides
-      .map((_, i) => `<div class="flip-nav-dot ${i === current % total ? "active" : ""}" onclick="portfolioGoTo(${i})"></div>`)
-      .join("");
-  }
-
-  renderZoomThumbs();
-
-  // в”Ђв”Ђ Click card to open the project photo
-  track.addEventListener('click', (e) => {
-    if (e.target.closest('.btn-zoom')) return;
-    const card = e.target.closest('.portfolio-project-card');
-    if (!card) return;
-    openZoom(Number(card.dataset.portfolioIndex), e);
-  });
-
-  // в”Ђв”Ђ Swipe (touch)
-  let touchStartX = 0;
-  let touchStartY = 0;
-
-  track.addEventListener('touchstart', (e) => {
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
-  }, { passive: true });
-
-  track.addEventListener('touchend', (e) => {
-    const dx = e.changedTouches[0].clientX - touchStartX;
-    const dy = e.changedTouches[0].clientY - touchStartY;
-    // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ (> 40px пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ scroll)
-    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
-      stopAutoplay();
-      goTo(dx < 0 ? current + 1 : current - 1);
-      startAutoplay();
-    }
-  }, { passive: true });
-
-  // в”Ђв”Ђ Globals
-  window.portfolioOpenZoom = openZoom;
-  window.portfolioGoTo = function (i) {
-    stopAutoplay(); goTo(i); startAutoplay();
-  };
-  window._pfsPrev = () => { stopAutoplay(); goTo(current - 1); startAutoplay(); };
-  window._pfsNext = () => { stopAutoplay(); goTo(current + 1); startAutoplay(); };
-
-  if (prevBtn) prevBtn.onclick = () => { stopAutoplay(); goTo(current - 1); startAutoplay(); };
-  if (nextBtn) nextBtn.onclick = () => { stopAutoplay(); goTo(current + 1); startAutoplay(); };
-  if (zoomClose) zoomClose.onclick = closeZoom;
-  if (zoomBackdrop) zoomBackdrop.onclick = closeZoom;
-  if (zoomPrev) zoomPrev.onclick = (e) => { e.stopPropagation(); shiftZoom(-1); };
-  if (zoomNext) zoomNext.onclick = (e) => { e.stopPropagation(); shiftZoom(1); };
-
-  if (zoomOverlay) {
-    let zTouchX = 0, zTouchY = 0;
-    zoomOverlay.addEventListener("touchstart", (e) => {
-      zTouchX = e.touches[0].clientX;
-      zTouchY = e.touches[0].clientY;
-    }, { passive: true });
-    zoomOverlay.addEventListener("touchend", (e) => {
-      const dx = e.changedTouches[0].clientX - zTouchX;
-      const dy = e.changedTouches[0].clientY - zTouchY;
-      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
-        shiftZoom(dx < 0 ? 1 : -1);
-      }
-    }, { passive: true });
-  }
-
-  track.addEventListener("mouseenter", () => { if (window.innerWidth > 600) stopAutoplay(); });
-  track.addEventListener("mouseleave", () => { if (window.innerWidth > 600) startAutoplay(); });
-
-  // resize пїЅ debounced, only if width actually changed
-  let lastWidth = window.innerWidth;
-  window.addEventListener('resize', () => {
-    const newWidth = window.innerWidth;
-    if (Math.abs(newWidth - lastWidth) > 50) {
-      lastWidth = newWidth;
-      renderTrack();
-    }
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeZoom();
-    if (zoomOverlay && zoomOverlay.classList.contains("active")) {
-      if (e.key === "ArrowLeft") shiftZoom(-1);
-      if (e.key === "ArrowRight") shiftZoom(1);
-    }
-  });
-
-  renderTrack();
-  startAutoplay();
 }
 
 window.changeLanguage = async function (lang) {
@@ -771,10 +337,12 @@ window.changeLanguage = async function (lang) {
   document.body.classList.remove("menu-open");
 
   await new Promise((resolve) => setTimeout(resolve, 50));
-  initPortfolioFlipSlider();
+  initGallery(getCurrentLanguage());
+  initContactModal({ lockPage: preventBodyScroll, unlockPage: allowBodyScroll });
   initContactForm();
   initScrollToTop();
-  initProductModals();
+  initCatalog(getProducts(), getCurrentLanguage());
+  initNutScene(getCurrentLanguage());
   initServiceModals();
   initFooterModals();
   initEmailLinks();
@@ -791,88 +359,12 @@ initApp().catch((error) => {
   document.documentElement.classList.remove("app-loading");
 });
 
-// Services Modal Function
+// Services modal and animation lifecycle (also reset when changing language).
 function initServiceModals() {
-  const serviceCards = document.querySelectorAll(
-    ".service-card[data-service-modal]",
-  );
-  const serviceModals = document.querySelectorAll(".service-modal");
-  const closeServiceButtons = document.querySelectorAll(".close-modal");
-  const serviceContactLinks = document.querySelectorAll("[data-service-contact]");
-
-  // Open modal window when clicking on service card
-  serviceCards.forEach((card) => {
-    card.addEventListener("click", function (e) {
-      if (e.target.closest(".service-page-link")) return;
-      const modalId = this.getAttribute("data-service-modal");
-      const modal = document.getElementById(modalId);
-      if (modal) {
-        modal.classList.add("active");
-        preventBodyScroll();
-        trackEvent("open_service_modal", {
-          service_id: modalId,
-          service_title: this.querySelector(".service-title")?.textContent?.trim() || "",
-        });
-      }
-    });
-  });
-
-  // Close modal window
-  closeServiceButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-      const modal = this.closest(".service-modal");
-      modal.classList.remove("active");
-      allowBodyScroll();
-    });
-  });
-
-  // Close when clicking outside modal window
-  serviceModals.forEach((modal) => {
-    modal.addEventListener("click", function (e) {
-      if (e.target === this) {
-        this.classList.remove("active");
-        allowBodyScroll();
-      }
-    });
-  });
-
-  serviceContactLinks.forEach((link) => {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-      const modal = this.closest(".service-modal");
-      trackEvent("click_request_quote", {
-        service_id: modal?.id || "",
-        source: "service_modal",
-      });
-      if (modal) {
-        modal.classList.remove("active");
-        allowBodyScroll();
-      }
-
-      setTimeout(() => {
-        const contactSection = document.getElementById("contact");
-        if (contactSection) {
-          contactSection.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
-        }
-      }, 150);
-    });
-  });
-
-  // Close on Escape
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") {
-      serviceModals.forEach((modal) => {
-        if (modal.classList.contains("active")) {
-          modal.classList.remove("active");
-          allowBodyScroll();
-        }
-      });
-    }
-  });
+  initImportServices();
 }
+
+
 
 // Current date function
 function getLastTuesday() {
@@ -970,7 +462,7 @@ function initAnalyticsTracking() {
         return;
       }
 
-      if (href.includes("mail.google.com") || href.startsWith("mailto:") || link.classList.contains("email-link")) {
+      if (href.startsWith("mailto:") || link.hasAttribute('data-contact-open') || link.classList.contains("email-link")) {
         trackEvent("click_email", { link_text: label, link_url: href || "email_copy" });
         return;
       }
@@ -980,7 +472,7 @@ function initAnalyticsTracking() {
         return;
       }
 
-      if (href === "#contact" || link.dataset.modalContact !== undefined || link.dataset.serviceContact !== undefined) {
+      if (href === "#footer" || link.dataset.modalContact !== undefined || link.dataset.serviceContact !== undefined) {
         trackEvent("click_request_quote", { link_text: label });
       }
     });
@@ -1160,7 +652,7 @@ function initProductModals() {
       if (e.target.closest(".btn-more")) {
         e.preventDefault();
         e.stopPropagation();
-        const contactSection = document.getElementById("contact");
+        const contactSection = document.getElementById("footer");
         trackEvent("click_product_contact", {
           product_info: this.getAttribute("data-product-info") || "",
         });
@@ -1175,7 +667,7 @@ function initProductModals() {
 
       // If clicked on the card itself (but not on the button) - also scroll to contacts
       if (!e.target.closest(".btn-more")) {
-        const contactSection = document.getElementById("contact");
+        const contactSection = document.getElementById("footer");
         if (contactSection) {
           contactSection.scrollIntoView({
             behavior: "smooth",
@@ -1216,7 +708,7 @@ function initProductModals() {
       }
 
       setTimeout(() => {
-        const contactSection = document.getElementById("contact");
+        const contactSection = document.getElementById("footer");
         if (contactSection) {
           contactSection.scrollIntoView({
             behavior: "smooth",
@@ -1236,7 +728,7 @@ function initProductModals() {
       }
 
       setTimeout(() => {
-        const contactSection = document.getElementById("contact");
+        const contactSection = document.getElementById("footer");
         if (contactSection) {
           contactSection.scrollIntoView({
             behavior: "smooth",
@@ -1454,60 +946,56 @@ function initServiceCards() {
   }
 }
 
-// Footer Modals Function
+let disposeFooterModals = () => {};
+
+// Footer documents own their focus and scroll lifecycle.
 function initFooterModals() {
-  const privacyLink = document.getElementById("privacy-policy-link");
-  const termsLink = document.getElementById("terms-of-service-link");
-  const privacyModal = document.getElementById("privacyModal");
-  const termsModal = document.getElementById("termsModal");
-
-  if (privacyLink && privacyModal) {
-    privacyLink.addEventListener("click", function (e) {
-      e.preventDefault();
-      privacyModal.style.display = "block";
-      preventBodyScroll();
-    });
+  disposeFooterModals();
+  initFooter();
+  const controller = new AbortController();
+  const events = { signal: controller.signal };
+  let active = null;
+  let trigger = null;
+  function close(restoreFocus = true) {
+    if (!active) return;
+    active.style.display = "none";
+    active = null;
+    allowBodyScroll();
+    if (restoreFocus && trigger?.isConnected) trigger.focus({ preventScroll: true });
   }
-
-  if (termsLink && termsModal) {
-    termsLink.addEventListener("click", function (e) {
-      e.preventDefault();
-      termsModal.style.display = "block";
+  for (const [linkId, modalId] of [["privacy-policy-link", "privacyModal"], ["terms-of-service-link", "termsModal"]]) {
+    const link = document.getElementById(linkId);
+    const modal = document.getElementById(modalId);
+    if (!link || !modal) continue;
+    link.addEventListener("click", event => {
+      event.preventDefault();
+      if (active) close(false);
+      trigger = link;
+      active = modal;
+      modal.style.display = "flex";
+      modal.querySelector('.pf-document-body').scrollTop = 0;
       preventBodyScroll();
-    });
+      modal.querySelector('.pf-document-close').focus({ preventScroll: true });
+    }, events);
+    modal.querySelectorAll('[data-pf-document-close]').forEach(button => button.addEventListener("click", () => close(), events));
+    modal.addEventListener("click", event => { if (event.target === modal) close(); }, events);
   }
-
-  const closeButtons = document.querySelectorAll(".modal .close-modal");
-  closeButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-      const modal = this.closest(".modal");
-      if (modal) {
-        modal.style.display = "none";
-        allowBodyScroll();
-      }
-    });
-  });
-
-  const modals = document.querySelectorAll(".modal");
-  modals.forEach((modal) => {
-    modal.addEventListener("click", function (e) {
-      if (e.target === this) {
-        this.style.display = "none";
-        allowBodyScroll();
-      }
-    });
-  });
-
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") {
-      modals.forEach((modal) => {
-        if (modal.style.display === "block") {
-          modal.style.display = "none";
-          allowBodyScroll();
-        }
-      });
+  // Capture before the old service-dialog listener hides every .modal.
+  document.addEventListener("keydown", event => {
+    if (!active || document.querySelector('#contactModal[open]')) return;
+    if (event.key === "Escape") {
+      event.preventDefault();
+      event.stopPropagation();
+      close();
+    } else if (event.key === "Tab") {
+      const controls = [...active.querySelectorAll('a[href], button:not([disabled]), [tabindex="0"]')].filter(control => control.getClientRects().length);
+      const first = controls[0], last = controls.at(-1);
+      if (!active.contains(document.activeElement)) { event.preventDefault(); (event.shiftKey ? last : first)?.focus(); }
+      else if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
     }
-  });
+  }, { ...events, capture: true });
+  disposeFooterModals = () => { close(false); controller.abort(); };
 }
 
 // Email Links Function

@@ -1,7 +1,13 @@
 import { personalEn } from "../content/content-en.js";
 import { personalRu } from "../content/content-ru.js";
 import { personalCn } from "../content/content-cn.js";
-import { getCurrentLanguage } from "../utils/i18n.js";
+import { getCurrentLanguage, t } from "../utils/i18n.js";
+import diagonal from '../assets/import-icons/arrow-up-right.svg?raw';
+import closeIcon from '../assets/import-icons/x.svg?raw';
+import rightIcon from '../assets/import-icons/arrow-right.svg?raw';
+import { createFooterMotion } from './footer-motion.js';
+import { renderContactModal } from './contact.js';
+import { importServices } from './import-services.js';
 
 function getPersonalData() {
   const lang = getCurrentLanguage();
@@ -151,77 +157,116 @@ export function Footer() {
   const personal = getPersonalData();
   const lang = getCurrentLanguage();
   const legal = getLegalBodies(lang);
+  const copy = {
+    ru: { rights: 'Все права защищены.', home: 'Наверх', close: 'Закрыть документ', eyebrow: 'Обсудим вашу поставку?', request: 'Оставить запрос', response: 'Ответ в течение 1 рабочего дня', privacy: 'Политика', terms: 'Условия', brand: 'Орехи и сухофрукты · Импорт', shortServices: ['Поставщики', 'Переговоры', 'Логистика', 'Документы', 'Контроль груза', 'Импорт под ключ'] },
+    en: { rights: 'All rights reserved.', home: 'Back to top', close: 'Close document', eyebrow: 'Let’s talk about your next shipment.', request: 'Send an enquiry', response: 'A reply within 1 business day', privacy: 'Privacy', terms: 'Terms', brand: 'Nuts & dried fruits · Import', shortServices: ['Sourcing', 'Negotiation', 'Logistics', 'Documents', 'Monitoring', 'Full import'] },
+    cn: { rights: '保留所有权利。', home: '返回顶部', close: '关闭文档', eyebrow: '聊聊您的下一批进口货物。', request: '发送询价', response: '1 个工作日内回复', privacy: '隐私政策', terms: '服务条款', brand: '坚果与干果 · 进口', shortServices: ['寻找供应商', '商务谈判', '物流协调', '贸易单证', '货运跟踪', '全程进口服务'] },
+  }[lang] || { rights: 'All rights reserved.', home: 'Pologenki — home', close: 'Close document' };
+  const arrow = `<span class="pf-arrow" aria-hidden="true">${diagonal}</span>`;
+  const documentCopy = {
+    ru: { label: 'Документы', done: 'Закрыть' },
+    en: { label: 'Documents', done: 'Close' },
+    cn: { label: '文档', done: '关闭' },
+  }[lang] || { label: 'Documents', done: 'Close' };
+  const renderDocument = (id, html) => {
+    const title = html.match(/<h2>(.*?)<\/h2>/)[1];
+    const body = html.replace(/<h2>.*?<\/h2>/, '').replace(/<a href="mailto:/g, '<a data-contact-open href="mailto:');
+    return `<div id="${id}" class="pf-document" role="dialog" aria-modal="true" aria-labelledby="${id}-title" style="display:none;">
+      <div class="pf-document-panel">
+        <header class="pf-document-header">
+          <div class="pf-document-bar">
+            <span class="pf-document-brand"><span>P</span>OLOGENKI</span>
+            <span class="pf-document-label">${documentCopy.label}</span>
+            <button type="button" class="pf-document-close" data-pf-document-close aria-label="${copy.close}">${closeIcon}</button>
+          </div>
+          <h2 id="${id}-title">${title}</h2>
+        </header>
+        <div class="pf-document-body" tabindex="0" role="document" aria-labelledby="${id}-title">${body}</div>
+        <div class="pf-document-footer">
+          <a class="pf-document-email" href="mailto:${personal.contacts.email}" data-contact-open aria-haspopup="dialog" aria-controls="contactModal">${personal.contacts.email}${arrow}</a>
+          <button type="button" class="pf-document-done" data-pf-document-close>${documentCopy.done}</button>
+        </div>
+      </div>
+    </div>`;
+  };
+  const prefix = lang === 'ru' ? '/ru' : lang === 'cn' ? '/zh-cn' : '';
+  const phones = [...personal.contacts.phones].sort((a, b) => Number(b.startsWith('+372')) - Number(a.startsWith('+372')));
+  const navItems = ['products', 'services', 'portfolio', 'contact'];
+  const socialItems = [['facebook', 'Facebook', 'fa-brands fa-facebook-f'], ['telegram', 'Telegram', 'fa-brands fa-telegram'], ['whatsapp', 'WhatsApp', 'fa-brands fa-whatsapp'], ['wechat', 'WeChat', 'fa-brands fa-weixin'], ['zoho', 'Zoho Mail', 'fa-solid fa-envelope']];
 
   return `
-    <footer class="footer">
-      <div class="footer-container">
-        <div class="footer-top">
-          <div class="footer-brand">
-            <h3 class="footer-name">${personal.footerBrand}</h3>
-            <p class="footer-tagline" data-i18n="about.subtitle">Import Manager & Trade Specialist</p>
-          </div>
-
-          <div class="footer-links">
-            <div class="footer-column">
-              <h4 class="footer-column-title" data-i18n="footer.navigation">Navigation</h4>
-              <ul class="footer-list">
-                <li><a href="#products" class="footer-link" data-i18n="nav.products">Our Products</a></li>
-                <li><a href="#services" class="footer-link" data-i18n="nav.services">Services</a></li>
-                <li><a href="#portfolio" class="footer-link" data-i18n="nav.portfolio">Portfolio</a></li>
-                <li><a href="#contact" class="footer-link" data-i18n="nav.contact">Get In Touch</a></li>
-              </ul>
-            </div>
-
-            <div class="footer-column">
-              <h4 class="footer-column-title" data-i18n="footer.services">Services</h4>
-              <ul class="footer-list">
-                <li><a href="#services" class="footer-link" data-i18n="services.supplierSourcing">Supplier Sourcing</a></li>
-                <li><a href="#services" class="footer-link" data-i18n="services.contractNegotiation">Contract Negotiation</a></li>
-                <li><a href="#services" class="footer-link" data-i18n="services.logisticsManagement">Logistics Management</a></li>
-                <li><a href="#services" class="footer-link" data-i18n="services.tradeDocumentation">Trade Documentation</a></li>
-                <li><a href="#services" class="footer-link" data-i18n="services.shipmentMonitoring">Shipment Monitoring</a></li>
-                <li><a href="#services" class="footer-link" data-i18n="services.fullServiceImport">Full-Service Import</a></li>
-              </ul>
-            </div>
-
-            <div class="footer-column">
-              <h4 class="footer-column-title" data-i18n="footer.connect">Connect</h4>
-              <ul class="footer-list">
-                <li><a href="${personal.contacts.socials.facebook}" class="footer-link" target="_blank">Facebook</a></li>
-                <li><a href="${personal.contacts.socials.whatsapp}" class="footer-link" target="_blank">WhatsApp</a></li>
-                <li><a href="${personal.contacts.socials.gmail}" class="footer-link" target="_blank">Gmail</a></li>
-                <li><a href="${personal.contacts.socials.telegram}" class="footer-link" target="_blank">Telegram</a></li>
-                <li><a href="${personal.contacts.socials.wechat}" class="footer-link" target="_blank">WeChat</a></li>
-              </ul>
-            </div>
+    <footer id="footer" class="pf-footer">
+      <canvas class="pf-dots" aria-hidden="true"></canvas>
+      <a class="pf-totop" href="#nut-scene" aria-label="${copy.home}">${rightIcon}</a>
+      <div class="pf-top pf-wrap">
+        <div class="pf-cta">
+          <p class="pf-eyebrow">${copy.eyebrow}</p>
+          <a class="pf-mail" href="mailto:${personal.contacts.email}" data-contact-open aria-haspopup="dialog" aria-controls="contactModal"><span>${personal.contacts.email}</span>${arrow}</a>
+          <div class="pf-cta-row">
+            <a class="pf-inquiry" href="#contact-form" data-contact-open aria-haspopup="dialog" aria-controls="contactModal"><span>${copy.request}</span><span class="pf-arrow" aria-hidden="true">${rightIcon}</span></a>
+            <span class="pf-response"><i aria-hidden="true"></i>${copy.response}</span>
           </div>
         </div>
-
-        <div class="footer-bottom">
-          <div class="footer-copyright">
-            <p>&copy; Designed & Developed by Pologenki © ${new Date().getFullYear()} All rights reserved.</p>
-          </div>
-
-          <div class="footer-legal">
-            <a href="#privacy-policy" class="footer-legal-link" id="privacy-policy-link" data-i18n="footer.privacy">Privacy Policy</a>
-            <a href="#terms-of-service" class="footer-legal-link" id="terms-of-service-link" data-i18n="footer.terms">Terms of Service</a>
-          </div>
+        <div class="pf-nav">
+          <nav class="pf-column pf-services" aria-labelledby="pf-services-title">
+            <h2 class="pf-title" id="pf-services-title">${t('footer.services')}</h2>
+            <ul class="pf-list">${importServices.map((service, index) => `<li><a class="pf-link" href="${prefix}/services/${service.slug}/" data-footer-service="${service.id}" aria-label="${t(`services.${service.title}`)}" aria-haspopup="dialog"><span class="pf-service-full">${t(`services.${service.title}`)}</span><span class="pf-service-short" aria-hidden="true">${copy.shortServices[index]}</span></a></li>`).join('')}</ul>
+          </nav>
+          <nav class="pf-column pf-navigation" aria-labelledby="pf-navigation-title">
+            <h2 class="pf-title" id="pf-navigation-title">${t('footer.navigation')}</h2>
+            <ul class="pf-list">
+              ${navItems.map(key => `<li><a class="pf-link" href="#${key === 'contact' ? 'footer' : key}">${t(`nav.${key}`)}</a></li>`).join('')}
+              <li><button type="button" class="pf-link pf-legal-link" id="privacy-policy-link" aria-label="${t('footer.privacy')}" aria-haspopup="dialog">${copy.privacy}</button></li>
+              <li><button type="button" class="pf-link pf-legal-link" id="terms-of-service-link" aria-label="${t('footer.terms')}" aria-haspopup="dialog">${copy.terms}</button></li>
+            </ul>
+          </nav>
+          <nav class="pf-column pf-social" aria-labelledby="pf-social-title">
+            <h2 class="pf-title" id="pf-social-title">${t('footer.connect')}</h2>
+            <ul class="pf-list">${socialItems.map(([key, name, icon]) => `<li><a class="pf-link" href="${personal.contacts.socials[key]}" ${key === 'zoho' ? 'data-contact-open aria-haspopup="dialog" aria-controls="contactModal"' : 'target="_blank" rel="noopener noreferrer"'}><i class="${icon}" aria-hidden="true"></i><span>${name}</span></a></li>`).join('')}</ul>
+            <div class="pf-phones">${phones.map(phone => `<a href="tel:${phone.replace(/[^+\d]/g, '')}">${phone}</a>`).join('')}</div>
+          </nav>
+        </div>
+      </div>
+      <div class="pf-word-stage">
+        <div class="pf-wordmark" role="img" aria-label="POLOGENKI">${[...'POLOGENKI'].map((letter, index) => `<span class="pf-letter${index === 0 ? ' pf-letter-accent' : ''}" aria-hidden="true">${letter}</span>`).join('')}</div>
+      </div>
+      <div class="pf-bottom-wrap">
+        <div class="pf-bottom pf-wrap">
+          <span class="pf-brand-note">${copy.brand}</span>
+          <p class="pf-copyright">&copy; ${new Date().getFullYear()} Pologenki. ${copy.rights}</p>
         </div>
       </div>
 
-      <div id="privacyModal" class="modal" style="display:none;">
-        <div class="modal-content">
-          <span class="close-modal"></span>
-          <div class="modal-body">${legal.privacy}</div>
-        </div>
-      </div>
-
-      <div id="termsModal" class="modal" style="display:none;">
-        <div class="modal-content">
-          <span class="close-modal"></span>
-          <div class="modal-body">${legal.terms}</div>
-        </div>
-      </div>
+      ${renderDocument('privacyModal', legal.privacy)}
+      ${renderDocument('termsModal', legal.terms)}
+      ${renderContactModal(lang)}
     </footer>
   `;
+}
+
+let disposeFooter = () => {};
+
+export function initFooter() {
+  disposeFooter();
+  const footer = document.querySelector('#footer.pf-footer');
+  if (!footer) return;
+  const controller = new AbortController();
+  const measure = () => footer.style.setProperty('--pf-viewport-width', `${document.documentElement.clientWidth}px`);
+  measure();
+  window.addEventListener('resize', measure, { signal: controller.signal, passive: true });
+  const stopMotion = createFooterMotion(footer, controller.signal, measure);
+  let anchorTimer;
+  if (['#footer', '#contact'].includes(location.hash)) {
+    let interacted = false;
+    for (const type of ['pointerdown', 'wheel', 'touchstart', 'keydown']) window.addEventListener(type, () => { interacted = true; }, { signal: controller.signal, once: true, passive: true });
+    const followAnchor = () => {
+      if (interacted || controller.signal.aborted || !footer.isConnected || !['#footer', '#contact'].includes(location.hash)) return;
+      const headerHeight = document.querySelector('.pv-site-header')?.offsetHeight || 0;
+      window.scrollTo({ top: scrollY + footer.getBoundingClientRect().top - headerHeight - 12, behavior: 'instant' });
+    };
+    requestAnimationFrame(() => requestAnimationFrame(followAnchor));
+    const loaded = document.readyState === 'complete' ? Promise.resolve() : new Promise(resolve => window.addEventListener('load', resolve, { signal: controller.signal, once: true }));
+    Promise.all([document.fonts.ready, loaded]).then(() => { if (!controller.signal.aborted) anchorTimer = setTimeout(followAnchor, 180); });
+  }
+  disposeFooter = () => { controller.abort(); stopMotion(); clearTimeout(anchorTimer); };
 }

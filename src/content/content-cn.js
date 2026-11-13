@@ -16,7 +16,7 @@ export const personalCn = {
       telegram: "https://t.me/parvinaolive",
       whatsapp: "https://wa.me/37258006670",
       wechat: "https://web.wechat.com/",
-      gmail: "https://mail.google.com/mail/?view=cm&to=info@pologenki.eu",
+      zoho: "mailto:info@pologenki.eu",
     },
   },
   footerBrand: "Parvina",

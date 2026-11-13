@@ -1,160 +1,92 @@
+import { contactCopy } from '../components/contact.js';
+import { getCurrentLanguage } from './i18n.js';
+
+let disposeForm = () => {};
+
 export function initContactForm() {
-  const form = document.getElementById("contact-form");
-
+  disposeForm();
+  const form = document.getElementById('contact-form');
   if (!form) return;
+  const copy = contactCopy[getCurrentLanguage()] || contactCopy.en;
+  const controller = new AbortController();
+  const events = { signal: controller.signal };
+  const fields = [...form.querySelectorAll('input, textarea')];
+  const button = form.querySelector('button[type="submit"]');
+  const label = button.querySelector('[data-contact-submit-label]');
+  const status = form.querySelector('.pc-form-status');
+  let submitting = false;
+  let attempted = false;
 
-  const fields = form.querySelectorAll("input[required], textarea[required]");
+  function setStatus(message = '', state = '') {
+    status.textContent = message;
+    status.dataset.state = state;
+  }
 
-  fields.forEach((field) => {
-    field.addEventListener("invalid", function (e) {
-      e.preventDefault();
+  function validate(field) {
+    const value = field.value.trim();
+    const error = field.required && !value ? copy.required
+      : field.type === 'email' && value && (field.validity.typeMismatch || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) ? copy.invalidEmail : '';
+    field.setAttribute('aria-invalid', String(Boolean(error)));
+    form.querySelector(`#${field.id}-error`).textContent = error;
+    return !error;
+  }
 
-      const message =
-        this.type === "email"
-          ? "Please enter a valid email address"
-          : "This field is required";
-
-      showCustomAlert("error", message);
-      markFieldInvalid(this);
-    });
+  fields.forEach(field => {
+    field.addEventListener('input', () => {
+      if (field.getAttribute('aria-invalid') === 'true') validate(field);
+      if (!submitting) setStatus();
+    }, events);
+    field.addEventListener('blur', () => {
+      if (attempted || field.value.trim()) validate(field);
+    }, events);
   });
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerHTML;
-
-    submitBtn.innerHTML = "Sending...";
-    submitBtn.disabled = true;
-
-    const formData = new FormData(form);
-    const templateParams = {
-      name: formData.get("first_name"),
-      last_name: formData.get("last_name"),
-      email: formData.get("user_email"),
-      message: formData.get("message"),
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (submitting) return;
+    attempted = true;
+    const invalid = fields.filter(field => !validate(field));
+    if (invalid.length) {
+      setStatus(copy.check, 'error');
+      invalid[0].focus();
+      return;
+    }
+    if (typeof window.emailjs?.send !== 'function') {
+      setStatus(copy.unavailable, 'error');
+      return;
+    }
+    const data = new FormData(form);
+    const params = {
+      name: data.get('first_name').trim(),
+      last_name: data.get('last_name').trim(),
+      email: data.get('user_email').trim(),
+      message: data.get('message').trim(),
     };
-
-    const validationError = validateForm(templateParams, form);
-    if (validationError) {
-      showCustomAlert("error", validationError);
-      submitBtn.innerHTML = originalText;
-      submitBtn.disabled = false;
-      return;
+    submitting = true;
+    button.disabled = true;
+    form.setAttribute('aria-busy', 'true');
+    label.textContent = copy.sending;
+    setStatus();
+    try {
+      // Keep the existing EmailJS service and template contract.
+      await window.emailjs.send('service_bz33zpg', 'template_8tkd7hk', params);
+      if (controller.signal.aborted || !form.isConnected) return;
+      form.reset();
+      attempted = false;
+      fields.forEach(field => field.removeAttribute('aria-invalid'));
+      setStatus(copy.success, 'success');
+    } catch {
+      if (controller.signal.aborted || !form.isConnected) return;
+      // Preserve the message and allow retrying after an actual service failure.
+      setStatus(copy.failed, 'error');
+    } finally {
+      if (!controller.signal.aborted && form.isConnected) {
+        submitting = false;
+        button.disabled = false;
+        form.removeAttribute('aria-busy');
+        label.textContent = copy.submit;
+      }
     }
-
-    if (!window.emailjs || typeof window.emailjs.send !== "function") {
-      showCustomAlert(
-        "error",
-        "Email service is still loading. Please try again in a moment.",
-      );
-      submitBtn.innerHTML = originalText;
-      submitBtn.disabled = false;
-      return;
-    }
-
-    window.emailjs
-      .send("service_bz33zpg", "template_8tkd7hk", templateParams)
-      .then(() => {
-        showCustomAlert(
-          "success",
-          "Your message has been sent successfully! We will contact you shortly.",
-        );
-        form.reset();
-        fields.forEach((field) => clearFieldInvalid(field));
-      })
-      .catch(() => {
-        showCustomAlert(
-          "error",
-          "Failed to send message. Please try again later.",
-        );
-      })
-      .finally(() => {
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-      });
-  });
-}
-
-function validateForm(templateParams, form) {
-  if (!templateParams.name || !templateParams.name.trim()) {
-    markFieldInvalid(form.querySelector("#firstName"));
-    return "First name is required";
-  }
-
-  if (!templateParams.email || !templateParams.email.trim()) {
-    markFieldInvalid(form.querySelector("#email"));
-    return "Email is required";
-  }
-
-  if (!isValidEmail(templateParams.email)) {
-    markFieldInvalid(form.querySelector("#email"));
-    return "Please enter a valid email address";
-  }
-
-  if (!templateParams.message || !templateParams.message.trim()) {
-    markFieldInvalid(form.querySelector("#message"));
-    return "Message is required";
-  }
-
-  return "";
-}
-
-function markFieldInvalid(field) {
-  if (!field) return;
-
-  field.style.borderColor = "#ef4444";
-  field.style.backgroundColor = "#fef2f2";
-  field.addEventListener("input", () => clearFieldInvalid(field), {
-    once: true,
-  });
-}
-
-function clearFieldInvalid(field) {
-  field.style.borderColor = "";
-  field.style.backgroundColor = "";
-}
-
-function isValidEmail(email) {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-}
-
-function showCustomAlert(type, message) {
-  let alert = document.querySelector(".contact-alert");
-
-  if (!alert) {
-    alert = document.createElement("div");
-    alert.className = "contact-alert";
-    alert.setAttribute("role", "status");
-    alert.setAttribute("aria-live", "polite");
-    document.body.appendChild(alert);
-  }
-
-  alert.textContent = message;
-  alert.className = `contact-alert ${type} visible`;
-  alert.style.cssText = `
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    z-index: 10000;
-    max-width: min(360px, calc(100vw - 40px));
-    padding: 14px 18px;
-    border-radius: 8px;
-    color: #fff;
-    font: 500 14px/1.45 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.22);
-    background: ${type === "success" ? "#2f855a" : "#c53030"};
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity .25s ease, transform .25s ease;
-  `;
-
-  window.clearTimeout(alert.hideTimer);
-  alert.hideTimer = window.setTimeout(() => {
-    alert.style.opacity = "0";
-    alert.style.transform = "translateY(8px)";
-    alert.classList.remove("visible");
-  }, 4200);
+  }, events);
+  disposeForm = () => controller.abort();
 }

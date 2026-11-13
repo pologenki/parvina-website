@@ -121,7 +121,7 @@ function renderServicePage(service, localeKey) {
   </style>
 </head>
 <body>
-  <header><a href="${copy.prefix ? `${copy.prefix}/` : '/'}"><img src="/optimized/Logo2-compact-160.webp" srcset="/optimized/Logo2-compact-160.webp 160w, /optimized/Logo2-compact-320.webp 320w" sizes="145px" alt="Pologenki" width="160" height="46" /></a><nav class="languages" aria-label="Language"><a href="${serviceUrl(service, 'en')}" lang="en">EN</a><a href="${serviceUrl(service, 'ru')}" lang="ru">RU</a><a href="${serviceUrl(service, 'cn')}" lang="zh-CN">中文</a></nav></header>
+  <header><a href="${copy.prefix ? `${copy.prefix}/` : '/'}"><img src="/optimized/Logo2-compact-160.webp" srcset="/optimized/Logo2-compact-160.webp 160w, /optimized/Logo2-compact-320.webp 320w" sizes="145px" alt="Pologenki" width="160" height="46" /></a><nav class="languages" aria-label="Language"><a href="${new URL(serviceUrl(service, 'en')).pathname}" lang="en">EN</a><a href="${new URL(serviceUrl(service, 'ru')).pathname}" lang="ru">RU</a><a href="${new URL(serviceUrl(service, 'cn')).pathname}" lang="zh-CN">中文</a></nav></header>
   <main class="page">
     <section class="hero"><div><p class="eyebrow">${copy.eyebrow}</p><h1>${esc(title)}</h1><p class="lead">${esc(description)}</p><a class="cta" href="mailto:info@pologenki.eu?subject=${encodeURIComponent(title)}">${copy.cta}</a></div><img src="/optimized/ParvinaFoto-480.webp" alt="Parvina Pologenki" width="480" height="574" loading="eager" fetchpriority="high" /></section>
     <div class="content-grid">

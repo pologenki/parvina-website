@@ -12,7 +12,7 @@ const products = (productsData.products || []).filter(product => product.publish
 const locales = {
   en: {
     prefix: '', lang: 'en', locale: 'en_US',
-    catalogue: 'Product catalogue', origin: 'Origin', grades: 'Available grades and packing',
+    catalogue: 'Product catalogue', origin: 'Origin', grades: 'Available grades and packing', onRequest: 'Price on request',
     request: 'Request current price and delivery terms', back: 'Back to all products',
     coordinationTitle: 'Import coordination available',
     coordinationText: 'Support can include supplier communication, specification checks, packing confirmation, export documents and cargo delivery coordination.',
@@ -24,7 +24,7 @@ const locales = {
   },
   ru: {
     prefix: '/ru', lang: 'ru', locale: 'ru_RU',
-    catalogue: 'Каталог товаров', origin: 'Происхождение', grades: 'Доступные сорта и упаковка',
+    catalogue: 'Каталог товаров', origin: 'Происхождение', grades: 'Доступные сорта и упаковка', onRequest: 'По запросу',
     request: 'Запросить актуальную цену и условия доставки', back: 'Вернуться ко всем товарам',
     coordinationTitle: 'Доступно сопровождение импорта',
     coordinationText: 'Помощь может включать связь с поставщиком, проверку спецификации, подтверждение упаковки, экспортные документы и координацию доставки груза.',
@@ -36,7 +36,7 @@ const locales = {
   },
   cn: {
     prefix: '/zh-cn', lang: 'zh-CN', locale: 'zh_CN',
-    catalogue: '产品目录', origin: '产地', grades: '可供等级与包装',
+    catalogue: '产品目录', origin: '产地', grades: '可供等级与包装', onRequest: '价格面议',
     request: '咨询当前价格与交货条件', back: '返回全部产品',
     coordinationTitle: '可提供进口协调支持',
     coordinationText: '支持范围可包括供应商沟通、规格确认、包装核对、出口文件和货运协调。',
@@ -114,6 +114,7 @@ function offerSchema(product, canonical) {
 
 function renderProductPage(product, localeKey) {
   const locale = locales[localeKey];
+  const priceText = value => /^price on request$/i.test(String(value || '').trim()) ? locale.onRequest : value || '';
   const name = textFor(product, 'name', localeKey);
   const description = textFor(product, 'desc', localeKey);
   const origin = textFor(product, 'origin', localeKey);
@@ -143,7 +144,7 @@ function renderProductPage(product, localeKey) {
   const variants = (product.variants || []).map(variant => `
           <article class="grade">
             <div><h3>${esc(variantText(variant, 'name', localeKey))}</h3><p>${esc(variantText(variant, 'desc', localeKey))}</p></div>
-            <strong>${esc(variant.price || '')}</strong>
+            <strong>${esc(priceText(variant.price))}</strong>
           </article>`).join('');
 
   return `<!doctype html>
@@ -167,14 +168,15 @@ function renderProductPage(product, localeKey) {
   <script type="application/ld+json">${JSON.stringify(schema)}</script>
   <style>
     *{box-sizing:border-box}body{margin:0;background:#f6f8fa;color:#17212b;font:16px/1.55 Arial,sans-serif}header{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 max(24px,calc((100% - 1120px)/2));background:#fff;border-top:4px solid #222;border-bottom:1px solid #dfe5e9}header img{width:132px;height:58px;object-fit:contain}header a{color:#17212b;text-decoration:none}.page{max-width:1120px;margin:0 auto;padding:54px 24px 72px}.hero{display:grid;grid-template-columns:420px 1fr;gap:54px;align-items:center}.photo{aspect-ratio:1;background:#fff;border:1px solid #dbe3e8;padding:24px}.photo img{width:100%;height:100%;object-fit:contain}.eyebrow{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#607080}h1{margin:8px 0 10px;font:600 46px/1.05 Georgia,serif}h2{margin:54px 0 18px;font:600 30px/1.2 Georgia,serif}.meta{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}.meta span,.price{padding:8px 12px;border:1px solid #dbe3e8;background:#fff}.price{display:inline-block;font-size:20px;font-weight:700}.cta{display:inline-block;margin-top:20px;padding:13px 20px;background:#111;color:#fff;text-decoration:none}.grades{display:grid;gap:10px}.grade{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;padding:20px;background:#fff;border:1px solid #dbe3e8}.grade h3{margin:0 0 6px;font-size:17px}.grade p{margin:0;color:#53616e}.grade strong{white-space:nowrap;padding:6px 10px;background:#eef7ff;border:1px solid #b8ddfb}.support-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}.support-panel{padding:24px;background:#fff;border:1px solid #dbe3e8}.support-panel h2{margin:0 0 12px;font:600 24px/1.2 Georgia,serif}.support-panel ul{margin:0;padding-left:20px}.support-link{display:inline-block;margin-top:14px}.languages{display:flex;gap:14px}.languages a{text-decoration:underline}@media(max-width:760px){header{padding:0 18px}.page{padding:32px 18px 56px}.hero{grid-template-columns:1fr;gap:28px}.photo{max-width:420px}h1{font-size:36px}.grade{grid-template-columns:1fr}.grade strong{justify-self:start}.support-grid{grid-template-columns:1fr}}
+    .hero>div{min-width:0}h1{overflow-wrap:anywhere}
   </style>
 </head>
 <body>
-  <header><a href="${locale.prefix || '/'}"><img src="/optimized/Logo2-sharp-320.png" alt="Pologenki" width="320" height="320" /></a><nav class="languages" aria-label="Language"><a href="${productUrl(product, 'en')}" lang="en">EN</a><a href="${productUrl(product, 'ru')}" lang="ru">RU</a><a href="${productUrl(product, 'cn')}" lang="zh-CN">中文</a></nav></header>
+  <header><a href="${locale.prefix ? `${locale.prefix}/` : '/'}"><img src="/optimized/Logo2-sharp-320.png" alt="Pologenki" width="320" height="320" /></a><nav class="languages" aria-label="Language"><a href="${new URL(productUrl(product, 'en')).pathname}" lang="en">EN</a><a href="${new URL(productUrl(product, 'ru')).pathname}" lang="ru">RU</a><a href="${new URL(productUrl(product, 'cn')).pathname}" lang="zh-CN">中文</a></nav></header>
   <main class="page">
     <div class="hero">
       <div class="photo"><img src="${optimizedImagePath(product.image, 480)}" srcset="${optimizedImagePath(product.image, 240)} 240w, ${optimizedImagePath(product.image, 480)} 480w" sizes="(max-width:760px) calc(100vw - 84px), 372px" alt="${esc(name)}" width="480" height="480" fetchpriority="high" /></div>
-      <div><p class="eyebrow">${locale.catalogue}</p><h1>${esc(name)}</h1><p>${esc(description)}</p><div class="meta"><span>${locale.origin}: ${esc(origin)}</span></div><div class="price">${esc(product.mainPrice || '')}</div><br><a class="cta" href="mailto:info@pologenki.eu?subject=${encodeURIComponent(name)}">${locale.request}</a></div>
+      <div><p class="eyebrow">${locale.catalogue}</p><h1>${esc(name)}</h1><p>${esc(description)}</p><div class="meta"><span>${locale.origin}: ${esc(origin)}</span></div><div class="price">${esc(priceText(product.mainPrice))}</div><br><a class="cta" href="mailto:info@pologenki.eu?subject=${encodeURIComponent(name)}">${locale.request}</a></div>
     </div>
     <section><h2>${locale.grades}</h2><div class="grades">${variants}</div></section>
     <div class="support-grid"><section class="support-panel"><h2>${locale.coordinationTitle}</h2><p>${locale.coordinationText}</p><a class="support-link" href="${locale.prefix || ''}/services/full-service-import/">${locale.servicesLink}</a></section><section class="support-panel"><h2>${locale.requestDetailsTitle}</h2><ul>${locale.requestDetails.map(item => `<li>${item}</li>`).join('')}</ul></section></div>

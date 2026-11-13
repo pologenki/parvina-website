@@ -1,0 +1,166 @@
+/* OhhMyDesign composition, adapted to Pologenki's white / ink / sand palette. */
+#footer.pf-footer {
+  position: relative;
+  width: var(--pf-viewport-width, calc(100% + 32px));
+  margin-inline-start: calc(50% - var(--pf-viewport-width, calc(100% + 32px)) / 2);
+  margin-top: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 36px 36px 0 0;
+  background: #fff;
+  color: #222;
+  font-family: 'Inter Tight', Arial, sans-serif;
+  scroll-margin-top: 162px;
+}
+.pf-footer *, .pf-footer *::before, .pf-footer *::after { box-sizing: border-box; }
+.pf-footer a { color: inherit; text-decoration: none; }
+.pf-footer button { font-family: inherit; }
+.pf-footer :is(a, button):focus-visible { outline: 2px solid #222; outline-offset: 4px; }
+.pf-dots { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; border-radius: inherit; pointer-events: none; }
+.pf-wrap { width: 100%; max-width: 1350px; margin-inline: auto; padding-inline: 34px; }
+.pf-top { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 48px; padding-top: 56px; padding-bottom: 18px; }
+.pf-cta { min-width: 0; }
+.pf-eyebrow { margin: 0 0 12px; font-size: 11px; font-weight: 650; line-height: 1.4; letter-spacing: .14em; text-transform: uppercase; color: #8a6b49; }
+.pf-mail { display: inline-flex; align-items: center; gap: 14px; max-width: 100%; color: #222; font-size: clamp(28px, 3vw, 52px); font-weight: 750; line-height: 1.05; letter-spacing: -.05em; white-space: nowrap; }
+.pf-mail > span:first-child { min-width: 0; }
+.pf-arrow { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+.pf-arrow svg { display: block; width: 18px; height: 18px; stroke-width: 1.8; }
+.pf-mail .pf-arrow { color: #a3815b; transition: transform .25s; }
+.pf-mail .pf-arrow svg { width: 25px; height: 25px; }
+.pf-mail:is(:hover, :focus-visible) .pf-arrow { transform: translate(4px, -4px); }
+.pf-cta-row { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; margin-top: 18px; }
+.pf-inquiry { display: inline-flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 44px; padding: 12px 20px; border-radius: 9px; background: #dec8ae; font-size: 14px; font-weight: 650; line-height: 1.3; transition: background-color .25s, color .25s; }
+.pf-inquiry .pf-arrow { transition: transform .25s; }
+.pf-inquiry:is(:hover, :focus-visible) { background: #222; color: #fff; }
+.pf-inquiry:is(:hover, :focus-visible) .pf-arrow { transform: translateX(3px); }
+.pf-response { display: inline-flex; align-items: center; gap: 9px; max-width: 240px; color: #666; font-size: 11px; font-weight: 600; line-height: 1.5; }
+.pf-response > i { display: block; flex: 0 0 7px; width: 7px; height: 7px; border-radius: 50%; background: #b79a75; }
+.pf-nav { display: grid; grid-template-columns: 1.35fr 1fr .8fr; gap: 24px; align-items: start; }
+.pf-column { min-width: 0; }
+.pf-service-short { display: none; }
+.pf-footer .pf-title { margin: 0 0 12px; color: #737373; font: 650 12px/1.4 'Inter Tight', Arial, sans-serif; letter-spacing: .09em; text-transform: uppercase; }
+.pf-list { margin: 0; padding: 0; list-style: none; }
+.pf-list > li { margin: 0; padding: 0; }
+.pf-footer .pf-link { display: inline-flex; align-items: center; gap: 7px; max-width: 100%; min-height: 28px; padding: 4px 0; border: 0; border-radius: 0; background: transparent; color: #333; font: 550 16px/1.35 'Inter Tight', Arial, sans-serif; text-align: left; text-decoration: none; cursor: pointer; overflow-wrap: break-word; transition: color .2s; }
+.pf-footer .pf-link:is(:hover, :focus-visible) { color: #8a6b49; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.pf-social .pf-link > i { display: grid; place-items: center; flex: 0 0 16px; width: 16px; font-size: 16px; transition: transform .25s; }
+.pf-social .pf-link:is(:hover, :focus-visible) > i { transform: translateY(-2px); }
+.pf-phones { display: grid; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1px solid #2222; }
+.pf-phones a { display: block; color: #333; font-size: 14px; font-weight: 550; line-height: 1.4; overflow-wrap: break-word; }
+.pf-phones a:is(:hover, :focus-visible) { color: #8a6b49; text-decoration: underline; text-underline-offset: 4px; }
+.pf-totop { position: absolute; z-index: 2; top: 12px; right: 22px; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid #2223; border-radius: 50%; background: transparent; transition: background-color .25s, border-color .25s; }
+.pf-totop svg { display: block; width: 19px; height: 19px; transform: rotate(-90deg); }
+.pf-totop:is(:hover, :focus-visible) { background: #dec8ae; border-color: #dec8ae; }
+body.pf-footer-up-visible #scrollToTop { visibility: hidden; pointer-events: none; }
+.pf-word-stage { position: relative; z-index: 1; padding: 8px clamp(16px, 4vw, 76px) 6px; }
+.pf-wordmark { position: relative; display: flex; justify-content: center; width: 100%; max-width: 900px; margin: 0 auto; color: #222; font: 900 18vw/.86 'Inter Tight', Arial, sans-serif; letter-spacing: -.055em; white-space: nowrap; user-select: none; }
+.pf-letter { display: block; flex: 0 0 auto; transform-origin: 50% 80%; }
+.pf-letter-accent { color: #dec8ae; }
+.pf-bottom-wrap { position: relative; z-index: 1; margin-top: 3px; border-top: 1px solid #2222; }
+.pf-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px 24px; min-height: 46px; padding-top: 12px; padding-bottom: 12px; padding-right: 84px; color: #707070; font-size: 11px; font-weight: 550; line-height: 1.4; }
+.pf-brand-note { display: inline-flex; align-items: center; gap: 9px; }
+.pf-brand-note::before { content: ''; flex: 0 0 7px; width: 7px; height: 7px; border-radius: 2px; background: #dec8ae; }
+.pf-phone { color: #555 !important; }
+.pf-phone:is(:hover, :focus-visible) { text-decoration: underline; text-underline-offset: 3px; }
+.pf-copyright { margin: 0; }
+/* Footer documents have their own layout, independent of the old product dialogs. */
+#footer .pf-document { position: fixed; inset: 0; z-index: 6000; align-items: center; justify-content: center; padding: 32px; margin: 0; background: #2228; backdrop-filter: blur(10px); overflow: hidden; font-family: 'Inter Tight', Arial, sans-serif; }
+.pf-document-panel { display: flex; flex-direction: column; position: relative; width: min(860px,100%); height: min(780px,calc(100dvh - 64px)); min-height: 0; max-height: 100%; margin: 0; overflow: hidden; color: #222; background: #fff; border: 1px solid #2222; border-radius: 24px; box-shadow: 0 24px 90px #0003; animation: pf-document-enter .25s cubic-bezier(.22,1,.36,1) both; }
+.pf-document-header { flex: 0 0 auto; position: relative; padding: 22px 32px 24px; border-bottom: 1px solid #2222; background-image: radial-gradient(#2222 .65px,transparent .65px); background-size: 24px 24px; }
+.pf-document-bar { display: flex; align-items: center; gap: 20px; }
+.pf-document-brand { margin-right: auto; font-size: 20px; font-weight: 900; line-height: 1; letter-spacing: -.045em; }
+.pf-document-brand > span { color: #dec8ae; }
+.pf-document-label { color: #737373; font-size: 11px; font-weight: 650; line-height: 1.4; letter-spacing: .09em; text-transform: uppercase; }
+.pf-footer .pf-document-close { flex: 0 0 44px; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid #2223; border-radius: 50%; background: #fff; color: #222; cursor: pointer; transition: background-color .2s, border-color .2s; }
+.pf-document-close svg { display: block; width: 20px; height: 20px; transition: transform .25s; }
+.pf-footer .pf-document-close:is(:hover, :focus-visible) { background: #dec8ae; border-color: #dec8ae; }
+.pf-document-close:is(:hover, :focus-visible) svg { transform: rotate(90deg); }
+.pf-footer .pf-document-header h2 { margin: 18px 0 0; padding: 0; border: 0; color: #222; font: 650 32px/1.12 'Inter Tight', Arial, sans-serif; letter-spacing: -.035em; text-transform: none; overflow-wrap: anywhere; }
+.pf-document-body { flex: 1 1 auto; min-height: 0; padding: 28px 32px 32px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #b5a38e #f5f2ed; color: #444; font-size: 16px; line-height: 1.65; outline: 0; }
+.pf-document-body:focus-visible { outline: 2px solid #b79976; outline-offset: -4px; }
+.pf-footer .pf-document-body h3 { margin: 28px 0 12px; padding: 0; color: #222; font: 600 20px/1.25 'Inter Tight', Arial, sans-serif; letter-spacing: -.02em; text-transform: none; }
+.pf-document-body > h3:first-child { margin-top: 0; }
+.pf-document-body p { margin: 0 0 14px; color: #444; font-size: inherit; line-height: inherit; }
+.pf-document-body strong { color: #222; font-weight: 600; }
+.pf-document-body ul { display: grid; gap: 9px; margin: 14px 0 22px; padding: 0; list-style: none; }
+.pf-document-body li { position: relative; margin: 0; padding-left: 18px; color: #444; font-size: inherit; line-height: inherit; }
+.pf-document-body li::before { position: absolute; content: ''; left: 1px; top: .7em; width: 5px; height: 5px; border-radius: 50%; background: #b79976; }
+.pf-footer .pf-document-body a { color: #8a6b49; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; overflow-wrap: anywhere; }
+.pf-document-body em { color: #737373; font-size: 13px; font-style: normal; }
+.pf-document-body > :last-child { margin-bottom: 0; }
+.pf-document-footer { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 16px 32px; border-top: 1px solid #2222; background: #fff; }
+.pf-document-email { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; font-weight: 550; }
+.pf-document-email .pf-arrow { color: #8a6b49; }
+.pf-document-email:is(:hover, :focus-visible) { text-decoration: underline; text-underline-offset: 4px; }
+.pf-footer .pf-document-done { min-height: 44px; padding: 12px 24px; border: 0; border-radius: 8px; background: #dec8ae; color: #222; font-size: 14px; font-weight: 600; cursor: pointer; transition: background-color .2s, color .2s; }
+.pf-footer .pf-document-done:is(:hover, :focus-visible) { background: #222; color: #fff; }
+@keyframes pf-document-enter { from { opacity: 0; transform: translateY(12px) scale(.99); } to { opacity: 1; transform: none; } }
+@media (max-width: 620px) {
+  #footer .pf-document { padding: 12px; }
+  .pf-document-panel { height: calc(100dvh - 24px); border-radius: 20px; }
+  .pf-document-header { padding: 16px 20px 20px; }
+  .pf-document-bar { gap: 12px; }
+  .pf-document-brand { font-size: 18px; }
+  .pf-document-label { display: none; }
+  .pf-footer .pf-document-header h2 { font-size: 26px; line-height: 1.15; margin-top: 18px; }
+  .pf-document-body { padding: 24px 20px; font-size: 15px; line-height: 1.6; }
+  .pf-footer .pf-document-body h3 { font-size: 19px; margin-top: 26px; }
+  .pf-document-body > h3:first-child { margin-top: 0; }
+  .pf-document-footer { padding: 12px 20px; gap: 12px; }
+  .pf-document-email { gap: 6px; font-size: 14px; }
+  .pf-document-email .pf-arrow svg { width: 14px; height: 14px; }
+  .pf-footer .pf-document-done { padding-inline: 18px; }
+}
+@media (max-height: 540px) and (min-width: 621px) {
+  #footer .pf-document { padding: 12px; }
+  .pf-document-panel { height: calc(100dvh - 24px); }
+  .pf-document-header { padding: 12px 24px 16px; }
+  .pf-footer .pf-document-header h2 { font-size: 26px; margin-top: 10px; }
+  .pf-document-footer { padding: 10px 24px; }
+}
+@media (max-width: 1120px) {
+  #footer.pf-footer { scroll-margin-top: 128px; }
+}
+@media (max-width: 900px) {
+  .pf-top { grid-template-columns: 1fr; gap: 24px; padding-top: 52px; padding-bottom: 18px; }
+  .pf-mail { font-size: clamp(28px, 4.5vw, 42px); }
+  .pf-nav { grid-template-columns: 1.35fr 1fr .9fr; gap: 36px; max-width: 760px; }
+  .pf-response { max-width: none; }
+  .pf-totop { right: 24px; }
+}
+@media (max-width: 620px) {
+  #footer.pf-footer { border-radius: 28px 28px 0 0; }
+  .pf-wrap { padding-inline: 26px; }
+  .pf-top { padding-top: 40px; padding-bottom: 16px; gap: 20px; }
+  .pf-eyebrow { font-size: 10px; margin-bottom: 10px; }
+  .pf-mail { gap: 8px; font-size: clamp(23px, 6vw, 32px); letter-spacing: -.04em; }
+  .pf-mail .pf-arrow svg { width: 19px; height: 19px; }
+  .pf-cta-row { align-items: flex-start; flex-direction: column; gap: 10px; margin-top: 16px; }
+  .pf-inquiry { font-size: 13px; }
+  .pf-response { display: none; }
+  .pf-nav { position: relative; grid-template-columns: 1.35fr 1fr 1fr; gap: 18px; padding-bottom: 56px; }
+  .pf-footer .pf-title { font-size: 11px; letter-spacing: .04em; margin-bottom: 12px; }
+  .pf-footer .pf-link { min-height: 32px; padding-block: 6px; font-size: 13px; line-height: 1.4; }
+  .pf-service-full { display: none; }
+  .pf-service-short { display: inline; }
+  .pf-social .pf-link { gap: 6px; }
+  .pf-social .pf-link > i { flex-basis: 13px; width: 13px; font-size: 13px; }
+  .pf-phones { position: absolute; inset: auto 0 0; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 16px; margin: 0; }
+  .pf-phones a { font-size: 13px; white-space: nowrap; }
+  .pf-totop { top: 12px; right: 20px; width: 44px; height: 44px; }
+  .pf-word-stage { padding-top: 6px; padding-bottom: 6px; }
+  .pf-bottom { align-items: flex-start; flex-direction: column; gap: 6px; padding-block: 12px; padding-right: 68px; font-size: 10px; }
+  .pf-brand-note { display: none; }
+}
+@media (max-width: 360px) {
+  .pf-wrap { padding-inline: 20px; }
+  .pf-mail { font-size: 23px; gap: 7px; }
+  .pf-nav { grid-template-columns: 1.2fr .9fr 1.05fr; gap: 10px; }
+  .pf-footer .pf-link { font-size: 13px; }
+  .pf-footer .pf-title { font-size: 11px; }
+  .pf-social .pf-link { gap: 3px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pf-footer *, .pf-footer *::before, .pf-footer *::after { transition: none !important; animation: none !important; }
+  .pf-letter, .pf-social .pf-link:is(:hover, :focus-visible) > i, .pf-mail:is(:hover, :focus-visible) .pf-arrow, .pf-inquiry:is(:hover, :focus-visible) .pf-arrow { transform: none !important; }
+}

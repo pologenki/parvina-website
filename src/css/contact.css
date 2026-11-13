@@ -1,0 +1,66 @@
+/* The enquiry form lives in a native dialog; there is no separate contact section. */
+#contactModal.pc-dialog { position: fixed; inset: 0; width: min(620px,calc(100% - 40px)); max-width: none; max-height: calc(100dvh - 40px); margin: auto; padding: 0; border: 1px solid #2222; border-radius: 24px; overflow: hidden; background: #fff; color: #222; font-family: 'Inter Tight', Arial, sans-serif; box-shadow: 0 24px 90px #0003; }
+.pc-dialog[open] { display: flex; flex-direction: column; animation: pc-dialog-enter .25s cubic-bezier(.22,1,.36,1) both; }
+.pc-dialog:not([open]) { display: none; }
+.pc-dialog::backdrop { background: #2228; backdrop-filter: blur(10px); }
+.pc-dialog *, .pc-dialog *::before, .pc-dialog *::after { box-sizing: border-box; }
+.pc-dialog button, .pc-dialog input, .pc-dialog textarea { font-family: inherit; }
+.pc-dialog :is(a,button,input,textarea):focus-visible { outline: 2px solid #8a6b49; outline-offset: 4px; }
+.pc-dialog-header { flex: 0 0 auto; padding: 20px 28px 22px; border-bottom: 1px solid #2222; background-image: radial-gradient(#2222 .65px,transparent .65px); background-size: 24px 24px; }
+.pc-dialog-bar { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.pc-dialog-brand { font-size: 20px; font-weight: 900; line-height: 1; letter-spacing: -.045em; }
+.pc-dialog-brand > span { color: #dec8ae; }
+.pc-dialog .pc-dialog-close { display: grid; place-items: center; flex: 0 0 44px; width: 44px; height: 44px; margin: 0; padding: 0; border: 1px solid #2223; border-radius: 50%; background: #fff; color: #222; cursor: pointer; transition: background-color .2s, border-color .2s; }
+.pc-dialog-close svg { display: block; width: 20px; height: 20px; transition: transform .25s; }
+.pc-dialog .pc-dialog-close:is(:hover,:focus-visible) { background: #dec8ae; border-color: #dec8ae; }
+.pc-dialog-close:is(:hover,:focus-visible) svg { transform: rotate(90deg); }
+.pc-dialog #pc-form-title { margin: 14px 0 0; padding: 0; color: #222; font: 650 28px/1.15 'Inter Tight',Arial,sans-serif; letter-spacing: -.03em; }
+.pc-dialog #pc-form-note { margin: 8px 0 0; color: #65605a; font-size: 14px; line-height: 1.5; }
+.pc-dialog-body { flex: 1 1 auto; min-height: 0; padding: 24px 28px 28px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #b5a38e #f5f2ed; }
+.pc-form { position: relative; display: flex; flex-direction: column; gap: 15px; }
+.pc-fields-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.pc-field { min-width: 0; }
+.pc-field label { display: block; margin-bottom: 6px; color: #222; font-weight: 500; font-size: 13px; line-height: 1.4; }
+.pc-field label > span { color: #756f67; font-weight: 400; font-size: 11px; }
+.pc-dialog .pc-field :is(input,textarea) { display: block; width: 100%; min-width: 0; min-height: 44px; margin: 0; padding: 10px 12px; border: 1px solid #dcd8d2; border-radius: 4px; background: #fff; box-shadow: none; color: #222; font-size: 16px; line-height: 1.4; transition: border-color .2s; }
+.pc-dialog .pc-field input::placeholder, .pc-dialog .pc-field textarea::placeholder { color: #76716c; opacity: 1; font-size: 14px; }
+.pc-dialog .pc-field textarea { height: 110px; min-height: 92px; max-height: 260px; resize: vertical; }
+.pc-dialog .pc-field :is(input,textarea):focus { outline: 2px solid #8e7458; outline-offset: 1px; border-color: #8e7458; }
+.pc-dialog .pc-field :is(input,textarea)[aria-invalid='true'] { border-color: #a43024; }
+.pc-field-error { display: none; padding-top: 5px; color: #a43024; font-size: 12px; line-height: 1.35; }
+.pc-field-error:not(:empty) { display: block; }
+.pc-form-actions { display: flex; align-items: center; gap: 22px; margin-top: 3px; }
+.pc-arrow { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+.pc-arrow svg { display: block; width: 18px; height: 18px; stroke-width: 1.6; }
+.pc-dialog .pc-submit { display: flex; align-items: center; justify-content: space-between; flex: 0 0 212px; gap: 20px; min-height: 48px; margin: 0; padding: 12px 16px; background: #222; border: 1px solid #222; border-radius: 6px; color: #fff; cursor: pointer; font-size: 14px; font-weight: 550; text-align: left; transition: background-color .25s,color .25s,border-color .25s; }
+.pc-submit .pc-arrow { transition: transform .25s; }
+.pc-dialog .pc-submit:is(:hover,:focus-visible) { background: #dec8ae; border-color: #dec8ae; color: #222; }
+.pc-submit:is(:hover,:focus-visible) .pc-arrow { transform: translate(2px,-2px); }
+.pc-dialog .pc-submit:disabled { opacity: .65; cursor: wait; }
+.pc-form-reply { max-width: 190px; margin: 0; color: #756f67; font-size: 12px; line-height: 1.45; }
+.pc-form .pc-form-status { margin: 0; color: #555; font-size: 13px; line-height: 1.45; }
+.pc-form-status:empty { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.pc-form-status[data-state='error'] { color: #a43024; }
+.pc-form-status[data-state='success'] { color: #286044; }
+@keyframes pc-dialog-enter { from { opacity: 0; transform: translateY(12px) scale(.99); } to { opacity: 1; transform: none; } }
+@media (max-width: 620px) {
+  #contactModal.pc-dialog { width: calc(100% - 24px); max-height: calc(100dvh - 24px); border-radius: 20px; }
+  .pc-dialog-header { padding: 16px 20px 20px; }
+  .pc-dialog-brand { font-size: 18px; }
+  .pc-dialog #pc-form-title { font-size: 26px; }
+  .pc-dialog-body { padding: 20px; }
+  .pc-fields-row { grid-template-columns: 1fr; gap: 15px; }
+  .pc-dialog .pc-field :is(input,textarea) { min-height: 46px; }
+  .pc-dialog .pc-field textarea { height: 100px; }
+  .pc-form-actions { align-items: stretch; flex-direction: column; gap: 12px; }
+  .pc-dialog .pc-submit { flex-basis: auto; width: 100%; }
+  .pc-form-reply { max-width: none; font-size: 11px; }
+}
+@media (max-height: 540px) {
+  .pc-dialog-header { padding-block: 12px 16px; }
+  .pc-dialog #pc-form-title { margin-top: 8px; font-size: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pc-dialog *, .pc-dialog *::before, .pc-dialog *::after, .pc-dialog[open] { animation: none !important; transition: none !important; }
+  .pc-dialog-close:is(:hover,:focus-visible) svg, .pc-submit:is(:hover,:focus-visible) .pc-arrow { transform: none; }
+}

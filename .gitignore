@@ -12,6 +12,18 @@ dist
 dist-ssr
 *.local
 
+# Local review evidence and working backups
+/artifacts/
+/_local_backup_before_fixes/
+/design-qa.md
+/mobile-audit.md
+/colors_analysis.txt
+
+# Local environment configuration
+.env
+.env.*
+!.env.example
+
 # Generated SEO product pages (created during every build)
 public/products/
 public/ru/products/

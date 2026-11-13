@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --config src/vite.config.js",
     "validate:data": "node scripts/validate-data.mjs",
     "optimize:images": "node scripts/optimize-images.mjs",
     "generate:seo": "node scripts/generate-seo-pages.mjs && node scripts/generate-service-pages.mjs",
