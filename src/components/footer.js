@@ -46,7 +46,7 @@ function getLegalBodies(lang) {
     `,
     ru: `
       <h2>Политика конфиденциальности</h2>
-      <p><strong>Parvina - импорт-менеджер и торговый специалист</strong> уважает вашу конфиденциальность.</p>
+      <p><strong>Парвина - импорт-менеджер и торговый специалист</strong> уважает вашу конфиденциальность.</p>
       <h3>Какие данные мы собираем</h3>
       <p>При обращении к нам мы можем собирать следующую информацию:</p>
       <ul>
@@ -118,17 +118,17 @@ function getLegalBodies(lang) {
     ru: `
       <h2>Условия использования</h2>
       <h3>Деловые услуги</h3>
-      <p>Parvina предоставляет услуги по управлению импортом и торговой координации. Цены и спецификации продуктов могут меняться в зависимости от рынка, наличия и подтверждения поставщика.</p>
+      <p>Парвина предоставляет услуги по управлению импортом и торговой координации. Цены и спецификации продуктов могут меняться в зависимости от рынка, наличия и подтверждения поставщика.</p>
       <h3>Запросы и соглашения</h3>
       <p>Первичные запросы и сообщения не являются юридически обязывающим соглашением. Финальные цены, условия и договорённости подтверждаются официальными предложениями, счетами или контрактами.</p>
       <h3>Интеллектуальная собственность</h3>
-      <p>Контент сайта, изображения, логотипы и деловая информация принадлежат Parvina или соответствующим правообладателям и не могут копироваться без разрешения.</p>
+      <p>Контент сайта, изображения, логотипы и деловая информация принадлежат Парвине или соответствующим правообладателям и не могут копироваться без разрешения.</p>
       <h3>Ограничение ответственности</h3>
-      <p>Мы стремимся поддерживать точность информации, однако бизнес-решения должны подтверждаться официальными документами. Parvina не несёт ответственности за косвенные убытки, возникшие из-за использования общей информации с сайта.</p>
+      <p>Мы стремимся поддерживать точность информации, однако бизнес-решения должны подтверждаться официальными документами. Парвина не несёт ответственности за косвенные убытки, возникшие из-за использования общей информации с сайта.</p>
       <h3>Применимые условия</h3>
       <p>Коммерческое сотрудничество регулируется условиями, согласованными сторонами в письменных деловых документах.</p>
       <h3>Контакты</h3>
-      <p>Parvina - импорт-менеджер и торговый специалист<br>Email: <a href="mailto:info@pologenki.eu">info@pologenki.eu</a></p>
+      <p>Парвина - импорт-менеджер и торговый специалист<br>Email: <a href="mailto:info@pologenki.eu">info@pologenki.eu</a></p>
       <p><em>Последнее обновление: 2026</em></p>
     `,
     cn: `
@@ -228,7 +228,7 @@ export function Footer() {
         </div>
       </div>
       <div class="pf-word-stage">
-        <div class="pf-wordmark" role="img" aria-label="POLOGENKI">${[...'POLOGENKI'].map((letter, index) => `<span class="pf-letter${index === 0 ? ' pf-letter-accent' : ''}" aria-hidden="true">${letter}</span>`).join('')}</div>
+        <a class="pf-wordmark" href="#nut-scene" aria-label="POLOGENKI — ${copy.home}">${[...'POLOGENKI'].map((letter, index) => `<span class="pf-letter${index === 0 ? ' pf-letter-accent' : ''}" aria-hidden="true">${letter}</span>`).join('')}</a>
       </div>
       <div class="pf-bottom-wrap">
         <div class="pf-bottom pf-wrap">
@@ -255,6 +255,13 @@ export function initFooter() {
   measure();
   window.addEventListener('resize', measure, { signal: controller.signal, passive: true });
   const stopMotion = createFooterMotion(footer, controller.signal, measure);
+  footer.querySelector('.pf-wordmark').addEventListener('click', event => {
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    history.replaceState(history.state, '', '#nut-scene');
+    window.scrollTo({ top: 0, left: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+    document.querySelector('.pv-brand')?.focus({ preventScroll: true });
+  }, { signal: controller.signal });
   let anchorTimer;
   if (['#footer', '#contact'].includes(location.hash)) {
     let interacted = false;
