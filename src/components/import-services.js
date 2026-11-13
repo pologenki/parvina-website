@@ -1,4 +1,5 @@
 import { t, getCurrentLanguage } from '../utils/i18n.js';
+import { initDeferredImages } from '../utils/deferred-images.js';
 
 const iconFiles = import.meta.glob('../assets/import-icons/*.svg', { query: '?raw', import: 'default', eager: true });
 function icon(name, extra = '') {
@@ -39,8 +40,9 @@ function pageUrl(service, lang) {
   return `${lang === 'ru' ? '/ru' : lang === 'cn' ? '/zh-cn' : ''}/services/${service.slug}/`;
 }
 function art(service, large = false) {
+  const source = `${large ? 'src' : 'data-lazy-src'}="/import-services/${service.id}-640.webp" ${large ? 'srcset' : 'data-lazy-srcset'}="/import-services/${service.id}-640.webp 640w, /import-services/${service.id}-1280.webp 1280w"`;
   return `<div class="import-art import-art--${service.id}${large ? ' import-art--large' : ''}" aria-hidden="true">
-    <img class="import-art-image" src="/import-services/${service.id}-640.webp" srcset="/import-services/${service.id}-640.webp 640w, /import-services/${service.id}-1280.webp 1280w" sizes="${large ? '(max-width: 700px) 80vw, 500px' : '260px'}" alt="" width="1280" height="854" loading="${large ? 'eager' : 'lazy'}" decoding="async">
+    <img class="import-art-image" ${source} sizes="${large ? '(max-width: 700px) 80vw, 500px' : '260px'}" alt="" width="1280" height="854" loading="${large ? 'eager' : 'lazy'}" decoding="async">
     <span class="import-art-detail" data-import-loop>${icon(service.icon)}</span>
     <span class="import-art-seal" data-import-loop>${icon('circle-check')}</span>
   </div>`;
@@ -78,6 +80,7 @@ export function initImportServices() {
   const body = dialog.querySelector('.import-dialog-body');
   const controller = new AbortController();
   const options = { signal: controller.signal };
+  initDeferredImages(section, controller.signal);
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   const pauseButton = section.querySelector('[data-import-pause]');
   let currentIndex = 0, opener = null, paused = motion.matches, exitAnimation = null, closePromise = null;

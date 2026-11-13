@@ -1,4 +1,5 @@
 import { responsiveImagePath, responsiveImageSrcset } from "../utils/responsiveImage.js";
+import { initDeferredImages } from "../utils/deferred-images.js";
 
 const copy = {
   ru: {
@@ -73,7 +74,8 @@ function bowl(product, className = "", eager = false) {
   const hasCutout = groups.some(group => group.products?.includes(product.id));
   const src = hasCutout ? `${image}-480.webp` : responsiveImagePath(product.image, 480);
   const srcset = hasCutout ? `${image}-240.webp 240w, ${image}-480.webp 480w, ${image}-960.webp 960w` : responsiveImageSrcset(product.image, [240, 480]);
-  return `<span class="catalog-bowl catalog-bowl--${esc(product.id)} ${className}"><img src="${src}" srcset="${srcset}" sizes="(max-width: 600px) 60vw, (max-width: 1100px) 40vw, 440px" alt="" width="960" height="960" loading="${eager ? "eager" : "lazy"}" decoding="async"></span>`;
+  const source = eager ? `src="${src}" srcset="${srcset}"` : `data-lazy-src="${src}" data-lazy-srcset="${srcset}"`;
+  return `<span class="catalog-bowl catalog-bowl--${esc(product.id)} ${className}"><img ${source} sizes="(max-width: 600px) 60vw, (max-width: 1100px) 40vw, 440px" alt="" width="960" height="960" loading="${eager ? "eager" : "lazy"}" decoding="async"></span>`;
 }
 
 function categoryProducts(products, id) {
@@ -153,6 +155,7 @@ export function initCatalog(products, lang) {
   const pauseButton = section.querySelector("[data-catalog-pause]");
   const controller = new AbortController();
   const options = { signal: controller.signal };
+  initDeferredImages(section, controller.signal);
   const searchForm = section.querySelector(".catalog-search");
   const searchInput = searchForm.querySelector("input");
   const searchPanel = searchForm.querySelector(".catalog-search-panel");

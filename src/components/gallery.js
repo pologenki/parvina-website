@@ -35,7 +35,7 @@ export function renderGallery(lang = 'en') {
   const titleParts = lang === 'ru' ? ['Га', 'лерея'] : lang === 'cn' ? ['影', '像集'] : ['Ga', 'llery'];
   return `<section id="portfolio" class="portfolio-section pg-section" aria-labelledby="pg-title" data-gallery-lang="${lang}">
     <div class="pg-container">
-      <header class="pg-heading"><h2 id="pg-title" aria-label="${c.title}"><span class="pg-title-start" aria-hidden="true">${titleParts[0]}</span><span class="pg-title-video" aria-hidden="true"><video muted loop playsinline preload="none" poster="/gallery/video/almonds-poster.webp"><source data-src="/gallery/video/almonds-loop.webm" type="video/webm"><source data-src="/gallery/video/almonds-falling.mp4" type="video/mp4"></video></span><span class="pg-title-end" aria-hidden="true">${titleParts[1]}</span></h2><div class="pg-heading-line"><p>${c.intro}</p><span class="pg-total"></span></div></header>
+      <header class="pg-heading"><h2 id="pg-title" aria-label="${c.title}"><span class="pg-title-start" aria-hidden="true">${titleParts[0]}</span><span class="pg-title-video" aria-hidden="true"><video muted loop playsinline preload="none" poster="/gallery/video/almonds-poster.webp"><source data-src="/gallery/video/almonds-loop-small.webm" type="video/webm"><source data-src="/gallery/video/almonds-loop-small.mp4" type="video/mp4"></video></span><span class="pg-title-end" aria-hidden="true">${titleParts[1]}</span></h2><div class="pg-heading-line"><p>${c.intro}</p><span class="pg-total"></span></div></header>
       <div class="pg-shelf"><div class="pg-track" tabindex="0" role="region" aria-roledescription="carousel" aria-label="${c.title}" aria-busy="true"><p class="pg-load-status" role="status">${c.loading}</p></div><span class="pg-cursor" aria-hidden="true"><span class="pg-cursor-label">${c.open}</span>${icon('diagonal')}</span></div>
       <footer class="pg-tools"><div class="pg-filters" role="group" aria-label="${c.gallery}">${['all', 'exhibitions', 'meetings', 'production'].map((key, i) => `<button type="button" data-pg-filter="${key}" aria-pressed="${i === 0}">${c[key]}</button>`).join('')}</div><div class="pg-controls"><span class="pg-position" aria-live="polite"></span><button class="pg-control" type="button" data-pg-step="-1" aria-label="${c.prev}">${icon('left')}</button><button class="pg-control" type="button" data-pg-pause aria-pressed="false" aria-label="${c.pause}">${icon('pause')}</button><button class="pg-control" type="button" data-pg-step="1" aria-label="${c.next}">${icon('right')}</button></div></footer>
     </div>
@@ -101,7 +101,9 @@ export async function initGallery(lang = 'en') {
     if (!p) return `<img src="${esc(item.img)}" alt="${alt}" loading="${full ? 'eager' : 'lazy'}" decoding="async">`;
     const variants = full ? p.variants : p.variants.filter(v => v.width <= 960);
     const source = variants[variants.length - 1];
-    return `<img src="${esc(source.src)}" srcset="${variants.map(v => `${esc(v.src)} ${v.width}w`).join(', ')}" sizes="${sizes}" width="${p.width}" height="${p.height}" alt="${alt}" loading="${full ? 'eager' : 'lazy'}" decoding="async">`;
+    const avif = (p.avifVariants || []).filter(v => full || v.width <= 960);
+    const image = `<img src="${esc(source.src)}" srcset="${variants.map(v => `${esc(v.src)} ${v.width}w`).join(', ')}" sizes="${sizes}" width="${p.width}" height="${p.height}" alt="${alt}" loading="${full ? 'eager' : 'lazy'}" decoding="async">`;
+    return avif.length ? `<picture><source type="image/avif" srcset="${avif.map(v => `${esc(v.src)} ${v.width}w`).join(', ')}" sizes="${sizes}">${image}</picture>` : image;
   }
 
   function renderTrack() {

@@ -1,6 +1,10 @@
+import en from '../locales/en.json';
+import ru from '../locales/ru.json';
+import cn from '../locales/cn.json';
+
 let currentLanguage = "en";
 let translations = {};
-const translationsCache = {};
+const translationsCache = { en, ru, cn };
 const supportedLanguages = ["en", "ru", "cn"];
 
 export function getLanguageFromPath(pathname = window.location.pathname) {
@@ -35,11 +39,6 @@ export async function loadTranslations(lang) {
   const targetLang = supportedLanguages.includes(lang) ? lang : "en";
 
   try {
-    if (!translationsCache[targetLang]) {
-      const module = await import(`../locales/${targetLang}.json`);
-      translationsCache[targetLang] = module.default;
-    }
-
     translations = translationsCache[targetLang];
     currentLanguage = targetLang;
 

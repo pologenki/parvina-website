@@ -27,6 +27,32 @@
         "height": 1920,
         "bytes": 439702
       }
+    ],
+    "avifVariants": [
+      {
+        "src": "/gallery/img002-240.avif",
+        "width": 240,
+        "height": 426,
+        "bytes": 27967
+      },
+      {
+        "src": "/gallery/img002-480.avif",
+        "width": 480,
+        "height": 852,
+        "bytes": 88547
+      },
+      {
+        "src": "/gallery/img002-960.avif",
+        "width": 960,
+        "height": 1704,
+        "bytes": 247482
+      },
+      {
+        "src": "/gallery/img002-1082.avif",
+        "width": 1082,
+        "height": 1920,
+        "bytes": 291652
+      }
     ]
   },
   "img003": {
@@ -56,6 +82,32 @@
         "width": 1600,
         "height": 1200,
         "bytes": 634712
+      }
+    ],
+    "avifVariants": [
+      {
+        "src": "/gallery/img003-240.avif",
+        "width": 240,
+        "height": 180,
+        "bytes": 14440
+      },
+      {
+        "src": "/gallery/img003-480.avif",
+        "width": 480,
+        "height": 360,
+        "bytes": 49619
+      },
+      {
+        "src": "/gallery/img003-960.avif",
+        "width": 960,
+        "height": 720,
+        "bytes": 178866
+      },
+      {
+        "src": "/gallery/img003-1600.avif",
+        "width": 1600,
+        "height": 1200,
+        "bytes": 386228
       }
     ]
   },
@@ -87,6 +139,32 @@
         "height": 1920,
         "bytes": 455470
       }
+    ],
+    "avifVariants": [
+      {
+        "src": "/gallery/img007-240.avif",
+        "width": 240,
+        "height": 427,
+        "bytes": 28068
+      },
+      {
+        "src": "/gallery/img007-480.avif",
+        "width": 480,
+        "height": 853,
+        "bytes": 89791
+      },
+      {
+        "src": "/gallery/img007-960.avif",
+        "width": 960,
+        "height": 1707,
+        "bytes": 263133
+      },
+      {
+        "src": "/gallery/img007-1080.avif",
+        "width": 1080,
+        "height": 1920,
+        "bytes": 310993
+      }
     ]
   },
   "img013": {
@@ -116,6 +194,32 @@
         "width": 1080,
         "height": 1920,
         "bytes": 333526
+      }
+    ],
+    "avifVariants": [
+      {
+        "src": "/gallery/img013-240.avif",
+        "width": 240,
+        "height": 427,
+        "bytes": 26031
+      },
+      {
+        "src": "/gallery/img013-480.avif",
+        "width": 480,
+        "height": 853,
+        "bytes": 73550
+      },
+      {
+        "src": "/gallery/img013-960.avif",
+        "width": 960,
+        "height": 1707,
+        "bytes": 191420
+      },
+      {
+        "src": "/gallery/img013-1080.avif",
+        "width": 1080,
+        "height": 1920,
+        "bytes": 226531
       }
     ]
   },
@@ -147,6 +251,32 @@
         "height": 1920,
         "bytes": 499382
       }
+    ],
+    "avifVariants": [
+      {
+        "src": "/gallery/img014-240.avif",
+        "width": 240,
+        "height": 320,
+        "bytes": 16271
+      },
+      {
+        "src": "/gallery/img014-480.avif",
+        "width": 480,
+        "height": 640,
+        "bytes": 54770
+      },
+      {
+        "src": "/gallery/img014-960.avif",
+        "width": 960,
+        "height": 1280,
+        "bytes": 173650
+      },
+      {
+        "src": "/gallery/img014-1440.avif",
+        "width": 1440,
+        "height": 1920,
+        "bytes": 334943
+      }
     ]
   },
   "img008": {
@@ -176,6 +306,32 @@
         "width": 1080,
         "height": 1920,
         "bytes": 270482
+      }
+    ],
+    "avifVariants": [
+      {
+        "src": "/gallery/img008-240.avif",
+        "width": 240,
+        "height": 427,
+        "bytes": 16978
+      },
+      {
+        "src": "/gallery/img008-480.avif",
+        "width": 480,
+        "height": 853,
+        "bytes": 51562
+      },
+      {
+        "src": "/gallery/img008-960.avif",
+        "width": 960,
+        "height": 1707,
+        "bytes": 153498
+      },
+      {
+        "src": "/gallery/img008-1080.avif",
+        "width": 1080,
+        "height": 1920,
+        "bytes": 187874
       }
     ]
   },
@@ -207,6 +363,32 @@
         "height": 1200,
         "bytes": 330084
       }
+    ],
+    "avifVariants": [
+      {
+        "src": "/gallery/img011-240.avif",
+        "width": 240,
+        "height": 180,
+        "bytes": 14206
+      },
+      {
+        "src": "/gallery/img011-480.avif",
+        "width": 480,
+        "height": 360,
+        "bytes": 40532
+      },
+      {
+        "src": "/gallery/img011-960.avif",
+        "width": 960,
+        "height": 720,
+        "bytes": 113602
+      },
+      {
+        "src": "/gallery/img011-1600.avif",
+        "width": 1600,
+        "height": 1200,
+        "bytes": 220742
+      }
     ]
   },
   "img012": {
@@ -236,6 +418,32 @@
         "width": 1082,
         "height": 1920,
         "bytes": 445254
+      }
+    ],
+    "avifVariants": [
+      {
+        "src": "/gallery/img012-240.avif",
+        "width": 240,
+        "height": 426,
+        "bytes": 26147
+      },
+      {
+        "src": "/gallery/img012-480.avif",
+        "width": 480,
+        "height": 852,
+        "bytes": 84577
+      },
+      {
+        "src": "/gallery/img012-960.avif",
+        "width": 960,
+        "height": 1704,
+        "bytes": 241742
+      },
+      {
+        "src": "/gallery/img012-1082.avif",
+        "width": 1082,
+        "height": 1920,
+        "bytes": 284854
       }
     ]
   },
@@ -267,6 +475,32 @@
         "height": 1920,
         "bytes": 374578
       }
+    ],
+    "avifVariants": [
+      {
+        "src": "/gallery/photo_2026-01-29_11-40-39-240.avif",
+        "width": 240,
+        "height": 426,
+        "bytes": 21135
+      },
+      {
+        "src": "/gallery/photo_2026-01-29_11-40-39-480.avif",
+        "width": 480,
+        "height": 852,
+        "bytes": 68108
+      },
+      {
+        "src": "/gallery/photo_2026-01-29_11-40-39-960.avif",
+        "width": 960,
+        "height": 1704,
+        "bytes": 216051
+      },
+      {
+        "src": "/gallery/photo_2026-01-29_11-40-39-1082.avif",
+        "width": 1082,
+        "height": 1920,
+        "bytes": 258955
+      }
     ]
   },
   "photo_2026-01-26_15-51-28": {
@@ -296,6 +530,32 @@
         "width": 1440,
         "height": 1920,
         "bytes": 494212
+      }
+    ],
+    "avifVariants": [
+      {
+        "src": "/gallery/photo_2026-01-26_15-51-28-240.avif",
+        "width": 240,
+        "height": 320,
+        "bytes": 18114
+      },
+      {
+        "src": "/gallery/photo_2026-01-26_15-51-28-480.avif",
+        "width": 480,
+        "height": 640,
+        "bytes": 56869
+      },
+      {
+        "src": "/gallery/photo_2026-01-26_15-51-28-960.avif",
+        "width": 960,
+        "height": 1280,
+        "bytes": 170507
+      },
+      {
+        "src": "/gallery/photo_2026-01-26_15-51-28-1440.avif",
+        "width": 1440,
+        "height": 1920,
+        "bytes": 323573
       }
     ]
   },
@@ -327,6 +587,32 @@
         "height": 1920,
         "bytes": 566866
       }
+    ],
+    "avifVariants": [
+      {
+        "src": "/gallery/photo_2026-01-26_15-51-29-240.avif",
+        "width": 240,
+        "height": 320,
+        "bytes": 19485
+      },
+      {
+        "src": "/gallery/photo_2026-01-26_15-51-29-480.avif",
+        "width": 480,
+        "height": 640,
+        "bytes": 64344
+      },
+      {
+        "src": "/gallery/photo_2026-01-26_15-51-29-960.avif",
+        "width": 960,
+        "height": 1280,
+        "bytes": 196362
+      },
+      {
+        "src": "/gallery/photo_2026-01-26_15-51-29-1440.avif",
+        "width": 1440,
+        "height": 1920,
+        "bytes": 367834
+      }
     ]
   },
   "photo_2026-01-26_11-39-43": {
@@ -356,6 +642,32 @@
         "width": 1082,
         "height": 1920,
         "bytes": 374232
+      }
+    ],
+    "avifVariants": [
+      {
+        "src": "/gallery/photo_2026-01-26_11-39-43-240.avif",
+        "width": 240,
+        "height": 426,
+        "bytes": 28341
+      },
+      {
+        "src": "/gallery/photo_2026-01-26_11-39-43-480.avif",
+        "width": 480,
+        "height": 852,
+        "bytes": 80083
+      },
+      {
+        "src": "/gallery/photo_2026-01-26_11-39-43-960.avif",
+        "width": 960,
+        "height": 1704,
+        "bytes": 218764
+      },
+      {
+        "src": "/gallery/photo_2026-01-26_11-39-43-1082.avif",
+        "width": 1082,
+        "height": 1920,
+        "bytes": 256015
       }
     ]
   }

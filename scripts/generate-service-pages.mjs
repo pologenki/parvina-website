@@ -112,11 +112,11 @@ function renderServicePage(service, localeKey) {
   <meta property="og:title" content="${esc(copy.pageTitle(title))}" />
   <meta property="og:description" content="${esc(metaDescription)}" />
   <meta property="og:url" content="${canonical}" />
-  <meta property="og:image" content="${baseUrl}/social/pologenki-logo-v1.jpg" />
+  <meta property="og:image" content="${baseUrl}/social/pologenki-hero-v2.jpg" />
   <meta property="og:image:type" content="image/jpeg" />
-  <meta property="og:image:width" content="1024" />
-  <meta property="og:image:height" content="1024" />
-  <meta property="og:image:alt" content="${localeKey === 'ru' ? 'Логотип Pologenki' : 'Pologenki logo'}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="${localeKey === 'ru' ? 'Pologenki — орехи и сухофрукты' : 'Pologenki — nuts and dried fruits'}" />
   <meta property="og:site_name" content="Pologenki" />
   <meta property="og:locale" content="${copy.locale}" />
   <script type="application/ld+json">${JSON.stringify(schema)}</script>

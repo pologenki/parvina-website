@@ -21,7 +21,7 @@ export function Header() {
       <nav class="pv-socials" aria-label="${t('footer.connect')}">${channels.map(([key, name, icon]) => `<a class="pv-social-link" href="${socials[key]}" aria-label="${name}" title="${name}" ${key === 'zoho' ? 'data-contact-open aria-haspopup="dialog" aria-controls="contactModal"' : 'target="_blank" rel="noopener noreferrer"'}><i class="${icon}" aria-hidden="true"></i></a>`).join('')}</nav>
     </div></div>
     <div class="pv-main-bar"><div class="pv-header-inner pv-main-inner">
-      <a class="pv-brand" href="#nut-scene" aria-label="Pologenki"><img src="/logo-transparent.png" alt="Pologenki" width="720" height="188" decoding="async"></a>
+      <a class="pv-brand" href="#nut-scene" aria-label="Pologenki"><img src="/logo-360.webp" srcset="/logo-180.webp 180w, /logo-360.webp 360w, /logo-540.webp 540w, /logo-720.webp 720w" sizes="(max-width:360px) 112px, (max-width:600px) 140px, (max-width:1120px) 160px, 180px" alt="Pologenki" width="720" height="188" decoding="async"></a>
       <nav class="pv-header-nav" id="navMenu" aria-label="${c.menu}">
       <a class="pv-nav-link" href="#products" data-section="products" data-i18n="nav.products">${t("nav.products")}</a>
       <a class="pv-nav-link" href="#services" data-section="services" data-i18n="nav.services">${t("nav.services")}</a>

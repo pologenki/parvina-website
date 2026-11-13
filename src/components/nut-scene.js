@@ -16,6 +16,8 @@ const ingredients = [
   { kind: "cashew", x: 44, y: 9, size: 8, angle: -42, depth: -.3, phase: 10.2, front: false },
   { kind: "cranberries", x: 73, y: 86, size: 10, angle: 24, depth: .55, phase: 11.6, front: false },
 ];
+const mobileIngredientSizes = [32, 23, 22, 34, 30, 16, 20, 16, 18];
+const ingredientPixels = { walnut: 640, cashew: 640, apricot: 800, mango: 800, cranberries: 800 };
 
 export function NutScene(lang = "en") {
   const c = translations[lang] || translations.en;
@@ -23,11 +25,14 @@ export function NutScene(lang = "en") {
     <div class="nut-scene-inner">
       <div class="nut-scene-stage">
         ${ingredients.map((nut, i) => {
-          const layer = (transmission = false) => `<div class="nut-scene-object nut-scene-ingredient nut-scene-ingredient-${i + 1}${nut.front ? " nut-scene-foreground" : ""}${transmission ? " nut-scene-transmission" : ""}" data-nut-depth="${nut.depth}" data-nut-phase="${nut.phase}" data-nut-amplitude="9" style="--nut-x:${nut.x}%;--nut-y:${nut.y}%;--nut-size:${nut.size}%;--nut-angle:${nut.angle}deg" aria-hidden="true"><img src="/nut-scene/${nut.kind}.webp" width="640" height="640" alt="" loading="eager" fetchpriority="high" decoding="async" draggable="false"></div>`;
+          const pixels = ingredientPixels[nut.kind];
+          const size = mobileIngredientSizes[i];
+          const sizes = `(max-width: 700px) calc(${size}vw - ${size * .4}px), (min-width: 1600px) ${Math.round(nut.size * 14.4)}px, ${nut.size * .91}vw`;
+          const layer = (transmission = false) => `<div class="nut-scene-object nut-scene-ingredient nut-scene-ingredient-${i + 1}${nut.front ? " nut-scene-foreground" : ""}${transmission ? " nut-scene-transmission" : ""}" data-nut-depth="${nut.depth}" data-nut-phase="${nut.phase}" data-nut-amplitude="9" style="--nut-x:${nut.x}%;--nut-y:${nut.y}%;--nut-size:${nut.size}%;--nut-angle:${nut.angle}deg" aria-hidden="true"><img src="/nut-scene/${nut.kind}-480.webp" srcset="/nut-scene/${nut.kind}-240.webp 240w, /nut-scene/${nut.kind}-480.webp 480w, /nut-scene/${nut.kind}.webp ${pixels}w" sizes="${sizes}" width="${pixels}" height="${pixels}" alt="" loading="eager" fetchpriority="low" decoding="async" draggable="false"></div>`;
           return layer() + (nut.front ? layer(true) : "");
         }).join("")}
         <div class="nut-scene-object nut-scene-jar" data-nut-depth="0.17" data-nut-phase="1.1" data-nut-amplitude="3" style="--nut-x:51%;--nut-y:47%;--nut-size:29%;--nut-angle:-4deg">
-          <img src="/nut-scene/mix-jar.webp" srcset="/nut-scene/mix-jar-480.webp 480w, /nut-scene/mix-jar-960.webp 960w, /nut-scene/mix-jar.webp 1024w" sizes="(max-width: 700px) 59vw, 440px" width="1024" height="1536" alt="${c.jar}" loading="eager" fetchpriority="high" decoding="async" draggable="false">
+          <img src="/nut-scene/mix-jar-fast-1024.webp" srcset="/nut-scene/mix-jar-fast-480.webp 480w, /nut-scene/mix-jar-fast-960.webp 960w, /nut-scene/mix-jar-fast-1024.webp 1024w" sizes="(max-width: 700px) 59vw, 440px" width="1024" height="1536" alt="${c.jar}" loading="eager" fetchpriority="high" decoding="async" draggable="false">
         </div>
         <h1 class="nut-scene-wordmark">POLOGENKI</h1>
       </div>
