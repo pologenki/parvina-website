@@ -8,6 +8,7 @@
 @import './css/gallery.css';
 @import './css/contact.css';
 @import './css/footer.css';
+@import './css/site-scale.css';
 
  body {
         margin: 0;

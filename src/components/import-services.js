@@ -1,5 +1,6 @@
 import { t, getCurrentLanguage } from '../utils/i18n.js';
 import { initDeferredImages } from '../utils/deferred-images.js';
+import { getLayoutViewportWidth, getHeaderHeight, toLayoutPixels } from '../utils/layout-scale.js';
 
 const iconFiles = import.meta.glob('../assets/import-icons/*.svg', { query: '?raw', import: 'default', eager: true });
 function icon(name, extra = '') {
@@ -84,13 +85,13 @@ export function initImportServices() {
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   const pauseButton = section.querySelector('[data-import-pause]');
   let currentIndex = 0, opener = null, paused = motion.matches, exitAnimation = null, closePromise = null;
-  const measure = () => section.style.setProperty('--import-viewport-width', `${document.documentElement.clientWidth}px`);
+  const measure = () => section.style.setProperty('--import-viewport-width', `${getLayoutViewportWidth()}px`);
   measure();
   window.addEventListener('resize', measure, options);
   if (location.hash === '#services') {
     document.fonts.ready.then(() => requestAnimationFrame(() => requestAnimationFrame(() => {
       if (controller.signal.aborted || location.hash !== '#services') return;
-      const headerHeight = document.querySelector('.pv-site-header')?.offsetHeight || 0;
+      const headerHeight = getHeaderHeight();
       window.scrollTo({ top: section.getBoundingClientRect().top + scrollY - headerHeight - 12, behavior: 'instant' });
     })));
   }
@@ -188,7 +189,7 @@ export function initImportServices() {
     if (event.target.closest('[data-import-pause]')) { paused = !paused; syncMotion(); }
     if (event.target.closest('[data-import-included]')) {
       const target = body.querySelector('.import-included');
-      dialog.scrollTo({ top: target.getBoundingClientRect().top - dialog.getBoundingClientRect().top + dialog.scrollTop - 96, behavior: motion.matches ? 'instant' : 'smooth' });
+      dialog.scrollTo({ top: toLayoutPixels(target.getBoundingClientRect().top - dialog.getBoundingClientRect().top) + dialog.scrollTop - 96, behavior: motion.matches ? 'instant' : 'smooth' });
     }
     if (event.target.closest('[data-import-contact]')) {
       event.preventDefault(); event.stopPropagation();
@@ -196,7 +197,7 @@ export function initImportServices() {
       await close();
       const target = document.getElementById('footer');
       if (target) {
-        const headerHeight = document.querySelector('.pv-site-header')?.offsetHeight || 0;
+        const headerHeight = getHeaderHeight();
         window.scrollTo({ top: target.getBoundingClientRect().top + scrollY - headerHeight - 12, behavior: motion.matches ? 'instant' : 'smooth' });
       }
     }

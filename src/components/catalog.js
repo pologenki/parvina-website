@@ -1,5 +1,6 @@
 import { responsiveImagePath, responsiveImageSrcset } from "../utils/responsiveImage.js";
 import { initDeferredImages } from "../utils/deferred-images.js";
+import { getLayoutViewportWidth, getHeaderHeight, toLayoutPixels } from "../utils/layout-scale.js";
 
 const copy = {
   ru: {
@@ -171,13 +172,13 @@ export function initCatalog(products, lang) {
   });
   let searchMatches = [];
   let activeSearchIndex = -1;
-  const fitViewport = () => section.style.setProperty("--catalog-viewport-width", `${document.documentElement.clientWidth}px`);
+  const fitViewport = () => section.style.setProperty("--catalog-viewport-width", `${getLayoutViewportWidth()}px`);
   fitViewport();
   window.addEventListener("resize", fitViewport, options);
   if (location.hash === "#products") {
     document.fonts.ready.then(() => requestAnimationFrame(() => requestAnimationFrame(() => {
       if (controller.signal.aborted || location.hash !== "#products") return;
-      const headerHeight = document.querySelector(".pv-site-header")?.offsetHeight || 0;
+      const headerHeight = getHeaderHeight();
       window.scrollTo({ top: section.getBoundingClientRect().top + scrollY - headerHeight - 12, behavior: "instant" });
     })));
   }
@@ -199,7 +200,7 @@ export function initCatalog(products, lang) {
     if (searchPanel.hidden) return;
     const viewport = window.visualViewport;
     const bottom = (viewport?.offsetTop || 0) + (viewport?.height || innerHeight);
-    const available = bottom - searchForm.getBoundingClientRect().bottom - searchForm.querySelector(".catalog-search-summary").offsetHeight - 28;
+    const available = toLayoutPixels(bottom - searchForm.getBoundingClientRect().bottom) - searchForm.querySelector(".catalog-search-summary").offsetHeight - 28;
     searchResults.style.maxHeight = `${Math.max(96, Math.min(390, available))}px`;
   }
   window.addEventListener("scroll", fitSearchResults, { ...options, passive: true });
@@ -247,8 +248,8 @@ export function initCatalog(products, lang) {
     searchInput.setAttribute("aria-activedescendant", selected.id);
     const bounds = selected.getBoundingClientRect();
     const container = searchResults.getBoundingClientRect();
-    if (bounds.bottom > container.bottom) searchResults.scrollTop += bounds.bottom - container.bottom;
-    else if (bounds.top < container.top) searchResults.scrollTop -= container.top - bounds.top;
+    if (bounds.bottom > container.bottom) searchResults.scrollTop += toLayoutPixels(bounds.bottom - container.bottom);
+    else if (bounds.top < container.top) searchResults.scrollTop -= toLayoutPixels(container.top - bounds.top);
   }
 
   searchInput.addEventListener("input", event => { if (!event.isComposing) updateSearch(); }, options);
@@ -354,7 +355,7 @@ export function initCatalog(products, lang) {
   function move(direction, automatic = false) {
     const first = carousel.querySelector(".catalog-product");
     if (!first) return;
-    const step = first.getBoundingClientRect().width + parseFloat(getComputedStyle(carousel).columnGap);
+    const step = toLayoutPixels(first.getBoundingClientRect().width) + parseFloat(getComputedStyle(carousel).columnGap);
     const max = carousel.scrollWidth - carousel.clientWidth;
     const target = carousel.scrollLeft + direction * step;
     const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;

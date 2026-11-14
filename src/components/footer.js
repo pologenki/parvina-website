@@ -7,6 +7,7 @@ import closeIcon from '../assets/import-icons/x.svg?raw';
 import rightIcon from '../assets/import-icons/arrow-right.svg?raw';
 import { createFooterMotion } from './footer-motion.js';
 import { renderContactModal } from './contact.js';
+import { getLayoutViewportWidth, getHeaderHeight } from '../utils/layout-scale.js';
 import { importServices } from './import-services.js';
 
 function getPersonalData() {
@@ -162,6 +163,7 @@ export function Footer() {
     en: { rights: 'All rights reserved.', home: 'Back to top', close: 'Close document', eyebrow: 'Let’s talk about your next shipment.', request: 'Send an enquiry', response: 'A reply within 1 business day', privacy: 'Privacy', terms: 'Terms', brand: 'Nuts & dried fruits · Import', shortServices: ['Sourcing', 'Negotiation', 'Logistics', 'Documents', 'Monitoring', 'Full import'] },
     cn: { rights: '保留所有权利。', home: '返回顶部', close: '关闭文档', eyebrow: '聊聊您的下一批进口货物。', request: '发送询价', response: '1 个工作日内回复', privacy: '隐私政策', terms: '服务条款', brand: '坚果与干果 · 进口', shortServices: ['寻找供应商', '商务谈判', '物流协调', '贸易单证', '货运跟踪', '全程进口服务'] },
   }[lang] || { rights: 'All rights reserved.', home: 'Pologenki — home', close: 'Close document' };
+  const credit = { ru: 'Дизайн и создание сайта — Pologenki.', en: 'Designed and developed by Pologenki.', cn: '网站设计与开发：Pologenki。' }[lang] || 'Designed and developed by Pologenki.';
   const arrow = `<span class="pf-arrow" aria-hidden="true">${diagonal}</span>`;
   const documentCopy = {
     ru: { label: 'Документы', done: 'Закрыть' },
@@ -233,7 +235,7 @@ export function Footer() {
       <div class="pf-bottom-wrap">
         <div class="pf-bottom pf-wrap">
           <span class="pf-brand-note">${copy.brand}</span>
-          <p class="pf-copyright">&copy; ${new Date().getFullYear()} Pologenki. ${copy.rights}</p>
+          <p class="pf-copyright">${credit} &copy; ${new Date().getFullYear()} ${copy.rights}</p>
         </div>
       </div>
 
@@ -251,7 +253,7 @@ export function initFooter() {
   const footer = document.querySelector('#footer.pf-footer');
   if (!footer) return;
   const controller = new AbortController();
-  const measure = () => footer.style.setProperty('--pf-viewport-width', `${document.documentElement.clientWidth}px`);
+  const measure = () => footer.style.setProperty('--pf-viewport-width', `${getLayoutViewportWidth()}px`);
   measure();
   window.addEventListener('resize', measure, { signal: controller.signal, passive: true });
   const stopMotion = createFooterMotion(footer, controller.signal, measure);
@@ -268,7 +270,7 @@ export function initFooter() {
     for (const type of ['pointerdown', 'wheel', 'touchstart', 'keydown']) window.addEventListener(type, () => { interacted = true; }, { signal: controller.signal, once: true, passive: true });
     const followAnchor = () => {
       if (interacted || controller.signal.aborted || !footer.isConnected || !['#footer', '#contact'].includes(location.hash)) return;
-      const headerHeight = document.querySelector('.pv-site-header')?.offsetHeight || 0;
+      const headerHeight = getHeaderHeight();
       window.scrollTo({ top: scrollY + footer.getBoundingClientRect().top - headerHeight - 12, behavior: 'instant' });
     };
     requestAnimationFrame(() => requestAnimationFrame(followAnchor));

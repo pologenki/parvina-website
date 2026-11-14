@@ -1,3 +1,5 @@
+import { getLayoutViewportWidth } from '../utils/layout-scale.js';
+
 const translations = {
   ru: { catalogue: "Перейти в каталог", pause: "Остановить анимацию", play: "Включить анимацию", scene: "Pologenki — орехи и сухофрукты", jar: "Стеклянная банка со смесью кешью, миндаля, грецких орехов, кураги, манго и клюквы" },
   en: { catalogue: "Explore the catalogue", pause: "Pause animation", play: "Play animation", scene: "Pologenki — nuts and dried fruits", jar: "A glass jar of cashews, almonds, walnuts, dried apricots, mango and cranberries" },
@@ -73,7 +75,7 @@ export function initNutScene(lang = "en") {
   let scrollOffset = 0;
 
   function measure() {
-    section.style.setProperty("--nut-scene-width", `${document.documentElement.clientWidth}px`);
+    section.style.setProperty("--nut-scene-width", `${getLayoutViewportWidth()}px`);
     bounds = stage.getBoundingClientRect();
     const centre = bounds.top + bounds.height / 2;
     scrollOffset = Math.max(-1, Math.min(1, (innerHeight / 2 - centre) / innerHeight));

@@ -5,6 +5,7 @@ import diagonal from '../assets/import-icons/arrow-up-right.svg?raw';
 import pause from '../assets/import-icons/pause.svg?raw';
 import play from '../assets/import-icons/play.svg?raw';
 import { createGalleryReel } from './gallery-reel.js';
+import { getLayoutViewportWidth, getHeaderHeight, toLayoutPixels } from '../utils/layout-scale.js';
 
 const icons = { x, left, right, diagonal, pause, play };
 const icon = name => icons[name].replace('<svg ', '<svg aria-hidden="true" focusable="false" ');
@@ -68,10 +69,10 @@ export async function initGallery(lang = 'en') {
   const place = item => item.editorial?.place[languageIndex] || '';
   const number = index => String(index + 1).padStart(2, '0');
   const fit = () => {
-    section.style.setProperty('--pg-viewport-width', `${document.documentElement.clientWidth}px`);
+    section.style.setProperty('--pg-viewport-width', `${getLayoutViewportWidth()}px`);
     const heading = section.querySelector('#pg-title'), start = heading.querySelector('.pg-title-start'), end = heading.querySelector('.pg-title-end');
     heading.style.setProperty('--pg-title-size', '100px');
-    const textWidth = element => { const range = document.createRange(); range.selectNodeContents(element); return range.getBoundingClientRect().width; };
+    const textWidth = element => { const range = document.createRange(); range.selectNodeContents(element); return toLayoutPixels(range.getBoundingClientRect().width); };
     const total = matchMedia('(max-width:767px)').matches ? textWidth(end) : textWidth(start) + textWidth(end) + 150;
     heading.style.setProperty('--pg-title-size', `${Math.floor(heading.clientWidth / total * 100 * .99)}px`);
   };
@@ -204,14 +205,14 @@ export async function initGallery(lang = 'en') {
     const card = event.target.closest('.pg-card'), r = shelf.getBoundingClientRect();
     shelf.classList.toggle('pg-hovering', !!card && !drag);
     shelf.querySelector('.pg-cursor-label').textContent = card ? `${c.open} · ${card.dataset.pgName}` : c.open;
-    shelf.querySelector('.pg-cursor').style.transform = `translate3d(${event.clientX - r.left}px,${event.clientY - r.top}px,0) translate(-50%,-50%)`;
+    shelf.querySelector('.pg-cursor').style.transform = `translate3d(${toLayoutPixels(event.clientX - r.left)}px,${toLayoutPixels(event.clientY - r.top)}px,0) translate(-50%,-50%)`;
   }, opts);
   track.addEventListener('pointerdown', event => {
     dragged = false;
     if (event.pointerType === 'mouse' && event.button === 0 && innerWidth >= 768) drag = { x: event.clientX, left: track.scrollLeft, id: event.pointerId };
   }, opts);
   track.addEventListener('pointermove', event => {
-    if (!drag) return; const distance = event.clientX - drag.x;
+    if (!drag) return; const distance = toLayoutPixels(event.clientX - drag.x);
     if (Math.abs(distance) > 8) { dragged = true; track.classList.add('pg-dragging'); track.setPointerCapture(drag.id); reel?.dragTo(drag.left - distance); }
   }, opts);
   const endDrag = () => { if (dragged) reel?.settle(); drag = null; track.classList.remove('pg-dragging'); setTimeout(() => { dragged = false; }, 0); };
@@ -231,7 +232,7 @@ export async function initGallery(lang = 'en') {
     reel = createGalleryReel({ track, signal, reduced, isPaused: () => paused, onIndex: index => { section.querySelector('.pg-position').textContent = `${number(index)} / ${String(filtered.length).padStart(2, '0')}`; }, onBrowse: enabled => { section.querySelectorAll('[data-pg-step]').forEach(button => { button.disabled = !enabled; }); } });
     reel.refresh(true); section.classList.add('pg-ready'); syncMotion();
     document.fonts.ready.then(() => { if (!signal.aborted) fit(); });
-    if (location.hash === '#portfolio') { await document.fonts.ready; requestAnimationFrame(() => requestAnimationFrame(() => { if (!signal.aborted) window.scrollTo({ top: section.getBoundingClientRect().top + scrollY - (document.querySelector('.pv-site-header')?.offsetHeight || 0) - 12, behavior: 'instant' }); })); }
+    if (location.hash === '#portfolio') { await document.fonts.ready; requestAnimationFrame(() => requestAnimationFrame(() => { if (!signal.aborted) window.scrollTo({ top: section.getBoundingClientRect().top + scrollY - getHeaderHeight() - 12, behavior: 'instant' }); })); }
   } catch (error) {
     if (signal.aborted) return;
     track.setAttribute('aria-busy', 'false'); track.innerHTML = `<div class="pg-load-status" role="status"><p>${c.error}</p><button type="button" class="pg-retry">${c.retry}</button></div>`;

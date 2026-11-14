@@ -1,0 +1,21 @@
+/* Compact desktop layout; browser zoom and the mobile layout stay independent. */
+:root {
+  --site-scale: 1;
+  --site-vw: 1vw;
+  --site-vh: 1vh;
+  --site-svh: 1svh;
+  --site-dvh: 1dvh;
+}
+
+@supports (zoom: .9) {
+  @media screen and (min-width: 1121px) {
+    :root {
+      --site-scale: .9;
+      --site-vw: calc(1vw / .9);
+      --site-vh: calc(1vh / .9);
+      --site-svh: calc(1svh / .9);
+      --site-dvh: calc(1dvh / .9);
+      zoom: var(--site-scale);
+    }
+  }
+}

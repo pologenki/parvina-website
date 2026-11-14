@@ -1,3 +1,5 @@
+import { getLayoutViewportWidth, getHeaderHeight, getLayoutScale, toLayoutPixels } from '../utils/layout-scale.js';
+
 // Pointer-driven wordmark and dot field; idle, hidden and reduced-motion states do not run a loop.
 export function createFooterMotion(footer, signal, measureViewport) {
   const canvas = footer.querySelector('.pf-dots');
@@ -22,7 +24,7 @@ export function createFooterMotion(footer, signal, measureViewport) {
     if (signal.aborted || !word.isConnected) return;
     resetLetters();
     word.style.fontSize = '100px';
-    const measured = letters.reduce((sum, letter) => sum + letter.getBoundingClientRect().width, 0);
+    const measured = letters.reduce((sum, letter) => sum + toLayoutPixels(letter.getBoundingClientRect().width), 0);
     const available = word.clientWidth;
     fontSize = (measured > 0 ? available * 100 / measured : 100) * .5;
     word.style.fontSize = `${fontSize}px`;
@@ -50,14 +52,14 @@ export function createFooterMotion(footer, signal, measureViewport) {
   function measure() {
     if (signal.aborted || !footer.isConnected) return;
     measureViewport();
-    const nextWidth = document.documentElement.clientWidth;
+    const nextWidth = getLayoutViewportWidth();
     if (nextWidth !== viewportWidth) { viewportWidth = nextWidth; fitWord(); }
     resizeCanvas();
     syncTopVisibility();
   }
   function syncTopVisibility() {
     const rect = toTop.getBoundingClientRect();
-    const headerHeight = document.querySelector('.pv-site-header')?.offsetHeight || 0;
+    const headerHeight = getHeaderHeight();
     document.body.classList.toggle('pf-footer-up-visible', visible && rect.top >= headerHeight && rect.bottom <= innerHeight);
   }
   window.addEventListener('scroll', syncTopVisibility, { ...events, passive: true });
@@ -69,7 +71,8 @@ export function createFooterMotion(footer, signal, measureViewport) {
     const amount = 1 - Math.pow(.8, Math.min(previous ? (time - previous) / 16.667 : 1, 3));
     previous = time;
     const bounds = footer.getBoundingClientRect();
-    const localX = pointer.x - bounds.left, localY = pointer.y - bounds.top;
+    const scale = getLayoutScale();
+    const localX = (pointer.x - bounds.left) / scale, localY = (pointer.y - bounds.top) / scale;
     let moving = false;
     for (const point of points) {
       const dx = point.bx - localX, dy = point.by - localY, distance = Math.hypot(dx, dy);
@@ -83,8 +86,8 @@ export function createFooterMotion(footer, signal, measureViewport) {
     const wordBounds = word.getBoundingClientRect();
     const peak = Math.min(58, fontSize * .18), radius = fontSize * 1.75 + 100;
     letters.forEach((letter, index) => {
-      const dx = pointer.x - wordBounds.left - centers[index];
-      const dy = pointer.y - wordBounds.top - wordBounds.height * .5;
+      const dx = (pointer.x - wordBounds.left) / scale - centers[index];
+      const dy = (pointer.y - wordBounds.top - wordBounds.height * .5) / scale;
       const proximity = pointer.word ? Math.max(0, 1 - Math.hypot(dx, dy) / radius) : 0;
       const target = proximity * proximity * (3 - 2 * proximity) * peak;
       lifts[index] += (target - lifts[index]) * amount;
