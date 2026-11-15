@@ -1,4 +1,5 @@
 import { access, readFile, stat } from 'node:fs/promises';
+import sharp from 'sharp';
 
 const pages = [
   { path: 'index.html', canonical: 'https://pologenki.eu/', lang: 'en' },
@@ -6,6 +7,7 @@ const pages = [
   { path: 'zh-cn/index.html', canonical: 'https://pologenki.eu/zh-cn/', lang: 'zh-CN' }
 ];
 const errors = [];
+const shareImage = 'https://pologenki.eu/social/pologenki-home-v3.jpg';
 
 for (const page of pages) {
   const html = await readFile(page.path, 'utf8');
@@ -26,6 +28,16 @@ for (const page of pages) {
   if (!/<h1>[^<]+<\/h1>/.test(html)) errors.push(`${page.path}: missing static H1`);
   if (!html.includes('rel="preload" as="image"')) errors.push(`${page.path}: missing LCP image preload`);
   if (!html.includes('srcset=')) errors.push(`${page.path}: missing responsive image sources`);
+  for (const tag of [
+    `<meta property="og:image" content="${shareImage}"`,
+    `<meta property="og:image:secure_url" content="${shareImage}"`,
+    `<meta name="twitter:image" content="${shareImage}"`,
+    `<link rel="image_src" href="${shareImage}"`
+  ]) {
+    if (!html.includes(tag)) errors.push(`${page.path}: missing homepage share image: ${tag}`);
+  }
+  if ([...html.matchAll(/property="og:image"/g)].length !== 1) errors.push(`${page.path}: expected a single primary share image`);
+  if (html.includes('ParvinaFoto')) errors.push(`${page.path}: legacy portrait URL remains in homepage metadata`);
 }
 
 const sitemap = await readFile('public/sitemap.xml', 'utf8');
@@ -72,6 +84,8 @@ for (const slug of serviceSlugs) {
       if (!html.includes('"@type":"Service"')) errors.push(`${servicePage}: missing Service JSON-LD`);
       if (!html.includes('"@type":"BreadcrumbList"')) errors.push(`${servicePage}: missing breadcrumbs`);
       if (!/<h1>[^<]+<\/h1>/.test(html)) errors.push(`${servicePage}: missing H1`);
+      if (!html.includes(`property="og:image" content="${shareImage}"`)) errors.push(`${servicePage}: missing homepage share image`);
+      if (!html.includes('/optimized/portraits/parvina-pologenki-480.webp')) errors.push(`${servicePage}: missing separate profile portrait`);
     } catch {
       errors.push(`${servicePage}: generated service page is missing`);
     }
@@ -82,6 +96,9 @@ for (const image of [
   'public/optimized/ParvinaFoto-480.webp',
   'public/optimized/ParvinaFoto-768.webp',
   'public/optimized/ParvinaFoto-1148.webp',
+  'public/optimized/portraits/parvina-pologenki-480.webp',
+  'public/optimized/portraits/parvina-pologenki-768.webp',
+  'public/optimized/portraits/parvina-pologenki-1148.webp',
   'public/optimized/Logo2-160.webp',
   'public/optimized/Logo2-compact-160.webp',
   'public/optimized/Logo2-sharp-320.png'
@@ -91,6 +108,20 @@ for (const image of [
     if (imageStat.size > 250 * 1024) errors.push(`${image}: optimized image exceeds 250 KB`);
   } catch {
     errors.push(`${image}: optimized image is missing`);
+  }
+}
+
+// Both historical OG URLs must remain homepage images after image generation.
+for (const path of [
+  'public/social/pologenki-home-v3.jpg',
+  'public/ParvinaFoto.png',
+  ...[480, 768, 1148].map(width => `public/optimized/ParvinaFoto-${width}.webp`)
+]) {
+  try {
+    const image = await sharp(path).metadata();
+    if (Math.abs(image.width / image.height - 1200 / 630) > .01) errors.push(`${path}: historical share image reverted to a portrait`);
+  } catch {
+    errors.push(`${path}: share image is missing or invalid`);
   }
 }
 

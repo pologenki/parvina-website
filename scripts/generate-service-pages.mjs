@@ -112,7 +112,9 @@ function renderServicePage(service, localeKey) {
   <meta property="og:title" content="${esc(copy.pageTitle(title))}" />
   <meta property="og:description" content="${esc(metaDescription)}" />
   <meta property="og:url" content="${canonical}" />
-  <meta property="og:image" content="${baseUrl}/social/pologenki-hero-v2.jpg" />
+  <link rel="image_src" href="${baseUrl}/social/pologenki-home-v3.jpg" />
+  <meta property="og:image" content="${baseUrl}/social/pologenki-home-v3.jpg" />
+  <meta property="og:image:secure_url" content="${baseUrl}/social/pologenki-home-v3.jpg" />
   <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -127,7 +129,7 @@ function renderServicePage(service, localeKey) {
 <body>
   <header><a href="${copy.prefix ? `${copy.prefix}/` : '/'}"><img src="/optimized/Logo2-compact-160.webp" srcset="/optimized/Logo2-compact-160.webp 160w, /optimized/Logo2-compact-320.webp 320w" sizes="145px" alt="Pologenki" width="160" height="46" /></a><nav class="languages" aria-label="Language"><a href="${new URL(serviceUrl(service, 'en')).pathname}" lang="en">EN</a><a href="${new URL(serviceUrl(service, 'ru')).pathname}" lang="ru">RU</a><a href="${new URL(serviceUrl(service, 'cn')).pathname}" lang="zh-CN">中文</a></nav></header>
   <main class="page">
-    <section class="hero"><div><p class="eyebrow">${copy.eyebrow}</p><h1>${esc(title)}</h1><p class="lead">${esc(description)}</p><a class="cta" href="mailto:info@pologenki.eu?subject=${encodeURIComponent(title)}">${copy.cta}</a></div><img src="/optimized/ParvinaFoto-480.webp" alt="${localeKey === 'ru' ? 'Парвина Пологенки' : 'Parvina Pologenki'}" width="480" height="574" loading="eager" fetchpriority="high" /></section>
+    <section class="hero"><div><p class="eyebrow">${copy.eyebrow}</p><h1>${esc(title)}</h1><p class="lead">${esc(description)}</p><a class="cta" href="mailto:info@pologenki.eu?subject=${encodeURIComponent(title)}">${copy.cta}</a></div><img src="/optimized/portraits/parvina-pologenki-480.webp" alt="${localeKey === 'ru' ? 'Парвина Пологенки' : 'Parvina Pologenki'}" width="480" height="574" loading="eager" fetchpriority="high" /></section>
     <div class="content-grid">
       <section class="panel"><h2>${copy.includedTitle}</h2><ul>${included.map(item => `<li>${esc(item)}</li>`).join('')}</ul></section>
       <section class="panel"><h2>${copy.processTitle}</h2><ol>${copy.process.map(item => `<li>${esc(item)}</li>`).join('')}</ol></section>

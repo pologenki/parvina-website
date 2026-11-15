@@ -53,7 +53,9 @@ async function createSharpLogo() {
 await rm(outputDir, { recursive: true, force: true });
 
 const jobs = [
+  // These historical share-image URLs must keep serving the homepage card.
   ...[480, 768, 1148].map(width => createVariant('ParvinaFoto.png', width, 84)),
+  ...[480, 768, 1148].map(width => createVariant('portraits/parvina-pologenki.png', width, 84)),
   ...[160, 320].map(width => createVariant('Logo2.png', width, 88)),
   ...[160, 320].map(width => createCompactLogo(width)),
   createSharpLogo(),
