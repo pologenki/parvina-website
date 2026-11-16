@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --config src/vite.config.js",
     "validate:data": "node scripts/validate-data.mjs",
+    "test:price-import": "node --test tests/admin-price-import.test.mjs",
     "optimize:images": "node scripts/optimize-images.mjs",
     "generate:seo": "node scripts/generate-seo-pages.mjs && node scripts/generate-service-pages.mjs",
     "validate:seo": "node scripts/validate-seo.mjs",

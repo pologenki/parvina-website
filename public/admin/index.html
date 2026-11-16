@@ -9,6 +9,7 @@
 <link rel="icon" type="image/jpeg" href="/logo.jpeg">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://accounts.google.com/gsi/client" async defer></script>
+<link rel="stylesheet" href="./price-import.css">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -4618,6 +4619,7 @@
       <div class="admin-action-main">
         <button class="btn-soft" onclick="addProduct()">+ Добавить товар</button>
         <button class="btn-soft" onclick="showValidationPanel('products')">Проверить</button>
+        <button class="btn-soft" type="button" data-price-import-open>Загрузить цены из Excel</button>
         <details class="admin-more">
           <summary class="btn-soft">Дополнительно</summary>
           <div class="admin-more-actions">
@@ -4668,6 +4670,7 @@
       <div class="price-heading-actions">
         <select id="priceProductSelect" onchange="renderPriceDashboard()" aria-label="Выберите товар"></select>
         <button type="button" onclick="switchTab('products')">Изменить цены</button>
+        <button type="button" data-price-import-open>Загрузить Excel</button>
       </div>
     </section>
 
@@ -6169,7 +6172,7 @@ function switchTab(name) {
   window.setTimeout(() => panel.classList.remove('tab-entering'), 900);
 
   document.getElementById('headerMeta').textContent = labels[name] || 'Панель управления';
-  document.getElementById('publishBtn').hidden = !['products', 'portfolio'].includes(name);
+  document.getElementById('publishBtn').hidden = !['products', 'prices', 'portfolio'].includes(name);
 
   if (name === 'portfolio' && pfData === null) fetchPortfolio();
   if (name === 'dashboard') renderDashboard();
@@ -7527,6 +7530,19 @@ async function publishPortfolio() {
 }
 
 // Override publishChanges to handle both tabs
+window.pologenkiPriceImportAdmin = {
+  getProducts: () => data?.products || [],
+  notify: message => showToast(message, 'fail'),
+  didApply(count) {
+    addChangeLog(data, `Импорт цен из Excel: ${count} позиций`);
+    renderGrid();
+    renderDashboard();
+    if (document.getElementById('tab-prices')?.classList.contains('active')) preparePricesTab();
+    setStatus('ok', `Импортировано цен: ${count}. Готово к публикации.`);
+    showToast('Цены из Excel применены. Нажмите «Опубликовать», чтобы сохранить их на сайте.', 'ok');
+  }
+};
+
 const _origPublish = publishChanges;
 window.publishChanges = async function() {
   const activeTab = document.querySelector('.tab-panel.active')?.id;
@@ -7537,5 +7553,6 @@ window.publishChanges = async function() {
   }
 };
 </script>
+<script type="module" src="./price-import.js"></script>
 </body>
 </html>
