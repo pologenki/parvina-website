@@ -85,6 +85,7 @@ export function initImportServices() {
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   const pauseButton = section.querySelector('[data-import-pause]');
   let currentIndex = 0, opener = null, paused = motion.matches, exitAnimation = null, closePromise = null;
+  let swipeStart = null, swipeAnimation = null;
   const measure = () => section.style.setProperty('--import-viewport-width', `${getLayoutViewportWidth()}px`);
   measure();
   window.addEventListener('resize', measure, options);
@@ -115,8 +116,11 @@ export function initImportServices() {
   section.querySelectorAll('.import-service-card').forEach(card => observer.observe(card));
   section.classList.add('is-motion-ready');
 
-  function open(index) {
+  function open(index, swipeDirection = 0) {
     if (closePromise) return;
+    swipeStart = null;
+    swipeAnimation?.cancel();
+    dialog.classList.toggle('is-swipe-navigation', swipeDirection !== 0);
     currentIndex = (index + services.length) % services.length;
     const s = services[currentIndex];
     const includes = [1, 2, 3].map(n => t(`services.${s.id}Include${n}`));
@@ -144,10 +148,54 @@ export function initImportServices() {
     }
     dialog.scrollTop = 0;
     body.querySelector('#import-dialog-title').focus({ preventScroll: true });
+    if (swipeDirection && !motion.matches) {
+      swipeAnimation = body.animate([
+        { opacity: .45, transform: `translateX(${swipeDirection * 32}px)` },
+        { opacity: 1, transform: 'translateX(0)' },
+      ], { duration: 240, easing: 'cubic-bezier(.22,1,.36,1)' });
+    }
     window.trackSiteEvent?.('open_service_modal', { service_id: s.id, service_title: t(`services.${s.title}`) });
   }
 
+  const hasSelection = () => {
+    const selection = window.getSelection();
+    return selection && !selection.isCollapsed && dialog.contains(selection.anchorNode);
+  };
+  body.addEventListener('touchstart', event => {
+    swipeStart = null;
+    if (!dialog.open || closePromise || event.touches.length !== 1 || hasSelection()) return;
+    if (event.target.closest('a,button,input,select,textarea,label,[contenteditable]:not([contenteditable="false"]),[role="button"],[role="slider"]')) return;
+    const touch = event.touches[0];
+    swipeStart = { id: touch.identifier, x: touch.clientX, y: touch.clientY };
+  }, { ...options, passive: true });
+  body.addEventListener('touchmove', event => {
+    if (!swipeStart) return;
+    const touch = Array.from(event.touches).find(item => item.identifier === swipeStart.id);
+    if (event.touches.length !== 1 || !touch) { swipeStart = null; return; }
+    const dx = Math.abs(touch.clientX - swipeStart.x), dy = Math.abs(touch.clientY - swipeStart.y);
+    // Once a vertical scroll starts, it must not turn into service navigation.
+    if (dy > 12 && dy >= dx) swipeStart = null;
+  }, { ...options, passive: true });
+  body.addEventListener('touchend', event => {
+    const start = swipeStart;
+    swipeStart = null;
+    if (!start || !dialog.open || closePromise || event.touches.length || hasSelection()) return;
+    const touch = Array.from(event.changedTouches).find(item => item.identifier === start.id);
+    if (!touch) return;
+    const dx = touch.clientX - start.x, dy = Math.abs(touch.clientY - start.y);
+    const threshold = Math.max(48, Math.min(80, dialog.getBoundingClientRect().width * .18));
+    if (Math.abs(dx) < threshold || Math.abs(dx) < dy * 1.8) return;
+    // Cancel only the completed horizontal swipe's synthetic click.
+    if (event.cancelable) event.preventDefault();
+    const direction = dx < 0 ? 1 : -1;
+    open(currentIndex + direction, direction);
+  }, { ...options, passive: false });
+  body.addEventListener('touchcancel', () => { swipeStart = null; }, { ...options, passive: true });
+  window.addEventListener('resize', () => { swipeStart = null; }, options);
+
   function close() {
+    swipeStart = null;
+    swipeAnimation?.cancel();
     if (!dialog.open) return Promise.resolve();
     if (closePromise) return closePromise;
     if (motion.matches) { dialog.close(); return Promise.resolve(); }
@@ -157,6 +205,8 @@ export function initImportServices() {
     return closePromise;
   }
   dialog.addEventListener('close', () => {
+    swipeStart = null;
+    swipeAnimation?.cancel();
     exitAnimation?.cancel(); exitAnimation = null; closePromise = null;
     dialog.classList.remove('is-closing');
     document.documentElement.classList.remove('import-service-is-open');
@@ -203,7 +253,7 @@ export function initImportServices() {
     }
   }, options);
   dispose = () => {
-    controller.abort(); observer.disconnect(); exitAnimation?.cancel();
+    controller.abort(); observer.disconnect(); exitAnimation?.cancel(); swipeAnimation?.cancel();
     if (dialog.open) dialog.close();
     document.documentElement.classList.remove('import-service-is-open');
   };
