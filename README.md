@@ -17,6 +17,7 @@ npm run dev
 - `src/components/` — каталог, первый экран, услуги, галерея, контакты и футер.
 - `src/utils/` — переводы, аналитика, блокировка прокрутки и обработка формы.
 - `src/css/base.css` — общие стили; оформление компонентов находится в отдельных CSS-файлах рядом.
+- `src/utils/product-offers.js` — стартовая цена из цен сортов; общий рендер таблицы используется также на страницах товаров.
 - `src/locales/` — переводы интерфейса.
 - `public/data/` — товары, цены и записи галереи.
 - `public/admin/index.html`, `admin.css`, `admin.js` — разметка, стили и логика админки.
@@ -30,6 +31,7 @@ npm run dev
 ```sh
 npm run validate:data
 npm run test:price-import
+npm run test:offers
 npm run build
 ```
 

@@ -2,6 +2,9 @@ import { responsiveImagePath, responsiveImageSrcset } from "../utils/responsiveI
 import { initDeferredImages } from "../utils/deferred-images.js";
 import { getLayoutViewportWidth, getHeaderHeight, toLayoutPixels } from "../utils/layout-scale.js";
 
+import { getStartingPrice, startingPriceText, formatOfferPrice, offerCopy, variantText } from '../utils/product-offers.js';
+import { renderProductSpecifications } from './product-specifications.js';
+
 const copy = {
   ru: {
     title: "Каталог", subtitle: "Продукты для<br>оптового импорта", pricesUpdated: "Цены обновлены", nuts: "Орехи", dried: "Сухофрукты", snacks: "Фруктовые снеки", all: "Все товары",
@@ -47,12 +50,6 @@ function productName(product, lang) {
   return copy[lang].names[product.id] || text(product, "name", lang);
 }
 
-function price(value, lang) {
-  if (!value || /request/i.test(value)) return copy[lang].onRequest;
-  const formatted = String(value).replace(/\s*USD\s*\/\s*kg/i, lang === "cn" ? " $/公斤" : lang === "ru" ? " $/кг" : " $/kg");
-  return lang === "ru" ? formatted.replace(/(\d)\.(\d)/g, "$1,$2") : formatted;
-}
-
 function priceUpdateNote(value, lang) {
   const iso = String(value || "");
   if (!/^\d{4}-\d{2}-\d{2}$/.test(iso)) return "";
@@ -91,7 +88,7 @@ function card(product, lang, featured = false, order = 0) {
     ${corners()}<div class="catalog-product-copy"><span class="catalog-product-origin">${esc(text(product, "origin", lang))}</span>
     <i class="fa-solid fa-arrow-right catalog-arrow" aria-hidden="true"></i>
     <h3 class="catalog-product-name">${esc(name)}</h3></div>
-    ${bowl(product)}<span class="catalog-product-price">${esc(price(product.mainPrice, lang))}</span>
+    ${bowl(product)}<span class="catalog-product-price">${esc(startingPriceText(product, lang))}</span>
   </a>`;
 }
 
@@ -228,7 +225,7 @@ export function initCatalog(products, lang) {
       const hasCutout = groups.some(group => group.products?.includes(product.id));
       const image = hasCutout ? `/catalog/products/${encodeURIComponent(product.id)}-240.webp` : responsiveImagePath(product.image, 240);
       return `<li class="catalog-search-result" id="catalog-search-option-${index}" role="option" aria-selected="false" data-catalog-product="${esc(product.id)}">
-        <img src="${esc(image)}" width="48" height="48" alt=""><span class="catalog-search-result-copy"><strong>${esc(productName(product, lang))}</strong><span>${esc(text(product, "origin", lang))}</span></span><span class="catalog-search-price">${esc(price(product.mainPrice, lang))}</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        <img src="${esc(image)}" width="48" height="48" alt=""><span class="catalog-search-result-copy"><strong>${esc(productName(product, lang))}</strong><span>${esc(text(product, "origin", lang))}</span></span><span class="catalog-search-price">${esc(startingPriceText(product, lang))}</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
       </li>`;
     }).join("");
     searchForm.querySelector("[data-search-count]").textContent = c.count(searchMatches.length);
@@ -314,11 +311,14 @@ export function initCatalog(products, lang) {
     }
     const name = productName(product, lang);
     const inquiry = `${c.message} ${text(product, "name", lang)}. ${c.request}.`;
-    const variants = (product.variants || []).map((variant, index) => `<article class="catalog-specification" style="--catalog-item-order:${index}"><span class="catalog-spec-number" aria-hidden="true">${String(index + 1).padStart(2, "0")}</span><h3>${esc(text(variant, "name", lang))}</h3><p>${esc(text(variant, "desc", lang))}</p><strong>${esc(price(variant.price, lang))}</strong></article>`).join("");
+    const starting = getStartingPrice(product);
+    const offers = offerCopy(lang);
+    const priceLabel = starting.variant ? variantText(starting.variant, 'name', lang) : offers.indicative;
+    const priceNote = starting.variant ? offers.otherGrades : offers.selectGrade;
     body.dataset.view = "product";
     body.innerHTML = `<button type="button" class="catalog-back" data-catalog-back aria-label="${c.back}"><i class="fa-solid fa-arrow-left-long" aria-hidden="true"></i> ${esc(c[currentCategory])}</button>
-      <div class="catalog-detail-hero"><div class="catalog-detail-copy"><p class="catalog-detail-origin">${c.origin} · ${esc(text(product, "origin", lang))}</p><h2 id="catalog-dialog-title">${esc(text(product, "name", lang))}</h2><p class="catalog-detail-price"><span>${c.price}</span><strong>${esc(price(product.mainPrice, lang))}</strong></p></div>${bowl(product, "catalog-detail-image", true)}</div>
-      <section class="catalog-specifications"><h2>${c.specifications}</h2><div class="catalog-specification-grid">${variants}</div></section>
+      <div class="catalog-detail-hero"><div class="catalog-detail-copy"><p class="catalog-detail-origin">${c.origin} · ${esc(text(product, "origin", lang))}</p><h2 id="catalog-dialog-title">${esc(text(product, "name", lang))}</h2><p class="catalog-detail-price"><span>${esc(priceLabel)}</span><strong>${esc(formatOfferPrice(starting.price, lang, !starting.variant))}</strong></p><p class="catalog-detail-note">${esc(priceNote)}</p></div>${bowl(product, "catalog-detail-image", true)}</div>
+      <section class="catalog-specifications"><h2>${c.specifications}</h2>${renderProductSpecifications(product, lang)}</section>
       <a class="catalog-inquiry" href="mailto:info@pologenki.eu?subject=${encodeURIComponent(text(product, "name", lang))}&body=${encodeURIComponent(inquiry)}" data-contact-open data-contact-message="${esc(inquiry)}" aria-haspopup="dialog" aria-controls="contactModal">${c.request}<i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i></a>`;
     show();
     const heading = body.querySelector("#catalog-dialog-title");

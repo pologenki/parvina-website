@@ -1,6 +1,8 @@
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { getStartingPrice, offerCopy, parseOfferPrice, startingPriceText, variantText } from '../src/utils/product-offers.js';
+import { renderProductSpecifications } from '../src/components/product-specifications.js';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const publicDir = join(root, 'public');
@@ -8,6 +10,7 @@ const baseUrl = 'https://pologenki.eu';
 const productsData = JSON.parse(await readFile(join(publicDir, 'data', 'products.json'), 'utf8'));
 const portfolioData = JSON.parse(await readFile(join(publicDir, 'data', 'portfolio.json'), 'utf8'));
 const products = (productsData.products || []).filter(product => product.published !== false);
+const specificationsCss = await readFile(join(root, 'src', 'css', 'product-specifications.css'), 'utf8');
 
 const locales = {
   en: {
@@ -74,10 +77,6 @@ function textFor(product, field, locale) {
   return product[field] || '';
 }
 
-function variantText(variant, field, locale) {
-  return variant[`${field}_${locale}`] || variant[field] || '';
-}
-
 function productUrl(product, locale) {
   return `${baseUrl}${locales[locale].prefix}/products/${encodeURIComponent(product.id)}/`;
 }
@@ -98,23 +97,39 @@ function alternateLinks(product) {
   ].join('\n    ');
 }
 
-function offerSchema(product, canonical) {
-  const match = String(product.mainPrice || '').replace(',', '.').match(/([0-9]+(?:\.[0-9]+)?)/);
-  if (!match) return null;
-  return {
+function offerSchema(product, canonical, locale) {
+  const namedOffer = (value, name, url = canonical) => ({
     '@type': 'Offer',
+    name,
+    url,
+    priceCurrency: 'USD',
+    price: value,
+    seller: { '@id': `${baseUrl}/#organization` },
+    priceSpecification: { '@type': 'UnitPriceSpecification', price: value, priceCurrency: 'USD', unitCode: 'KGM' }
+  });
+  const offers = (product.variants || []).flatMap((variant, index) => {
+    const value = parseOfferPrice(variant.price);
+    return value === null ? [] : [namedOffer(value, variantText(variant, 'name', locale), `${canonical}#offer-grade-${index}`)];
+  });
+  if (!offers.length) {
+    const starting = getStartingPrice(product);
+    return starting.value === null ? null : namedOffer(starting.value, textFor(product, 'name', locale));
+  }
+  if (offers.length === 1) return offers[0];
+  const prices = offers.map(offer => offer.price);
+  return {
+    '@type': 'AggregateOffer',
     url: canonical,
     priceCurrency: 'USD',
-    price: match[1],
-    availability: 'https://schema.org/InStock',
-    seller: { '@id': `${baseUrl}/#organization` },
-    priceSpecification: { '@type': 'UnitPriceSpecification', price: match[1], priceCurrency: 'USD', unitCode: 'KGM' }
+    lowPrice: Math.min(...prices),
+    highPrice: Math.max(...prices),
+    offerCount: offers.length,
+    offers
   };
 }
 
 function renderProductPage(product, localeKey) {
   const locale = locales[localeKey];
-  const priceText = value => /^price on request$/i.test(String(value || '').trim()) ? locale.onRequest : value || '';
   const name = textFor(product, 'name', localeKey);
   const description = textFor(product, 'desc', localeKey);
   const origin = textFor(product, 'origin', localeKey);
@@ -127,7 +142,7 @@ function renderProductPage(product, localeKey) {
         '@type': 'Product', '@id': `${canonical}#product`, name, description: locale.description(name),
         image: [`${baseUrl}${optimizedImagePath(product.image, 480)}`, image], category: 'Nuts, dried fruits and food ingredients',
         countryOfOrigin: origin ? { '@type': 'Country', name: origin } : undefined,
-        offers: offerSchema(product, canonical)
+        offers: offerSchema(product, canonical, localeKey)
       },
       {
         '@type': 'BreadcrumbList', itemListElement: [
@@ -141,11 +156,11 @@ function renderProductPage(product, localeKey) {
   if (!schema['@graph'][0].offers) delete schema['@graph'][0].offers;
   if (!schema['@graph'][0].countryOfOrigin) delete schema['@graph'][0].countryOfOrigin;
 
-  const variants = (product.variants || []).map(variant => `
-          <article class="grade">
-            <div><h3>${esc(variantText(variant, 'name', localeKey))}</h3><p>${esc(variantText(variant, 'desc', localeKey))}</p></div>
-            <strong>${esc(priceText(variant.price))}</strong>
-          </article>`).join('');
+  const starting = getStartingPrice(product);
+  const copy = offerCopy(localeKey);
+  const priceNote = starting.source === 'variant'
+    ? `${copy.indicative} · ${copy.grade}: ${variantText(starting.variant, 'name', localeKey)}. ${copy.otherGrades}`
+    : starting.source === 'catalogue' ? `${copy.indicative} · ${copy.selectGrade}` : copy.selectGrade;
 
   return `<!doctype html>
 <html lang="${locale.lang}">
@@ -158,6 +173,7 @@ function renderProductPage(product, localeKey) {
   <link rel="canonical" href="${canonical}" />
   ${alternateLinks(product)}
   <link rel="icon" type="image/jpeg" href="/logo.jpeg" />
+  <link rel="stylesheet" href="/fonts/inter-tight.css" />
   <meta property="og:type" content="product" />
   <meta property="og:title" content="${esc(locale.pageTitle(name))}" />
   <meta property="og:description" content="${esc(locale.description(name))}" />
@@ -167,8 +183,9 @@ function renderProductPage(product, localeKey) {
   <meta property="og:locale" content="${locale.locale}" />
   <script type="application/ld+json">${JSON.stringify(schema)}</script>
   <style>
-    *{box-sizing:border-box}body{margin:0;background:#f6f8fa;color:#17212b;font:16px/1.55 Arial,sans-serif}header{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 max(24px,calc((100% - 1120px)/2));background:#fff;border-top:4px solid #222;border-bottom:1px solid #dfe5e9}header img{width:132px;height:58px;object-fit:contain}header a{color:#17212b;text-decoration:none}.page{max-width:1120px;margin:0 auto;padding:54px 24px 72px}.hero{display:grid;grid-template-columns:420px 1fr;gap:54px;align-items:center}.photo{aspect-ratio:1;background:#fff;border:1px solid #dbe3e8;padding:24px}.photo img{width:100%;height:100%;object-fit:contain}.eyebrow{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#607080}h1{margin:8px 0 10px;font:600 46px/1.05 Georgia,serif}h2{margin:54px 0 18px;font:600 30px/1.2 Georgia,serif}.meta{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}.meta span,.price{padding:8px 12px;border:1px solid #dbe3e8;background:#fff}.price{display:inline-block;font-size:20px;font-weight:700}.cta{display:inline-block;margin-top:20px;padding:13px 20px;background:#111;color:#fff;text-decoration:none}.grades{display:grid;gap:10px}.grade{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;padding:20px;background:#fff;border:1px solid #dbe3e8}.grade h3{margin:0 0 6px;font-size:17px}.grade p{margin:0;color:#53616e}.grade strong{white-space:nowrap;padding:6px 10px;background:#eef7ff;border:1px solid #b8ddfb}.support-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}.support-panel{padding:24px;background:#fff;border:1px solid #dbe3e8}.support-panel h2{margin:0 0 12px;font:600 24px/1.2 Georgia,serif}.support-panel ul{margin:0;padding-left:20px}.support-link{display:inline-block;margin-top:14px}.languages{display:flex;gap:14px}.languages a{text-decoration:underline}@media(max-width:760px){header{padding:0 18px}.page{padding:32px 18px 56px}.hero{grid-template-columns:1fr;gap:28px}.photo{max-width:420px}h1{font-size:36px}.grade{grid-template-columns:1fr}.grade strong{justify-self:start}.support-grid{grid-template-columns:1fr}}
+    *{box-sizing:border-box}body{margin:0;background:#f6f8fa;color:#17212b;font:16px/1.55 Arial,sans-serif}header{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 max(24px,calc((100% - 1120px)/2));background:#fff;border-top:4px solid #222;border-bottom:1px solid #dfe5e9}header img{width:132px;height:58px;object-fit:contain}header a{color:#17212b;text-decoration:none}.page{max-width:1120px;margin:0 auto;padding:54px 24px 72px}.hero{display:grid;grid-template-columns:420px 1fr;gap:54px;align-items:center}.photo{aspect-ratio:1;background:#fff;border:1px solid #dbe3e8;padding:24px}.photo img{width:100%;height:100%;object-fit:contain}.eyebrow{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#607080}h1{margin:8px 0 10px;font:600 46px/1.05 Georgia,serif}h2{margin:54px 0 18px;font:600 30px/1.2 Georgia,serif}.meta{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}.meta span,.price{padding:8px 12px;border:1px solid #dbe3e8;background:#fff}.price{display:inline-block;font-size:20px;font-weight:700}.cta{display:inline-block;margin-top:20px;padding:13px 20px;background:#111;color:#fff;text-decoration:none}.support-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}.support-panel{padding:24px;background:#fff;border:1px solid #dbe3e8}.support-panel h2{margin:0 0 12px;font:600 24px/1.2 Georgia,serif}.support-panel ul{margin:0;padding-left:20px}.support-link{display:inline-block;margin-top:14px}.languages{display:flex;gap:14px}.languages a{text-decoration:underline}@media(max-width:760px){header{padding:0 18px}.page{padding:32px 18px 56px}.hero{grid-template-columns:1fr;gap:28px}.photo{max-width:420px}h1{font-size:36px}.support-grid{grid-template-columns:1fr}}
     .hero>div{min-width:0}h1{overflow-wrap:anywhere}
+    ${specificationsCss}
   </style>
 </head>
 <body>
@@ -176,9 +193,9 @@ function renderProductPage(product, localeKey) {
   <main class="page">
     <div class="hero">
       <div class="photo"><img src="${optimizedImagePath(product.image, 480)}" srcset="${optimizedImagePath(product.image, 240)} 240w, ${optimizedImagePath(product.image, 480)} 480w" sizes="(max-width:760px) calc(100vw - 84px), 372px" alt="${esc(name)}" width="480" height="480" fetchpriority="high" /></div>
-      <div><p class="eyebrow">${locale.catalogue}</p><h1>${esc(name)}</h1><p>${esc(description)}</p><div class="meta"><span>${locale.origin}: ${esc(origin)}</span></div><div class="price">${esc(priceText(product.mainPrice))}</div><br><a class="cta" href="mailto:info@pologenki.eu?subject=${encodeURIComponent(name)}">${locale.request}</a></div>
+      <div><p class="eyebrow">${locale.catalogue}</p><h1>${esc(name)}</h1><p>${esc(description)}</p><div class="meta"><span>${locale.origin}: ${esc(origin)}</span></div><div class="price">${esc(startingPriceText(product, localeKey))}</div><p class="catalog-detail-note">${esc(priceNote)}</p><a class="cta" href="mailto:info@pologenki.eu?subject=${encodeURIComponent(name)}">${locale.request}</a></div>
     </div>
-    <section><h2>${locale.grades}</h2><div class="grades">${variants}</div></section>
+    <section><h2>${locale.grades}</h2>${renderProductSpecifications(product, localeKey)}</section>
     <div class="support-grid"><section class="support-panel"><h2>${locale.coordinationTitle}</h2><p>${locale.coordinationText}</p><a class="support-link" href="${locale.prefix || ''}/services/full-service-import/">${locale.servicesLink}</a></section><section class="support-panel"><h2>${locale.requestDetailsTitle}</h2><ul>${locale.requestDetails.map(item => `<li>${item}</li>`).join('')}</ul></section></div>
     <p><a href="${locale.prefix || '/'}#products">← ${locale.back}</a></p>
   </main>

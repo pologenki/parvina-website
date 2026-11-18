@@ -339,13 +339,6 @@ html.catalog-is-open { overflow: hidden; scrollbar-gutter: stable; }
 .catalog-detail-hero .catalog-detail-image { position: relative; width: 100%; max-width: 320px; justify-self: end; }
 .catalog-specifications { margin: 44px 0 0; padding: 0; }
 .catalog-specifications > h2 { margin: 0 0 24px; font-size: clamp(30px, 3.4cqw, 44px); font-weight: 700; line-height: 1.12; letter-spacing: -.035em; }
-.catalog-specification-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-.catalog-specification { position: relative; display: flex; flex-direction: column; align-items: start; gap: 16px; padding: 28px; border-top: 2px solid #dec8ae; background: #f8f8f8; transition: background .25s, box-shadow .25s, transform .25s; animation: catalog-content-enter .45s ease both; animation-delay: calc(var(--catalog-item-order, 0) * 45ms); }
-.catalog-spec-number { font-size: 15px; line-height: 1; color: #777; }
-.catalog-specification h3 { margin: 0; font-size: clamp(23px, 2.3cqw, 30px); font-weight: 700; letter-spacing: -.025em; line-height: 1.2; overflow-wrap: break-word; }
-.catalog-specification p { max-width: 52ch; margin: 0; font-size: 18px; line-height: 1.55; color: #444; }
-.catalog-specification strong { display: block; width: 100%; margin-top: auto; padding-top: 18px; border-top: 1px solid #2222; font-size: 24px; font-weight: 700; line-height: 1.3; }
-.catalog-specification:hover { background: #fff; box-shadow: 0 10px 28px #2221; transform: translateY(-3px); }
 .catalog-inquiry { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 72px; margin-top: 28px; padding: 22px 28px; background: #222; color: #e9e9e9; font-size: 18px; font-weight: 600; line-height: 1.3; text-decoration: none; transition: background .25s, color .25s; }
 .catalog-inquiry i { transition: transform .25s; }
 .catalog-inquiry:hover { background: #dec8ae; color: #222; }
@@ -435,11 +428,6 @@ html.catalog-is-open { overflow: hidden; scrollbar-gutter: stable; }
   .catalog-detail-price > strong { font-size: 22px; }
   .catalog-specifications { margin-top: 32px; }
   .catalog-specifications > h2 { margin-bottom: 22px; font-size: 30px; }
-  .catalog-specification-grid { grid-template-columns: minmax(0, 1fr); }
-  .catalog-specification { padding: 24px; }
-  .catalog-specification h3 { font-size: 24px; }
-  .catalog-specification p { font-size: 16px; line-height: 1.6; }
-  .catalog-specification strong { font-size: 22px; }
   .catalog-back { margin-bottom: 20px; font-size: 15px; }
   .catalog-inquiry { min-height: 72px; gap: 16px; padding: 22px; font-size: 17px; }
 }

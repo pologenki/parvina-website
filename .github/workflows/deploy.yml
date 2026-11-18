@@ -36,6 +36,9 @@ jobs:
       - name: Test Excel price importer
         run: npm run test:price-import
 
+      - name: Test product offer prices
+        run: npm run test:offers
+
       - name: Build
         run: npm run build
 
