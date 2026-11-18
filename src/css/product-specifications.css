@@ -8,6 +8,7 @@
 .product-specification-table tbody tr { background: #f8f8f8; }
 .product-specification-table tbody tr + tr { border-top: 5px solid #e9e9e9; }
 .product-specification-table tbody tr:hover { background: #fff; }
+.product-specification-table tbody tr.is-search-match { outline: 2px solid #dec8ae; outline-offset: -2px; background: #dec8ae44; }
 .product-specification-name { display: block; font-size: 19px; font-weight: 650; line-height: 1.3; }
 .product-specification-table .product-specification-price { width: 20%; text-align: right; }
 .product-specification-price strong { font-size: 19px; font-weight: 700; }

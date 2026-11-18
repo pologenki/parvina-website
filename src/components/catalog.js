@@ -2,8 +2,9 @@ import { responsiveImagePath, responsiveImageSrcset } from "../utils/responsiveI
 import { initDeferredImages } from "../utils/deferred-images.js";
 import { getLayoutViewportWidth, getHeaderHeight, toLayoutPixels } from "../utils/layout-scale.js";
 
-import { getStartingPrice, startingPriceText, formatOfferPrice, offerCopy, variantText } from '../utils/product-offers.js';
+import { getStartingPrice, startingPriceText, formatOfferPrice, offerCopy, variantText, variantPacking, variantDelivery } from '../utils/product-offers.js';
 import { renderProductSpecifications } from './product-specifications.js';
+import { buildCatalogSearchIndex, searchCatalog, normalizeCatalogQuery } from '../utils/catalog-search.js';
 
 const copy = {
   ru: {
@@ -11,20 +12,20 @@ const copy = {
     view: "Смотреть товары", open: "Открыть каталог", featured: "Товары из каталога", origin: "Происхождение", price: "Цена в каталоге", specifications: "Сорта и спецификации",
     request: "Запросить условия поставки", message: "Здравствуйте! Меня интересует", onRequest: "По запросу", close: "Закрыть каталог", back: "Назад к категории", previous: "Предыдущие товары", next: "Следующие товары", pause: "Остановить прокрутку", play: "Включить прокрутку", empty: "В этой категории пока нет товаров.",
     names: { cashew: "Кешью", "walnuts-shell": "Орехи в скорлупе", "peanuts-blanched": "Арахис бланшированный", papaya: "Папайя" },
-    search: "Поиск товаров", searchPlaceholder: "Найти товар…", searchResults: "Результаты поиска", searchClear: "Очистить поиск", searchNone: "Ничего не найдено", searchTry: "Попробуйте другое название, сорт или страну.",
+    search: "Поиск товаров и сортов", searchPlaceholder: "Товар, сорт или страна…", searchFound: "Найдено", searchGrade: "Сорт", searchAllGrades: "Все сорта", searchResults: "Результаты поиска", searchClear: "Очистить поиск", searchNone: "Ничего не найдено", searchTry: "Попробуйте другое название, сорт или страну.",
     count(n) { const a = n % 10, b = n % 100; return `${n} ${a === 1 && b !== 11 ? "товар" : a >= 2 && a <= 4 && (b < 12 || b > 14) ? "товара" : "товаров"}`; },
   },
   en: {
     title: "Catalogue", subtitle: "Products for<br>wholesale import", pricesUpdated: "Prices updated", nuts: "Nuts", dried: "Dried fruits", snacks: "Fruit snacks", all: "All products",
     view: "View products", open: "Open catalogue", featured: "From the catalogue", origin: "Origin", price: "Catalogue price", specifications: "Grades and specifications",
     request: "Request delivery terms", message: "Hello! I am interested in", onRequest: "On request", close: "Close catalogue", back: "Back to category", previous: "Previous products", next: "Next products", pause: "Pause carousel", play: "Play carousel", empty: "No products in this category yet.", names: {}, count: n => `${n} ${n === 1 ? "product" : "products"}`,
-    search: "Search products", searchPlaceholder: "Find a product…", searchResults: "Search results", searchClear: "Clear search", searchNone: "No products found", searchTry: "Try another name, grade or country.",
+    search: "Search products and grades", searchPlaceholder: "Product, grade or country…", searchFound: "Found", searchGrade: "Grade", searchAllGrades: "All grades", searchResults: "Search results", searchClear: "Clear search", searchNone: "No products found", searchTry: "Try another name, grade or country.",
   },
   cn: {
     title: "产品目录", subtitle: "批量进口<br>产品精选", pricesUpdated: "价格更新", nuts: "坚果", dried: "干果", snacks: "水果零食", all: "全部产品",
     view: "查看产品", open: "打开目录", featured: "目录精选", origin: "产地", price: "目录价格", specifications: "等级与规格",
     request: "咨询交货条件", message: "您好！我对以下产品感兴趣：", onRequest: "价格面议", close: "关闭目录", back: "返回分类", previous: "上一组产品", next: "下一组产品", pause: "暂停轮播", play: "播放轮播", empty: "此分类暂无产品。", names: {}, count: n => `${n} 款产品`,
-    search: "搜索产品", searchPlaceholder: "查找产品…", searchResults: "搜索结果", searchClear: "清除搜索", searchNone: "未找到产品", searchTry: "请尝试其他名称、等级或国家。",
+    search: "搜索产品及等级", searchPlaceholder: "产品、等级或产地…", searchFound: "找到", searchGrade: "等级", searchAllGrades: "全部等级", searchResults: "搜索结果", searchClear: "清除搜索", searchNone: "未找到产品", searchTry: "请尝试其他名称、等级或国家。",
   },
 };
 
@@ -160,12 +161,13 @@ export function initCatalog(products, lang) {
   const searchResults = searchForm.querySelector("[role=listbox]");
   const clearSearchButton = searchForm.querySelector(".catalog-search-clear");
   const searchStatus = searchForm.querySelector("[role=status]");
-  const normalizeSearch = value => String(value).normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/ё/g, "е").replace(/[^\p{L}\p{N}]+/gu, " ").trim();
-  const searchIndex = products.map(product => {
+  const searchIndex = buildCatalogSearchIndex(products, product => {
     const categories = groups.filter(group => group.products?.includes(product.id));
-    const labels = ["ru", "en", "cn"].flatMap(locale => [productName(product, locale), text(product, "name", locale), text(product, "origin", locale), text(product, "desc", locale), ...categories.map(group => copy[locale][group.id])]);
-    const variants = (product.variants || []).flatMap(variant => [variant.name, variant.name_ru, variant.name_cn]);
-    return { product, name: normalizeSearch(productName(product, lang)), terms: normalizeSearch([product.id, ...labels, ...variants].filter(Boolean).join(" ")) };
+    return {
+      names: ['ru', 'en', 'cn'].flatMap(locale => [productName(product, locale), text(product, 'name', locale)]),
+      terms: ['ru', 'en', 'cn'].flatMap(locale => [text(product, 'origin', locale), ...categories.map(group => copy[locale][group.id])]),
+      description: ['ru', 'en', 'cn'].map(locale => text(product, 'desc', locale)),
+    };
   });
   let searchMatches = [];
   let activeSearchIndex = -1;
@@ -206,7 +208,7 @@ export function initCatalog(products, lang) {
   window.visualViewport?.addEventListener("scroll", fitSearchResults, options);
 
   function updateSearch() {
-    const query = normalizeSearch(searchInput.value);
+    const query = normalizeCatalogQuery(searchInput.value);
     clearSearchButton.hidden = !searchInput.value;
     activeSearchIndex = -1;
     searchInput.removeAttribute("aria-activedescendant");
@@ -217,20 +219,21 @@ export function initCatalog(products, lang) {
       closeSearch();
       return;
     }
-    const words = query.split(" ");
-    searchMatches = searchIndex.filter(entry => words.every(word => entry.terms.includes(word)))
-      .map(entry => ({ ...entry, score: entry.name === query ? 0 : entry.name.startsWith(query) ? 1 : entry.name.includes(query) ? 2 : 3 }))
-      .sort((a, b) => a.score - b.score).map(entry => entry.product);
-    searchResults.innerHTML = searchMatches.map((product, index) => {
+    searchMatches = searchCatalog(searchIndex, query);
+    searchResults.innerHTML = searchMatches.map(({ product, variant, variantIndex }, index) => {
       const hasCutout = groups.some(group => group.products?.includes(product.id));
       const image = hasCutout ? `/catalog/products/${encodeURIComponent(product.id)}-240.webp` : responsiveImagePath(product.image, 240);
-      return `<li class="catalog-search-result" id="catalog-search-option-${index}" role="option" aria-selected="false" data-catalog-product="${esc(product.id)}">
-        <img src="${esc(image)}" width="48" height="48" alt=""><span class="catalog-search-result-copy"><strong>${esc(productName(product, lang))}</strong><span>${esc(text(product, "origin", lang))}</span></span><span class="catalog-search-price">${esc(startingPriceText(product, lang))}</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+      const title = variant ? variantText(variant, 'name', lang) : productName(product, lang);
+      const meta = variant ? [text(product, 'origin', lang), variantPacking(variant, lang), variantDelivery(variant)].filter(Boolean).join(' · ')
+        : [c.searchAllGrades, text(product, 'origin', lang)].filter(Boolean).join(' · ');
+      const displayedPrice = variant ? formatOfferPrice(variant.price, lang) : startingPriceText(product, lang);
+      return `<li class="catalog-search-result" id="catalog-search-option-${index}" role="option" aria-selected="false" data-catalog-product="${esc(product.id)}"${variant ? ` data-catalog-variant="${variantIndex}"` : ''}>
+        <img src="${esc(image)}" width="48" height="48" alt=""><span class="catalog-search-result-copy">${variant ? `<span class="catalog-search-kicker">${esc(productName(product, lang))} · ${c.searchGrade}</span>` : ''}<strong>${esc(title)}</strong><span class="catalog-search-meta">${esc(meta)}</span></span><span class="catalog-search-price">${esc(displayedPrice)}</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
       </li>`;
-    }).join("");
-    searchForm.querySelector("[data-search-count]").textContent = c.count(searchMatches.length);
+    }).join('');
+    searchForm.querySelector("[data-search-count]").textContent = `${c.searchFound}: ${searchMatches.length}`;
     searchForm.querySelector(".catalog-search-empty").hidden = searchMatches.length > 0;
-    searchStatus.textContent = searchMatches.length ? `${c.searchResults}: ${c.count(searchMatches.length)}` : c.searchNone;
+    searchStatus.textContent = searchMatches.length ? `${c.searchFound}: ${searchMatches.length}` : c.searchNone;
     searchResults.scrollTop = 0;
     searchPanel.hidden = false;
     searchInput.setAttribute("aria-expanded", "true");
@@ -267,8 +270,8 @@ export function initCatalog(products, lang) {
   searchForm.addEventListener("submit", event => {
     event.preventDefault();
     if (searchPanel.hidden) updateSearch();
-    const product = searchMatches[activeSearchIndex < 0 ? 0 : activeSearchIndex];
-    if (product) openProduct(product.id, false);
+    const result = searchMatches[activeSearchIndex < 0 ? 0 : activeSearchIndex];
+    if (result) openProduct(result.product.id, false, result.variantIndex);
     else searchInput.focus();
   }, options);
   clearSearchButton.addEventListener("click", () => { searchInput.value = ""; updateSearch(); searchInput.focus(); }, options);
@@ -300,7 +303,7 @@ export function initCatalog(products, lang) {
     window.trackSiteEvent?.("view_catalog_category", { category: id });
   }
 
-  function openProduct(id, fromCategory) {
+  function openProduct(id, fromCategory, variantIndex = null) {
     const product = products.find(item => item.id === id);
     if (!product) return;
     closeSearch();
@@ -310,8 +313,10 @@ export function initCatalog(products, lang) {
       categoryScroll = 0;
     }
     const name = productName(product, lang);
-    const inquiry = `${c.message} ${text(product, "name", lang)}. ${c.request}.`;
-    const starting = getStartingPrice(product);
+    const selectedVariant = Number.isInteger(variantIndex) ? product.variants?.[variantIndex] : null;
+    const starting = selectedVariant ? { variant: selectedVariant, price: selectedVariant.price } : getStartingPrice(product);
+    const selectedDetails = selectedVariant ? ` — ${variantText(selectedVariant, 'name', lang)} (${formatOfferPrice(selectedVariant.price, lang)})` : '';
+    const inquiry = `${c.message} ${text(product, 'name', lang)}${selectedDetails}. ${c.request}.`;
     const offers = offerCopy(lang);
     const priceLabel = starting.variant ? variantText(starting.variant, 'name', lang) : offers.indicative;
     const priceNote = starting.variant ? offers.otherGrades : offers.selectGrade;
@@ -324,7 +329,19 @@ export function initCatalog(products, lang) {
     const heading = body.querySelector("#catalog-dialog-title");
     heading.tabIndex = -1;
     heading.focus({ preventScroll: true });
-    window.trackSiteEvent?.("view_product", { product_id: product.id, product_name: name });
+    if (selectedVariant) {
+      const row = body.querySelector(`#offer-grade-${variantIndex}`);
+      row.classList.add('is-search-match');
+      row.tabIndex = -1;
+      const details = row.querySelector('details');
+      if (details) details.open = true;
+      requestAnimationFrame(() => {
+        if (!dialog.open || !row.isConnected) return;
+        row.focus({ preventScroll: true });
+        row.scrollIntoView({ block: 'center', behavior: 'instant' });
+      });
+    }
+    window.trackSiteEvent?.("view_product", { product_id: product.id, product_name: name, ...(selectedVariant ? { variant_name: selectedVariant.name } : {}) });
   }
 
   section.addEventListener("click", event => {
@@ -333,7 +350,7 @@ export function initCatalog(products, lang) {
     const product = event.target.closest("[data-catalog-product]");
     if (product && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) {
       event.preventDefault();
-      openProduct(product.dataset.catalogProduct, !!product.closest("dialog"));
+      openProduct(product.dataset.catalogProduct, !!product.closest("dialog"), product.hasAttribute("data-catalog-variant") ? Number(product.dataset.catalogVariant) : null);
     }
     if (event.target.closest("[data-catalog-back]")) {
       openCategory(currentCategory, true);

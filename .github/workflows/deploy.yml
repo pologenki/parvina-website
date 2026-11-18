@@ -39,6 +39,9 @@ jobs:
       - name: Test product offer prices
         run: npm run test:offers
 
+      - name: Test catalogue search
+        run: npm run test:catalog-search
+
       - name: Build
         run: npm run build
 

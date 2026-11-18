@@ -32,6 +32,7 @@ npm run dev
 npm run validate:data
 npm run test:price-import
 npm run test:offers
+npm run test:catalog-search
 npm run build
 ```
 
